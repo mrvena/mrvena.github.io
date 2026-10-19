@@ -1,0 +1,1373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estimating Decimal Sums & Adding Decimals</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Roboto+Mono:wght@500;700&display=swap">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            heading: ['Fredoka', 'sans-serif'],
+            mono: ['Roboto Mono', 'monospace']
+          },
+          colors: {
+            brandBlue: '#0284c7',
+            brandGreen: '#16a34a',
+            brandYellow: '#ca8a04',
+            brandPurple: '#9333ea',
+            brandOrange: '#ea580c'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #f8fafc;
+      color: #0f172a;
+      font-size: 18px;
+    }
+    
+    /* Strict Math Grid Layout */
+    .math-grid {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(36px, 48px));
+      gap: 4px;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Roboto Mono', monospace;
+      font-weight: 700;
+      font-size: 24px;
+    }
+
+    .math-cell {
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+    }
+
+    /* Regrouping Pill Box Rows */
+    .regroup-pill-blue {
+      background-color: #dbeafe;
+      color: #1e40af;
+      border: 2px solid #60a5fa;
+      font-size: 18px;
+      font-weight: 800;
+      border-radius: 8px;
+      height: 36px;
+    }
+
+    .regroup-pill-orange {
+      background-color: #ffedd5;
+      color: #c2410c;
+      border: 2px solid #fb923c;
+      font-size: 18px;
+      font-weight: 800;
+      border-radius: 8px;
+      height: 36px;
+    }
+
+    .math-input {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 20px;
+      font-weight: 700;
+      text-align: center;
+      border: 2px dashed #94a3b8;
+      border-radius: 8px;
+      background-color: #ffffff;
+      color: #0284c7;
+      transition: all 0.2s ease;
+      width: 100%;
+      height: 42px;
+    }
+
+    .math-input:focus {
+      outline: none;
+      border-color: #0284c7;
+      border-style: solid;
+      background-color: #f0f9ff;
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.2);
+    }
+
+    .math-input.correct {
+      border-color: #16a34a !important;
+      border-style: solid !important;
+      background-color: #f0fdf4 !important;
+      color: #15803d !important;
+    }
+
+    .math-input.incorrect {
+      border-color: #dc2626 !important;
+      border-style: solid !important;
+      background-color: #fef2f2 !important;
+      color: #b91c1c !important;
+    }
+
+    mark {
+      background-color: #fef08a;
+      color: #854d0e;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-weight: 700;
+    }
+
+    .grid-divider {
+      grid-column: span 6;
+      border-bottom: 3px solid #0f172a;
+      margin: 2px 0;
+    }
+
+    .grid-double-divider {
+      grid-column: span 6;
+      border-bottom: 4px double #0f172a;
+      margin: 2px 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen pb-24">
+
+  <!-- STICKY HEADER & SECTION NAVIGATION -->
+  <header class="sticky top-0 z-40 bg-white border-b border-slate-200 shadow-md py-3 px-4 md:px-8">
+    <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-4">
+      
+      <!-- App Title -->
+      <div class="flex items-center gap-3">
+        <div class="bg-sky-600 text-white p-2.5 rounded-2xl">
+          <i class="fa-solid fa-calculator text-2xl"></i>
+        </div>
+        <div>
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold bg-sky-100 text-sky-800 uppercase tracking-wider">
+            Sadlier Math Grade 5 • Lessons 10-3 & 10-5
+          </span>
+          <h1 class="text-xl md:text-2xl font-heading font-bold text-slate-900">
+            Estimating Decimal Sums & Adding Decimals
+          </h1>
+        </div>
+      </div>
+
+      <!-- Quick Jump Navigation Tabs -->
+      <nav class="flex flex-wrap items-center justify-center gap-1.5 text-xs font-bold">
+        <a href="#sec1" class="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-sky-100 text-slate-700 hover:text-sky-800 transition">1. Intro & Vocab</a>
+        <a href="#sec2" class="px-3 py-1.5 rounded-xl bg-sky-100 hover:bg-sky-200 text-sky-900 transition">2. Obj 1 Teach</a>
+        <a href="#sec3" class="px-3 py-1.5 rounded-xl bg-sky-600 hover:bg-sky-700 text-white transition">3. Obj 1 Practice</a>
+        <a href="#sec4" class="px-3 py-1.5 rounded-xl bg-purple-100 hover:bg-purple-200 text-purple-900 transition">4. Obj 2 Teach</a>
+        <a href="#sec5" class="px-3 py-1.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white transition">5. Obj 2 Practice</a>
+        <a href="#sec6" class="px-3 py-1.5 rounded-xl bg-amber-100 hover:bg-amber-200 text-amber-900 transition">6. Summary</a>
+      </nav>
+
+      <!-- Live Score Counter & Turn-In Action Buttons -->
+      <div class="flex items-center gap-3">
+        <div class="bg-slate-100 px-3 py-1.5 rounded-2xl border border-slate-200 flex items-center gap-2">
+          <div class="text-right">
+            <div class="text-[10px] font-bold text-slate-500 uppercase">Score Progress</div>
+            <div id="progress-text" class="text-xs font-extrabold text-sky-700">0 / 11 Solved</div>
+          </div>
+          <div class="w-16 bg-slate-200 rounded-full h-2.5 overflow-hidden">
+            <div id="progress-bar" class="bg-gradient-to-r from-sky-500 to-emerald-500 h-2.5 rounded-full transition-all duration-500 w-0"></div>
+          </div>
+        </div>
+
+        <button onclick="openSubmitModal()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3 py-2 rounded-xl transition flex items-center gap-1.5 text-xs shadow-sm">
+          <i class="fa-solid fa-paper-plane"></i> Email Teacher
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 mt-8 space-y-12">
+
+    <!-- SECTION 1: WHY WE NEED THIS MATH & KEY VOCABULARY -->
+    <section id="sec1" class="bg-white border-2 border-slate-200 rounded-3xl p-6 md:p-8 shadow-sm space-y-6">
+      <div class="flex items-center gap-3">
+        <div class="p-3 bg-emerald-100 text-emerald-800 rounded-2xl">
+          <i class="fa-solid fa-earth-americas text-2xl"></i>
+        </div>
+        <div>
+          <span class="text-xs font-bold text-emerald-800 uppercase tracking-wide">Section 1</span>
+          <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">Why We Need This Math & Key Vocabulary</h2>
+        </div>
+      </div>
+
+      <!-- Real World Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        
+        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 flex flex-col items-center text-center">
+          <div class="w-14 h-14 mb-2 flex items-center justify-center">
+            <svg viewBox="0 0 100 100" class="w-12 h-12">
+              <circle cx="50" cy="50" r="35" fill="none" stroke="#38bdf8" stroke-width="6" stroke-dasharray="6 6"/>
+              <circle cx="50" cy="15" r="7" fill="#ef4444" />
+              <circle cx="85" cy="50" r="7" fill="#eab308" />
+              <circle cx="50" cy="85" r="7" fill="#22c55e" />
+              <circle cx="15" cy="50" r="7" fill="#a855f7" />
+            </svg>
+          </div>
+          <h3 class="font-heading font-bold text-lg text-slate-900">Duathlon & Sports</h3>
+          <p class="text-sm text-slate-600 mt-1">
+            Running <b>1.35 miles</b>, biking <b>3.1 miles</b>, and running <b>0.75 miles</b> gives an estimated duathlon length of about <b>5 miles</b>!
+          </p>
+        </div>
+
+        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 flex flex-col items-center text-center">
+          <div class="w-14 h-14 mb-2 flex items-center justify-center">
+            <svg viewBox="0 0 100 100" class="w-12 h-12">
+              <ellipse cx="50" cy="55" rx="35" ry="25" fill="#fbcfe8" stroke="#ec4899" stroke-width="4"/>
+              <circle cx="30" cy="45" r="3" fill="#be185d"/>
+              <circle cx="50" cy="22" r="10" fill="#fde047" stroke="#ca8a04" stroke-width="3"/>
+              <text x="50" y="26" font-size="12" font-weight="bold" fill="#854d0e" text-anchor="middle">$</text>
+            </svg>
+          </div>
+          <h3 class="font-heading font-bold text-lg text-slate-900">Grocery Shopping</h3>
+          <p class="text-sm text-slate-600 mt-1">
+            Buying <b>0.37 lb</b> yellow onions and <b>1.26 lb</b> white onions gives <b>1.63 lbs</b> total produce in your cart!
+          </p>
+        </div>
+
+        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 flex flex-col items-center text-center">
+          <div class="w-14 h-14 mb-2 flex items-center justify-center">
+            <svg viewBox="0 0 100 100" class="w-12 h-12">
+              <polygon points="50,15 10,35 90,35" fill="#e9d5ff" stroke="#9333ea" stroke-width="4"/>
+              <rect x="20" y="35" width="10" height="40" fill="#c084fc"/>
+              <rect x="45" y="35" width="10" height="40" fill="#c084fc"/>
+              <rect x="70" y="35" width="10" height="40" fill="#c084fc"/>
+            </svg>
+          </div>
+          <h3 class="font-heading font-bold text-lg text-slate-900">Mountain Elevations</h3>
+          <p class="text-sm text-slate-600 mt-1">
+            Ojos del Salado volcano is <b>6.89 km</b> high, and Mount Everest is <b>1.96 km taller</b>, reaching <b>8.85 km</b>!
+          </p>
+        </div>
+
+        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 flex flex-col items-center text-center">
+          <div class="w-14 h-14 mb-2 flex items-center justify-center">
+            <svg viewBox="0 0 100 100" class="w-12 h-12">
+              <rect x="10" y="20" width="80" height="60" rx="6" fill="#86efac" stroke="#16a34a" stroke-width="4"/>
+              <line x1="50" y1="20" x2="50" y2="80" stroke="#ffffff" stroke-width="3"/>
+            </svg>
+          </div>
+          <h3 class="font-heading font-bold text-lg text-slate-900">Rainforest Rainfall</h3>
+          <p class="text-sm text-slate-600 mt-1">
+            Manaus receives <b>6.3 cm</b> rain in September and <b>11.11 cm</b> in October, totaling <b>17.41 cm</b> for both months!
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Key Math Vocabulary Bar -->
+      <div class="bg-amber-50 border-2 border-amber-200 rounded-2xl p-5 space-y-3">
+        <h3 class="font-heading font-bold text-xl text-amber-950 flex items-center gap-2">
+          <i class="fa-solid fa-spell-check text-amber-600"></i> Key Vocabulary Terms
+        </h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 text-sm">
+          <div class="bg-white p-3 rounded-xl border border-amber-200"><mark>nonzero place</mark>: The leftmost place value in a number that contains a digit other than 0.</div>
+          <div class="bg-white p-3 rounded-xl border border-amber-200"><mark>front-end estimation</mark>: Estimating by adding the values of the front digits in the greatest nonzero place.</div>
+          <div class="bg-white p-3 rounded-xl border border-amber-200"><mark>rounding</mark>: Adjusting numbers to nearby place values (like nearest tenth or whole) for quick estimation.</div>
+          <div class="bg-white p-3 rounded-xl border border-amber-200"><mark>hundredth</mark>: One part out of 100 equal parts (0.01), two places to the right of the decimal point.</div>
+          <div class="bg-white p-3 rounded-xl border border-amber-200"><mark>sum</mark>: The total result obtained from adding numbers together.</div>
+          <div class="bg-white p-3 rounded-xl border border-amber-200"><mark>regroup</mark>: Exchanging 10 hundredths as 1 tenth or 10 tenths as 1 one when adding place-value columns.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: OBJECTIVE 1 DIRECT INSTRUCTION (ESTIMATE DECIMAL SUMS) -->
+    <section id="sec2" class="bg-white border-2 border-sky-200 rounded-3xl p-6 md:p-8 shadow-sm space-y-6">
+      <div class="flex flex-col md:flex-row justify-between md:items-center gap-4">
+        <div class="flex items-center gap-3">
+          <div class="p-3 bg-sky-100 text-sky-800 rounded-2xl">
+            <i class="fa-solid fa-chalkboard-user text-2xl"></i>
+          </div>
+          <div>
+            <span class="text-xs font-bold text-sky-800 uppercase tracking-wide">Section 2 • 5 Minutes Instruction</span>
+            <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">
+              Objective 1: Estimate Decimal Sums (Lesson 10-3)
+            </h2>
+          </div>
+        </div>
+        <div class="bg-sky-50 border border-sky-200 px-4 py-2 rounded-2xl text-sky-900 font-bold text-sm">
+          Example: <span class="font-mono text-lg font-extrabold text-sky-700">1.35 + 3.1 + 0.75 ≈ 5</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+        
+        <!-- Step-by-Step Explanation -->
+        <div class="space-y-4">
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1">
+            <span class="font-bold text-sky-700 text-sm">Method 1: Front-End Estimation</span>
+            <p class="text-slate-700 text-base">
+              Identify the front digits in the greatest <mark>nonzero place</mark> of each number, then add: <br>
+              <b>1.00 + 3.0 + 0.70 = 4.7</b> (about 4.7 or 5).
+            </p>
+          </div>
+
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1">
+            <span class="font-bold text-sky-700 text-sm">Method 2: Rounding Method</span>
+            <p class="text-slate-700 text-base">
+              Round each decimal to the nearest tenth (the greatest nonzero place of the least number): <br>
+              1.35 → <b>1.4</b>, 3.1 → <b>3.1</b>, 0.75 → <b>0.8</b>.
+            </p>
+          </div>
+
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1">
+            <span class="font-bold text-sky-700 text-sm">Step 3: Add Rounded Numbers</span>
+            <p class="text-slate-700 text-base">
+              <b>1.4 + 3.1 + 0.8 = 5.3</b> (The duathlon is approximately 5 miles long).
+            </p>
+          </div>
+
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1">
+            <span class="font-bold text-sky-700 text-sm">Step 4: Compare Estimation Techniques</span>
+            <p class="text-slate-700 text-base">
+              <mark>rounding</mark> often gives a closer estimate than <mark>front-end estimation</mark> because it considers the next place value.
+            </p>
+          </div>
+        </div>
+
+        <!-- PLACE-VALUE ALIGNED GRID ALGORITHM -->
+        <div class="bg-slate-50 p-6 rounded-2xl border-2 border-sky-300 shadow-sm flex flex-col items-center">
+          <span class="text-xs font-bold text-sky-800 uppercase tracking-widest mb-3">Front-End vs Rounding Comparison Grid</span>
+          
+          <div class="math-grid bg-white p-6 rounded-2xl border border-slate-300 shadow-inner">
+            <!-- Header Column Labels -->
+            <div class="text-xs font-sans text-slate-400 font-bold text-center"></div>
+            <div class="text-xs font-sans text-slate-400 font-bold text-center">O</div>
+            <div class="text-xs font-sans text-slate-400 font-bold text-center">.</div>
+            <div class="text-xs font-sans text-slate-400 font-bold text-center">t</div>
+            <div class="text-xs font-sans text-slate-400 font-bold text-center">h</div>
+            <div class="text-xs font-sans text-slate-400 font-bold text-left pl-2">Rounded</div>
+
+            <!-- Number 1 -->
+            <div class="math-cell"></div>
+            <div class="math-cell text-slate-800">1</div>
+            <div class="math-cell text-slate-800">.</div>
+            <div class="math-cell text-slate-800">3</div>
+            <div class="math-cell text-slate-800">5</div>
+            <div class="text-xs font-sans text-sky-700 font-bold pl-2">→ 1.4</div>
+
+            <!-- Number 2 -->
+            <div class="math-cell"></div>
+            <div class="math-cell text-slate-800">3</div>
+            <div class="math-cell text-slate-800">.</div>
+            <div class="math-cell text-slate-800">1</div>
+            <div class="math-cell text-slate-800">0</div>
+            <div class="text-xs font-sans text-sky-700 font-bold pl-2">→ 3.1</div>
+
+            <!-- Number 3 -->
+            <div class="math-cell text-slate-800">+</div>
+            <div class="math-cell text-slate-800">0</div>
+            <div class="math-cell text-slate-800">.</div>
+            <div class="math-cell text-slate-800">7</div>
+            <div class="math-cell text-slate-800">5</div>
+            <div class="text-xs font-sans text-sky-700 font-bold pl-2">→ 0.8</div>
+
+            <!-- Divider -->
+            <div class="grid-divider"></div>
+
+            <!-- Front-End Estimate -->
+            <div class="math-cell text-slate-800">FE:</div>
+            <div class="math-cell text-amber-700 font-extrabold">4</div>
+            <div class="math-cell text-amber-700 font-extrabold">.</div>
+            <div class="math-cell text-amber-700 font-extrabold">7</div>
+            <div class="math-cell text-amber-700 font-extrabold">0</div>
+            <div class="text-xs font-sans text-amber-700 font-bold pl-2">Front-End</div>
+
+            <!-- Double Divider -->
+            <div class="grid-double-divider"></div>
+
+            <!-- Rounding Estimate -->
+            <div class="math-cell text-slate-800">Rd:</div>
+            <div class="math-cell text-emerald-700 font-extrabold">5</div>
+            <div class="math-cell text-emerald-700 font-extrabold">.</div>
+            <div class="math-cell text-emerald-700 font-extrabold">3</div>
+            <div class="math-cell text-emerald-700 font-extrabold">0</div>
+            <div class="text-xs font-sans text-emerald-700 font-extrabold pl-2">Rounded</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Common Error Box -->
+      <div class="bg-amber-50 border-2 border-amber-300 rounded-2xl p-5 flex items-start gap-4">
+        <div class="p-3 bg-amber-200 text-amber-900 rounded-xl">
+          <i class="fa-solid fa-triangle-exclamation text-2xl"></i>
+        </div>
+        <div>
+          <h4 class="font-heading font-bold text-amber-950 text-lg">Error to Avoid: Mixing Up Front-End and Rounding!</h4>
+          <p class="text-slate-700 text-base mt-1">
+            When using <b>front-end estimation</b>, look only at the greatest nonzero front digits. When using <b>rounding</b>, check the digit to the right to decide whether to round up or keep the digit!
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: OBJECTIVE 1 INDEPENDENT PRACTICE (10 Mins) -->
+    <section id="sec3" class="space-y-6">
+      <div class="flex items-center gap-3">
+        <div class="p-3 bg-sky-600 text-white rounded-2xl">
+          <i class="fa-solid fa-pen-to-square text-2xl"></i>
+        </div>
+        <div>
+          <span class="text-xs font-bold text-sky-800 uppercase tracking-wide">Section 3 • 10 Minutes Practice</span>
+          <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">
+            Objective 1 Independent Practice (Problems 1–6)
+          </h2>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- Problem 1 -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-3">
+              <span class="font-heading font-bold text-sky-800 text-xl">Problem 1</span>
+              <span class="text-xs font-bold px-3 py-1 bg-sky-100 text-sky-900 rounded-full">2.1 + 4.2 + 1.9</span>
+            </div>
+            
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3">
+              <div class="flex justify-between items-center text-sm">
+                <span class="font-semibold text-slate-700">Front-End Estimate (2 + 4 + 1):</span>
+                <input type="text" id="p1-1" class="math-input w-24" placeholder="?">
+              </div>
+              <div class="flex justify-between items-center text-sm">
+                <span class="font-semibold text-slate-700">Rounded Estimate (2.1 + 4.2 + 1.9):</span>
+                <input type="text" id="p1-2" class="math-input w-24" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p1')" class="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-amber-600"></i> Need a Hint?
+            </button>
+            <div id="hint-p1" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p>• Front-End: 2.0 + 4.0 + 1.0 = 7.</p>
+              <p>• Rounding to nearest tenth: 2.1 + 4.2 + 1.9 = 8.2.</p>
+            </div>
+
+            <div id="msg-p1" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p1', ['7', '8.2'])" class="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+        <!-- Problem 2 -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-3">
+              <span class="font-heading font-bold text-sky-800 text-xl">Problem 2</span>
+              <span class="text-xs font-bold px-3 py-1 bg-sky-100 text-sky-900 rounded-full">13.2 + 1.7 + 8.9</span>
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3">
+              <div class="flex justify-between items-center text-sm">
+                <span class="font-semibold text-slate-700">Front-End Estimate (10 + 1 + 8):</span>
+                <input type="text" id="p2-1" class="math-input w-24" placeholder="?">
+              </div>
+              <div class="flex justify-between items-center text-sm">
+                <span class="font-semibold text-slate-700">Nearest Whole Rounding (13 + 2 + 9):</span>
+                <input type="text" id="p2-2" class="math-input w-24" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p2')" class="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-amber-600"></i> Need a Hint?
+            </button>
+            <div id="hint-p2" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p>• Front-End: 10 + 1 + 8 = 19.</p>
+              <p>• Rounding to nearest whole: 13 + 2 + 9 = 24.</p>
+            </div>
+
+            <div id="msg-p2" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p2', ['19', '24'])" class="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+        <!-- Problem 3 -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-3">
+              <span class="font-heading font-bold text-sky-800 text-xl">Problem 3</span>
+              <span class="text-xs font-bold px-3 py-1 bg-sky-100 text-sky-900 rounded-full">$12.75 + $26.23 + $35.43</span>
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3">
+              <div class="flex justify-between items-center text-sm">
+                <span class="font-semibold text-slate-700">Front-End Estimate ($10 + $20 + $30):</span>
+                <input type="text" id="p3-1" class="math-input w-24" placeholder="?">
+              </div>
+              <div class="flex justify-between items-center text-sm">
+                <span class="font-semibold text-slate-700">Nearest Dollar Rounding ($13 + $26 + $35):</span>
+                <input type="text" id="p3-2" class="math-input w-24" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p3')" class="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-amber-600"></i> Need a Hint?
+            </button>
+            <div id="hint-p3" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p>• Front-End: 10 + 20 + 30 = 60.</p>
+              <p>• Nearest Dollar: 13 + 26 + 35 = 74.</p>
+            </div>
+
+            <div id="msg-p3" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p3', ['60', '74'])" class="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+        <!-- Problem 4 -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-3">
+              <span class="font-heading font-bold text-sky-800 text-xl">Problem 4</span>
+              <span class="text-xs font-bold px-3 py-1 bg-sky-100 text-sky-900 rounded-full">3.2 + 6.43</span>
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3">
+              <div class="flex justify-between items-center text-sm">
+                <span class="font-semibold text-slate-700">Front-End Estimate (3 + 6):</span>
+                <input type="text" id="p4-1" class="math-input w-24" placeholder="?">
+              </div>
+              <div class="flex justify-between items-center text-sm">
+                <span class="font-semibold text-slate-700">Nearest Tenth Rounding (3.2 + 6.4):</span>
+                <input type="text" id="p4-2" class="math-input w-24" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p4')" class="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-amber-600"></i> Need a Hint?
+            </button>
+            <div id="hint-p4" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p>• Front-End: 3 + 6 = 9.</p>
+              <p>• Nearest tenth: 3.2 + 6.4 = 9.6.</p>
+            </div>
+
+            <div id="msg-p4" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p4', ['9', '9.6'])" class="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+        <!-- Problem 5 -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-3">
+              <span class="font-heading font-bold text-sky-800 text-xl">Problem 5</span>
+              <span class="text-xs font-bold px-3 py-1 bg-sky-100 text-sky-900 rounded-full">12.35 + 52.67</span>
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3">
+              <div class="flex justify-between items-center text-sm">
+                <span class="font-semibold text-slate-700">Front-End Estimate (10 + 50):</span>
+                <input type="text" id="p5-1" class="math-input w-24" placeholder="?">
+              </div>
+              <div class="flex justify-between items-center text-sm">
+                <span class="font-semibold text-slate-700">Nearest Whole Rounding (12 + 53):</span>
+                <input type="text" id="p5-2" class="math-input w-24" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p5')" class="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-amber-600"></i> Need a Hint?
+            </button>
+            <div id="hint-p5" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p>• Front-End: 10 + 50 = 60.</p>
+              <p>• Rounding: 12 + 53 = 65.</p>
+            </div>
+
+            <div id="msg-p5" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p5', ['60', '65'])" class="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+        <!-- Problem 6: Word Problem (Duathlon) -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-3">
+              <span class="font-heading font-bold text-sky-800 text-xl">Problem 6 (Word Problem)</span>
+              <span class="text-xs font-bold px-3 py-1 bg-emerald-100 text-emerald-900 rounded-full"><i class="fa-solid fa-person-running"></i> Multi-Step</span>
+            </div>
+            <p class="text-slate-800 text-sm leading-relaxed mb-3">
+              John runs <b>1.35 miles</b>, bikes <b>3.1 miles</b>, and runs <b>0.75 miles</b>. Compare front-end estimation vs rounding to the nearest tenth.
+            </p>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3">
+              <div class="flex justify-between items-center text-sm">
+                <span class="font-semibold text-slate-700">Front-End (1.0 + 3.0 + 0.7):</span>
+                <input type="text" id="p6-1" class="math-input w-28" placeholder="?">
+              </div>
+              <div class="flex justify-between items-center text-sm">
+                <span class="font-semibold text-slate-700">Rounded Tenths (1.4 + 3.1 + 0.8):</span>
+                <input type="text" id="p6-2" class="math-input w-28" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p6')" class="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-amber-600"></i> Need a Hint?
+            </button>
+            <div id="hint-p6" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p>• Front-End: 1.0 + 3.0 + 0.7 = 4.7.</p>
+              <p>• Rounding: 1.4 + 3.1 + 0.8 = 5.3 (about 5 miles).</p>
+            </div>
+
+            <div id="msg-p6" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p6', ['4.7', '5.3'])" class="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 4: OBJECTIVE 2 DIRECT INSTRUCTION (ADD DECIMALS: HUNDREDTHS) -->
+    <section id="sec4" class="bg-white border-2 border-purple-200 rounded-3xl p-6 md:p-8 shadow-sm space-y-6">
+      <div class="flex flex-col md:flex-row justify-between md:items-center gap-4">
+        <div class="flex items-center gap-3">
+          <div class="p-3 bg-purple-100 text-purple-900 rounded-2xl">
+            <i class="fa-solid fa-layer-group text-2xl"></i>
+          </div>
+          <div>
+            <span class="text-xs font-bold text-purple-900 uppercase tracking-wide">Section 4 • 5 Minutes Instruction</span>
+            <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">
+              Objective 2: Add Decimals to Hundredths (Lesson 10-5)
+            </h2>
+          </div>
+        </div>
+        <div class="bg-purple-50 border border-purple-200 px-4 py-2 rounded-2xl text-purple-900 font-bold text-sm">
+          Example: <span class="font-mono text-lg font-extrabold text-purple-700">0.37 + 1.26 = 1.63</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+        
+        <!-- Step-by-Step Instruction -->
+        <div class="space-y-4">
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1">
+            <span class="font-bold text-purple-800 text-sm">Step 1: Line Up Decimal Points</span>
+            <p class="text-slate-700 text-base">
+              Line up the decimal points and align place-value columns (ones, tenths, hundredths).
+            </p>
+          </div>
+
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1 flex items-start gap-3">
+            <span class="w-6 h-6 bg-orange-500 text-white rounded-full flex items-center justify-center font-bold text-xs mt-0.5 shrink-0">1</span>
+            <div>
+              <span class="font-bold text-orange-700 text-sm">Step 2: Add Hundredths & Regroup</span>
+              <p class="text-slate-700 text-sm mt-0.5">
+                • 7 hundredths + 6 hundredths = 13 hundredths.<br>
+                • Write <b>3 in hundredths place</b> and <mark>regroup</mark> 1 tenth above the tenths column.
+              </p>
+            </div>
+          </div>
+
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1 flex items-start gap-3">
+            <span class="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-xs mt-0.5 shrink-0">2</span>
+            <div>
+              <span class="font-bold text-blue-800 text-sm">Step 3: Add Tenths & Ones</span>
+              <p class="text-slate-700 text-sm mt-0.5">
+                • 1 (carried) + 3 + 2 = <b>6 tenths</b>.<br>
+                • 0 + 1 = <b>1 one</b>.<br>
+                • Bring down the decimal point directly aligned.
+              </p>
+            </div>
+          </div>
+
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1">
+            <span class="font-bold text-purple-800 text-sm">Step 4: Final Sum</span>
+            <p class="text-slate-700 text-base">
+              0.37 + 1.26 = <b>1.63</b> (Brian bought 1.63 pounds of onions).
+            </p>
+          </div>
+        </div>
+
+        <!-- STACKED REGROUPING GRID ALGORITHM -->
+        <div class="bg-slate-50 p-6 rounded-2xl border-2 border-purple-300 shadow-sm flex flex-col items-center">
+          <span class="text-xs font-bold text-purple-900 uppercase tracking-widest mb-3">Stacked Decimal Alignment Grid</span>
+
+          <div class="math-grid bg-white p-6 rounded-2xl border border-slate-300 shadow-inner">
+            <!-- Header Column Labels -->
+            <div class="text-xs font-sans text-slate-400 font-bold text-center"></div>
+            <div class="text-xs font-sans text-slate-400 font-bold text-center">O</div>
+            <div class="text-xs font-sans text-slate-400 font-bold text-center">.</div>
+            <div class="text-xs font-sans text-slate-400 font-bold text-center">t</div>
+            <div class="text-xs font-sans text-slate-400 font-bold text-center">h</div>
+            <div class="text-xs font-sans text-slate-400 font-bold text-left pl-2">Row Type</div>
+
+            <!-- REGROUPING ROW -->
+            <div class="math-cell"></div>
+            <div class="math-cell"></div>
+            <div class="math-cell"></div>
+            <div class="math-cell regroup-pill-orange">1</div>
+            <div class="math-cell"></div>
+            <div class="text-xs font-sans text-orange-700 font-bold pl-2">Carried 1 tenth</div>
+
+            <!-- ADDEND 1 -->
+            <div class="math-cell"></div>
+            <div class="math-cell text-slate-800">0</div>
+            <div class="math-cell text-slate-800">.</div>
+            <div class="math-cell text-slate-800">3</div>
+            <div class="math-cell text-slate-800">7</div>
+            <div class="text-xs font-sans text-slate-500 font-semibold pl-2">Yellow Onions</div>
+
+            <!-- ADDEND 2 -->
+            <div class="math-cell text-slate-800">+</div>
+            <div class="math-cell text-slate-800">1</div>
+            <div class="math-cell text-slate-800">.</div>
+            <div class="math-cell text-slate-800">2</div>
+            <div class="math-cell text-slate-800">6</div>
+            <div class="text-xs font-sans text-slate-500 font-semibold pl-2">White Onions</div>
+
+            <!-- DIVIDER -->
+            <div class="grid-divider"></div>
+
+            <!-- DOUBLE DIVIDER -->
+            <div class="grid-double-divider"></div>
+
+            <!-- FINAL SUM -->
+            <div class="math-cell"></div>
+            <div class="math-cell text-purple-800 font-extrabold">1</div>
+            <div class="math-cell text-purple-800 font-extrabold">.</div>
+            <div class="math-cell text-purple-800 font-extrabold">6</div>
+            <div class="math-cell text-purple-800 font-extrabold">3</div>
+            <div class="text-xs font-sans text-purple-800 font-extrabold pl-2">Total Pounds</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Common Error Box -->
+      <div class="bg-red-50 border-2 border-red-300 rounded-2xl p-5 flex items-start gap-4">
+        <div class="p-3 bg-red-200 text-red-900 rounded-xl">
+          <i class="fa-solid fa-triangle-exclamation text-2xl"></i>
+        </div>
+        <div>
+          <h4 class="font-heading font-bold text-red-950 text-lg">Critical Error: Always Align Decimal Points!</h4>
+          <p class="text-slate-700 text-base mt-1">
+            Never align numbers by their rightmost digit if they have different decimal places! Add placeholder zeros (like 3.6 → 3.60) to keep columns properly aligned before adding.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: OBJECTIVE 2 INDEPENDENT PRACTICE (10 Mins) -->
+    <section id="sec5" class="space-y-6">
+      <div class="flex items-center gap-3">
+        <div class="p-3 bg-purple-600 text-white rounded-2xl">
+          <i class="fa-solid fa-pen-to-square text-2xl"></i>
+        </div>
+        <div>
+          <span class="text-xs font-bold text-purple-800 uppercase tracking-wide">Section 5 • 10 Minutes Practice</span>
+          <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">
+            Objective 2 Independent Practice (Problems 7–11)
+          </h2>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- Problem 7: 4.42 + 5.54 -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-3">
+              <span class="font-heading font-bold text-purple-900 text-xl">Problem 7</span>
+              <span class="text-xs font-bold px-3 py-1 bg-purple-100 text-purple-900 rounded-full">4.42 + 5.54</span>
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3">
+              <div class="flex justify-between items-center text-sm">
+                <span class="font-semibold text-slate-700">Hundredths Sum (2 + 4):</span>
+                <input type="text" id="p7-1" class="math-input w-28" placeholder="?">
+              </div>
+              <div class="flex justify-between items-center text-sm">
+                <span class="font-semibold text-slate-700">Tenths Sum (4 + 5):</span>
+                <input type="text" id="p7-2" class="math-input w-28" placeholder="?">
+              </div>
+              <div class="border-t border-slate-300 pt-2 flex justify-between items-center">
+                <span class="font-bold text-slate-900">Total Sum:</span>
+                <input type="text" id="p7-3" class="math-input w-32 font-bold text-purple-800" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p7')" class="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-amber-600"></i> Need a Hint?
+            </button>
+            <div id="hint-p7" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p>• Hundredths: 2 + 4 = 6</p>
+              <p>• Tenths: 4 + 5 = 9</p>
+              <p>• Sum: 4.42 + 5.54 = 9.96.</p>
+            </div>
+
+            <div id="msg-p7" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p7', ['6', '9', '9.96'])" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+        <!-- Problem 8: 1.24 + 2.69 -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-3">
+              <span class="font-heading font-bold text-purple-900 text-xl">Problem 8</span>
+              <span class="text-xs font-bold px-3 py-1 bg-purple-100 text-purple-900 rounded-full">1.24 + 2.69</span>
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3">
+              <div class="flex justify-between items-center text-sm">
+                <span class="font-semibold text-slate-700">Hundredths Sum (4 + 9):</span>
+                <input type="text" id="p8-1" class="math-input w-28" placeholder="?">
+              </div>
+              <div class="flex justify-between items-center text-sm">
+                <span class="font-semibold text-slate-700">Tenths with Carry (1 + 2 + 6):</span>
+                <input type="text" id="p8-2" class="math-input w-28" placeholder="?">
+              </div>
+              <div class="border-t border-slate-300 pt-2 flex justify-between items-center">
+                <span class="font-bold text-slate-900">Total Sum:</span>
+                <input type="text" id="p8-3" class="math-input w-32 font-bold text-purple-800" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p8')" class="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-amber-600"></i> Need a Hint?
+            </button>
+            <div id="hint-p8" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p>• 4 + 9 = 13 hundredths (write 3, carry 1 tenth)</p>
+              <p>• 1 + 2 + 6 = 9 tenths</p>
+              <p>• Sum: 1.24 + 2.69 = 3.93.</p>
+            </div>
+
+            <div id="msg-p8" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p8', ['13', '9', '3.93'])" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+        <!-- Problem 9: 10.87 + 20.48 -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-3">
+              <span class="font-heading font-bold text-purple-900 text-xl">Problem 9</span>
+              <span class="text-xs font-bold px-3 py-1 bg-purple-100 text-purple-900 rounded-full">10.87 + 20.48</span>
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3">
+              <div class="flex justify-between items-center text-sm">
+                <span class="font-semibold text-slate-700">Hundredths Sum (7 + 8):</span>
+                <input type="text" id="p9-1" class="math-input w-28" placeholder="?">
+              </div>
+              <div class="flex justify-between items-center text-sm">
+                <span class="font-semibold text-slate-700">Tenths with Carry (1 + 8 + 4):</span>
+                <input type="text" id="p9-2" class="math-input w-28" placeholder="?">
+              </div>
+              <div class="border-t border-slate-300 pt-2 flex justify-between items-center">
+                <span class="font-bold text-slate-900">Total Sum:</span>
+                <input type="text" id="p9-3" class="math-input w-32 font-bold text-purple-800" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p9')" class="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-amber-600"></i> Need a Hint?
+            </button>
+            <div id="hint-p9" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p>• 7 + 8 = 15 hundredths (write 5, carry 1 tenth)</p>
+              <p>• 1 + 8 + 4 = 13 tenths (write 3, carry 1 one)</p>
+              <p>• Sum: 10.87 + 20.48 = 31.35.</p>
+            </div>
+
+            <div id="msg-p9" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p9', ['15', '13', '31.35'])" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+        <!-- Problem 10: 3.6 + 6.54 + 3.05 -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-3">
+              <span class="font-heading font-bold text-purple-900 text-xl">Problem 10</span>
+              <span class="text-xs font-bold px-3 py-1 bg-purple-100 text-purple-900 rounded-full">3.6 + 6.54 + 3.05</span>
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3">
+              <div class="flex justify-between items-center text-sm">
+                <span class="font-semibold text-slate-700">Hundredths Sum (0 + 4 + 5):</span>
+                <input type="text" id="p10-1" class="math-input w-28" placeholder="?">
+              </div>
+              <div class="flex justify-between items-center text-sm">
+                <span class="font-semibold text-slate-700">Tenths Sum (6 + 5 + 0):</span>
+                <input type="text" id="p10-2" class="math-input w-28" placeholder="?">
+              </div>
+              <div class="border-t border-slate-300 pt-2 flex justify-between items-center">
+                <span class="font-bold text-slate-900">Total Sum:</span>
+                <input type="text" id="p10-3" class="math-input w-32 font-bold text-purple-800" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p10')" class="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-amber-600"></i> Need a Hint?
+            </button>
+            <div id="hint-p10" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p>• Add placeholder zero: 3.60 + 6.54 + 3.05</p>
+              <p>• Hundredths: 0 + 4 + 5 = 9</p>
+              <p>• Tenths: 6 + 5 + 0 = 11 tenths (write 1, carry 1 one)</p>
+              <p>• Total Sum: 13.19.</p>
+            </div>
+
+            <div id="msg-p10" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p10', ['9', '11', '13.19'])" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+        <!-- Problem 11: Word Problem (Rainfall) -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-3">
+              <span class="font-heading font-bold text-purple-900 text-xl">Problem 11 (Word Problem)</span>
+              <span class="text-xs font-bold px-3 py-1 bg-emerald-100 text-emerald-900 rounded-full"><i class="fa-solid fa-cloud-rain"></i> Measurement</span>
+            </div>
+            <p class="text-slate-800 text-sm leading-relaxed mb-3">
+              Manaus receives <b>6.3 cm</b> of rain in September. In October, rainfall increases by <b>4.81 cm</b>. What is the total rainfall for both months combined?
+            </p>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3">
+              <div class="flex justify-between items-center text-sm">
+                <span class="font-semibold text-slate-700">October Rainfall (6.3 + 4.81):</span>
+                <input type="text" id="p11-1" class="math-input w-28" placeholder="?">
+              </div>
+              <div class="border-t border-slate-300 pt-2 flex justify-between items-center">
+                <span class="font-bold text-slate-900">Total Rainfall (Sept + Oct):</span>
+                <input type="text" id="p11-2" class="math-input w-32 font-bold text-purple-800" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p11')" class="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-amber-600"></i> Need a Hint?
+            </button>
+            <div id="hint-p11" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p>• Step 1: October rainfall = 6.30 + 4.81 = 11.11 cm.</p>
+              <p>• Step 2: Total = 6.30 + 11.11 = 17.41 cm.</p>
+            </div>
+
+            <div id="msg-p11" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p11', ['11.11', '17.41'])" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 6: KEY TAKEAWAYS & EMAIL TURN-IN -->
+    <section id="sec6" class="bg-amber-50 border-2 border-amber-200 rounded-3xl p-6 md:p-8 space-y-6">
+      <div class="flex items-center gap-3">
+        <div class="p-3 bg-amber-200 text-amber-900 rounded-2xl">
+          <i class="fa-solid fa-award text-2xl"></i>
+        </div>
+        <div>
+          <span class="text-xs font-bold text-amber-800 uppercase tracking-wide">Section 6</span>
+          <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">Key Takeaways & Turn In</h2>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        
+        <div class="bg-white p-5 rounded-2xl border border-amber-200 space-y-2">
+          <div class="text-amber-800 font-bold text-lg flex items-center gap-2">
+            <i class="fa-solid fa-calculator"></i> 1. Front-End Estimation
+          </div>
+          <p class="text-sm text-slate-600">
+            Add the values of the front digits in the greatest nonzero place for a quick estimate.
+          </p>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-sky-200 space-y-2">
+          <div class="text-sky-800 font-bold text-lg flex items-center gap-2">
+            <i class="fa-solid fa-bullseye"></i> 2. Rounding Sums
+          </div>
+          <p class="text-sm text-slate-600">
+            Round decimals to the nearest tenth or whole number for a closer estimate.
+          </p>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-purple-200 space-y-2">
+          <div class="text-purple-800 font-bold text-lg flex items-center gap-2">
+            <i class="fa-solid fa-arrow-up-right-dots"></i> 3. Align Decimals
+          </div>
+          <p class="text-sm text-slate-600">
+            Always line up decimal points and place-value columns before adding!
+          </p>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-emerald-200 space-y-2">
+          <div class="text-emerald-800 font-bold text-lg flex items-center gap-2">
+            <i class="fa-solid fa-plus-circle"></i> 4. Regroup Correctly
+          </div>
+          <p class="text-sm text-slate-600">
+            Regroup 10 hundredths as 1 tenth or 10 tenths as 1 one as you add columns right-to-left.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Final Completion & Email Turn In Card -->
+      <div class="bg-white p-8 rounded-3xl border-2 border-emerald-300 text-center space-y-4 shadow-md">
+        <div class="w-16 h-16 bg-emerald-100 text-emerald-700 rounded-2xl flex items-center justify-center mx-auto text-3xl">
+          <i class="fa-solid fa-envelope"></i>
+        </div>
+        <h3 class="font-heading font-bold text-2xl text-slate-900">Ready to Email Your Score Report?</h3>
+        <p class="text-slate-600 text-base max-w-xl mx-auto">
+          Click the green button below to open Gmail in a new tab with your completed worksheet score report ready to send to <b>jvena@saintmarys.us</b>!
+        </p>
+        <div class="flex flex-wrap justify-center gap-4 pt-2">
+          <button onclick="openSubmitModal()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-lg px-8 py-3.5 rounded-2xl transition shadow-lg inline-flex items-center gap-2">
+            <i class="fa-solid fa-paper-plane"></i> Email Work to jvena@saintmarys.us
+          </button>
+          <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-6 py-3.5 rounded-2xl transition border border-slate-300 inline-flex items-center gap-2">
+            <i class="fa-solid fa-arrow-up"></i> Return to Top
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- INTERACTIVE SCRATCHPAD FLOATING BUTTON -->
+  <div class="fixed bottom-6 right-6 z-50">
+    <button onclick="toggleScratchpad()" class="bg-sky-600 hover:bg-sky-700 text-white font-bold px-5 py-3 rounded-full shadow-2xl flex items-center gap-2 text-base transition transform hover:scale-105 border-2 border-white">
+      <i class="fa-solid fa-pen-line"></i> Open Scratchpad
+    </button>
+  </div>
+
+  <!-- SCRATCHPAD MODAL -->
+  <div id="scratchpad-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-3xl w-full p-6 shadow-2xl space-y-4 flex flex-col h-[85vh]">
+      <div class="flex justify-between items-center border-b border-slate-200 pb-3">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-pen-clip text-sky-600 text-xl"></i>
+          <h3 class="font-heading font-bold text-xl text-slate-900">Chromebook Scratchpad & Scratch Work</h3>
+        </div>
+        <button onclick="toggleScratchpad()" class="text-slate-400 hover:text-slate-700 text-2xl font-bold px-2">&times;</button>
+      </div>
+
+      <!-- Controls -->
+      <div class="flex flex-wrap items-center justify-between gap-3 bg-slate-100 p-3 rounded-2xl">
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-bold text-slate-600">Color:</span>
+          <button onclick="setPadColor('#0284c7')" class="w-8 h-8 rounded-full bg-sky-600 border-2 border-white shadow"></button>
+          <button onclick="setPadColor('#dc2626')" class="w-8 h-8 rounded-full bg-red-600 border-2 border-white shadow"></button>
+          <button onclick="setPadColor('#16a34a')" class="w-8 h-8 rounded-full bg-emerald-600 border-2 border-white shadow"></button>
+          <button onclick="setPadColor('#0f172a')" class="w-8 h-8 rounded-full bg-slate-900 border-2 border-white shadow"></button>
+        </div>
+        <button onclick="clearScratchpad()" class="bg-red-100 hover:bg-red-200 text-red-800 text-xs font-bold px-3 py-2 rounded-xl transition">
+          <i class="fa-solid fa-trash"></i> Clear Pad
+        </button>
+      </div>
+
+      <!-- Canvas Box -->
+      <div class="flex-1 bg-slate-50 border-2 border-slate-200 rounded-2xl overflow-hidden relative">
+        <canvas id="scratch-canvas" class="w-full h-full cursor-crosshair"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- STUDENT EMAIL SUBMIT MODAL -->
+  <div id="submit-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 md:p-8 shadow-2xl space-y-6 border-4 border-emerald-500">
+      <div class="flex justify-between items-center border-b border-slate-200 pb-3">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-paper-plane text-emerald-600 text-2xl"></i>
+          <h3 class="font-heading font-bold text-2xl text-slate-900">Email Report to Teacher</h3>
+        </div>
+        <button onclick="closeSubmitModal()" class="text-slate-400 hover:text-slate-700 text-2xl font-bold px-2">&times;</button>
+      </div>
+
+      <div class="space-y-4">
+        <div>
+          <label class="block text-sm font-bold text-slate-700 mb-1">Student First & Last Name:</label>
+          <input type="text" id="studentName" class="w-full px-4 py-3 rounded-xl border-2 border-slate-300 font-bold text-slate-900 focus:border-emerald-500 focus:outline-none" placeholder="e.g. Alex Johnson">
+        </div>
+
+        <div>
+          <label class="block text-sm font-bold text-slate-700 mb-1">Grade:</label>
+          <input type="text" id="classId" class="w-full px-4 py-3 rounded-xl border-2 border-slate-300 font-bold text-slate-900 focus:border-emerald-500 focus:outline-none" placeholder="e.g. 5th Grade">
+        </div>
+
+        <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-xl text-xs text-emerald-900">
+          <i class="fa-solid fa-circle-info"></i> Submitting will automatically open a <b>Gmail web compose window in a new tab</b> with your full score report pre-filled for <b>jvena@saintmarys.us</b>.
+        </div>
+      </div>
+
+      <div class="flex gap-3 pt-2">
+        <button onclick="processEmailSubmission()" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl transition shadow-md flex items-center justify-center gap-2">
+          <i class="fa-solid fa-envelope"></i> Open Gmail in New Tab
+        </button>
+        <button onclick="closeSubmitModal()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-5 py-3.5 rounded-xl transition">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    const solvedProblems = new Set();
+    const totalProblems = 11;
+    const DEFAULT_TEACHER_EMAIL = "jvena@saintmarys.us";
+
+    function sanitizeInput(val) {
+      return val.toString().replace(/,/g, '').trim();
+    }
+
+    function toggleHint(hintId) {
+      const hintElem = document.getElementById(hintId);
+      if (hintElem) hintElem.classList.toggle('hidden');
+    }
+
+    function checkProblem(probId, expectedAnswers) {
+      let allCorrect = true;
+
+      expectedAnswers.forEach((expected, idx) => {
+        const inputElem = document.getElementById(`${probId}-${idx + 1}`);
+        if (!inputElem) return;
+
+        const userVal = sanitizeInput(inputElem.value);
+        if (userVal === expected) {
+          inputElem.classList.remove('incorrect');
+          inputElem.classList.add('correct');
+        } else {
+          inputElem.classList.remove('correct');
+          inputElem.classList.add('incorrect');
+          allCorrect = false;
+        }
+      });
+
+      const msgElem = document.getElementById(`msg-${probId}`);
+      if (msgElem) {
+        msgElem.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-800', 'bg-red-100', 'text-red-800');
+        if (allCorrect) {
+          msgElem.classList.add('bg-emerald-100', 'text-emerald-800');
+          msgElem.innerHTML = '<i class="fa-solid fa-circle-check"></i> Great job! Correct!';
+          solvedProblems.add(probId);
+        } else {
+          msgElem.classList.add('bg-red-100', 'text-red-800');
+          msgElem.innerHTML = '<i class="fa-solid fa-circle-xmark"></i> Check the red boxes and try again!';
+        }
+      }
+
+      updateProgress();
+    }
+
+    function updateProgress() {
+      const count = solvedProblems.size;
+      const percent = Math.round((count / totalProblems) * 100);
+
+      const progressText = document.getElementById('progress-text');
+      const progressBar = document.getElementById('progress-bar');
+
+      if (progressText) progressText.innerText = `${count} / ${totalProblems} Solved`;
+      if (progressBar) progressBar.style.width = `${percent}%`;
+    }
+
+    /* Scratchpad Canvas Logic */
+    let canvas, ctx, isDrawing = false;
+    let padColor = '#0284c7';
+
+    function toggleScratchpad() {
+      const modal = document.getElementById('scratchpad-modal');
+      modal.classList.toggle('hidden');
+
+      if (!modal.classList.contains('hidden')) {
+        setTimeout(initCanvas, 100);
+      }
+    }
+
+    function initCanvas() {
+      canvas = document.getElementById('scratch-canvas');
+      if (!canvas) return;
+
+      const rect = canvas.parentElement.getBoundingClientRect();
+      canvas.width = rect.width;
+      canvas.height = rect.height;
+
+      ctx = canvas.getContext('2d');
+      ctx.lineWidth = 3;
+      ctx.lineCap = 'round';
+      ctx.strokeStyle = padColor;
+
+      canvas.removeEventListener('mousedown', startDraw);
+      canvas.removeEventListener('mousemove', draw);
+      canvas.removeEventListener('mouseup', stopDraw);
+
+      canvas.addEventListener('mousedown', startDraw);
+      canvas.addEventListener('mousemove', draw);
+      canvas.addEventListener('mouseup', stopDraw);
+
+      /* Touch events for Chromebook touchscreens */
+      canvas.addEventListener('touchstart', (e) => { startDraw(e.touches[0]); e.preventDefault(); });
+      canvas.addEventListener('touchmove', (e) => { draw(e.touches[0]); e.preventDefault(); });
+      canvas.addEventListener('touchend', stopDraw);
+    }
+
+    function startDraw(e) {
+      isDrawing = true;
+      const rect = canvas.getBoundingClientRect();
+      ctx.beginPath();
+      ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
+    }
+
+    function draw(e) {
+      if (!isDrawing) return;
+      const rect = canvas.getBoundingClientRect();
+      ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
+      ctx.stroke();
+    }
+
+    function stopDraw() {
+      isDrawing = false;
+    }
+
+    function setPadColor(color) {
+      padColor = color;
+      if (ctx) ctx.strokeStyle = padColor;
+    }
+
+    function clearScratchpad() {
+      if (ctx && canvas) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+    }
+
+    /* Email Submission Functions */
+    function openSubmitModal() {
+      document.getElementById('submit-modal').classList.remove('hidden');
+    }
+
+    function closeSubmitModal() {
+      document.getElementById('submit-modal').classList.add('hidden');
+    }
+
+    function processEmailSubmission() {
+      const name = document.getElementById('studentName').value.trim();
+      const classId = document.getElementById('classId').value.trim();
+
+      if (!name) {
+        alert('Please enter your name before turning in your work!');
+        return;
+      }
+
+      const timestamp = new Date().toLocaleString();
+      const scoreProgress = `${solvedProblems.size} / ${totalProblems} Solved`;
+      const targetEmail = DEFAULT_TEACHER_EMAIL;
+
+      let reportBody = `5th Grade Math Score Report - Sadlier Math Lessons 10-3 & 10-5\n`;
+      reportBody += `----------------------------------------------------\n`;
+      reportBody += `Student Name: ${name}\n`;
+      reportBody += `Grade: ${classId || 'N/A'}\n`;
+      reportBody += `Score Progress: ${scoreProgress}\n`;
+      reportBody += `Date & Time: ${timestamp}\n\n`;
+      reportBody += `--- DETAILED STUDENT ANSWERS ---\n`;
+
+      const problemTitles = [
+        "Problem 1 (2.1 + 4.2 + 1.9)",
+        "Problem 2 (13.2 + 1.7 + 8.9)",
+        "Problem 3 ($12.75 + $26.23 + $35.43)",
+        "Problem 4 (3.2 + 6.43)",
+        "Problem 5 (12.35 + 52.67)",
+        "Problem 6 (Word Problem - Duathlon)",
+        "Problem 7 (4.42 + 5.54)",
+        "Problem 8 (1.24 + 2.69)",
+        "Problem 9 (10.87 + 20.48)",
+        "Problem 10 (3.6 + 6.54 + 3.05)",
+        "Problem 11 (Word Problem - Manaus Rainfall)"
+      ];
+
+      for (let i = 1; i <= 11; i++) {
+        const val1 = document.getElementById(`p${i}-1`) ? document.getElementById(`p${i}-1`).value : '';
+        const val2 = document.getElementById(`p${i}-2`) ? document.getElementById(`p${i}-2`).value : '';
+        const val3 = document.getElementById(`p${i}-3`) ? document.getElementById(`p${i}-3`).value : '';
+
+        if (i === 11) {
+          reportBody += `${problemTitles[i - 1]}: Oct Rainfall = ${val1} cm, Total = ${val2} cm\n`;
+        } else if (i <= 6) {
+          reportBody += `${problemTitles[i - 1]}: Front-End = ${val1}, Rounded = ${val2}\n`;
+        } else {
+          reportBody += `${problemTitles[i - 1]}: Hundredths = ${val1}, Tenths = ${val2}, Total = ${val3}\n`;
+        }
+      }
+
+      const subject = encodeURIComponent(`Math Score Report: ${name} (${classId || '5th Grade'}) - ${scoreProgress}`);
+      const body = encodeURIComponent(reportBody);
+
+      // Force launch directly in Gmail Web Client compose mode in a new browser tab
+      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(targetEmail)}&su=${subject}&body=${body}`;
+
+      window.open(gmailUrl, '_blank');
+
+      alert(`Great job, ${name}! A new Gmail tab has opened to send your score report to ${targetEmail}. Click "Send" in Gmail to complete your submission.`);
+      closeSubmitModal();
+    }
+  </script>
+</body>
+</html>
