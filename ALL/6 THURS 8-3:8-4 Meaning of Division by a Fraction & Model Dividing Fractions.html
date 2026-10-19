@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meaning of Division by a Fraction & Model Dividing Fractions</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Roboto+Mono:wght@500;700&display=swap">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            heading: ['Fredoka', 'sans-serif'],
+            mono: ['Roboto Mono', 'monospace']
+          },
+          colors: {
+            brandBlue: '#0284c7',
+            brandGreen: '#16a34a',
+            brandYellow: '#ca8a04',
+            brandPurple: '#9333ea',
+            brandOrange: '#ea580c'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #f8fafc;
+      color: #0f172a;
+      font-size: 18px;
+    }
+    
+    .math-grid {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(36px, 48px));
+      gap: 4px;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Roboto Mono', monospace;
+      font-weight: 700;
+      font-size: 24px;
+    }
+
+    .math-cell {
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+    }
+
+    .math-input {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 18px;
+      font-weight: 700;
+      text-align: center;
+      border: 2px dashed #94a3b8;
+      border-radius: 8px;
+      background-color: #ffffff;
+      color: #0284c7;
+      transition: all 0.2s ease;
+      width: 100%;
+      height: 42px;
+    }
+
+    .math-input:focus {
+      outline: none;
+      border-color: #0284c7;
+      border-style: solid;
+      background-color: #f0f9ff;
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.2);
+    }
+
+    .math-input.correct {
+      border-color: #16a34a !important;
+      border-style: solid !important;
+      background-color: #f0fdf4 !important;
+      color: #15803d !important;
+    }
+
+    .math-input.incorrect {
+      border-color: #dc2626 !important;
+      border-style: solid !important;
+      background-color: #fef2f2 !important;
+      color: #b91c1c !important;
+    }
+
+    mark {
+      background-color: #fef08a;
+      color: #854d0e;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-weight: 700;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen pb-24">
+
+  <!-- STICKY HEADER & SECTION NAVIGATION -->
+  <header class="sticky top-0 z-40 bg-white border-b border-slate-200 shadow-md py-3 px-4 md:px-8">
+    <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-4">
+      
+      <!-- App Title -->
+      <div class="flex items-center gap-3">
+        <div class="bg-sky-600 text-white p-2.5 rounded-2xl shadow-sm">
+          <i class="fa-solid fa-pie-chart text-2xl"></i>
+        </div>
+        <div>
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold bg-sky-100 text-sky-800 uppercase tracking-wider">
+            Sadlier Math Grade 6 • Lessons 8-3 & 8-4
+          </span>
+          <h1 class="text-xl md:text-2xl font-heading font-bold text-slate-900">
+            Meaning of Division by a Fraction & Model Dividing Fractions
+          </h1>
+        </div>
+      </div>
+
+      <!-- Quick Jump Navigation Tabs -->
+      <nav class="flex flex-wrap items-center justify-center gap-1.5 text-xs font-bold">
+        <a href="#sec1" class="px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-sky-100 text-slate-700 hover:text-sky-800 transition">1. Intro & Vocab</a>
+        <a href="#sec2" class="px-2.5 py-1.5 rounded-xl bg-sky-100 hover:bg-sky-200 text-sky-900 transition">2. Obj 1 Teach</a>
+        <a href="#sec3a" class="px-2.5 py-1.5 rounded-xl bg-amber-100 hover:bg-amber-200 text-amber-900 transition">3. Obj 1 Partner (5m)</a>
+        <a href="#sec3b" class="px-2.5 py-1.5 rounded-xl bg-sky-600 hover:bg-sky-700 text-white transition">4. Obj 1 Ind. (5m)</a>
+        <a href="#sec4" class="px-2.5 py-1.5 rounded-xl bg-purple-100 hover:bg-purple-200 text-purple-900 transition">5. Obj 2 Teach</a>
+        <a href="#sec5a" class="px-2.5 py-1.5 rounded-xl bg-amber-100 hover:bg-amber-200 text-amber-900 transition">6. Obj 2 Partner (5m)</a>
+        <a href="#sec5b" class="px-2.5 py-1.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white transition">7. Obj 2 Ind. (5m)</a>
+        <a href="#sec6" class="px-2.5 py-1.5 rounded-xl bg-emerald-100 hover:bg-emerald-200 text-emerald-900 transition">8. Summary</a>
+      </nav>
+
+      <!-- Live Score Counter & Turn-In Action Buttons -->
+      <div class="flex items-center gap-3">
+        <div class="bg-slate-100 px-3 py-1.5 rounded-2xl border border-slate-200 flex items-center gap-2">
+          <div class="text-right">
+            <div class="text-[10px] font-bold text-slate-500 uppercase">Score Progress</div>
+            <div id="progress-text" class="text-xs font-extrabold text-sky-700">0 / 11 Solved</div>
+          </div>
+          <div class="w-16 bg-slate-200 rounded-full h-2.5 overflow-hidden">
+            <div id="progress-bar" class="bg-gradient-to-r from-sky-500 to-emerald-500 h-2.5 rounded-full transition-all duration-500 w-0"></div>
+          </div>
+        </div>
+
+        <button onclick="openSubmitModal()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3 py-2 rounded-xl transition flex items-center gap-1.5 text-xs shadow-sm">
+          <i class="fa-solid fa-paper-plane"></i> Email Teacher
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 mt-8 space-y-12">
+
+    <!-- SECTION 1: WHY WE NEED THIS MATH & KEY VOCABULARY -->
+    <section id="sec1" class="bg-white border-2 border-slate-200 rounded-3xl p-6 md:p-8 shadow-sm space-y-6">
+      <div class="flex items-center gap-3">
+        <div class="p-3 bg-emerald-100 text-emerald-800 rounded-2xl">
+          <i class="fa-solid fa-earth-americas text-2xl"></i>
+        </div>
+        <div>
+          <span class="text-xs font-bold text-emerald-800 uppercase tracking-wide">Section 1</span>
+          <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">Why We Need This Math & Key Vocabulary</h2>
+        </div>
+      </div>
+
+      <!-- Real World Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        
+        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 flex flex-col items-center text-center">
+          <div class="w-14 h-14 mb-2 flex items-center justify-center text-sky-600 text-3xl">
+            <i class="fa-solid fa-utensils"></i>
+          </div>
+          <h3 class="font-heading font-bold text-lg text-slate-900">Cooking & Tofu</h3>
+          <p class="text-sm text-slate-600 mt-1">
+            Rylee cuts a <b>5 inch block</b> of tofu into <b>5/8 inch pieces</b>. She makes <b>8 pieces</b>!
+          </p>
+        </div>
+
+        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 flex flex-col items-center text-center">
+          <div class="w-14 h-14 mb-2 flex items-center justify-center text-emerald-600 text-3xl">
+            <i class="fa-solid fa-cheese"></i>
+          </div>
+          <h3 class="font-heading font-bold text-lg text-slate-900">Cheese Wedges</h3>
+          <p class="text-sm text-slate-600 mt-1">
+            Dividing <b>5 wheels of cheese</b> into <b>1/5 wedges</b> gives <b>25 total wedges</b>!
+          </p>
+        </div>
+
+        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 flex flex-col items-center text-center">
+          <div class="w-14 h-14 mb-2 flex items-center justify-center text-purple-600 text-3xl">
+            <i class="fa-solid fa-person-biking"></i>
+          </div>
+          <h3 class="font-heading font-bold text-lg text-slate-900">Biking Speed</h3>
+          <p class="text-sm text-slate-600 mt-1">
+            Jayla bikes <b>3/8 mile per minute</b>. To bike <b>3/4 mile</b> takes her exactly <b>2 minutes</b>!
+          </p>
+        </div>
+
+        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 flex flex-col items-center text-center">
+          <div class="w-14 h-14 mb-2 flex items-center justify-center text-amber-600 text-3xl">
+            <i class="fa-solid fa-cookie"></i>
+          </div>
+          <h3 class="font-heading font-bold text-lg text-slate-900">Baking Batches</h3>
+          <p class="text-sm text-slate-600 mt-1">
+            Sean has <b>2/3 cup of honey</b>. Using <b>2/6 cup per batch</b> makes <b>2 batches of muffins</b>!
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Key Math Vocabulary Bar -->
+      <div class="bg-amber-50 border-2 border-amber-200 rounded-2xl p-5 space-y-3">
+        <h3 class="font-heading font-bold text-xl text-amber-950 flex items-center gap-2">
+          <i class="fa-solid fa-spell-check text-amber-600"></i> Key Vocabulary Terms
+        </h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 text-sm">
+          <div class="bg-white p-3 rounded-xl border border-amber-200"><mark>unit fraction</mark>: A fraction with a numerator of 1, such as 1/4, 1/6, or 1/8.</div>
+          <div class="bg-white p-3 rounded-xl border border-amber-200"><mark>quotient</mark>: The result or answer obtained when one number is divided by another.</div>
+          <div class="bg-white p-3 rounded-xl border border-amber-200"><mark>dividend</mark>: The total amount or starting quantity being divided into smaller parts.</div>
+          <div class="bg-white p-3 rounded-xl border border-amber-200"><mark>divisor</mark>: The size of each equal group or fractional piece you are dividing by.</div>
+          <div class="bg-white p-3 rounded-xl border border-amber-200"><mark>fraction model</mark>: A visual bar or diagram showing division into equal fractional parts.</div>
+          <div class="bg-white p-3 rounded-xl border border-amber-200"><mark>equal parts</mark>: Sections of a whole that are all identical in size and fraction measure.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: OBJECTIVE 1 DIRECT INSTRUCTION (Lesson 8-3 Meaning of Division by a Fraction) -->
+    <section id="sec2" class="bg-white border-2 border-sky-200 rounded-3xl p-6 md:p-8 shadow-sm space-y-6">
+      <div class="flex flex-col md:flex-row justify-between md:items-center gap-4">
+        <div class="flex items-center gap-3">
+          <div class="p-3 bg-sky-100 text-sky-800 rounded-2xl">
+            <i class="fa-solid fa-chalkboard-user text-2xl"></i>
+          </div>
+          <div>
+            <span class="text-xs font-bold text-sky-800 uppercase tracking-wide">Section 2 • 5 Minutes Direct Instruction</span>
+            <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">
+              Objective 1: Meaning of Division by a Fraction (Lesson 8-3)
+            </h2>
+          </div>
+        </div>
+        <div class="bg-sky-50 border border-sky-200 px-4 py-2 rounded-2xl text-sky-900 font-bold text-sm">
+          Example: <span class="font-mono text-lg font-extrabold text-sky-700">5 ÷ 5/8 = 8</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+        
+        <!-- Step-by-Step Explanation -->
+        <div class="space-y-4">
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1">
+            <span class="font-bold text-sky-700 text-sm">Step 1: Understand the Division Question</span>
+            <p class="text-slate-700 text-base">
+              Rylee has a <b>5-inch</b> block of tofu. She wants <b>5/8-inch</b> pieces.<br>
+              Ask: <b>"How many 5/8s are in 5?"</b>
+            </p>
+          </div>
+
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1">
+            <span class="font-bold text-sky-700 text-sm">Step 2: Divide Each Whole into Eighths</span>
+            <p class="text-slate-700 text-base">
+              Each 1-inch block contains <b>8 eighths (1/8)</b>.<br>
+              5 whole inches equal <b>5 x 8 = 40 eighths</b>.
+            </p>
+          </div>
+
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1">
+            <span class="font-bold text-sky-700 text-sm">Step 3: Count Groups of 5 Eighths</span>
+            <p class="text-slate-700 text-base">
+              Group 40 eighths into sections of 5 eighths: <b>40 ÷ 5 = 8</b>.<br>
+              So, <mark>5 ÷ 5/8 = 8</mark> pieces of tofu!
+            </p>
+          </div>
+        </div>
+
+        <!-- VISUAL DIAGRAM MODEL -->
+        <div class="bg-slate-50 p-6 rounded-2xl border-2 border-sky-300 shadow-sm flex flex-col items-center">
+          <span class="text-xs font-bold text-sky-800 uppercase tracking-widest mb-4">Tofu Division Diagram (5 ÷ 5/8)</span>
+          
+          <div class="w-full max-w-md bg-white p-4 rounded-2xl border border-slate-300 shadow-inner space-y-3">
+            <div class="text-xs font-bold text-slate-600 text-center">5 Whole Inches Divided into 5/8-inch Sections:</div>
+
+            <div class="grid grid-cols-8 gap-1 text-center font-mono text-xs font-bold">
+              <div class="bg-sky-100 border border-sky-300 p-2 rounded text-sky-900 col-span-1">5/8 in.</div>
+              <div class="bg-sky-100 border border-sky-300 p-2 rounded text-sky-900 col-span-1">5/8 in.</div>
+              <div class="bg-sky-100 border border-sky-300 p-2 rounded text-sky-900 col-span-1">5/8 in.</div>
+              <div class="bg-sky-100 border border-sky-300 p-2 rounded text-sky-900 col-span-1">5/8 in.</div>
+              <div class="bg-sky-100 border border-sky-300 p-2 rounded text-sky-900 col-span-1">5/8 in.</div>
+              <div class="bg-sky-100 border border-sky-300 p-2 rounded text-sky-900 col-span-1">5/8 in.</div>
+              <div class="bg-sky-100 border border-sky-300 p-2 rounded text-sky-900 col-span-1">5/8 in.</div>
+              <div class="bg-sky-100 border border-sky-300 p-2 rounded text-sky-900 col-span-1">5/8 in.</div>
+            </div>
+
+            <div class="flex justify-between text-xs font-bold text-slate-500 px-1">
+              <span>0 in.</span>
+              <span>1 in.</span>
+              <span>2 in.</span>
+              <span>3 in.</span>
+              <span>4 in.</span>
+              <span>5 in.</span>
+            </div>
+
+            <div class="mt-2 text-center text-xs font-bold text-slate-700">
+              Total Sections = <span class="text-sky-700 font-extrabold text-base">8 sections</span> of 5/8 in.
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Common Error Box -->
+      <div class="bg-amber-50 border-2 border-amber-300 rounded-2xl p-5 flex items-start gap-4">
+        <div class="p-3 bg-amber-200 text-amber-900 rounded-xl">
+          <i class="fa-solid fa-triangle-exclamation text-2xl"></i>
+        </div>
+        <div>
+          <h4 class="font-heading font-bold text-amber-950 text-lg">Error to Avoid: Confusing Total Parts with Section Size!</h4>
+          <p class="text-slate-700 text-base mt-1">
+            When dividing a whole number by a fraction smaller than 1, your quotient will be <b>GREATER</b> than the starting whole number because you are making smaller parts!
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3A: OBJECTIVE 1 GUIDED PRACTICE (5 Mins - Partner Work) -->
+    <section id="sec3a" class="space-y-6">
+      <div class="flex items-center gap-3">
+        <div class="p-3 bg-amber-500 text-white rounded-2xl shadow-sm">
+          <i class="fa-solid fa-user-group text-2xl"></i>
+        </div>
+        <div>
+          <span class="text-xs font-bold text-amber-800 uppercase tracking-wide">Section 3A • 5 Minutes Guided Practice (Partner Work)</span>
+          <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">
+            Objective 1 Partner Practice (Problems 1–2)
+          </h2>
+          <p class="text-sm text-slate-600 font-semibold">Work together with a partner to answer each fraction division step!</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <!-- Problem 1: How many 1/4s in 3? -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-amber-300 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-3">
+              <span class="font-heading font-bold text-amber-900 text-xl">Problem 1 (Partner Work)</span>
+              <span class="text-xs font-bold px-3 py-1 bg-amber-100 text-amber-900 rounded-full">3 ÷ 1/4</span>
+            </div>
+            
+            <p class="text-xs font-bold text-amber-800 uppercase tracking-wide mb-2"><i class="fa-solid fa-comments"></i> Partner Discussion: How many 1/4s are in 3?</p>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3">
+              <div class="flex justify-between items-center text-sm">
+                <span class="font-semibold text-slate-700">1/4 parts in 1 whole:</span>
+                <input type="text" id="p1-1" class="math-input w-24" placeholder="?">
+              </div>
+              <div class="flex justify-between items-center text-sm">
+                <span class="font-semibold text-slate-700">Total 1/4 parts in 3 wholes:</span>
+                <input type="text" id="p1-2" class="math-input w-24" placeholder="?">
+              </div>
+              <div class="border-t border-slate-300 pt-2 flex justify-between items-center">
+                <span class="font-bold text-slate-900">Quotient (3 ÷ 1/4):</span>
+                <input type="text" id="p1-3" class="math-input w-28 font-bold text-amber-700" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p1')" class="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-amber-600"></i> Partner Hint
+            </button>
+            <div id="hint-p1" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p>• Each 1 whole contains 4 fourths.</p>
+              <p>• For 3 wholes: 3 x 4 = 12 total parts.</p>
+              <p>• 3 ÷ 1/4 = 12.</p>
+            </div>
+
+            <div id="msg-p1" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p1', ['4', '12', '12'])" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Partner Answer
+            </button>
+          </div>
+        </div>
+
+        <!-- Problem 2: Rylee's Tofu (5 ÷ 5/8) -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-amber-300 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-3">
+              <span class="font-heading font-bold text-amber-900 text-xl">Problem 2 (Partner Work)</span>
+              <span class="text-xs font-bold px-3 py-1 bg-amber-100 text-amber-900 rounded-full">5 ÷ 5/8</span>
+            </div>
+
+            <p class="text-xs font-bold text-amber-800 uppercase tracking-wide mb-2"><i class="fa-solid fa-comments"></i> Partner Discussion: How many 5/8-in. pieces in 5 inches?</p>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3">
+              <div class="flex justify-between items-center text-sm">
+                <span class="font-semibold text-slate-700">Total 1/8s in 5 inches (5 x 8):</span>
+                <input type="text" id="p2-1" class="math-input w-24" placeholder="?">
+              </div>
+              <div class="flex justify-between items-center text-sm">
+                <span class="font-semibold text-slate-700">Groups of 5 eighths (40 ÷ 5):</span>
+                <input type="text" id="p2-2" class="math-input w-24" placeholder="?">
+              </div>
+              <div class="border-t border-slate-300 pt-2 flex justify-between items-center">
+                <span class="font-bold text-slate-900">Quotient (5 ÷ 5/8):</span>
+                <input type="text" id="p2-3" class="math-input w-28 font-bold text-amber-700" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p2')" class="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-amber-600"></i> Partner Hint
+            </button>
+            <div id="hint-p2" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p>• 5 wholes = 40 eighths.</p>
+              <p>• Divide 40 eighths by 5 = 8 pieces.</p>
+              <p>• 5 ÷ 5/8 = 8.</p>
+            </div>
+
+            <div id="msg-p2" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p2', ['40', '8', '8'])" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Partner Answer
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 3B: OBJECTIVE 1 INDEPENDENT PRACTICE (5 Mins - Individual Work) -->
+    <section id="sec3b" class="space-y-6">
+      <div class="flex items-center gap-3">
+        <div class="p-3 bg-sky-600 text-white rounded-2xl shadow-sm">
+          <i class="fa-solid fa-user text-2xl"></i>
+        </div>
+        <div>
+          <span class="text-xs font-bold text-sky-800 uppercase tracking-wide">Section 3B • 5 Minutes Independent Practice (Individual Work)</span>
+          <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">
+            Objective 1 Independent Practice (Problems 3–5)
+          </h2>
+          <p class="text-sm text-slate-600 font-semibold">Work on your own to solve these fraction division questions!</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <!-- Problem 3: 3/6 ÷ 1/6 -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-3">
+              <span class="font-heading font-bold text-sky-800 text-xl">Problem 3</span>
+              <span class="text-xs font-bold px-3 py-1 bg-sky-100 text-sky-900 rounded-full">3/6 ÷ 1/6</span>
+            </div>
+
+            <p class="text-xs text-slate-600 font-semibold mb-2">How many 1/6s are in 3/6?</p>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3">
+              <div class="flex justify-between items-center text-sm">
+                <span class="font-semibold text-slate-700">Number of 1/6 parts:</span>
+                <input type="text" id="p3-1" class="math-input w-24" placeholder="?">
+              </div>
+              <div class="border-t border-slate-300 pt-2 flex justify-between items-center">
+                <span class="font-bold text-slate-900">Quotient:</span>
+                <input type="text" id="p3-2" class="math-input w-28 font-bold text-sky-700" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p3')" class="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-amber-600"></i> Need a Hint?
+            </button>
+            <div id="hint-p3" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p>• Count how many 1/6 sections fit in 3/6.</p>
+              <p>• 3/6 ÷ 1/6 = 3.</p>
+            </div>
+
+            <div id="msg-p3" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p3', ['3', '3'])" class="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+        <!-- Problem 4: Apple Slices (3 ÷ 1/2) -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-3">
+              <span class="font-heading font-bold text-sky-800 text-xl">Problem 4</span>
+              <span class="text-xs font-bold px-3 py-1 bg-sky-100 text-sky-900 rounded-full">3 ÷ 1/2</span>
+            </div>
+
+            <p class="text-xs text-slate-600 font-semibold mb-2">How many 1/2-apple slices are in 3 apples?</p>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3">
+              <div class="flex justify-between items-center text-sm">
+                <span class="font-semibold text-slate-700">Slices in 1 apple:</span>
+                <input type="text" id="p4-1" class="math-input w-24" placeholder="?">
+              </div>
+              <div class="border-t border-slate-300 pt-2 flex justify-between items-center">
+                <span class="font-bold text-slate-900">Total Slices:</span>
+                <input type="text" id="p4-2" class="math-input w-28 font-bold text-sky-700" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p4')" class="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-amber-600"></i> Need a Hint?
+            </button>
+            <div id="hint-p4" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p>• 1 apple = 2 halves.</p>
+              <p>• 3 apples = 3 x 2 = 6 slices.</p>
+            </div>
+
+            <div id="msg-p4" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p4', ['2', '6'])" class="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+        <!-- Problem 5: Cheese Wedges (5 ÷ 1/5) -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-3">
+              <span class="font-heading font-bold text-sky-800 text-xl">Problem 5 (Cheese)</span>
+              <span class="text-xs font-bold px-3 py-1 bg-emerald-100 text-emerald-900 rounded-full"><i class="fa-solid fa-cheese"></i> Wedges</span>
+            </div>
+            <p class="text-slate-800 text-xs leading-relaxed mb-3">
+              A wheel of cheese is divided into <b>1/5s</b>. How many wedges are in <b>5 wheels of cheese</b>?
+            </p>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3">
+              <div class="flex justify-between items-center text-sm">
+                <span class="font-semibold text-slate-700">Wedges in 1 wheel:</span>
+                <input type="text" id="p5-1" class="math-input w-24" placeholder="?">
+              </div>
+              <div class="border-t border-slate-300 pt-2 flex justify-between items-center">
+                <span class="font-bold text-slate-900">Total Wedges:</span>
+                <input type="text" id="p5-2" class="math-input w-28 font-bold text-emerald-700" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p5')" class="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-amber-600"></i> Need a Hint?
+            </button>
+            <div id="hint-p5" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p>• 1 wheel = 5 wedges of 1/5.</p>
+              <p>• 5 wheels = 5 x 5 = 25 wedges.</p>
+            </div>
+
+            <div id="msg-p5" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p5', ['5', '25'])" class="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 4: OBJECTIVE 2 DIRECT INSTRUCTION (Lesson 8-4 Model Dividing Fractions) -->
+    <section id="sec4" class="bg-white border-2 border-purple-200 rounded-3xl p-6 md:p-8 shadow-sm space-y-6">
+      <div class="flex flex-col md:flex-row justify-between md:items-center gap-4">
+        <div class="flex items-center gap-3">
+          <div class="p-3 bg-purple-100 text-purple-900 rounded-2xl">
+            <i class="fa-solid fa-layer-group text-2xl"></i>
+          </div>
+          <div>
+            <span class="text-xs font-bold text-purple-900 uppercase tracking-wide">Section 4 • 5 Minutes Direct Instruction</span>
+            <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">
+              Objective 2: Model Dividing Fractions by Fractions (Lesson 8-4)
+            </h2>
+          </div>
+        </div>
+        <div class="bg-purple-50 border border-purple-200 px-4 py-2 rounded-2xl text-purple-900 font-bold text-sm">
+          Example: <span class="font-mono text-lg font-extrabold text-purple-700">3/4 ÷ 3/8 = 2</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+        
+        <!-- Step-by-Step Instruction -->
+        <div class="space-y-4">
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1">
+            <span class="font-bold text-purple-800 text-sm">Step 1: Model the Starting Fraction (Dividend)</span>
+            <p class="text-slate-700 text-base">
+              Jayla bikes <b>3/4 mile</b>. Draw a bar split into 4 equal parts and shade 3 parts.
+            </p>
+          </div>
+
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1 flex items-start gap-3">
+            <span class="w-6 h-6 bg-purple-600 text-white rounded-full flex items-center justify-center font-bold text-xs mt-0.5 shrink-0">1</span>
+            <div>
+              <span class="font-bold text-purple-800 text-sm">Find a Common Denominator:</span>
+              <p class="text-slate-700 text-sm mt-0.5">Divide the same bar into eighths: <b>3/4 = 6/8</b>.</p>
+            </div>
+          </div>
+
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1 flex items-start gap-3">
+            <span class="w-6 h-6 bg-purple-600 text-white rounded-full flex items-center justify-center font-bold text-xs mt-0.5 shrink-0">2</span>
+            <div>
+              <span class="font-bold text-purple-800 text-sm">Count Groups of the Divisor (3/8):</span>
+              <p class="text-slate-700 text-sm mt-0.5">How many <b>3/8s</b> fit into <b>6/8</b>? <b>6 eighths ÷ 3 eighths = 2</b>.</p>
+            </div>
+          </div>
+
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1">
+            <span class="font-bold text-purple-800 text-sm">Step 2: State the Final Answer</span>
+            <p class="text-slate-700 text-base">
+              It takes Jayla <b>2 minutes</b> to bike 3/4 mile!
+            </p>
+          </div>
+        </div>
+
+        <!-- FRACTION MODEL VISUAL CARD -->
+        <div class="bg-slate-50 p-6 rounded-2xl border-2 border-purple-300 shadow-sm flex flex-col items-center">
+          <span class="text-xs font-bold text-purple-900 uppercase tracking-widest mb-3">Fraction Model Summary (3/4 ÷ 3/8)</span>
+
+          <div class="w-full bg-white p-5 rounded-2xl border border-slate-300 space-y-4 font-mono">
+            <div class="text-center font-extrabold text-xl text-purple-900 pb-2 border-b border-slate-200">
+              3/4 ÷ 3/8 = 6/8 ÷ 3/8
+            </div>
+
+            <!-- Visual fraction bars -->
+            <div class="space-y-3">
+              <div>
+                <span class="text-xs font-bold text-slate-600 font-sans">1. Model 3/4:</span>
+                <div class="grid grid-cols-4 gap-1 mt-1">
+                  <div class="bg-purple-200 text-purple-900 p-2 rounded text-center text-xs font-bold">1/4</div>
+                  <div class="bg-purple-200 text-purple-900 p-2 rounded text-center text-xs font-bold">1/4</div>
+                  <div class="bg-purple-200 text-purple-900 p-2 rounded text-center text-xs font-bold">1/4</div>
+                  <div class="bg-slate-100 text-slate-400 p-2 rounded text-center text-xs">1/4</div>
+                </div>
+              </div>
+
+              <div>
+                <span class="text-xs font-bold text-slate-600 font-sans">2. Partition into 8ths (6/8):</span>
+                <div class="grid grid-cols-8 gap-1 mt-1">
+                  <div class="bg-purple-600 text-white p-1 rounded text-center text-[10px] font-bold">1/8</div>
+                  <div class="bg-purple-600 text-white p-1 rounded text-center text-[10px] font-bold">1/8</div>
+                  <div class="bg-purple-600 text-white p-1 rounded text-center text-[10px] font-bold">1/8</div>
+                  <div class="bg-purple-500 text-white p-1 rounded text-center text-[10px] font-bold">1/8</div>
+                  <div class="bg-purple-500 text-white p-1 rounded text-center text-[10px] font-bold">1/8</div>
+                  <div class="bg-purple-500 text-white p-1 rounded text-center text-[10px] font-bold">1/8</div>
+                  <div class="bg-slate-100 text-slate-400 p-1 rounded text-center text-[10px]">1/8</div>
+                  <div class="bg-slate-100 text-slate-400 p-1 rounded text-center text-[10px]">1/8</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="pt-2 border-t-2 border-purple-300 flex justify-between items-center font-extrabold text-lg text-purple-950">
+              <span class="font-sans text-sm">Number of 3/8 groups:</span>
+              <span class="bg-purple-100 px-3 py-1 rounded-lg text-purple-900 font-mono">2</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Common Error Box -->
+      <div class="bg-red-50 border-2 border-red-300 rounded-2xl p-5 flex items-start gap-4">
+        <div class="p-3 bg-red-200 text-red-900 rounded-xl">
+          <i class="fa-solid fa-triangle-exclamation text-2xl"></i>
+        </div>
+        <div>
+          <h4 class="font-heading font-bold text-red-950 text-lg">Error to Avoid: Forgetting Common Denominators!</h4>
+          <p class="text-slate-700 text-base mt-1">
+            Always make sure both fractions are expressed with the <b>SAME denominator</b> before counting how many groups fit inside!
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5A: OBJECTIVE 2 GUIDED PRACTICE (5 Mins - Partner Work) -->
+    <section id="sec5a" class="space-y-6">
+      <div class="flex items-center gap-3">
+        <div class="p-3 bg-amber-500 text-white rounded-2xl shadow-sm">
+          <i class="fa-solid fa-user-group text-2xl"></i>
+        </div>
+        <div>
+          <span class="text-xs font-bold text-amber-800 uppercase tracking-wide">Section 5A • 5 Minutes Guided Practice (Partner Work)</span>
+          <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">
+            Objective 2 Partner Practice (Problems 6–7)
+          </h2>
+          <p class="text-sm text-slate-600 font-semibold">Work together with your partner to model and divide these fractions!</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <!-- Problem 6: Jayla's Bike Ride (3/4 ÷ 3/8) -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-amber-300 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-3">
+              <span class="font-heading font-bold text-amber-900 text-xl">Problem 6 (Partner Work)</span>
+              <span class="text-xs font-bold px-3 py-1 bg-amber-100 text-amber-900 rounded-full">3/4 ÷ 3/8</span>
+            </div>
+
+            <p class="text-xs font-bold text-amber-800 uppercase tracking-wide mb-2"><i class="fa-solid fa-comments"></i> Partner Discussion: Jayla's Bike Ride (3/4 ÷ 3/8)</p>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3">
+              <div class="flex justify-between items-center text-sm">
+                <span class="font-semibold text-slate-700">3/4 converted to eighths:</span>
+                <input type="text" id="p6-1" class="math-input w-28" placeholder="?">
+              </div>
+              <div class="flex justify-between items-center text-sm">
+                <span class="font-semibold text-slate-700">How many 3/8s in 6/8:</span>
+                <input type="text" id="p6-2" class="math-input w-28" placeholder="?">
+              </div>
+              <div class="border-t border-slate-300 pt-2 flex justify-between items-center">
+                <span class="font-bold text-slate-900">Total Minutes:</span>
+                <input type="text" id="p6-3" class="math-input w-32 font-bold text-amber-700" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p6')" class="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-amber-600"></i> Partner Hint
+            </button>
+            <div id="hint-p6" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p>• 3/4 = 6/8.</p>
+              <p>• 6/8 ÷ 3/8 = 2 groups of 3/8.</p>
+              <p>• Result: 2 minutes.</p>
+            </div>
+
+            <div id="msg-p6" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p6', ['6/8', '2', '2'])" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Partner Answer
+            </button>
+          </div>
+        </div>
+
+        <!-- Problem 7: Sean's Honey Muffins (2/3 ÷ 1/6) -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-amber-300 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-3">
+              <span class="font-heading font-bold text-amber-900 text-xl">Problem 7 (Partner Work)</span>
+              <span class="text-xs font-bold px-3 py-1 bg-amber-100 text-amber-900 rounded-full">2/3 ÷ 1/6</span>
+            </div>
+
+            <p class="text-xs font-bold text-amber-800 uppercase tracking-wide mb-2"><i class="fa-solid fa-comments"></i> Partner Discussion: Sean's Honey (2/3 ÷ 1/6)</p>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3">
+              <div class="flex justify-between items-center text-sm">
+                <span class="font-semibold text-slate-700">2/3 converted to sixths:</span>
+                <input type="text" id="p7-1" class="math-input w-28" placeholder="?">
+              </div>
+              <div class="flex justify-between items-center text-sm">
+                <span class="font-semibold text-slate-700">How many 1/6s in 4/6:</span>
+                <input type="text" id="p7-2" class="math-input w-28" placeholder="?">
+              </div>
+              <div class="border-t border-slate-300 pt-2 flex justify-between items-center">
+                <span class="font-bold text-slate-900">Total Batches:</span>
+                <input type="text" id="p7-3" class="math-input w-32 font-bold text-amber-700" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p7')" class="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-amber-600"></i> Partner Hint
+            </button>
+            <div id="hint-p7" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p>• 2/3 = 4/6.</p>
+              <p>• 4/6 ÷ 1/6 = 4 groups.</p>
+              <p>• Result: 4 batches.</p>
+            </div>
+
+            <div id="msg-p7" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p7', ['4/6', '4', '4'])" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Partner Answer
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 5B: OBJECTIVE 2 INDEPENDENT PRACTICE (5 Mins - Individual Work) -->
+    <section id="sec5b" class="space-y-6">
+      <div class="flex items-center gap-3">
+        <div class="p-3 bg-purple-600 text-white rounded-2xl shadow-sm">
+          <i class="fa-solid fa-user text-2xl"></i>
+        </div>
+        <div>
+          <span class="text-xs font-bold text-purple-800 uppercase tracking-wide">Section 5B • 5 Minutes Independent Practice (Individual Work)</span>
+          <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">
+            Objective 2 Independent Practice (Problems 8–11)
+          </h2>
+          <p class="text-sm text-slate-600 font-semibold">Solve these fraction division modeling problems on your own!</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+        <!-- Problem 8: Mark's Paint (3/4 ÷ 3/16) -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-3">
+              <span class="font-heading font-bold text-purple-900 text-xl">Problem 8</span>
+              <span class="text-xs font-bold px-3 py-1 bg-purple-100 text-purple-900 rounded-full">3/4 ÷ 3/16</span>
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-2 text-xs">
+              <div class="flex justify-between items-center">
+                <span>3/4 in sixteenths:</span>
+                <input type="text" id="p8-1" class="math-input w-24 h-8 text-sm" placeholder="?">
+              </div>
+              <div class="flex justify-between items-center">
+                <span>3/16 groups:</span>
+                <input type="text" id="p8-2" class="math-input w-24 h-8 text-sm" placeholder="?">
+              </div>
+              <div class="border-t border-slate-300 pt-2 flex justify-between items-center">
+                <span class="font-bold text-slate-900 text-sm">Robots Painted:</span>
+                <input type="text" id="p8-3" class="math-input w-28 h-9 font-bold text-purple-800 text-sm" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p8')" class="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-amber-600"></i> Need a Hint?
+            </button>
+            <div id="hint-p8" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p>• 3/4 = 12/16.</p>
+              <p>• 12/16 ÷ 3/16 = 4 robots.</p>
+            </div>
+
+            <div id="msg-p8" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p8', ['12/16', '4', '4'])" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 rounded-xl transition shadow-sm text-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+        <!-- Problem 9: 5/6 ÷ 1/12 -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-3">
+              <span class="font-heading font-bold text-purple-900 text-xl">Problem 9</span>
+              <span class="text-xs font-bold px-3 py-1 bg-purple-100 text-purple-900 rounded-full">5/6 ÷ 1/12</span>
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-2 text-xs">
+              <div class="flex justify-between items-center">
+                <span>5/6 in twelfths:</span>
+                <input type="text" id="p9-1" class="math-input w-24 h-8 text-sm" placeholder="?">
+              </div>
+              <div class="flex justify-between items-center">
+                <span>1/12 groups:</span>
+                <input type="text" id="p9-2" class="math-input w-24 h-8 text-sm" placeholder="?">
+              </div>
+              <div class="border-t border-slate-300 pt-2 flex justify-between items-center">
+                <span class="font-bold text-slate-900 text-sm">Quotient:</span>
+                <input type="text" id="p9-3" class="math-input w-28 h-9 font-bold text-purple-800 text-sm" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p9')" class="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-amber-600"></i> Need a Hint?
+            </button>
+            <div id="hint-p9" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p>• 5/6 = 10/12.</p>
+              <p>• 10/12 ÷ 1/12 = 10.</p>
+            </div>
+
+            <div id="msg-p9" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p9', ['10/12', '10', '10'])" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 rounded-xl transition shadow-sm text-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+        <!-- Problem 10: Zane's Run (4/5 ÷ 1/10) -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-3">
+              <span class="font-heading font-bold text-purple-900 text-xl">Problem 10</span>
+              <span class="text-xs font-bold px-3 py-1 bg-purple-100 text-purple-900 rounded-full">4/5 ÷ 1/10</span>
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-2 text-xs">
+              <div class="flex justify-between items-center">
+                <span>4/5 in tenths:</span>
+                <input type="text" id="p10-1" class="math-input w-24 h-8 text-sm" placeholder="?">
+              </div>
+              <div class="flex justify-between items-center">
+                <span>1/10 groups:</span>
+                <input type="text" id="p10-2" class="math-input w-24 h-8 text-sm" placeholder="?">
+              </div>
+              <div class="border-t border-slate-300 pt-2 flex justify-between items-center">
+                <span class="font-bold text-slate-900 text-sm">Minutes Needed:</span>
+                <input type="text" id="p10-3" class="math-input w-28 h-9 font-bold text-purple-800 text-sm" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p10')" class="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-amber-600"></i> Need a Hint?
+            </button>
+            <div id="hint-p10" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p>• 4/5 = 8/10.</p>
+              <p>• 8/10 ÷ 1/10 = 8 minutes.</p>
+            </div>
+
+            <div id="msg-p10" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p10', ['8/10', '8', '8'])" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 rounded-xl transition shadow-sm text-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+        <!-- Problem 11: Mrs. Ross Popcorn (3/4 ÷ 1/8) -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-3">
+              <span class="font-heading font-bold text-purple-900 text-xl">Problem 11 (Popcorn)</span>
+              <span class="text-xs font-bold px-3 py-1 bg-emerald-100 text-emerald-900 rounded-full"><i class="fa-solid fa-cookie"></i> Snack</span>
+            </div>
+            <p class="text-slate-800 text-xs leading-relaxed mb-3">
+              Mrs. Ross has <b>3/4 cup</b> popcorn. She gives each student <b>1/8 cup</b>. How many students get popcorn?
+            </p>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-2 text-xs">
+              <div class="flex justify-between items-center">
+                <span>3/4 cup in eighths:</span>
+                <input type="text" id="p11-1" class="math-input w-24 h-8 text-sm" placeholder="?">
+              </div>
+              <div class="flex justify-between items-center">
+                <span>1/8 cup servings:</span>
+                <input type="text" id="p11-2" class="math-input w-24 h-8 text-sm" placeholder="?">
+              </div>
+              <div class="border-t border-slate-300 pt-2 flex justify-between items-center">
+                <span class="font-bold text-slate-900 text-sm">Total Students:</span>
+                <input type="text" id="p11-3" class="math-input w-28 h-9 font-bold text-emerald-700 text-sm" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p11')" class="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-amber-600"></i> Need a Hint?
+            </button>
+            <div id="hint-p11" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p>• 3/4 = 6/8.</p>
+              <p>• 6/8 ÷ 1/8 = 6 students.</p>
+            </div>
+
+            <div id="msg-p11" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p11', ['6/8', '6', '6'])" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 rounded-xl transition shadow-sm text-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 6: KEY TAKEAWAYS & EMAIL TURN-IN -->
+    <section id="sec6" class="bg-amber-50 border-2 border-amber-200 rounded-3xl p-6 md:p-8 space-y-6">
+      <div class="flex items-center gap-3">
+        <div class="p-3 bg-amber-200 text-amber-900 rounded-2xl">
+          <i class="fa-solid fa-award text-2xl"></i>
+        </div>
+        <div>
+          <span class="text-xs font-bold text-amber-800 uppercase tracking-wide">Section 6</span>
+          <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">Key Takeaways & Turn In</h2>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        
+        <div class="bg-white p-5 rounded-2xl border border-amber-200 space-y-2">
+          <div class="text-amber-800 font-bold text-lg flex items-center gap-2">
+            <i class="fa-solid fa-question-circle"></i> 1. Meaning of Division
+          </div>
+          <p class="text-sm text-slate-600">
+            Division by a fraction asks: "How many copies of the divisor fit inside the dividend?"
+          </p>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-sky-200 space-y-2">
+          <div class="text-sky-800 font-bold text-lg flex items-center gap-2">
+            <i class="fa-solid fa-chart-column"></i> 2. Visual Models
+          </div>
+          <p class="text-sm text-slate-600">
+            Draw bars or number lines to visualize breaking wholes into fractional units.
+          </p>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-purple-200 space-y-2">
+          <div class="text-purple-800 font-bold text-lg flex items-center gap-2">
+            <i class="fa-solid fa-divide"></i> 3. Common Denominators
+          </div>
+          <p class="text-sm text-slate-600">
+            Convert fractions to equal denominators (e.g. 3/4 = 6/8) before counting groups.
+          </p>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-emerald-200 space-y-2">
+          <div class="text-emerald-800 font-bold text-lg flex items-center gap-2">
+            <i class="fa-solid fa-check-circle"></i> 4. Larger Quotients
+          </div>
+          <p class="text-sm text-slate-600">
+            Dividing a positive quantity by a fraction less than 1 results in a larger whole count!
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Final Completion & Email Turn In Card -->
+      <div class="bg-white p-8 rounded-3xl border-2 border-emerald-300 text-center space-y-4 shadow-md">
+        <div class="w-16 h-16 bg-emerald-100 text-emerald-700 rounded-2xl flex items-center justify-center mx-auto text-3xl">
+          <i class="fa-solid fa-envelope"></i>
+        </div>
+        <h3 class="font-heading font-bold text-2xl text-slate-900">Ready to Email Your Score Report?</h3>
+        <p class="text-slate-600 text-base max-w-xl mx-auto">
+          Click the green button below to open Gmail in a new tab with your completed worksheet score report ready to send to <b>jvena@saintmarys.us</b>!
+        </p>
+        <div class="flex flex-wrap justify-center gap-4 pt-2">
+          <button onclick="openSubmitModal()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-lg px-8 py-3.5 rounded-2xl transition shadow-lg inline-flex items-center gap-2">
+            <i class="fa-solid fa-paper-plane"></i> Email Work to jvena@saintmarys.us
+          </button>
+          <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-6 py-3.5 rounded-2xl transition border border-slate-300 inline-flex items-center gap-2">
+            <i class="fa-solid fa-arrow-up"></i> Return to Top
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- INTERACTIVE SCRATCHPAD FLOATING BUTTON -->
+  <div class="fixed bottom-6 right-6 z-50">
+    <button onclick="toggleScratchpad()" class="bg-sky-600 hover:bg-sky-700 text-white font-bold px-5 py-3 rounded-full shadow-2xl flex items-center gap-2 text-base transition transform hover:scale-105 border-2 border-white">
+      <i class="fa-solid fa-pen-line"></i> Open Scratchpad
+    </button>
+  </div>
+
+  <!-- SCRATCHPAD MODAL -->
+  <div id="scratchpad-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-3xl w-full p-6 shadow-2xl space-y-4 flex flex-col h-[85vh]">
+      <div class="flex justify-between items-center border-b border-slate-200 pb-3">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-pen-clip text-sky-600 text-xl"></i>
+          <h3 class="font-heading font-bold text-xl text-slate-900">Chromebook Scratchpad & Scratch Work</h3>
+        </div>
+        <button onclick="toggleScratchpad()" class="text-slate-400 hover:text-slate-700 text-2xl font-bold px-2">&times;</button>
+      </div>
+
+      <!-- Controls -->
+      <div class="flex flex-wrap items-center justify-between gap-3 bg-slate-100 p-3 rounded-2xl">
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-bold text-slate-600">Color:</span>
+          <button onclick="setPadColor('#0284c7')" class="w-8 h-8 rounded-full bg-sky-600 border-2 border-white shadow"></button>
+          <button onclick="setPadColor('#dc2626')" class="w-8 h-8 rounded-full bg-red-600 border-2 border-white shadow"></button>
+          <button onclick="setPadColor('#16a34a')" class="w-8 h-8 rounded-full bg-emerald-600 border-2 border-white shadow"></button>
+          <button onclick="setPadColor('#0f172a')" class="w-8 h-8 rounded-full bg-slate-900 border-2 border-white shadow"></button>
+        </div>
+        <button onclick="clearScratchpad()" class="bg-red-100 hover:bg-red-200 text-red-800 text-xs font-bold px-3 py-2 rounded-xl transition">
+          <i class="fa-solid fa-trash"></i> Clear Pad
+        </button>
+      </div>
+
+      <!-- Canvas Box -->
+      <div class="flex-1 bg-slate-50 border-2 border-slate-200 rounded-2xl overflow-hidden relative">
+        <canvas id="scratch-canvas" class="w-full h-full cursor-crosshair"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- STUDENT EMAIL SUBMIT MODAL -->
+  <div id="submit-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 md:p-8 shadow-2xl space-y-6 border-4 border-emerald-500">
+      <div class="flex justify-between items-center border-b border-slate-200 pb-3">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-paper-plane text-emerald-600 text-2xl"></i>
+          <h3 class="font-heading font-bold text-2xl text-slate-900">Email Report to Teacher</h3>
+        </div>
+        <button onclick="closeSubmitModal()" class="text-slate-400 hover:text-slate-700 text-2xl font-bold px-2">&times;</button>
+      </div>
+
+      <!-- Error alert banner -->
+      <div id="submit-error-banner" class="hidden bg-red-100 border border-red-300 text-red-800 p-3 rounded-xl text-xs font-bold flex items-center gap-2">
+        <i class="fa-solid fa-triangle-exclamation text-base"></i> Please enter your First and Last Name before turning in!
+      </div>
+
+      <div class="space-y-4">
+        <div>
+          <label class="block text-sm font-bold text-slate-700 mb-1">Student First & Last Name:</label>
+          <input type="text" id="studentName" class="w-full px-4 py-3 rounded-xl border-2 border-slate-300 font-bold text-slate-900 focus:border-emerald-500 focus:outline-none" placeholder="e.g. Alex Johnson">
+        </div>
+
+        <div>
+          <label class="block text-sm font-bold text-slate-700 mb-1">Grade / Class:</label>
+          <input type="text" id="classId" class="w-full px-4 py-3 rounded-xl border-2 border-slate-300 font-bold text-slate-900 focus:border-emerald-500 focus:outline-none" placeholder="e.g. 6th Grade Math">
+        </div>
+
+        <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-xl text-xs text-emerald-900">
+          <i class="fa-solid fa-circle-info"></i> Submitting will automatically open a <b>Gmail web compose window in a new tab</b> with your full score report pre-filled for <b>jvena@saintmarys.us</b>.
+        </div>
+      </div>
+
+      <div class="flex gap-3 pt-2">
+        <button onclick="processEmailSubmission()" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl transition shadow-md flex items-center justify-center gap-2">
+          <i class="fa-solid fa-envelope"></i> Open Gmail in New Tab
+        </button>
+        <button onclick="closeSubmitModal()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-5 py-3.5 rounded-xl transition">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUCCESS CONFIRMATION MODAL -->
+  <div id="success-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 text-center space-y-4 border-4 border-emerald-500 shadow-2xl">
+      <div class="w-16 h-16 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center mx-auto text-3xl">
+        <i class="fa-solid fa-check"></i>
+      </div>
+      <h3 class="font-heading font-bold text-2xl text-slate-900">Gmail Opened!</h3>
+      <p id="success-message-text" class="text-sm text-slate-600 leading-relaxed"></p>
+      <button onclick="document.getElementById('success-modal').classList.add('hidden')" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl transition">
+        Got It!
+      </button>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    const solvedProblems = new Set();
+    const totalProblems = 11;
+    const DEFAULT_TEACHER_EMAIL = "jvena@saintmarys.us";
+
+    function sanitizeInput(val) {
+      return val.toString().replace(/,/g, '').trim();
+    }
+
+    function toggleHint(hintId) {
+      const hintElem = document.getElementById(hintId);
+      if (hintElem) hintElem.classList.toggle('hidden');
+    }
+
+    function checkProblem(probId, expectedAnswers) {
+      let allCorrect = true;
+
+      expectedAnswers.forEach((expected, idx) => {
+        const inputElem = document.getElementById(`${probId}-${idx + 1}`);
+        if (!inputElem) return;
+
+        const userVal = sanitizeInput(inputElem.value);
+        if (userVal === expected) {
+          inputElem.classList.remove('incorrect');
+          inputElem.classList.add('correct');
+        } else {
+          inputElem.classList.remove('correct');
+          inputElem.classList.add('incorrect');
+          allCorrect = false;
+        }
+      });
+
+      const msgElem = document.getElementById(`msg-${probId}`);
+      if (msgElem) {
+        msgElem.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-800', 'bg-red-100', 'text-red-800');
+        if (allCorrect) {
+          msgElem.classList.add('bg-emerald-100', 'text-emerald-800');
+          msgElem.innerHTML = '<i class="fa-solid fa-circle-check"></i> Great job! Correct!';
+          solvedProblems.add(probId);
+        } else {
+          msgElem.classList.add('bg-red-100', 'text-red-800');
+          msgElem.innerHTML = '<i class="fa-solid fa-circle-xmark"></i> Check the red boxes and try again!';
+        }
+      }
+
+      updateProgress();
+    }
+
+    function updateProgress() {
+      const count = solvedProblems.size;
+      const percent = Math.round((count / totalProblems) * 100);
+
+      const progressText = document.getElementById('progress-text');
+      const progressBar = document.getElementById('progress-bar');
+
+      if (progressText) progressText.innerText = `${count} / ${totalProblems} Solved`;
+      if (progressBar) progressBar.style.width = `${percent}%`;
+    }
+
+    /* Scratchpad Canvas Logic */
+    let canvas, ctx, isDrawing = false;
+    let padColor = '#0284c7';
+
+    function toggleScratchpad() {
+      const modal = document.getElementById('scratchpad-modal');
+      modal.classList.toggle('hidden');
+
+      if (!modal.classList.contains('hidden')) {
+        setTimeout(initCanvas, 100);
+      }
+    }
+
+    function initCanvas() {
+      canvas = document.getElementById('scratch-canvas');
+      if (!canvas) return;
+
+      const rect = canvas.parentElement.getBoundingClientRect();
+      canvas.width = rect.width;
+      canvas.height = rect.height;
+
+      ctx = canvas.getContext('2d');
+      ctx.lineWidth = 3;
+      ctx.lineCap = 'round';
+      ctx.strokeStyle = padColor;
+
+      canvas.removeEventListener('mousedown', startDraw);
+      canvas.removeEventListener('mousemove', draw);
+      canvas.removeEventListener('mouseup', stopDraw);
+
+      canvas.addEventListener('mousedown', startDraw);
+      canvas.addEventListener('mousemove', draw);
+      canvas.addEventListener('mouseup', stopDraw);
+
+      /* Touch events for Chromebook touchscreens */
+      canvas.addEventListener('touchstart', (e) => { startDraw(e.touches[0]); e.preventDefault(); }, { passive: false });
+      canvas.addEventListener('touchmove', (e) => { draw(e.touches[0]); e.preventDefault(); }, { passive: false });
+      canvas.addEventListener('touchend', stopDraw);
+    }
+
+    function startDraw(e) {
+      isDrawing = true;
+      const rect = canvas.getBoundingClientRect();
+      ctx.beginPath();
+      ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
+    }
+
+    function draw(e) {
+      if (!isDrawing) return;
+      const rect = canvas.getBoundingClientRect();
+      ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
+      ctx.stroke();
+    }
+
+    function stopDraw() {
+      isDrawing = false;
+    }
+
+    function setPadColor(color) {
+      padColor = color;
+      if (ctx) ctx.strokeStyle = padColor;
+    }
+
+    function clearScratchpad() {
+      if (ctx && canvas) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+    }
+
+    /* Email Submission Functions */
+    function openSubmitModal() {
+      document.getElementById('submit-error-banner').classList.add('hidden');
+      document.getElementById('submit-modal').classList.remove('hidden');
+    }
+
+    function closeSubmitModal() {
+      document.getElementById('submit-modal').classList.add('hidden');
+    }
+
+    function processEmailSubmission() {
+      const name = document.getElementById('studentName').value.trim();
+      const classId = document.getElementById('classId').value.trim();
+
+      if (!name) {
+        document.getElementById('submit-error-banner').classList.remove('hidden');
+        return;
+      }
+
+      const timestamp = new Date().toLocaleString();
+      const scoreProgress = `${solvedProblems.size} / ${totalProblems} Solved`;
+      const targetEmail = DEFAULT_TEACHER_EMAIL;
+
+      let reportBody = `6th Grade Math Score Report - Sadlier Math Lessons 8-3 & 8-4\n`;
+      reportBody += `----------------------------------------------------\n`;
+      reportBody += `Student Name: ${name}\n`;
+      reportBody += `Grade/Class: ${classId || '6th Grade'}\n`;
+      reportBody += `Score Progress: ${scoreProgress}\n`;
+      reportBody += `Date & Time: ${timestamp}\n\n`;
+      reportBody += `--- DETAILED STUDENT ANSWERS ---\n`;
+
+      const problemTitles = [
+        "Problem 1 (Partner Guided: 3 ÷ 1/4)",
+        "Problem 2 (Partner Guided: 5 ÷ 5/8 Tofu)",
+        "Problem 3 (Independent: 3/6 ÷ 1/6)",
+        "Problem 4 (Independent: Apple Slices 3 ÷ 1/2)",
+        "Problem 5 (Word Problem - Cheese Wedges 5 ÷ 1/5)",
+        "Problem 6 (Partner Guided: Jayla's Bike Ride 3/4 ÷ 3/8)",
+        "Problem 7 (Partner Guided: Sean's Honey 2/3 ÷ 1/6)",
+        "Problem 8 (Independent: Mark's Paint 3/4 ÷ 3/16)",
+        "Problem 9 (Independent: 5/6 ÷ 1/12)",
+        "Problem 10 (Independent: Zane's Run 4/5 ÷ 1/10)",
+        "Problem 11 (Word Problem - Popcorn 3/4 ÷ 1/8)"
+      ];
+
+      for (let i = 1; i <= 11; i++) {
+        const val1 = document.getElementById(`p${i}-1`) ? document.getElementById(`p${i}-1`).value : '';
+        const val2 = document.getElementById(`p${i}-2`) ? document.getElementById(`p${i}-2`).value : '';
+        const val3 = document.getElementById(`p${i}-3`) ? document.getElementById(`p${i}-3`).value : '';
+
+        reportBody += `${problemTitles[i - 1]}: Answers = [${val1}, ${val2}, ${val3}].\n`;
+      }
+
+      const subject = encodeURIComponent(`Math Score Report: ${name} (${classId || '6th Grade'}) - ${scoreProgress}`);
+      const body = encodeURIComponent(reportBody);
+
+      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(targetEmail)}&su=${subject}&body=${body}`;
+
+      window.open(gmailUrl, '_blank');
+
+      closeSubmitModal();
+
+      document.getElementById('success-message-text').innerText = `Great job, ${name}! A new Gmail tab has opened with your score report pre-filled for ${targetEmail}. Click "Send" in Gmail to complete your turn-in.`;
+      document.getElementById('success-modal').classList.remove('hidden');
+    }
+  </script>
+</body>
+</html>
