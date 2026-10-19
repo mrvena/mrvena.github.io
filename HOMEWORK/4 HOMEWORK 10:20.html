@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multiply by Two-Digit Numbers - Homework</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Roboto+Mono:wght@500;700&display=swap">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            heading: ['Fredoka', 'sans-serif'],
+            mono: ['Roboto Mono', 'monospace']
+          },
+          colors: {
+            brandBlue: '#0284c7',
+            brandGreen: '#16a34a',
+            brandYellow: '#ca8a04',
+            brandPurple: '#9333ea',
+            brandOrange: '#ea580c'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #f8fafc;
+      color: #0f172a;
+      font-size: 18px;
+    }
+    
+    .math-input {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 18px;
+      font-weight: 700;
+      text-align: center;
+      border: 2px dashed #94a3b8;
+      border-radius: 8px;
+      background-color: #ffffff;
+      color: #0284c7;
+      transition: all 0.2s ease;
+      width: 100%;
+      height: 42px;
+    }
+
+    .math-input:focus {
+      outline: none;
+      border-color: #0284c7;
+      border-style: solid;
+      background-color: #f0f9ff;
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.2);
+    }
+
+    .math-input.correct {
+      border-color: #16a34a !important;
+      border-style: solid !important;
+      background-color: #f0fdf4 !important;
+      color: #15803d !important;
+    }
+
+    .math-input.incorrect {
+      border-color: #dc2626 !important;
+      border-style: solid !important;
+      background-color: #fef2f2 !important;
+      color: #b91c1c !important;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen pb-24">
+
+  <!-- STICKY HEADER & SECTION NAVIGATION -->
+  <header class="sticky top-0 z-40 bg-white border-b border-slate-200 shadow-md py-3 px-4 md:px-8">
+    <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-4">
+      
+      <!-- App Title -->
+      <div class="flex items-center gap-3">
+        <div class="bg-sky-600 text-white p-2.5 rounded-2xl shadow-sm">
+          <i class="fa-solid fa-shapes text-2xl"></i>
+        </div>
+        <div>
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold bg-sky-100 text-sky-800 uppercase tracking-wider">
+            Sadlier Math Grade 4 • Lessons 6-3 & 6-4
+          </span>
+          <h1 class="text-xl md:text-2xl font-heading font-bold text-slate-900">
+            Homework: Multiply by Two-Digit Numbers
+          </h1>
+        </div>
+      </div>
+
+      <!-- Live Score Counter & Turn-In Action Buttons -->
+      <div class="flex items-center gap-3">
+        <div class="bg-slate-100 px-3 py-1.5 rounded-2xl border border-slate-200 flex items-center gap-2">
+          <div class="text-right">
+            <div class="text-[10px] font-bold text-slate-500 uppercase">Score Progress</div>
+            <div id="progress-text" class="text-xs font-extrabold text-sky-700">0 / 10 Solved</div>
+          </div>
+          <div class="w-16 bg-slate-200 rounded-full h-2.5 overflow-hidden">
+            <div id="progress-bar" class="bg-gradient-to-r from-sky-500 to-emerald-500 h-2.5 rounded-full transition-all duration-500 w-0"></div>
+          </div>
+        </div>
+
+        <button onclick="openSubmitModal()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3 py-2 rounded-xl transition flex items-center gap-1.5 text-xs shadow-sm">
+          <i class="fa-solid fa-paper-plane"></i> Email Teacher
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 mt-8 space-y-12">
+
+    <!-- HOMEWORK SECTION -->
+    <section class="bg-white border-2 border-slate-200 rounded-3xl p-6 md:p-8 shadow-sm space-y-6">
+      <div class="flex items-center gap-3">
+        <div class="p-3 bg-sky-600 text-white rounded-2xl shadow-sm">
+          <i class="fa-solid fa-pencil text-2xl"></i>
+        </div>
+        <div>
+          <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">
+            Homework Practice
+          </h2>
+          <p class="text-sm text-slate-600 font-semibold">Find the product for each problem below.</p>
+        </div>
+      </div>
+
+      <!-- Area Models (1-5) -->
+      <h3 class="font-heading font-bold text-xl text-sky-800 mt-6 border-b pb-2">Part 1: No Regrouping (Lesson 6-3)</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+        
+        <!-- Problem 1 -->
+        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+          <div class="font-bold text-slate-700 mb-2">1. 36 x 11</div>
+          <input type="text" id="p1" class="math-input" placeholder="Product">
+          <div id="msg-p1" class="text-xs font-bold hidden mt-2 p-2 rounded-xl text-center"></div>
+          <button onclick="checkProblem('p1', '396')" class="w-full mt-2 bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 rounded-xl transition shadow-sm text-sm">Check</button>
+        </div>
+
+        <!-- Problem 2 -->
+        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+          <div class="font-bold text-slate-700 mb-2">2. 22 x 24</div>
+          <input type="text" id="p2" class="math-input" placeholder="Product">
+          <div id="msg-p2" class="text-xs font-bold hidden mt-2 p-2 rounded-xl text-center"></div>
+          <button onclick="checkProblem('p2', '528')" class="w-full mt-2 bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 rounded-xl transition shadow-sm text-sm">Check</button>
+        </div>
+
+        <!-- Problem 3 -->
+        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+          <div class="font-bold text-slate-700 mb-2">3. 45 x 11</div>
+          <input type="text" id="p3" class="math-input" placeholder="Product">
+          <div id="msg-p3" class="text-xs font-bold hidden mt-2 p-2 rounded-xl text-center"></div>
+          <button onclick="checkProblem('p3', '495')" class="w-full mt-2 bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 rounded-xl transition shadow-sm text-sm">Check</button>
+        </div>
+
+        <!-- Problem 4 -->
+        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+          <div class="font-bold text-slate-700 mb-2">4. 14 x 13</div>
+          <input type="text" id="p4" class="math-input" placeholder="Product">
+          <div id="msg-p4" class="text-xs font-bold hidden mt-2 p-2 rounded-xl text-center"></div>
+          <button onclick="checkProblem('p4', '182')" class="w-full mt-2 bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 rounded-xl transition shadow-sm text-sm">Check</button>
+        </div>
+
+        <!-- Problem 5 -->
+        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+          <div class="font-bold text-slate-700 mb-2">5. 32 x 13</div>
+          <input type="text" id="p5" class="math-input" placeholder="Product">
+          <div id="msg-p5" class="text-xs font-bold hidden mt-2 p-2 rounded-xl text-center"></div>
+          <button onclick="checkProblem('p5', '416')" class="w-full mt-2 bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 rounded-xl transition shadow-sm text-sm">Check</button>
+        </div>
+      </div>
+
+      <!-- Breaking Apart Factors (6-10) -->
+      <h3 class="font-heading font-bold text-xl text-purple-800 mt-8 border-b pb-2">Part 2: Regrouping (Lesson 6-4)</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+        
+        <!-- Problem 6 -->
+        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+          <div class="font-bold text-slate-700 mb-2">6. 22 x 55</div>
+          <input type="text" id="p6" class="math-input" placeholder="Product">
+          <div id="msg-p6" class="text-xs font-bold hidden mt-2 p-2 rounded-xl text-center"></div>
+          <button onclick="checkProblem('p6', '1210')" class="w-full mt-2 bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 rounded-xl transition shadow-sm text-sm">Check</button>
+        </div>
+
+        <!-- Problem 7 -->
+        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+          <div class="font-bold text-slate-700 mb-2">7. 33 x 66</div>
+          <input type="text" id="p7" class="math-input" placeholder="Product">
+          <div id="msg-p7" class="text-xs font-bold hidden mt-2 p-2 rounded-xl text-center"></div>
+          <button onclick="checkProblem('p7', '2178')" class="w-full mt-2 bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 rounded-xl transition shadow-sm text-sm">Check</button>
+        </div>
+
+        <!-- Problem 8 -->
+        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+          <div class="font-bold text-slate-700 mb-2">8. 83 x 29</div>
+          <input type="text" id="p8" class="math-input" placeholder="Product">
+          <div id="msg-p8" class="text-xs font-bold hidden mt-2 p-2 rounded-xl text-center"></div>
+          <button onclick="checkProblem('p8', '2407')" class="w-full mt-2 bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 rounded-xl transition shadow-sm text-sm">Check</button>
+        </div>
+
+        <!-- Problem 9 -->
+        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+          <div class="font-bold text-slate-700 mb-2">9. 403 x 56</div>
+          <input type="text" id="p9" class="math-input" placeholder="Product">
+          <div id="msg-p9" class="text-xs font-bold hidden mt-2 p-2 rounded-xl text-center"></div>
+          <button onclick="checkProblem('p9', '22568')" class="w-full mt-2 bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 rounded-xl transition shadow-sm text-sm">Check</button>
+        </div>
+
+        <!-- Problem 10 -->
+        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+          <div class="font-bold text-slate-700 mb-2">10. 341 x 88</div>
+          <input type="text" id="p10" class="math-input" placeholder="Product">
+          <div id="msg-p10" class="text-xs font-bold hidden mt-2 p-2 rounded-xl text-center"></div>
+          <button onclick="checkProblem('p10', '30008')" class="w-full mt-2 bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 rounded-xl transition shadow-sm text-sm">Check</button>
+        </div>
+      </div>
+
+      <!-- Bottom Email Button Section -->
+      <div class="mt-12 flex justify-center border-t border-slate-200 pt-8">
+        <button onclick="openSubmitModal()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-lg px-8 py-3.5 rounded-2xl transition shadow-lg inline-flex items-center gap-2">
+          <i class="fa-solid fa-paper-plane"></i> Email Work to jvena@saintmarys.us
+        </button>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- INTERACTIVE SCRATCHPAD FLOATING BUTTON -->
+  <div class="fixed bottom-6 right-6 z-50">
+    <button onclick="toggleScratchpad()" class="bg-sky-600 hover:bg-sky-700 text-white font-bold px-5 py-3 rounded-full shadow-2xl flex items-center gap-2 text-base transition transform hover:scale-105 border-2 border-white">
+      <i class="fa-solid fa-pen-line"></i> Open Scratchpad
+    </button>
+  </div>
+
+  <!-- SCRATCHPAD MODAL -->
+  <div id="scratchpad-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-3xl w-full p-6 shadow-2xl space-y-4 flex flex-col h-[85vh]">
+      <div class="flex justify-between items-center border-b border-slate-200 pb-3">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-pen-clip text-sky-600 text-xl"></i>
+          <h3 class="font-heading font-bold text-xl text-slate-900">Chromebook Scratchpad & Scratch Work</h3>
+        </div>
+        <button onclick="toggleScratchpad()" class="text-slate-400 hover:text-slate-700 text-2xl font-bold px-2">&times;</button>
+      </div>
+
+      <!-- Controls -->
+      <div class="flex flex-wrap items-center justify-between gap-3 bg-slate-100 p-3 rounded-2xl">
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-bold text-slate-600">Color:</span>
+          <button onclick="setPadColor('#0284c7')" class="w-8 h-8 rounded-full bg-sky-600 border-2 border-white shadow"></button>
+          <button onclick="setPadColor('#dc2626')" class="w-8 h-8 rounded-full bg-red-600 border-2 border-white shadow"></button>
+          <button onclick="setPadColor('#16a34a')" class="w-8 h-8 rounded-full bg-emerald-600 border-2 border-white shadow"></button>
+          <button onclick="setPadColor('#0f172a')" class="w-8 h-8 rounded-full bg-slate-900 border-2 border-white shadow"></button>
+        </div>
+        <button onclick="clearScratchpad()" class="bg-red-100 hover:bg-red-200 text-red-800 text-xs font-bold px-3 py-2 rounded-xl transition">
+          <i class="fa-solid fa-trash"></i> Clear Pad
+        </button>
+      </div>
+
+      <!-- Canvas Box -->
+      <div class="flex-1 bg-slate-50 border-2 border-slate-200 rounded-2xl overflow-hidden relative">
+        <canvas id="scratch-canvas" class="w-full h-full cursor-crosshair"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- STUDENT EMAIL SUBMIT MODAL -->
+  <div id="submit-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 md:p-8 shadow-2xl space-y-6 border-4 border-emerald-500">
+      <div class="flex justify-between items-center border-b border-slate-200 pb-3">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-paper-plane text-emerald-600 text-2xl"></i>
+          <h3 class="font-heading font-bold text-2xl text-slate-900">Email Report to Teacher</h3>
+        </div>
+        <button onclick="closeSubmitModal()" class="text-slate-400 hover:text-slate-700 text-2xl font-bold px-2">&times;</button>
+      </div>
+
+      <!-- Error alert banner (no browser alert used) -->
+      <div id="submit-error-banner" class="hidden bg-red-100 border border-red-300 text-red-800 p-3 rounded-xl text-xs font-bold flex items-center gap-2">
+        <i class="fa-solid fa-triangle-exclamation text-base"></i> Please enter your First and Last Name before turning in!
+      </div>
+
+      <div class="space-y-4">
+        <div>
+          <label class="block text-sm font-bold text-slate-700 mb-1">Student First & Last Name:</label>
+          <input type="text" id="studentName" class="w-full px-4 py-3 rounded-xl border-2 border-slate-300 font-bold text-slate-900 focus:border-emerald-500 focus:outline-none" placeholder="e.g. Alex Johnson">
+        </div>
+
+        <div>
+          <label class="block text-sm font-bold text-slate-700 mb-1">Grade / Class:</label>
+          <input type="text" id="classId" class="w-full px-4 py-3 rounded-xl border-2 border-slate-300 font-bold text-slate-900 focus:border-emerald-500 focus:outline-none" placeholder="e.g. 4th Grade">
+        </div>
+
+        <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-xl text-xs text-emerald-900">
+          <i class="fa-solid fa-circle-info"></i> Submitting will automatically open a <b>Gmail web compose window in a new tab</b> with your full score report pre-filled for <b>jvena@saintmarys.us</b>.
+        </div>
+      </div>
+
+      <div class="flex gap-3 pt-2">
+        <button onclick="processEmailSubmission()" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl transition shadow-md flex items-center justify-center gap-2">
+          <i class="fa-solid fa-envelope"></i> Open Gmail in New Tab
+        </button>
+        <button onclick="closeSubmitModal()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-5 py-3.5 rounded-xl transition">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUCCESS CONFIRMATION MODAL -->
+  <div id="success-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 text-center space-y-4 border-4 border-emerald-500 shadow-2xl">
+      <div class="w-16 h-16 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center mx-auto text-3xl">
+        <i class="fa-solid fa-check"></i>
+      </div>
+      <h3 class="font-heading font-bold text-2xl text-slate-900">Gmail Opened!</h3>
+      <p id="success-message-text" class="text-sm text-slate-600 leading-relaxed"></p>
+      <button onclick="document.getElementById('success-modal').classList.add('hidden')" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl transition">
+        Got It!
+      </button>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    const solvedProblems = new Set();
+    const totalProblems = 10;
+    const DEFAULT_TEACHER_EMAIL = "jvena@saintmarys.us";
+
+    function sanitizeInput(val) {
+      return val.toString().replace(/,/g, '').trim();
+    }
+
+    function checkProblem(probId, expectedAnswer) {
+      const inputElem = document.getElementById(probId);
+      if (!inputElem) return;
+
+      const userVal = sanitizeInput(inputElem.value);
+      const msgElem = document.getElementById(`msg-${probId}`);
+
+      if (userVal === expectedAnswer) {
+        inputElem.classList.remove('incorrect');
+        inputElem.classList.add('correct');
+        solvedProblems.add(probId);
+        if (msgElem) {
+          msgElem.classList.remove('hidden', 'bg-red-100', 'text-red-800');
+          msgElem.classList.add('bg-emerald-100', 'text-emerald-800');
+          msgElem.innerHTML = '<i class="fa-solid fa-circle-check"></i> Correct!';
+        }
+      } else {
+        inputElem.classList.remove('correct');
+        inputElem.classList.add('incorrect');
+        solvedProblems.delete(probId);
+        if (msgElem) {
+          msgElem.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-800');
+          msgElem.classList.add('bg-red-100', 'text-red-800');
+          msgElem.innerHTML = '<i class="fa-solid fa-circle-xmark"></i> Try again!';
+        }
+      }
+
+      updateProgress();
+    }
+
+    function updateProgress() {
+      const count = solvedProblems.size;
+      const percent = Math.round((count / totalProblems) * 100);
+
+      const progressText = document.getElementById('progress-text');
+      const progressBar = document.getElementById('progress-bar');
+
+      if (progressText) progressText.innerText = `${count} / ${totalProblems} Solved`;
+      if (progressBar) progressBar.style.width = `${percent}%`;
+    }
+
+    /* Scratchpad Canvas Logic */
+    let canvas, ctx, isDrawing = false;
+    let padColor = '#0284c7';
+
+    function toggleScratchpad() {
+      const modal = document.getElementById('scratchpad-modal');
+      modal.classList.toggle('hidden');
+
+      if (!modal.classList.contains('hidden')) {
+        setTimeout(initCanvas, 100);
+      }
+    }
+
+    function initCanvas() {
+      canvas = document.getElementById('scratch-canvas');
+      if (!canvas) return;
+
+      const rect = canvas.parentElement.getBoundingClientRect();
+      canvas.width = rect.width;
+      canvas.height = rect.height;
+
+      ctx = canvas.getContext('2d');
+      ctx.lineWidth = 3;
+      ctx.lineCap = 'round';
+      ctx.strokeStyle = padColor;
+
+      canvas.removeEventListener('mousedown', startDraw);
+      canvas.removeEventListener('mousemove', draw);
+      canvas.removeEventListener('mouseup', stopDraw);
+
+      canvas.addEventListener('mousedown', startDraw);
+      canvas.addEventListener('mousemove', draw);
+      canvas.addEventListener('mouseup', stopDraw);
+
+      canvas.addEventListener('touchstart', (e) => { startDraw(e.touches[0]); e.preventDefault(); }, { passive: false });
+      canvas.addEventListener('touchmove', (e) => { draw(e.touches[0]); e.preventDefault(); }, { passive: false });
+      canvas.addEventListener('touchend', stopDraw);
+    }
+
+    function startDraw(e) {
+      isDrawing = true;
+      const rect = canvas.getBoundingClientRect();
+      ctx.beginPath();
+      ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
+    }
+
+    function draw(e) {
+      if (!isDrawing) return;
+      const rect = canvas.getBoundingClientRect();
+      ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
+      ctx.stroke();
+    }
+
+    function stopDraw() {
+      isDrawing = false;
+    }
+
+    function setPadColor(color) {
+      padColor = color;
+      if (ctx) ctx.strokeStyle = padColor;
+    }
+
+    function clearScratchpad() {
+      if (ctx && canvas) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+    }
+
+    /* Email Submission Functions */
+    function openSubmitModal() {
+      document.getElementById('submit-error-banner').classList.add('hidden');
+      document.getElementById('submit-modal').classList.remove('hidden');
+    }
+
+    function closeSubmitModal() {
+      document.getElementById('submit-modal').classList.add('hidden');
+    }
+
+    function processEmailSubmission() {
+      const name = document.getElementById('studentName').value.trim();
+      const classId = document.getElementById('classId').value.trim();
+
+      if (!name) {
+        document.getElementById('submit-error-banner').classList.remove('hidden');
+        return;
+      }
+
+      const timestamp = new Date().toLocaleString();
+      const scoreProgress = `${solvedProblems.size} / ${totalProblems} Solved`;
+      const targetEmail = DEFAULT_TEACHER_EMAIL;
+
+      let reportBody = `4th Grade Math Score Report - Sadlier Math Lessons 6-3 & 6-4 Homework\n`;
+      reportBody += `----------------------------------------------------\n`;
+      reportBody += `Student Name: ${name}\n`;
+      reportBody += `Grade: ${classId || 'N/A'}\n`;
+      reportBody += `Score Progress: ${scoreProgress}\n`;
+      reportBody += `Date & Time: ${timestamp}\n\n`;
+      reportBody += `--- DETAILED STUDENT ANSWERS ---\n`;
+
+      const problemTitles = [
+        "Problem 1 (36 x 11)", "Problem 2 (22 x 24)", "Problem 3 (45 x 11)", "Problem 4 (14 x 13)", "Problem 5 (32 x 13)",
+        "Problem 6 (22 x 55)", "Problem 7 (33 x 66)", "Problem 8 (83 x 29)", "Problem 9 (403 x 56)", "Problem 10 (341 x 88)"
+      ];
+
+      for (let i = 1; i <= 10; i++) {
+        const val = document.getElementById(`p${i}`) ? document.getElementById(`p${i}`).value : '';
+        reportBody += `${problemTitles[i - 1]}: Answer Submitted = [${val}]\n`;
+      }
+
+      const subject = encodeURIComponent(`Math Score Report: ${name} (${classId || '4th Grade'}) - ${scoreProgress}`);
+      const body = encodeURIComponent(reportBody);
+
+      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(targetEmail)}&su=${subject}&body=${body}`;
+
+      window.open(gmailUrl, '_blank');
+
+      closeSubmitModal();
+
+      document.getElementById('success-message-text').innerText = `Great job, ${name}! A new Gmail tab has opened with your score report pre-filled for ${targetEmail}. Click "Send" in Gmail to complete your turn-in.`;
+      document.getElementById('success-modal').classList.remove('hidden');
+    }
+  </script>
+</body>
+</html>

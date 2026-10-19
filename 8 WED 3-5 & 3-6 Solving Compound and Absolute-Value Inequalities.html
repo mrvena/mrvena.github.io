@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solving Compound and Absolute-Value Inequalities</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Roboto+Mono:wght@500;700&display=swap">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            heading: ['Fredoka', 'sans-serif'],
+            mono: ['Roboto Mono', 'monospace']
+          },
+          colors: {
+            brandBlue: '#0284c7',
+            brandGreen: '#16a34a',
+            brandYellow: '#ca8a04',
+            brandPurple: '#9333ea',
+            brandOrange: '#ea580c'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #f8fafc;
+      color: #0f172a;
+      font-size: 18px;
+    }
+    
+    /* Strict Math Input Layout */
+    .math-input {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 18px;
+      font-weight: 700;
+      text-align: center;
+      border: 2px dashed #94a3b8;
+      border-radius: 8px;
+      background-color: #ffffff;
+      color: #0284c7;
+      transition: all 0.2s ease;
+      height: 42px;
+    }
+
+    .math-input:focus {
+      outline: none;
+      border-color: #0284c7;
+      border-style: solid;
+      background-color: #f0f9ff;
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.2);
+    }
+
+    .math-input.correct {
+      border-color: #16a34a !important;
+      border-style: solid !important;
+      background-color: #f0fdf4 !important;
+      color: #15803d !important;
+    }
+
+    .math-input.incorrect {
+      border-color: #dc2626 !important;
+      border-style: solid !important;
+      background-color: #fef2f2 !important;
+      color: #b91c1c !important;
+    }
+
+    mark {
+      background-color: #fef08a;
+      color: #854d0e;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-weight: 700;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen pb-24">
+
+  <!-- STICKY HEADER & SECTION NAVIGATION -->
+  <header class="sticky top-0 z-40 bg-white border-b border-slate-200 shadow-md py-3 px-4 md:px-8">
+    <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-4">
+      
+      <!-- App Title -->
+      <div class="flex items-center gap-3">
+        <div class="bg-sky-600 text-white p-2.5 rounded-2xl">
+          <i class="fa-solid fa-scale-unbalanced text-2xl"></i>
+        </div>
+        <div>
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold bg-sky-100 text-sky-800 uppercase tracking-wider">
+            Sadlier Math Grade 8 Algebra 1 • Lessons 3-5 & 3-6
+          </span>
+          <h1 class="text-xl md:text-2xl font-heading font-bold text-slate-900">
+            Solving Compound and Absolute-Value Inequalities
+          </h1>
+        </div>
+      </div>
+
+      <!-- Quick Jump Navigation Tabs -->
+      <nav class="flex flex-wrap items-center justify-center gap-1.5 text-xs font-bold">
+        <a href="#sec1" class="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-sky-100 text-slate-700 hover:text-sky-800 transition">1. Intro & Vocab</a>
+        <a href="#sec2" class="px-3 py-1.5 rounded-xl bg-sky-100 hover:bg-sky-200 text-sky-900 transition">2. Obj 1 Teach</a>
+        <a href="#sec3" class="px-3 py-1.5 rounded-xl bg-sky-600 hover:bg-sky-700 text-white transition">3. Obj 1 Practice</a>
+        <a href="#sec4" class="px-3 py-1.5 rounded-xl bg-purple-100 hover:bg-purple-200 text-purple-900 transition">4. Obj 2 Teach</a>
+        <a href="#sec5" class="px-3 py-1.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white transition">5. Obj 2 Practice</a>
+        <a href="#sec6" class="px-3 py-1.5 rounded-xl bg-amber-100 hover:bg-amber-200 text-amber-900 transition">6. Summary</a>
+      </nav>
+
+      <!-- Live Score Counter & Turn-In Action Buttons -->
+      <div class="flex items-center gap-3">
+        <div class="bg-slate-100 px-3 py-1.5 rounded-2xl border border-slate-200 flex items-center gap-2">
+          <div class="text-right">
+            <div class="text-[10px] font-bold text-slate-500 uppercase">Score Progress</div>
+            <div id="progress-text" class="text-xs font-extrabold text-sky-700">0 / 11 Solved</div>
+          </div>
+          <div class="w-16 bg-slate-200 rounded-full h-2.5 overflow-hidden">
+            <div id="progress-bar" class="bg-gradient-to-r from-sky-500 to-emerald-500 h-2.5 rounded-full transition-all duration-500 w-0"></div>
+          </div>
+        </div>
+
+        <button onclick="openSubmitModal()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3 py-2 rounded-xl transition flex items-center gap-1.5 text-xs shadow-sm">
+          <i class="fa-solid fa-paper-plane"></i> Email Teacher
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 mt-8 space-y-12">
+
+    <!-- SECTION 1: WHY WE NEED THIS MATH & KEY VOCABULARY -->
+    <section id="sec1" class="bg-white border-2 border-slate-200 rounded-3xl p-6 md:p-8 shadow-sm space-y-6">
+      <div class="flex items-center gap-3">
+        <div class="p-3 bg-emerald-100 text-emerald-800 rounded-2xl">
+          <i class="fa-solid fa-earth-americas text-2xl"></i>
+        </div>
+        <div>
+          <span class="text-xs font-bold text-emerald-800 uppercase tracking-wide">Section 1</span>
+          <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">Why We Need This Math & Key Vocabulary</h2>
+        </div>
+      </div>
+
+      <!-- Real World Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        
+        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 flex flex-col items-center text-center">
+          <div class="w-14 h-14 mb-2 flex items-center justify-center">
+            <svg viewBox="0 0 100 100" class="w-12 h-12">
+              <circle cx="50" cy="50" r="35" fill="none" stroke="#0284c7" stroke-width="6" stroke-dasharray="6 6"/>
+              <circle cx="50" cy="18" r="7" fill="#ef4444" />
+              <circle cx="82" cy="50" r="7" fill="#eab308" />
+              <circle cx="50" cy="82" r="7" fill="#22c55e" />
+            </svg>
+          </div>
+          <h3 class="font-heading font-bold text-lg text-slate-900">Aquarium pH Levels</h3>
+          <p class="text-sm text-slate-600 mt-1">
+            Aquarium fish require water pH <b>p</b> where <b>6.5 &lt; p &lt; 7.5</b> (a conjunction AND)!
+          </p>
+        </div>
+
+        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 flex flex-col items-center text-center">
+          <div class="w-14 h-14 mb-2 flex items-center justify-center">
+            <svg viewBox="0 0 100 100" class="w-12 h-12">
+              <circle cx="50" cy="50" r="36" fill="#fef3c7" stroke="#d97706" stroke-width="4"/>
+              <path d="M 30 65 L 50 30 L 70 65 Z" fill="#f59e0b"/>
+              <text x="50" y="80" font-size="14" font-weight="bold" fill="#78350f" text-anchor="middle">55</text>
+            </svg>
+          </div>
+          <h3 class="font-heading font-bold text-lg text-slate-900">Speed Limits</h3>
+          <p class="text-sm text-slate-600 mt-1">
+            Safe driving speed <b>s</b> must satisfy <b>45 &lt;= s &lt;= 65</b> mph on highways.
+          </p>
+        </div>
+
+        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 flex flex-col items-center text-center">
+          <div class="w-14 h-14 mb-2 flex items-center justify-center">
+            <svg viewBox="0 0 100 100" class="w-12 h-12">
+              <rect x="20" y="25" width="60" height="50" rx="8" fill="#e0e7ff" stroke="#4338ca" stroke-width="4"/>
+              <line x1="20" y1="50" x2="80" y2="50" stroke="#6366f1" stroke-width="3" stroke-dasharray="4 4"/>
+            </svg>
+          </div>
+          <h3 class="font-heading font-bold text-lg text-slate-900">Manufacturing Tolerance</h3>
+          <p class="text-sm text-slate-600 mt-1">
+            A part width <b>w</b> must satisfy absolute tolerance <b>|w - 50| &lt;= 0.5</b> mm!
+          </p>
+        </div>
+
+        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 flex flex-col items-center text-center">
+          <div class="w-14 h-14 mb-2 flex items-center justify-center">
+            <svg viewBox="0 0 100 100" class="w-12 h-12">
+              <path d="M 50 20 C 35 5, 10 30, 50 80 C 90 30, 65 5, 50 20 Z" fill="#fecdd3" stroke="#e11d48" stroke-width="4"/>
+              <polyline points="30,50 42,50 48,35 54,65 60,50 70,50" fill="none" stroke="#be123c" stroke-width="3"/>
+            </svg>
+          </div>
+          <h3 class="font-heading font-bold text-lg text-slate-900">Target Heart Rate</h3>
+          <p class="text-sm text-slate-600 mt-1">
+            Exercise heart rate <b>h</b> stays in zone when <b>|h - 140| &lt;= 20</b> bpm!
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Key Math Vocabulary Bar -->
+      <div class="bg-amber-50 border-2 border-amber-200 rounded-2xl p-5 space-y-3">
+        <h3 class="font-heading font-bold text-xl text-amber-950 flex items-center gap-2">
+          <i class="fa-solid fa-spell-check text-amber-600"></i> Key Vocabulary Terms
+        </h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 text-sm">
+          <div class="bg-white p-3 rounded-xl border border-amber-200"><mark>compound inequality</mark>: Two inequalities joined by the word AND or OR.</div>
+          <div class="bg-white p-3 rounded-xl border border-amber-200"><mark>conjunction</mark>: A compound inequality joined by AND (intersection where both parts are true).</div>
+          <div class="bg-white p-3 rounded-xl border border-amber-200"><mark>disjunction</mark>: A compound inequality joined by OR (union where at least one part is true).</div>
+          <div class="bg-white p-3 rounded-xl border border-amber-200"><mark>boundary point</mark>: The starting or ending value of a region on a number line.</div>
+          <div class="bg-white p-3 rounded-xl border border-amber-200"><mark>absolute value</mark>: The distance of a number from 0 on a number line (|x| &gt;= 0).</div>
+          <div class="bg-white p-3 rounded-xl border border-amber-200"><mark>interval notation</mark>: A shorthand way to write solution sets using brackets [ ] and parentheses ( ).</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: OBJECTIVE 1 DIRECT INSTRUCTION (COMPOUND INEQUALITIES) -->
+    <section id="sec2" class="bg-white border-2 border-sky-200 rounded-3xl p-6 md:p-8 shadow-sm space-y-6">
+      <div class="flex flex-col md:flex-row justify-between md:items-center gap-4">
+        <div class="flex items-center gap-3">
+          <div class="p-3 bg-sky-100 text-sky-800 rounded-2xl">
+            <i class="fa-solid fa-chalkboard-user text-2xl"></i>
+          </div>
+          <div>
+            <span class="text-xs font-bold text-sky-800 uppercase tracking-wide">Section 2 • 5 Minutes Instruction</span>
+            <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">
+              Objective 1: Write &amp; Solve Compound Inequalities (AND / OR)
+            </h2>
+          </div>
+        </div>
+        <div class="bg-sky-50 border border-sky-200 px-4 py-2 rounded-2xl text-sky-900 font-bold text-sm">
+          Example: <span class="font-mono text-lg font-extrabold text-sky-700">-7 &lt;= 2x - 1 &lt; 3</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+        
+        <!-- Step-by-Step Explanation -->
+        <div class="space-y-4">
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1">
+            <span class="font-bold text-sky-700 text-sm">Step 1: Identify Conjunction (AND) vs Disjunction (OR)</span>
+            <p class="text-slate-700 text-base">
+              • <mark>conjunction</mark> (AND): Solution is the <b>intersection</b> (overlapping region). <br>
+              • <mark>disjunction</mark> (OR): Solution is the <b>union</b> (all shaded regions combined).
+            </p>
+          </div>
+
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1">
+            <span class="font-bold text-sky-700 text-sm">Step 2: Add or Subtract to Isolate Variable Term</span>
+            <p class="text-slate-700 text-base">
+              Add 1 to all three parts of <b>-7 &lt;= 2x - 1 &lt; 3</b>: <br>
+              <b>-7 + 1 &lt;= 2x &lt; 3 + 1</b> &rarr; <b>-6 &lt;= 2x &lt; 4</b>.
+            </p>
+          </div>
+
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1">
+            <span class="font-bold text-sky-700 text-sm">Step 3: Divide by Coefficient</span>
+            <p class="text-slate-700 text-base">
+              Divide all parts by 2: <br>
+              <b>-6 / 2 &lt;= 2x / 2 &lt; 4 / 2</b> &rarr; <b>-3 &lt;= x &lt; 2</b>.
+            </p>
+          </div>
+
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1">
+            <span class="font-bold text-sky-700 text-sm">Step 4: Express Solution Set &amp; Graph</span>
+            <p class="text-slate-700 text-base">
+              Set-builder: <b>{x | -3 &lt;= x &lt; 2}</b> | Interval: <b>[-3, 2)</b>. <br>
+              Closed circle at -3, open circle at 2, shade in between!
+            </p>
+          </div>
+        </div>
+
+        <!-- VISUAL BREAKDOWN & NUMBER LINE CARD -->
+        <div class="bg-slate-50 p-6 rounded-2xl border-2 border-sky-300 shadow-sm flex flex-col items-center space-y-4">
+          <span class="text-xs font-bold text-sky-800 uppercase tracking-widest">Algebraic Step Breakdown</span>
+          
+          <div class="w-full bg-white p-5 rounded-2xl border border-slate-300 shadow-inner space-y-3 font-mono text-base">
+            <div class="flex justify-between items-center text-slate-500 text-xs font-sans font-bold border-b pb-1">
+              <span>ALGEBRAIC STEP</span>
+              <span>EXPRESSION</span>
+            </div>
+            <div class="flex justify-between items-center text-slate-800 font-bold">
+              <span class="text-xs text-slate-500 font-sans">Given:</span>
+              <span>-7 &lt;= 2x - 1 &lt; 3</span>
+            </div>
+            <div class="flex justify-between items-center text-sky-700 font-bold">
+              <span class="text-xs text-slate-500 font-sans">Add 1:</span>
+              <span>-6 &lt;= 2x &lt; 4</span>
+            </div>
+            <div class="flex justify-between items-center text-emerald-700 font-bold">
+              <span class="text-xs text-slate-500 font-sans">Divide by 2:</span>
+              <span>-3 &lt;= x &lt; 2</span>
+            </div>
+            <div class="border-t border-slate-300 pt-2 flex justify-between items-center text-amber-700 font-extrabold">
+              <span class="text-xs text-slate-500 font-sans">Interval:</span>
+              <span>[-3, 2)</span>
+            </div>
+          </div>
+
+          <!-- Visual Number Line Graphic -->
+          <div class="w-full bg-white p-4 rounded-2xl border border-slate-300 flex flex-col items-center space-y-2">
+            <span class="text-xs font-bold text-slate-500 uppercase font-sans">Number Line Representation</span>
+            <div class="relative w-full h-12 flex items-center justify-center">
+              <!-- Base Line -->
+              <div class="w-full h-1 bg-slate-300 rounded"></div>
+              <!-- Ticks -->
+              <div class="absolute w-full flex justify-between px-4 text-xs font-mono font-bold text-slate-600 top-7">
+                <span>-4</span><span>-3</span><span>-2</span><span>-1</span><span>0</span><span>1</span><span>2</span><span>3</span>
+              </div>
+              <!-- Highlighted Solution Bar -->
+              <div class="absolute left-[20%] right-[30%] h-2 bg-sky-500 rounded-full"></div>
+              <!-- Solid Dot at -3 -->
+              <div class="absolute left-[20%] -translate-x-1/2 w-4 h-4 bg-sky-600 rounded-full border-2 border-white shadow"></div>
+              <!-- Open Dot at 2 -->
+              <div class="absolute right-[30%] translate-x-1/2 w-4 h-4 bg-white rounded-full border-2 border-sky-600 shadow"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Common Error Box -->
+      <div class="bg-amber-50 border-2 border-amber-300 rounded-2xl p-5 flex items-start gap-4">
+        <div class="p-3 bg-amber-200 text-amber-900 rounded-xl">
+          <i class="fa-solid fa-triangle-exclamation text-2xl"></i>
+        </div>
+        <div>
+          <h4 class="font-heading font-bold text-amber-950 text-lg">Error to Avoid: Reversing Inequality Signs!</h4>
+          <p class="text-slate-700 text-base mt-1">
+            Whenever you <b>multiply or divide</b> all parts of an inequality by a <b>negative number</b>, you MUST flip the direction of the inequality symbols (e.g., &lt; becomes &gt;)!
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: OBJECTIVE 1 INDEPENDENT PRACTICE (10 Mins) -->
+    <section id="sec3" class="space-y-6">
+      <div class="flex items-center gap-3">
+        <div class="p-3 bg-sky-600 text-white rounded-2xl">
+          <i class="fa-solid fa-pen-to-square text-2xl"></i>
+        </div>
+        <div>
+          <span class="text-xs font-bold text-sky-800 uppercase tracking-wide">Section 3 • 10 Minutes Practice</span>
+          <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">
+            Objective 1 Independent Practice (Problems 1–6)
+          </h2>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- Problem 1 -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-3">
+              <span class="font-heading font-bold text-sky-800 text-xl">Problem 1</span>
+              <span class="text-xs font-bold px-3 py-1 bg-sky-100 text-sky-900 rounded-full">-4 &lt; x + 1 &lt; 6</span>
+            </div>
+            
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3">
+              <div class="flex justify-between items-center text-sm">
+                <span class="font-semibold text-slate-700">Lower Bound:</span>
+                <input type="text" id="p1-1" class="math-input w-28" placeholder="?">
+              </div>
+              <div class="flex justify-between items-center text-sm">
+                <span class="font-semibold text-slate-700">Upper Bound:</span>
+                <input type="text" id="p1-2" class="math-input w-28" placeholder="?">
+              </div>
+              <div class="border-t border-slate-300 pt-2 flex justify-between items-center">
+                <span class="font-bold text-slate-900">Solution:</span>
+                <input type="text" id="p1-3" class="math-input w-36 font-bold text-sky-700" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p1')" class="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-amber-600"></i> Need a Hint?
+            </button>
+            <div id="hint-p1" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p>• Subtract 1 from all three parts:</p>
+              <p>• -4 - 1 &lt; x &lt; 6 - 1</p>
+              <p>• Lower: -5 | Upper: 5 | Solution: -5 &lt; x &lt; 5</p>
+            </div>
+
+            <div id="msg-p1" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p1', ['-5', '5', '-5 < x < 5'])" class="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+        <!-- Problem 2 -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-3">
+              <span class="font-heading font-bold text-sky-800 text-xl">Problem 2</span>
+              <span class="text-xs font-bold px-3 py-1 bg-sky-100 text-sky-900 rounded-full">-1 &lt;= -3z + 2 &lt;= 5</span>
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3">
+              <div class="flex justify-between items-center text-sm">
+                <span class="font-semibold text-slate-700">Lower Bound:</span>
+                <input type="text" id="p2-1" class="math-input w-28" placeholder="?">
+              </div>
+              <div class="flex justify-between items-center text-sm">
+                <span class="font-semibold text-slate-700">Upper Bound:</span>
+                <input type="text" id="p2-2" class="math-input w-28" placeholder="?">
+              </div>
+              <div class="border-t border-slate-300 pt-2 flex justify-between items-center">
+                <span class="font-bold text-slate-900">Solution:</span>
+                <input type="text" id="p2-3" class="math-input w-36 font-bold text-sky-700" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p2')" class="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-amber-600"></i> Need a Hint?
+            </button>
+            <div id="hint-p2" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p>• Subtract 2: -3 &lt;= -3z &lt;= 3</p>
+              <p>• Divide by -3 and flip signs!</p>
+              <p>• Solution: -1 &lt;= z &lt;= 1</p>
+            </div>
+
+            <div id="msg-p2" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p2', ['-1', '1', '-1 <= z <= 1'])" class="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+        <!-- Problem 3 -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-3">
+              <span class="font-heading font-bold text-sky-800 text-xl">Problem 3</span>
+              <span class="text-xs font-bold px-3 py-1 bg-sky-100 text-sky-900 rounded-full">4r - 1 &lt; 7 AND 4r + 8 &gt; 8</span>
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3">
+              <div class="flex justify-between items-center text-sm">
+                <span class="font-semibold text-slate-700">Lower Bound:</span>
+                <input type="text" id="p3-1" class="math-input w-28" placeholder="?">
+              </div>
+              <div class="flex justify-between items-center text-sm">
+                <span class="font-semibold text-slate-700">Upper Bound:</span>
+                <input type="text" id="p3-2" class="math-input w-28" placeholder="?">
+              </div>
+              <div class="border-t border-slate-300 pt-2 flex justify-between items-center">
+                <span class="font-bold text-slate-900">Solution:</span>
+                <input type="text" id="p3-3" class="math-input w-36 font-bold text-sky-700" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p3')" class="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-amber-600"></i> Need a Hint?
+            </button>
+            <div id="hint-p3" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p>• 4r - 1 &lt; 7 &rarr; 4r &lt; 8 &rarr; r &lt; 2</p>
+              <p>• 4r + 8 &gt; 8 &rarr; 4r &gt; 0 &rarr; r &gt; 0</p>
+              <p>• Combine: 0 &lt; r &lt; 2</p>
+            </div>
+
+            <div id="msg-p3" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p3', ['0', '2', '0 < r < 2'])" class="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+        <!-- Problem 4 -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-3">
+              <span class="font-heading font-bold text-sky-800 text-xl">Problem 4</span>
+              <span class="text-xs font-bold px-3 py-1 bg-sky-100 text-sky-900 rounded-full">y + 3 &gt; 13 OR y + 3 &lt; -4</span>
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3">
+              <div class="flex justify-between items-center text-sm">
+                <span class="font-semibold text-slate-700">Left Branch:</span>
+                <input type="text" id="p4-1" class="math-input w-28" placeholder="?">
+              </div>
+              <div class="flex justify-between items-center text-sm">
+                <span class="font-semibold text-slate-700">Right Branch:</span>
+                <input type="text" id="p4-2" class="math-input w-28" placeholder="?">
+              </div>
+              <div class="border-t border-slate-300 pt-2 flex justify-between items-center">
+                <span class="font-bold text-slate-900">Solution:</span>
+                <input type="text" id="p4-3" class="math-input w-36 font-bold text-sky-700" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p4')" class="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-amber-600"></i> Need a Hint?
+            </button>
+            <div id="hint-p4" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p>• y + 3 &lt; -4 &rarr; y &lt; -7</p>
+              <p>• y + 3 &gt; 13 &rarr; y &gt; 10</p>
+              <p>• Disjunction: y &lt; -7 OR y &gt; 10</p>
+            </div>
+
+            <div id="msg-p4" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p4', ['y < -7', 'y > 10', 'y < -7 OR y > 10'])" class="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+        <!-- Problem 5 -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-3">
+              <span class="font-heading font-bold text-sky-800 text-xl">Problem 5</span>
+              <span class="text-xs font-bold px-3 py-1 bg-sky-100 text-sky-900 rounded-full">-4m + 6 &lt; 18 OR -4m + 6 &gt; 42</span>
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3">
+              <div class="flex justify-between items-center text-sm">
+                <span class="font-semibold text-slate-700">Left Branch:</span>
+                <input type="text" id="p5-1" class="math-input w-28" placeholder="?">
+              </div>
+              <div class="flex justify-between items-center text-sm">
+                <span class="font-semibold text-slate-700">Right Branch:</span>
+                <input type="text" id="p5-2" class="math-input w-28" placeholder="?">
+              </div>
+              <div class="border-t border-slate-300 pt-2 flex justify-between items-center">
+                <span class="font-bold text-slate-900">Solution:</span>
+                <input type="text" id="p5-3" class="math-input w-36 font-bold text-sky-700" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p5')" class="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-amber-600"></i> Need a Hint?
+            </button>
+            <div id="hint-p5" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p>• -4m + 6 &gt; 42 &rarr; -4m &gt; 36 &rarr; m &lt; -9</p>
+              <p>• -4m + 6 &lt; 18 &rarr; -4m &lt; 12 &rarr; m &gt; -3</p>
+              <p>• Disjunction: m &lt; -9 OR m &gt; -3</p>
+            </div>
+
+            <div id="msg-p5" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p5', ['m < -9', 'm > -3', 'm < -9 OR m > -3'])" class="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+        <!-- Problem 6: Word Problem (Aquarium pH) -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-3">
+              <span class="font-heading font-bold text-sky-800 text-xl">Problem 6 (Word Problem)</span>
+              <span class="text-xs font-bold px-3 py-1 bg-emerald-100 text-emerald-900 rounded-full"><i class="fa-solid fa-vial"></i> Biology Lab</span>
+            </div>
+            <p class="text-slate-800 text-sm leading-relaxed mb-3">
+              An aquarium caretaker keeps pH level <b>p</b> satisfying <b>-3 &lt;= 2p - 15 &lt;= 1</b>. What is the safe range of pH values?
+            </p>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3">
+              <div class="flex justify-between items-center text-sm">
+                <span class="font-semibold text-slate-700">Minimum pH:</span>
+                <input type="text" id="p6-1" class="math-input w-28" placeholder="?">
+              </div>
+              <div class="flex justify-between items-center text-sm">
+                <span class="font-semibold text-slate-700">Maximum pH:</span>
+                <input type="text" id="p6-2" class="math-input w-28" placeholder="?">
+              </div>
+              <div class="border-t border-slate-300 pt-2 flex justify-between items-center">
+                <span class="font-bold text-slate-900">pH Inequality:</span>
+                <input type="text" id="p6-3" class="math-input w-36 font-bold text-emerald-700" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p6')" class="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-amber-600"></i> Need a Hint?
+            </button>
+            <div id="hint-p6" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p>• Add 15: 12 &lt;= 2p &lt;= 16</p>
+              <p>• Divide by 2: 6 &lt;= p &lt;= 8</p>
+              <p>• Min: 6 | Max: 8 | Range: 6 &lt;= p &lt;= 8</p>
+            </div>
+
+            <div id="msg-p6" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p6', ['6', '8', '6 <= p <= 8'])" class="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 4: OBJECTIVE 2 DIRECT INSTRUCTION (ABSOLUTE-VALUE INEQUALITIES) -->
+    <section id="sec4" class="bg-white border-2 border-purple-200 rounded-3xl p-6 md:p-8 shadow-sm space-y-6">
+      <div class="flex flex-col md:flex-row justify-between md:items-center gap-4">
+        <div class="flex items-center gap-3">
+          <div class="p-3 bg-purple-100 text-purple-900 rounded-2xl">
+            <i class="fa-solid fa-layer-group text-2xl"></i>
+          </div>
+          <div>
+            <span class="text-xs font-bold text-purple-900 uppercase tracking-wide">Section 4 • 5 Minutes Instruction</span>
+            <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">
+              Objective 2: Solve Absolute-Value Inequalities (|x| &lt; a vs |x| &gt; a)
+            </h2>
+          </div>
+        </div>
+        <div class="bg-purple-50 border border-purple-200 px-4 py-2 rounded-2xl text-purple-900 font-bold text-sm">
+          Example: <span class="font-mono text-lg font-extrabold text-purple-700">|x| + 4 &lt; 14 &rarr; -10 &lt; x &lt; 10</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+        
+        <!-- Step-by-Step Instruction -->
+        <div class="space-y-4">
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1">
+            <span class="font-bold text-purple-800 text-sm">Step 1: Isolate the Absolute Value Expression</span>
+            <p class="text-slate-700 text-base">
+              Subtract 4 from both sides of <b>|x| + 4 &lt; 14</b>: <br>
+              <b>|x| &lt; 10</b>.
+            </p>
+          </div>
+
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1 flex items-start gap-3">
+            <span class="w-6 h-6 bg-purple-600 text-white rounded-full flex items-center justify-center font-bold text-xs mt-0.5 shrink-0">1</span>
+            <div>
+              <span class="font-bold text-purple-800 text-sm">Step 2: "Less Than" (&lt; or &lt;=) = Conjunction (AND)</span>
+              <p class="text-slate-700 text-sm mt-0.5">
+                • <b>|x| &lt; a</b> means distance from 0 is less than a units.<br>
+                • Rewrite as: <b>-a &lt; x &lt; a</b> (x is between -a and a).<br>
+                • Example: <b>|x| &lt; 10 &rarr; -10 &lt; x &lt; 10</b>.
+              </p>
+            </div>
+          </div>
+
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1 flex items-start gap-3">
+            <span class="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-xs mt-0.5 shrink-0">2</span>
+            <div>
+              <span class="font-bold text-blue-800 text-sm">Step 3: "Greater Than" (&gt; or &gt;=) = Disjunction (OR)</span>
+              <p class="text-slate-700 text-sm mt-0.5">
+                • <b>|x| &gt; a</b> means distance from 0 is greater than a units.<br>
+                • Rewrite as: <b>x &lt; -a OR x &gt; a</b>.<br>
+                • Example: <b>|x| &gt; 10 &rarr; x &lt; -10 OR x &gt; 10</b>.
+              </p>
+            </div>
+          </div>
+
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1">
+            <span class="font-bold text-purple-800 text-sm">Step 4: Solve &amp; Graph Solution Set</span>
+            <p class="text-slate-700 text-base">
+              Set-builder: <b>{x | -10 &lt; x &lt; 10}</b> | Interval: <b>(-10, 10)</b>.
+            </p>
+          </div>
+        </div>
+
+        <!-- VISUAL COMPARISON BOX -->
+        <div class="bg-slate-50 p-6 rounded-2xl border-2 border-purple-300 shadow-sm flex flex-col items-center space-y-4">
+          <span class="text-xs font-bold text-purple-900 uppercase tracking-widest">Key Principles for Absolute Value</span>
+
+          <div class="w-full bg-white p-5 rounded-2xl border border-slate-300 shadow-inner space-y-4 font-mono text-sm">
+            <div class="p-3 bg-purple-50 rounded-xl border border-purple-200">
+              <div class="font-sans font-bold text-purple-900 text-xs uppercase mb-1">Rule 1: Less Than (&lt; or &lt;=)</div>
+              <div class="text-purple-800 font-bold">|Expression| &lt; a</div>
+              <div class="text-slate-600 text-xs font-sans mt-1">&rarr; -a &lt; Expression &lt; a (Conjunction AND)</div>
+            </div>
+
+            <div class="p-3 bg-blue-50 rounded-xl border border-blue-200">
+              <div class="font-sans font-bold text-blue-900 text-xs uppercase mb-1">Rule 2: Greater Than (&gt; or &gt;=)</div>
+              <div class="text-blue-800 font-bold">|Expression| &gt; a</div>
+              <div class="text-slate-600 text-xs font-sans mt-1">&rarr; Expression &lt; -a OR Expression &gt; a (Disjunction OR)</div>
+            </div>
+          </div>
+
+          <div class="w-full bg-white p-4 rounded-2xl border border-slate-300 flex flex-col items-center space-y-2">
+            <span class="text-xs font-bold text-slate-500 uppercase font-sans">Distance from Zero Model</span>
+            <div class="relative w-full h-12 flex items-center justify-center">
+              <div class="w-full h-1 bg-slate-300 rounded"></div>
+              <div class="absolute w-full flex justify-between px-6 text-xs font-mono font-bold text-slate-600 top-7">
+                <span>-10</span><span>-5</span><span>0</span><span>5</span><span>10</span>
+              </div>
+              <!-- Distance Highlight between -10 and 10 -->
+              <div class="absolute left-[12%] right-[12%] h-2 bg-purple-500 rounded-full"></div>
+              <div class="absolute left-[12%] -translate-x-1/2 w-4 h-4 bg-white rounded-full border-2 border-purple-600 shadow"></div>
+              <div class="absolute right-[12%] translate-x-1/2 w-4 h-4 bg-white rounded-full border-2 border-purple-600 shadow"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Common Error Box -->
+      <div class="bg-red-50 border-2 border-red-300 rounded-2xl p-5 flex items-start gap-4">
+        <div class="p-3 bg-red-200 text-red-900 rounded-xl">
+          <i class="fa-solid fa-triangle-exclamation text-2xl"></i>
+        </div>
+        <div>
+          <h4 class="font-heading font-bold text-red-950 text-lg">Critical Error: Always Isolate Absolute Value First!</h4>
+          <p class="text-slate-700 text-base mt-1">
+            Never remove absolute value bars until all outside addition, subtraction, multiplication, or division is simplified first!
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: OBJECTIVE 2 INDEPENDENT PRACTICE (10 Mins) -->
+    <section id="sec5" class="space-y-6">
+      <div class="flex items-center gap-3">
+        <div class="p-3 bg-purple-600 text-white rounded-2xl">
+          <i class="fa-solid fa-pen-to-square text-2xl"></i>
+        </div>
+        <div>
+          <span class="text-xs font-bold text-purple-800 uppercase tracking-wide">Section 5 • 10 Minutes Practice</span>
+          <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">
+            Objective 2 Independent Practice (Problems 7–11)
+          </h2>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- Problem 7: |x| + 4 < 14 -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-3">
+              <span class="font-heading font-bold text-purple-900 text-xl">Problem 7</span>
+              <span class="text-xs font-bold px-3 py-1 bg-purple-100 text-purple-900 rounded-full">|x| + 4 &lt; 14</span>
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3">
+              <div class="flex justify-between items-center text-sm">
+                <span class="font-semibold text-slate-700">Lower Bound:</span>
+                <input type="text" id="p7-1" class="math-input w-28" placeholder="?">
+              </div>
+              <div class="flex justify-between items-center text-sm">
+                <span class="font-semibold text-slate-700">Upper Bound:</span>
+                <input type="text" id="p7-2" class="math-input w-28" placeholder="?">
+              </div>
+              <div class="border-t border-slate-300 pt-2 flex justify-between items-center">
+                <span class="font-bold text-slate-900">Final Solution:</span>
+                <input type="text" id="p7-3" class="math-input w-36 font-bold text-purple-800" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p7')" class="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-amber-600"></i> Need a Hint?
+            </button>
+            <div id="hint-p7" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p>• Subtract 4: |x| &lt; 10</p>
+              <p>• Rewrite as conjunction: -10 &lt; x &lt; 10</p>
+              <p>• Lower: -10 | Upper: 10</p>
+            </div>
+
+            <div id="msg-p7" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p7', ['-10', '10', '-10 < x < 10'])" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+        <!-- Problem 8: |2x - 1| <= 7 -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-3">
+              <span class="font-heading font-bold text-purple-900 text-xl">Problem 8</span>
+              <span class="text-xs font-bold px-3 py-1 bg-purple-100 text-purple-900 rounded-full">|2x - 1| &lt;= 7</span>
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3">
+              <div class="flex justify-between items-center text-sm">
+                <span class="font-semibold text-slate-700">Lower Bound:</span>
+                <input type="text" id="p8-1" class="math-input w-28" placeholder="?">
+              </div>
+              <div class="flex justify-between items-center text-sm">
+                <span class="font-semibold text-slate-700">Upper Bound:</span>
+                <input type="text" id="p8-2" class="math-input w-28" placeholder="?">
+              </div>
+              <div class="border-t border-slate-300 pt-2 flex justify-between items-center">
+                <span class="font-bold text-slate-900">Final Solution:</span>
+                <input type="text" id="p8-3" class="math-input w-36 font-bold text-purple-800" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p8')" class="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-amber-600"></i> Need a Hint?
+            </button>
+            <div id="hint-p8" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p>• -7 &lt;= 2x - 1 &lt;= 7</p>
+              <p>• Add 1: -6 &lt;= 2x &lt;= 8</p>
+              <p>• Divide by 2: -3 &lt;= x &lt;= 4</p>
+            </div>
+
+            <div id="msg-p8" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p8', ['-3', '4', '-3 <= x <= 4'])" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+        <!-- Problem 9: |3x + 3| > 12 -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-3">
+              <span class="font-heading font-bold text-purple-900 text-xl">Problem 9</span>
+              <span class="text-xs font-bold px-3 py-1 bg-purple-100 text-purple-900 rounded-full">|3x + 3| &gt; 12</span>
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3">
+              <div class="flex justify-between items-center text-sm">
+                <span class="font-semibold text-slate-700">Left Branch:</span>
+                <input type="text" id="p9-1" class="math-input w-28" placeholder="?">
+              </div>
+              <div class="flex justify-between items-center text-sm">
+                <span class="font-semibold text-slate-700">Right Branch:</span>
+                <input type="text" id="p9-2" class="math-input w-28" placeholder="?">
+              </div>
+              <div class="border-t border-slate-300 pt-2 flex justify-between items-center">
+                <span class="font-bold text-slate-900">Final Solution:</span>
+                <input type="text" id="p9-3" class="math-input w-36 font-bold text-purple-800" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p9')" class="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-amber-600"></i> Need a Hint?
+            </button>
+            <div id="hint-p9" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p>• 3x + 3 &lt; -12 OR 3x + 3 &gt; 12</p>
+              <p>• 3x &lt; -15 &rarr; x &lt; -5</p>
+              <p>• 3x &gt; 9 &rarr; x &gt; 3</p>
+            </div>
+
+            <div id="msg-p9" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p9', ['x < -5', 'x > 3', 'x < -5 OR x > 3'])" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+        <!-- Problem 10: |4x - 2| + 3 >= 17 -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-3">
+              <span class="font-heading font-bold text-purple-900 text-xl">Problem 10</span>
+              <span class="text-xs font-bold px-3 py-1 bg-purple-100 text-purple-900 rounded-full">|4x - 2| + 3 &gt;= 17</span>
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3">
+              <div class="flex justify-between items-center text-sm">
+                <span class="font-semibold text-slate-700">Left Branch:</span>
+                <input type="text" id="p10-1" class="math-input w-28" placeholder="?">
+              </div>
+              <div class="flex justify-between items-center text-sm">
+                <span class="font-semibold text-slate-700">Right Branch:</span>
+                <input type="text" id="p10-2" class="math-input w-28" placeholder="?">
+              </div>
+              <div class="border-t border-slate-300 pt-2 flex justify-between items-center">
+                <span class="font-bold text-slate-900">Final Solution:</span>
+                <input type="text" id="p10-3" class="math-input w-36 font-bold text-purple-800" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p10')" class="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-amber-600"></i> Need a Hint?
+            </button>
+            <div id="hint-p10" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p>• Isolate: |4x - 2| &gt;= 14</p>
+              <p>• 4x - 2 &lt;= -14 &rarr; 4x &lt;= -12 &rarr; x &lt;= -3</p>
+              <p>• 4x - 2 &gt;= 14 &rarr; 4x &gt;= 16 &rarr; x &gt;= 4</p>
+            </div>
+
+            <div id="msg-p10" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p10', ['x <= -3', 'x >= 4', 'x <= -3 OR x >= 4'])" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+        <!-- Problem 11: Word Problem (Quality Control Tolerance) -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-3">
+              <span class="font-heading font-bold text-purple-900 text-xl">Problem 11 (Word Problem)</span>
+              <span class="text-xs font-bold px-3 py-1 bg-emerald-100 text-emerald-900 rounded-full"><i class="fa-solid fa-robot"></i> Robotics Tolerance</span>
+            </div>
+            <p class="text-slate-800 text-sm leading-relaxed mb-3">
+              A metal shaft length <b>L</b> in cm must satisfy <b>|L - 50| &lt;= 2</b>. Find the valid range and state if a <b>51.5 cm</b> shaft is accepted (Yes/No).
+            </p>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3">
+              <div class="flex justify-between items-center text-sm">
+                <span class="font-semibold text-slate-700">Min Length (cm):</span>
+                <input type="text" id="p11-1" class="math-input w-28" placeholder="?">
+              </div>
+              <div class="flex justify-between items-center text-sm">
+                <span class="font-semibold text-slate-700">Max Length (cm):</span>
+                <input type="text" id="p11-2" class="math-input w-28" placeholder="?">
+              </div>
+              <div class="border-t border-slate-300 pt-2 flex justify-between items-center">
+                <span class="font-bold text-slate-900">51.5 cm Accepted?</span>
+                <input type="text" id="p11-3" class="math-input w-36 font-bold text-purple-800" placeholder="Yes/No">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p11')" class="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-amber-600"></i> Need a Hint?
+            </button>
+            <div id="hint-p11" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p>• -2 &lt;= L - 50 &lt;= 2</p>
+              <p>• Add 50: 48 &lt;= L &lt;= 52</p>
+              <p>• 51.5 is between 48 and 52, so Yes!</p>
+            </div>
+
+            <div id="msg-p11" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p11', ['48', '52', 'Yes'])" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 6: KEY TAKEAWAYS & EMAIL TURN-IN -->
+    <section id="sec6" class="bg-amber-50 border-2 border-amber-200 rounded-3xl p-6 md:p-8 space-y-6">
+      <div class="flex items-center gap-3">
+        <div class="p-3 bg-amber-200 text-amber-900 rounded-2xl">
+          <i class="fa-solid fa-award text-2xl"></i>
+        </div>
+        <div>
+          <span class="text-xs font-bold text-amber-800 uppercase tracking-wide">Section 6</span>
+          <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">Key Takeaways &amp; Turn In</h2>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        
+        <div class="bg-white p-5 rounded-2xl border border-amber-200 space-y-2">
+          <div class="text-amber-800 font-bold text-lg flex items-center gap-2">
+            <i class="fa-solid fa-scissors"></i> 1. Isolate First
+          </div>
+          <p class="text-sm text-slate-600">
+            Always isolate the absolute value expression before splitting into two inequalities!
+          </p>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-sky-200 space-y-2">
+          <div class="text-sky-800 font-bold text-lg flex items-center gap-2">
+            <i class="fa-solid fa-arrows-left-right-to-line"></i> 2. Less Than = AND
+          </div>
+          <p class="text-sm text-slate-600">
+            |x| &lt; a translates to -a &lt; x &lt; a (intersection region in between endpoints).
+          </p>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-purple-200 space-y-2">
+          <div class="text-purple-800 font-bold text-lg flex items-center gap-2">
+            <i class="fa-solid fa-arrows-split-up-and-left"></i> 3. Greater Than = OR
+          </div>
+          <p class="text-sm text-slate-600">
+            |x| &gt; a translates to x &lt; -a OR x &gt; a (disjunction pointing outwards).
+          </p>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-emerald-200 space-y-2">
+          <div class="text-emerald-800 font-bold text-lg flex items-center gap-2">
+            <i class="fa-solid fa-rotate"></i> 4. Flip on Negative Division
+          </div>
+          <p class="text-sm text-slate-600">
+            Multiplying or dividing by a negative number flips the inequality symbol direction.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Final Completion & Email Turn In Card -->
+      <div class="bg-white p-8 rounded-3xl border-2 border-emerald-300 text-center space-y-4 shadow-md">
+        <div class="w-16 h-16 bg-emerald-100 text-emerald-700 rounded-2xl flex items-center justify-center mx-auto text-3xl">
+          <i class="fa-solid fa-envelope"></i>
+        </div>
+        <h3 class="font-heading font-bold text-2xl text-slate-900">Ready to Email Your Score Report?</h3>
+        <p class="text-slate-600 text-base max-w-xl mx-auto">
+          Click the green button below to open Gmail in a new tab with your completed worksheet score report ready to send to <b>jvena@saintmarys.us</b>!
+        </p>
+        <div class="flex flex-wrap justify-center gap-4 pt-2">
+          <button onclick="openSubmitModal()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-lg px-8 py-3.5 rounded-2xl transition shadow-lg inline-flex items-center gap-2">
+            <i class="fa-solid fa-paper-plane"></i> Email Work to jvena@saintmarys.us
+          </button>
+          <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-6 py-3.5 rounded-2xl transition border border-slate-300 inline-flex items-center gap-2">
+            <i class="fa-solid fa-arrow-up"></i> Return to Top
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- INTERACTIVE SCRATCHPAD FLOATING BUTTON -->
+  <div class="fixed bottom-6 right-6 z-50">
+    <button onclick="toggleScratchpad()" class="bg-sky-600 hover:bg-sky-700 text-white font-bold px-5 py-3 rounded-full shadow-2xl flex items-center gap-2 text-base transition transform hover:scale-105 border-2 border-white">
+      <i class="fa-solid fa-pen-line"></i> Open Scratchpad
+    </button>
+  </div>
+
+  <!-- SCRATCHPAD MODAL -->
+  <div id="scratchpad-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-3xl w-full p-6 shadow-2xl space-y-4 flex flex-col h-[85vh]">
+      <div class="flex justify-between items-center border-b border-slate-200 pb-3">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-pen-clip text-sky-600 text-xl"></i>
+          <h3 class="font-heading font-bold text-xl text-slate-900">Chromebook Scratchpad &amp; Scratch Work</h3>
+        </div>
+        <button onclick="toggleScratchpad()" class="text-slate-400 hover:text-slate-700 text-2xl font-bold px-2">&times;</button>
+      </div>
+
+      <!-- Controls -->
+      <div class="flex flex-wrap items-center justify-between gap-3 bg-slate-100 p-3 rounded-2xl">
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-bold text-slate-600">Color:</span>
+          <button onclick="setPadColor('#0284c7')" class="w-8 h-8 rounded-full bg-sky-600 border-2 border-white shadow"></button>
+          <button onclick="setPadColor('#dc2626')" class="w-8 h-8 rounded-full bg-red-600 border-2 border-white shadow"></button>
+          <button onclick="setPadColor('#16a34a')" class="w-8 h-8 rounded-full bg-emerald-600 border-2 border-white shadow"></button>
+          <button onclick="setPadColor('#0f172a')" class="w-8 h-8 rounded-full bg-slate-900 border-2 border-white shadow"></button>
+        </div>
+        <button onclick="clearScratchpad()" class="bg-red-100 hover:bg-red-200 text-red-800 text-xs font-bold px-3 py-2 rounded-xl transition">
+          <i class="fa-solid fa-trash"></i> Clear Pad
+        </button>
+      </div>
+
+      <!-- Canvas Box -->
+      <div class="flex-1 bg-slate-50 border-2 border-slate-200 rounded-2xl overflow-hidden relative">
+        <canvas id="scratch-canvas" class="w-full h-full cursor-crosshair"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- STUDENT EMAIL SUBMIT MODAL -->
+  <div id="submit-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 md:p-8 shadow-2xl space-y-6 border-4 border-emerald-500">
+      <div class="flex justify-between items-center border-b border-slate-200 pb-3">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-paper-plane text-emerald-600 text-2xl"></i>
+          <h3 class="font-heading font-bold text-2xl text-slate-900">Email Report to Teacher</h3>
+        </div>
+        <button onclick="closeSubmitModal()" class="text-slate-400 hover:text-slate-700 text-2xl font-bold px-2">&times;</button>
+      </div>
+
+      <div class="space-y-4">
+        <div>
+          <label class="block text-sm font-bold text-slate-700 mb-1">Student First &amp; Last Name:</label>
+          <input type="text" id="studentName" class="w-full px-4 py-3 rounded-xl border-2 border-slate-300 font-bold text-slate-900 focus:border-emerald-500 focus:outline-none" placeholder="e.g. Alex Johnson">
+        </div>
+
+        <div>
+          <label class="block text-sm font-bold text-slate-700 mb-1">Grade / Class:</label>
+          <input type="text" id="classId" class="w-full px-4 py-3 rounded-xl border-2 border-slate-300 font-bold text-slate-900 focus:border-emerald-500 focus:outline-none" placeholder="e.g. 8th Grade Algebra 1">
+        </div>
+
+        <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-xl text-xs text-emerald-900">
+          <i class="fa-solid fa-circle-info"></i> Submitting will automatically open a <b>Gmail web compose window in a new tab</b> with your full score report pre-filled for <b>jvena@saintmarys.us</b>.
+        </div>
+      </div>
+
+      <div class="flex gap-3 pt-2">
+        <button onclick="processEmailSubmission()" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl transition shadow-md flex items-center justify-center gap-2">
+          <i class="fa-solid fa-envelope"></i> Open Gmail in New Tab
+        </button>
+        <button onclick="closeSubmitModal()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-5 py-3.5 rounded-xl transition">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    const solvedProblems = new Set();
+    const totalProblems = 11;
+    const DEFAULT_TEACHER_EMAIL = "jvena@saintmarys.us";
+
+    function sanitizeInput(val) {
+      return val.toString().replace(/,/g, '').replace(/\s+/g, ' ').trim().toLowerCase();
+    }
+
+    function toggleHint(hintId) {
+      const hintElem = document.getElementById(hintId);
+      if (hintElem) hintElem.classList.toggle('hidden');
+    }
+
+    function checkProblem(probId, expectedAnswers) {
+      let allCorrect = true;
+
+      expectedAnswers.forEach((expected, idx) => {
+        const inputElem = document.getElementById(`${probId}-${idx + 1}`);
+        if (!inputElem) return;
+
+        const userVal = sanitizeInput(inputElem.value);
+        const expVal = sanitizeInput(expected);
+
+        if (userVal === expVal) {
+          inputElem.classList.remove('incorrect');
+          inputElem.classList.add('correct');
+        } else {
+          inputElem.classList.remove('correct');
+          inputElem.classList.add('incorrect');
+          allCorrect = false;
+        }
+      });
+
+      const msgElem = document.getElementById(`msg-${probId}`);
+      if (msgElem) {
+        msgElem.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-800', 'bg-red-100', 'text-red-800');
+        if (allCorrect) {
+          msgElem.classList.add('bg-emerald-100', 'text-emerald-800');
+          msgElem.innerHTML = '<i class="fa-solid fa-circle-check"></i> Great job! Correct!';
+          solvedProblems.add(probId);
+        } else {
+          msgElem.classList.add('bg-red-100', 'text-red-800');
+          msgElem.innerHTML = '<i class="fa-solid fa-circle-xmark"></i> Check the red boxes and try again!';
+        }
+      }
+
+      updateProgress();
+    }
+
+    function updateProgress() {
+      const count = solvedProblems.size;
+      const percent = Math.round((count / totalProblems) * 100);
+
+      const progressText = document.getElementById('progress-text');
+      const progressBar = document.getElementById('progress-bar');
+
+      if (progressText) progressText.innerText = `${count} / ${totalProblems} Solved`;
+      if (progressBar) progressBar.style.width = `${percent}%`;
+    }
+
+    /* Scratchpad Canvas Logic */
+    let canvas, ctx, isDrawing = false;
+    let padColor = '#0284c7';
+
+    function toggleScratchpad() {
+      const modal = document.getElementById('scratchpad-modal');
+      modal.classList.toggle('hidden');
+
+      if (!modal.classList.contains('hidden')) {
+        setTimeout(initCanvas, 100);
+      }
+    }
+
+    function initCanvas() {
+      canvas = document.getElementById('scratch-canvas');
+      if (!canvas) return;
+
+      const rect = canvas.parentElement.getBoundingClientRect();
+      canvas.width = rect.width;
+      canvas.height = rect.height;
+
+      ctx = canvas.getContext('2d');
+      ctx.lineWidth = 3;
+      ctx.lineCap = 'round';
+      ctx.strokeStyle = padColor;
+
+      canvas.removeEventListener('mousedown', startDraw);
+      canvas.removeEventListener('mousemove', draw);
+      canvas.removeEventListener('mouseup', stopDraw);
+
+      canvas.addEventListener('mousedown', startDraw);
+      canvas.addEventListener('mousemove', draw);
+      canvas.addEventListener('mouseup', stopDraw);
+
+      /* Touch events for Chromebook touchscreens */
+      canvas.addEventListener('touchstart', (e) => { startDraw(e.touches[0]); e.preventDefault(); });
+      canvas.addEventListener('touchmove', (e) => { draw(e.touches[0]); e.preventDefault(); });
+      canvas.addEventListener('touchend', stopDraw);
+    }
+
+    function startDraw(e) {
+      isDrawing = true;
+      const rect = canvas.getBoundingClientRect();
+      ctx.beginPath();
+      ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
+    }
+
+    function draw(e) {
+      if (!isDrawing) return;
+      const rect = canvas.getBoundingClientRect();
+      ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
+      ctx.stroke();
+    }
+
+    function stopDraw() {
+      isDrawing = false;
+    }
+
+    function setPadColor(color) {
+      padColor = color;
+      if (ctx) ctx.strokeStyle = padColor;
+    }
+
+    function clearScratchpad() {
+      if (ctx && canvas) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+    }
+
+    /* Email Submission Functions */
+    function openSubmitModal() {
+      document.getElementById('submit-modal').classList.remove('hidden');
+    }
+
+    function closeSubmitModal() {
+      document.getElementById('submit-modal').classList.add('hidden');
+    }
+
+    function processEmailSubmission() {
+      const name = document.getElementById('studentName').value.trim();
+      const classId = document.getElementById('classId').value.trim();
+
+      if (!name) {
+        alert('Please enter your name before turning in your work!');
+        return;
+      }
+
+      const timestamp = new Date().toLocaleString();
+      const scoreProgress = `${solvedProblems.size} / ${totalProblems} Solved`;
+      const targetEmail = DEFAULT_TEACHER_EMAIL;
+
+      let reportBody = `8th Grade Algebra 1 Score Report - Lessons 3-5 & 3-6\n`;
+      reportBody += `----------------------------------------------------\n`;
+      reportBody += `Student Name: ${name}\n`;
+      reportBody += `Class / Grade: ${classId || '8th Grade Algebra 1'}\n`;
+      reportBody += `Score Progress: ${scoreProgress}\n`;
+      reportBody += `Date & Time: ${timestamp}\n\n`;
+      reportBody += `--- DETAILED STUDENT ANSWERS ---\n`;
+
+      const problemTitles = [
+        "Problem 1 (-4 < x + 1 < 6)",
+        "Problem 2 (-1 <= -3z + 2 <= 5)",
+        "Problem 3 (4r - 1 < 7 AND 4r + 8 > 8)",
+        "Problem 4 (y + 3 > 13 OR y + 3 < -4)",
+        "Problem 5 (-4m + 6 < 18 OR -4m + 6 > 42)",
+        "Problem 6 (Word Problem - Aquarium pH)",
+        "Problem 7 (|x| + 4 < 14)",
+        "Problem 8 (|2x - 1| <= 7)",
+        "Problem 9 (|3x + 3| > 12)",
+        "Problem 10 (|4x - 2| + 3 >= 17)",
+        "Problem 11 (Word Problem - Robotics Tolerance)"
+      ];
+
+      for (let i = 1; i <= 11; i++) {
+        const val1 = document.getElementById(`p${i}-1`) ? document.getElementById(`p${i}-1`).value : '';
+        const val2 = document.getElementById(`p${i}-2`) ? document.getElementById(`p${i}-2`).value : '';
+        const val3 = document.getElementById(`p${i}-3`) ? document.getElementById(`p${i}-3`).value : '';
+
+        reportBody += `${problemTitles[i - 1]}: Box 1 = ${val1}, Box 2 = ${val2}, Final = ${val3}\n`;
+      }
+
+      const subject = encodeURIComponent(`Math Score Report: ${name} (${classId || '8th Grade'}) - ${scoreProgress}`);
+      const body = encodeURIComponent(reportBody);
+
+      // Launch directly in Gmail Web Client compose mode in a new browser tab
+      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(targetEmail)}&su=${subject}&body=${body}`;
+
+      window.open(gmailUrl, '_blank');
+
+      alert(`Great job, ${name}! A new Gmail tab has opened to send your score report to ${targetEmail}. Click "Send" in Gmail to complete your submission.`);
+      closeSubmitModal();
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>8th Grade Daily Math Warm-Up • Lesson 3-4</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Roboto+Mono:wght@500;700&display=swap">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            heading: ['Fredoka', 'sans-serif'],
+            mono: ['Roboto Mono', 'monospace']
+          },
+          colors: {
+            brandBlue: '#0284c7',
+            brandGreen: '#16a34a',
+            brandYellow: '#ca8a04',
+            brandPurple: '#9333ea',
+            brandOrange: '#ea580c'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #f8fafc;
+      color: #0f172a;
+      font-size: 18px;
+    }
+
+    .math-input {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 20px;
+      font-weight: 700;
+      text-align: center;
+      border: 2px dashed #94a3b8;
+      border-radius: 8px;
+      background-color: #ffffff;
+      color: #0284c7;
+      transition: all 0.2s ease;
+      height: 48px;
+    }
+
+    .math-input:focus {
+      outline: none;
+      border-color: #0284c7;
+      border-style: solid;
+      background-color: #f0f9ff;
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.2);
+    }
+
+    .math-input.correct {
+      border-color: #16a34a !important;
+      border-style: solid !important;
+      background-color: #f0fdf4 !important;
+      color: #15803d !important;
+    }
+
+    .math-input.incorrect {
+      border-color: #dc2626 !important;
+      border-style: solid !important;
+      background-color: #fef2f2 !important;
+      color: #b91c1c !important;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen pb-24">
+
+  <!-- STICKY HEADER & SECTION NAVIGATION -->
+  <header class="sticky top-0 z-40 bg-white border-b border-slate-200 shadow-md py-3 px-4 md:px-8">
+    <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-4">
+      
+      <!-- App Title -->
+      <div class="flex items-center gap-3">
+        <div class="bg-sky-600 text-white p-2.5 rounded-2xl shadow-sm">
+          <i class="fa-solid fa-calculator text-2xl"></i>
+        </div>
+        <div>
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold bg-sky-100 text-sky-800 uppercase tracking-wider">
+            Sadlier Math Grade 8 • Lesson 3-4
+          </span>
+          <h1 class="text-xl md:text-2xl font-heading font-bold text-slate-900">
+            Daily Math Warm-Up & Maintenance
+          </h1>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <nav class="flex flex-wrap items-center justify-center gap-2 text-xs font-bold">
+        <a href="#prob1" class="px-3 py-2 rounded-xl bg-sky-100 hover:bg-sky-200 text-sky-900 transition">Warm-Up 1</a>
+        <a href="#prob2" class="px-3 py-2 rounded-xl bg-amber-100 hover:bg-amber-200 text-amber-900 transition">Warm-Up 2</a>
+        <a href="#prob3" class="px-3 py-2 rounded-xl bg-purple-100 hover:bg-purple-200 text-purple-900 transition">Warm-Up 3</a>
+        <a href="#sec-turnin" class="px-3 py-2 rounded-xl bg-emerald-100 hover:bg-emerald-200 text-emerald-900 transition"><i class="fa-solid fa-paper-plane"></i> Turn In</a>
+      </nav>
+
+      <!-- Score Progress & Header Turn In Button -->
+      <div class="flex items-center gap-3">
+        <div class="bg-slate-100 px-3 py-1.5 rounded-2xl border border-slate-200 flex items-center gap-2">
+          <div class="text-right">
+            <div class="text-[10px] font-bold text-slate-500 uppercase">Score Progress</div>
+            <div id="progress-text" class="text-xs font-extrabold text-sky-700">0 / 3 Solved</div>
+          </div>
+          <div class="w-16 bg-slate-200 rounded-full h-2.5 overflow-hidden">
+            <div id="progress-bar" class="bg-gradient-to-r from-sky-500 to-emerald-500 h-2.5 rounded-full transition-all duration-500 w-0"></div>
+          </div>
+        </div>
+
+        <button onclick="openSubmitModal()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3.5 py-2 rounded-xl transition flex items-center gap-1.5 text-xs shadow-sm">
+          <i class="fa-solid fa-paper-plane"></i> Email Teacher
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 mt-8 space-y-8">
+
+    <!-- WARM-UP PROBLEM 1 -->
+    <section id="prob1" class="bg-white border-2 border-sky-200 rounded-3xl p-6 md:p-8 shadow-sm space-y-4">
+      <div class="flex justify-between items-center border-b border-slate-100 pb-3">
+        <div class="flex items-center gap-3">
+          <span class="w-9 h-9 rounded-2xl bg-sky-600 text-white flex items-center justify-center font-heading font-bold text-lg">1</span>
+          <div>
+            <span class="text-xs font-bold text-sky-800 uppercase tracking-wide">Lesson 3-4 Warm-Up</span>
+            <h2 class="text-xl font-heading font-bold text-slate-900">Multistep Word Problem</h2>
+          </div>
+        </div>
+        <span class="text-xs font-bold px-3 py-1 bg-sky-100 text-sky-800 rounded-full">Real-World Application</span>
+      </div>
+
+      <p class="text-slate-800 font-semibold text-lg leading-relaxed">
+        Marcus wants to host a party. The hall costs $200 to reserve plus $15 per person. He can spend no more than $650. What is the maximum number of guests Marcus can invite?
+      </p>
+
+      <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 text-center space-y-4 max-w-md mx-auto">
+        <div class="font-mono text-3xl font-extrabold text-slate-800 tracking-wider">
+          15g + 200 &lt;= 650
+        </div>
+        <div class="flex justify-center items-center gap-3">
+          <label for="p1-1" class="font-bold text-slate-700 text-base">Maximum Guests (g &lt;= ?):</label>
+          <input type="text" id="p1-1" class="math-input w-40" placeholder="?">
+        </div>
+      </div>
+
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2">
+        <button onclick="toggleHint('hint-p1')" class="text-xs font-bold text-sky-800 bg-sky-50 hover:bg-sky-100 border border-sky-200 px-3 py-2 rounded-xl flex items-center gap-1">
+          <i class="fa-solid fa-lightbulb text-amber-500"></i> Need a Hint?
+        </button>
+        <button onclick="checkProblem('p1', ['30'])" class="w-full sm:w-auto bg-sky-600 hover:bg-sky-700 text-white font-bold px-6 py-2.5 rounded-xl transition shadow-sm text-sm">
+          Check Answer
+        </button>
+      </div>
+
+      <div id="hint-p1" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+        <p>• Subtract 200 from both sides: 15g &lt;= 450.</p>
+        <p>• Divide both sides by 15: g &lt;= 30.</p>
+        <p>• Marcus can invite at most 30 guests.</p>
+      </div>
+
+      <div id="msg-p1" class="text-xs font-bold hidden p-2.5 rounded-xl text-center"></div>
+    </section>
+
+    <!-- WARM-UP PROBLEM 2 -->
+    <section id="prob2" class="bg-white border-2 border-amber-200 rounded-3xl p-6 md:p-8 shadow-sm space-y-4">
+      <div class="flex justify-between items-center border-b border-slate-100 pb-3">
+        <div class="flex items-center gap-3">
+          <span class="w-9 h-9 rounded-2xl bg-amber-500 text-white flex items-center justify-center font-heading font-bold text-lg">2</span>
+          <div>
+            <span class="text-xs font-bold text-amber-800 uppercase tracking-wide">Lesson 3-4 Warm-Up</span>
+            <h2 class="text-xl font-heading font-bold text-slate-900">Distributive Property</h2>
+          </div>
+        </div>
+        <span class="text-xs font-bold px-3 py-1 bg-amber-100 text-amber-900 rounded-full">Grouping Symbols</span>
+      </div>
+
+      <p class="text-slate-800 font-semibold text-lg leading-relaxed">
+        Solve the multistep inequality containing grouping symbols: 4(3x - 2) + 5 &lt;= 45. What is the maximum value for x?
+      </p>
+
+      <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 space-y-4 max-w-md mx-auto">
+        <div class="font-mono text-3xl font-extrabold text-slate-800 tracking-wider text-center">
+          4(3x - 2) + 5 &lt;= 45
+        </div>
+        <div class="flex justify-between items-center gap-3">
+          <label for="p2-1" class="font-bold text-slate-700 text-base">Solution (x &lt;= ?):</label>
+          <input type="text" id="p2-1" class="math-input w-40" placeholder="?">
+        </div>
+      </div>
+
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2">
+        <button onclick="toggleHint('hint-p2')" class="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-2 rounded-xl flex items-center gap-1">
+          <i class="fa-solid fa-lightbulb text-amber-600"></i> Need a Hint?
+        </button>
+        <button onclick="checkProblem('p2', ['4'])" class="w-full sm:w-auto bg-amber-600 hover:bg-amber-700 text-white font-bold px-6 py-2.5 rounded-xl transition shadow-sm text-sm">
+          Check Answer
+        </button>
+      </div>
+
+      <div id="hint-p2" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+        <p>• Use Distributive Property: 12x - 8 + 5 &lt;= 45.</p>
+        <p>• Combine like terms: 12x - 3 &lt;= 45.</p>
+        <p>• Add 3 to both sides: 12x &lt;= 48.</p>
+        <p>• Divide by 12: x &lt;= 4.</p>
+      </div>
+
+      <div id="msg-p2" class="text-xs font-bold hidden p-2.5 rounded-xl text-center"></div>
+    </section>
+
+    <!-- WARM-UP PROBLEM 3 -->
+    <section id="prob3" class="bg-white border-2 border-purple-200 rounded-3xl p-6 md:p-8 shadow-sm space-y-4">
+      <div class="flex justify-between items-center border-b border-slate-100 pb-3">
+        <div class="flex items-center gap-3">
+          <span class="w-9 h-9 rounded-2xl bg-purple-600 text-white flex items-center justify-center font-heading font-bold text-lg">3</span>
+          <div>
+            <span class="text-xs font-bold text-purple-900 uppercase tracking-wide">Lesson 3-4 Warm-Up</span>
+            <h2 class="text-xl font-heading font-bold text-slate-900">Variables on Both Sides</h2>
+          </div>
+        </div>
+        <span class="text-xs font-bold px-3 py-1 bg-purple-100 text-purple-900 rounded-full">Fractional Terms</span>
+      </div>
+
+      <p class="text-slate-800 font-semibold text-lg leading-relaxed">
+        Solve the inequality with variables on both sides: 5x/4 - 3 &lt; x/4 + 7. What is the boundary value for x?
+      </p>
+
+      <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 space-y-4 max-w-md mx-auto">
+        <div class="font-mono text-3xl font-extrabold text-slate-800 tracking-wider text-center">
+          5x/4 - 3 &lt; x/4 + 7
+        </div>
+        <div class="flex justify-between items-center gap-3">
+          <label for="p3-1" class="font-bold text-slate-700 text-base">Boundary Value (x &lt; ?):</label>
+          <input type="text" id="p3-1" class="math-input w-40" placeholder="?">
+        </div>
+      </div>
+
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2">
+        <button onclick="toggleHint('hint-p3')" class="text-xs font-bold text-purple-900 bg-purple-50 hover:bg-purple-100 border border-purple-200 px-3 py-2 rounded-xl flex items-center gap-1">
+          <i class="fa-solid fa-lightbulb text-amber-500"></i> Need a Hint?
+        </button>
+        <button onclick="checkProblem('p3', ['10'])" class="w-full sm:w-auto bg-purple-600 hover:bg-purple-700 text-white font-bold px-6 py-2.5 rounded-xl transition shadow-sm text-sm">
+          Check Answer
+        </button>
+      </div>
+
+      <div id="hint-p3" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+        <p>• Subtract x/4 from both sides: 4x/4 - 3 &lt; 7 (which simplifies to x - 3 &lt; 7).</p>
+        <p>• Add 3 to both sides: x &lt; 10.</p>
+        <p>• Final solution boundary is 10.</p>
+      </div>
+
+      <div id="msg-p3" class="text-xs font-bold hidden p-2.5 rounded-xl text-center"></div>
+    </section>
+
+    <!-- SECTION TURN IN (AT THE BOTTOM) -->
+    <section id="sec-turnin" class="bg-gradient-to-br from-emerald-50 to-teal-50 border-2 border-emerald-300 rounded-3xl p-6 md:p-8 text-center space-y-4 shadow-md">
+      <div class="w-16 h-16 bg-emerald-100 text-emerald-700 rounded-2xl flex items-center justify-center mx-auto text-3xl shadow-sm">
+        <i class="fa-solid fa-paper-plane"></i>
+      </div>
+      <h3 class="font-heading font-bold text-2xl md:text-3xl text-slate-900">Ready to Turn In Your Warm-Up Work?</h3>
+      <p class="text-slate-600 text-base max-w-xl mx-auto">
+        Great work on today's math warm-up problems! Click the button below to turn in your score report directly to <b>jvena@saintmarys.us</b>.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4 pt-2">
+        <button onclick="openSubmitModal()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-lg px-8 py-3.5 rounded-2xl transition shadow-lg inline-flex items-center gap-2 transform hover:scale-105">
+          <i class="fa-solid fa-paper-plane"></i> Turn In Work to jvena@saintmarys.us
+        </button>
+        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="bg-white hover:bg-slate-100 text-slate-700 font-bold px-6 py-3.5 rounded-2xl transition border border-slate-300 inline-flex items-center gap-2">
+          <i class="fa-solid fa-arrow-up"></i> Return to Top
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- INTERACTIVE SCRATCHPAD FLOATING BUTTON -->
+  <div class="fixed bottom-6 right-6 z-50">
+    <button onclick="toggleScratchpad()" class="bg-sky-600 hover:bg-sky-700 text-white font-bold px-5 py-3 rounded-full shadow-2xl flex items-center gap-2 text-base transition transform hover:scale-105 border-2 border-white">
+      <i class="fa-solid fa-pen-line"></i> Open Scratchpad
+    </button>
+  </div>
+
+  <!-- SCRATCHPAD MODAL -->
+  <div id="scratchpad-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-3xl w-full p-6 shadow-2xl space-y-4 flex flex-col h-[85vh]">
+      <div class="flex justify-between items-center border-b border-slate-200 pb-3">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-pen-clip text-sky-600 text-xl"></i>
+          <h3 class="font-heading font-bold text-xl text-slate-900">Chromebook Scratchpad & Scratch Work</h3>
+        </div>
+        <button onclick="toggleScratchpad()" class="text-slate-400 hover:text-slate-700 text-2xl font-bold px-2">&times;</button>
+      </div>
+
+      <!-- Controls -->
+      <div class="flex flex-wrap items-center justify-between gap-3 bg-slate-100 p-3 rounded-2xl">
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-bold text-slate-600">Color:</span>
+          <button onclick="setPadColor('#0284c7')" class="w-8 h-8 rounded-full bg-sky-600 border-2 border-white shadow"></button>
+          <button onclick="setPadColor('#dc2626')" class="w-8 h-8 rounded-full bg-red-600 border-2 border-white shadow"></button>
+          <button onclick="setPadColor('#16a34a')" class="w-8 h-8 rounded-full bg-emerald-600 border-2 border-white shadow"></button>
+          <button onclick="setPadColor('#0f172a')" class="w-8 h-8 rounded-full bg-slate-900 border-2 border-white shadow"></button>
+        </div>
+        <button onclick="clearScratchpad()" class="bg-red-100 hover:bg-red-200 text-red-800 text-xs font-bold px-3 py-2 rounded-xl transition">
+          <i class="fa-solid fa-trash"></i> Clear Pad
+        </button>
+      </div>
+
+      <!-- Canvas Box -->
+      <div class="flex-1 bg-slate-50 border-2 border-slate-200 rounded-2xl overflow-hidden relative">
+        <canvas id="scratch-canvas" class="w-full h-full cursor-crosshair"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- STUDENT EMAIL SUBMIT MODAL -->
+  <div id="submit-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 md:p-8 shadow-2xl space-y-6 border-4 border-emerald-500">
+      <div class="flex justify-between items-center border-b border-slate-200 pb-3">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-paper-plane text-emerald-600 text-2xl"></i>
+          <h3 class="font-heading font-bold text-2xl text-slate-900">Turn In Work to Teacher</h3>
+        </div>
+        <button onclick="closeSubmitModal()" class="text-slate-400 hover:text-slate-700 text-2xl font-bold px-2">&times;</button>
+      </div>
+
+      <!-- Error alert banner -->
+      <div id="submit-error-banner" class="hidden bg-red-100 border border-red-300 text-red-800 p-3 rounded-xl text-xs font-bold flex items-center gap-2">
+        <i class="fa-solid fa-triangle-exclamation text-base"></i> Please enter your First and Last Name before turning in!
+      </div>
+
+      <div class="space-y-4">
+        <div>
+          <label class="block text-sm font-bold text-slate-700 mb-1">Student First & Last Name:</label>
+          <input type="text" id="studentName" class="w-full px-4 py-3 rounded-xl border-2 border-slate-300 font-bold text-slate-900 focus:border-emerald-500 focus:outline-none" placeholder="e.g. Alex Johnson">
+        </div>
+
+        <div>
+          <label class="block text-sm font-bold text-slate-700 mb-1">Grade / Class:</label>
+          <input type="text" id="classId" class="w-full px-4 py-3 rounded-xl border-2 border-slate-300 font-bold text-slate-900 focus:border-emerald-500 focus:outline-none" placeholder="e.g. 8th Grade Algebra 1">
+        </div>
+
+        <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-xl text-xs text-emerald-900">
+          <i class="fa-solid fa-circle-info"></i> Submitting will automatically open a <b>Gmail web compose window in a new tab</b> with your completed warm-up report pre-filled for <b>jvena@saintmarys.us</b>.
+        </div>
+      </div>
+
+      <div class="flex gap-3 pt-2">
+        <button onclick="processEmailSubmission()" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl transition shadow-md flex items-center justify-center gap-2">
+          <i class="fa-solid fa-envelope"></i> Open Gmail in New Tab
+        </button>
+        <button onclick="closeSubmitModal()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-5 py-3.5 rounded-xl transition">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUCCESS CONFIRMATION MODAL -->
+  <div id="success-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 text-center space-y-4 border-4 border-emerald-500 shadow-2xl">
+      <div class="w-16 h-16 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center mx-auto text-3xl">
+        <i class="fa-solid fa-check"></i>
+      </div>
+      <h3 class="font-heading font-bold text-2xl text-slate-900">Gmail Opened!</h3>
+      <p id="success-message-text" class="text-sm text-slate-600 leading-relaxed"></p>
+      <button onclick="document.getElementById('success-modal').classList.add('hidden')" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl transition">
+        Got It!
+      </button>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    const solvedProblems = new Set();
+    const totalProblems = 3;
+    const DEFAULT_TEACHER_EMAIL = "jvena@saintmarys.us";
+
+    function sanitizeInput(val) {
+      return val.toString().replace(/,/g, '').trim();
+    }
+
+    function toggleHint(hintId) {
+      const hintElem = document.getElementById(hintId);
+      if (hintElem) hintElem.classList.toggle('hidden');
+    }
+
+    function checkProblem(probId, expectedAnswers) {
+      let allCorrect = true;
+
+      expectedAnswers.forEach((expected, idx) => {
+        const inputElem = document.getElementById(`${probId}-${idx + 1}`);
+        if (!inputElem) return;
+
+        const userVal = sanitizeInput(inputElem.value);
+        if (userVal === expected) {
+          inputElem.classList.remove('incorrect');
+          inputElem.classList.add('correct');
+        } else {
+          inputElem.classList.remove('correct');
+          inputElem.classList.add('incorrect');
+          allCorrect = false;
+        }
+      });
+
+      const msgElem = document.getElementById(`msg-${probId}`);
+      if (msgElem) {
+        msgElem.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-800', 'bg-red-100', 'text-red-800');
+        if (allCorrect) {
+          msgElem.classList.add('bg-emerald-100', 'text-emerald-800');
+          msgElem.innerHTML = '<i class="fa-solid fa-circle-check"></i> Great job! Correct!';
+          solvedProblems.add(probId);
+        } else {
+          msgElem.classList.add('bg-red-100', 'text-red-800');
+          msgElem.innerHTML = '<i class="fa-solid fa-circle-xmark"></i> Incorrect answer, please try again!';
+        }
+      }
+
+      updateProgress();
+    }
+
+    function updateProgress() {
+      const count = solvedProblems.size;
+      const percent = Math.round((count / totalProblems) * 100);
+
+      const progressText = document.getElementById('progress-text');
+      const progressBar = document.getElementById('progress-bar');
+
+      if (progressText) progressText.innerText = `${count} / ${totalProblems} Solved`;
+      if (progressBar) progressBar.style.width = `${percent}%`;
+    }
+
+    /* Scratchpad Canvas Logic */
+    let canvas, ctx, isDrawing = false;
+    let padColor = '#0284c7';
+
+    function toggleScratchpad() {
+      const modal = document.getElementById('scratchpad-modal');
+      modal.classList.toggle('hidden');
+
+      if (!modal.classList.contains('hidden')) {
+        setTimeout(initCanvas, 100);
+      }
+    }
+
+    function initCanvas() {
+      canvas = document.getElementById('scratch-canvas');
+      if (!canvas) return;
+
+      const rect = canvas.parentElement.getBoundingClientRect();
+      canvas.width = rect.width;
+      canvas.height = rect.height;
+
+      ctx = canvas.getContext('2d');
+      ctx.lineWidth = 3;
+      ctx.lineCap = 'round';
+      ctx.strokeStyle = padColor;
+
+      canvas.removeEventListener('mousedown', startDraw);
+      canvas.removeEventListener('mousemove', draw);
+      canvas.removeEventListener('mouseup', stopDraw);
+
+      canvas.addEventListener('mousedown', startDraw);
+      canvas.addEventListener('mousemove', draw);
+      canvas.addEventListener('mouseup', stopDraw);
+
+      /* Touch events for Chromebook touchscreens */
+      canvas.addEventListener('touchstart', (e) => { startDraw(e.touches[0]); e.preventDefault(); }, { passive: false });
+      canvas.addEventListener('touchmove', (e) => { draw(e.touches[0]); e.preventDefault(); }, { passive: false });
+      canvas.addEventListener('touchend', stopDraw);
+    }
+
+    function startDraw(e) {
+      isDrawing = true;
+      const rect = canvas.getBoundingClientRect();
+      ctx.beginPath();
+      ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
+    }
+
+    function draw(e) {
+      if (!isDrawing) return;
+      const rect = canvas.getBoundingClientRect();
+      ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
+      ctx.stroke();
+    }
+
+    function stopDraw() {
+      isDrawing = false;
+    }
+
+    function setPadColor(color) {
+      padColor = color;
+      if (ctx) ctx.strokeStyle = padColor;
+    }
+
+    function clearScratchpad() {
+      if (ctx && canvas) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+    }
+
+    /* Email Submission Functions */
+    function openSubmitModal() {
+      document.getElementById('submit-error-banner').classList.add('hidden');
+      document.getElementById('submit-modal').classList.remove('hidden');
+    }
+
+    function closeSubmitModal() {
+      document.getElementById('submit-modal').classList.add('hidden');
+    }
+
+    function processEmailSubmission() {
+      const name = document.getElementById('studentName').value.trim();
+      const classId = document.getElementById('classId').value.trim();
+
+      if (!name) {
+        document.getElementById('submit-error-banner').classList.remove('hidden');
+        return;
+      }
+
+      const timestamp = new Date().toLocaleString();
+      const scoreProgress = `${solvedProblems.size} / ${totalProblems} Solved`;
+      const targetEmail = DEFAULT_TEACHER_EMAIL;
+
+      let reportBody = `8th Grade Daily Math Warm-Up Score Report - Sadlier Math Lesson 3-4\n`;
+      reportBody += `----------------------------------------------------\n`;
+      reportBody += `Student Name: ${name}\n`;
+      reportBody += `Grade/Class: ${classId || 'N/A'}\n`;
+      reportBody += `Score Progress: ${scoreProgress}\n`;
+      reportBody += `Date & Time: ${timestamp}\n\n`;
+      reportBody += `--- STUDENT ANSWERS ---\n`;
+
+      const problemTitles = [
+        "Warm-Up 1 (15g + 200 <= 650)",
+        "Warm-Up 2 (4(3x - 2) + 5 <= 45)",
+        "Warm-Up 3 (5x/4 - 3 < x/4 + 7)"
+      ];
+
+      for (let i = 1; i <= 3; i++) {
+        const val1 = document.getElementById(`p${i}-1`) ? document.getElementById(`p${i}-1`).value : '';
+        reportBody += `${problemTitles[i - 1]}: Answer = [${val1}]\n`;
+      }
+
+      const subject = encodeURIComponent(`Math Warm-Up Report: ${name} (${classId || '8th Grade Algebra 1'}) - ${scoreProgress}`);
+      const body = encodeURIComponent(reportBody);
+
+      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(targetEmail)}&su=${subject}&body=${body}`;
+
+      window.open(gmailUrl, '_blank');
+
+      closeSubmitModal();
+
+      document.getElementById('success-message-text').innerText = `Great job, ${name}! A new Gmail tab has opened with your score report pre-filled for ${targetEmail}. Click "Send" in Gmail to complete your turn-in.`;
+      document.getElementById('success-modal').classList.remove('hidden');
+    }
+  </script>
+</body>
+</html>
