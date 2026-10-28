@@ -1,0 +1,1433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson: Add & Subtract Fractions & Mixed Numbers</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Roboto+Mono:wght@500;700&display=swap">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            heading: ['Fredoka', 'sans-serif'],
+            mono: ['Roboto Mono', 'monospace']
+          },
+          colors: {
+            brandBlue: '#0284c7',
+            brandGreen: '#16a34a',
+            brandYellow: '#ca8a04',
+            brandPurple: '#9333ea',
+            brandOrange: '#ea580c'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #f8fafc;
+      color: #0f172a;
+      font-size: 18px;
+    }
+    
+    .math-input {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 18px;
+      font-weight: 700;
+      text-align: center;
+      border: 2px dashed #94a3b8;
+      border-radius: 8px;
+      background-color: #ffffff;
+      color: #0284c7;
+      transition: all 0.2s ease;
+      width: 100%;
+      height: 42px;
+    }
+
+    .math-input:focus {
+      outline: none;
+      border-color: #0284c7;
+      border-style: solid;
+      background-color: #f0f9ff;
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.2);
+    }
+
+    .math-input.correct {
+      border-color: #16a34a !important;
+      border-style: solid !important;
+      background-color: #f0fdf4 !important;
+      color: #15803d !important;
+    }
+
+    .math-input.incorrect {
+      border-color: #dc2626 !important;
+      border-style: solid !important;
+      background-color: #fef2f2 !important;
+      color: #b91c1c !important;
+    }
+
+    mark {
+      background-color: #fef08a;
+      color: #854d0e;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-weight: 700;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen pb-24">
+
+  <!-- STICKY HEADER & SECTION NAVIGATION -->
+  <header class="sticky top-0 z-40 bg-white border-b border-slate-200 shadow-md py-3 px-4 md:px-8">
+    <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-4">
+      
+      <!-- App Title -->
+      <div class="flex items-center gap-3">
+        <div class="bg-sky-600 text-white p-2.5 rounded-2xl shadow-sm">
+          <i class="fa-solid fa-calculator text-2xl"></i>
+        </div>
+        <div>
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold bg-sky-100 text-sky-800 uppercase tracking-wider">
+            Sadlier Math Grade 7 • Lessons 5-6 & 5-7
+          </span>
+          <h1 class="text-xl md:text-2xl font-heading font-bold text-slate-900">
+            Lesson: Add & Subtract Fractions & Mixed Numbers
+          </h1>
+        </div>
+      </div>
+
+      <!-- Quick Jump Navigation Tabs -->
+      <nav class="flex flex-wrap items-center justify-center gap-1.5 text-xs font-bold">
+        <a href="#sec1" class="px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-sky-100 text-slate-700 hover:text-sky-800 transition">1. Intro & Vocab</a>
+        <a href="#sec2" class="px-2.5 py-1.5 rounded-xl bg-sky-100 hover:bg-sky-200 text-sky-900 transition">2. Obj 1 Teach</a>
+        <a href="#sec3a" class="px-2.5 py-1.5 rounded-xl bg-amber-100 hover:bg-amber-200 text-amber-900 transition">3. Obj 1 Partner (5m)</a>
+        <a href="#sec3b" class="px-2.5 py-1.5 rounded-xl bg-sky-600 hover:bg-sky-700 text-white transition">4. Obj 1 Ind. (5m)</a>
+        <a href="#sec4" class="px-2.5 py-1.5 rounded-xl bg-purple-100 hover:bg-purple-200 text-purple-900 transition">5. Obj 2 Teach</a>
+        <a href="#sec5a" class="px-2.5 py-1.5 rounded-xl bg-amber-100 hover:bg-amber-200 text-amber-900 transition">6. Obj 2 Partner (5m)</a>
+        <a href="#sec5b" class="px-2.5 py-1.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white transition">7. Obj 2 Ind. (5m)</a>
+        <a href="#sec6" class="px-2.5 py-1.5 rounded-xl bg-emerald-100 hover:bg-emerald-200 text-emerald-900 transition">8. Summary</a>
+      </nav>
+
+      <!-- Live Score Counter, Save Work & Turn-In Action Buttons -->
+      <div class="flex items-center gap-2">
+        <div class="bg-slate-100 px-3 py-1.5 rounded-2xl border border-slate-200 flex items-center gap-2">
+          <div class="text-right">
+            <div class="text-[10px] font-bold text-slate-500 uppercase">Score Progress</div>
+            <div id="progress-text" class="text-xs font-extrabold text-sky-700">0 / 11 Solved</div>
+          </div>
+          <div class="w-16 bg-slate-200 rounded-full h-2.5 overflow-hidden">
+            <div id="progress-bar" class="bg-gradient-to-r from-sky-500 to-emerald-500 h-2.5 rounded-full transition-all duration-500 w-0"></div>
+          </div>
+        </div>
+
+        <!-- SAVE FOR LATER BUTTON -->
+        <button onclick="saveProgress()" class="bg-amber-500 hover:bg-amber-600 text-white font-bold px-3 py-2 rounded-xl transition flex items-center gap-1.5 text-xs shadow-sm" title="Save your current answers to finish later">
+          <i class="fa-solid fa-floppy-disk"></i> Save Work
+        </button>
+
+        <button onclick="loadProgress()" class="bg-slate-700 hover:bg-slate-800 text-white font-bold px-3 py-2 rounded-xl transition flex items-center gap-1.5 text-xs shadow-sm" title="Load previously saved answers">
+          <i class="fa-solid fa-folder-open"></i> Load Work
+        </button>
+
+        <button onclick="openSubmitModal()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3 py-2 rounded-xl transition flex items-center gap-1.5 text-xs shadow-sm">
+          <i class="fa-solid fa-paper-plane"></i> Email Teacher
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Toast Notification for Save/Load -->
+  <div id="toast-banner" class="fixed top-20 right-6 z-50 hidden bg-slate-900 text-white px-4 py-3 rounded-2xl shadow-xl flex items-center gap-3 text-sm border border-slate-700">
+    <i id="toast-icon" class="fa-solid fa-circle-check text-emerald-400 text-lg"></i>
+    <span id="toast-msg">Progress saved successfully!</span>
+  </div>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 mt-8 space-y-12">
+
+    <!-- SECTION 1: WHY WE NEED THIS MATH & KEY VOCABULARY -->
+    <section id="sec1" class="bg-white border-2 border-slate-200 rounded-3xl p-6 md:p-8 shadow-sm space-y-6">
+      <div class="flex items-center gap-3">
+        <div class="p-3 bg-emerald-100 text-emerald-800 rounded-2xl">
+          <i class="fa-solid fa-earth-americas text-2xl"></i>
+        </div>
+        <div>
+          <span class="text-xs font-bold text-emerald-800 uppercase tracking-wide">Section 1</span>
+          <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">Why We Need This Math & Key Vocabulary</h2>
+        </div>
+      </div>
+
+      <!-- Real World Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        
+        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 flex flex-col items-center text-center">
+          <div class="w-14 h-14 mb-2 flex items-center justify-center text-sky-600 text-3xl">
+            <i class="fa-solid fa-flag-checkered"></i>
+          </div>
+          <h3 class="font-heading font-bold text-lg text-slate-900">Racing & Time</h3>
+          <p class="text-sm text-slate-600 mt-1">
+            A second-place car reached the finish line 1/2 second behind the winner. A third car was 5/8 second behind the second. Adding these fractions gives the total time gap!
+          </p>
+        </div>
+
+        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 flex flex-col items-center text-center">
+          <div class="w-14 h-14 mb-2 flex items-center justify-center text-emerald-600 text-3xl">
+            <i class="fa-solid fa-money-bill-trend-up"></i>
+          </div>
+          <h3 class="font-heading font-bold text-lg text-slate-900">Business Profits</h3>
+          <p class="text-sm text-slate-600 mt-1">
+            A company has a profit of $4 1/4 million one year and a loss of -$3 1/8 million the next. Adding positive and negative mixed numbers finds the net gain!
+          </p>
+        </div>
+
+        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 flex flex-col items-center text-center">
+          <div class="w-14 h-14 mb-2 flex items-center justify-center text-purple-600 text-3xl">
+            <i class="fa-solid fa-hammer"></i>
+          </div>
+          <h3 class="font-heading font-bold text-lg text-slate-900">Construction</h3>
+          <p class="text-sm text-slate-600 mt-1">
+            When cutting a 10-foot board to fit a 7 3/8 foot space, a carpenter regroups integers into mixed numbers to subtract accurately.
+          </p>
+        </div>
+
+        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 flex flex-col items-center text-center">
+          <div class="w-14 h-14 mb-2 flex items-center justify-center text-amber-600 text-3xl">
+            <i class="fa-solid fa-bowl-food"></i>
+          </div>
+          <h3 class="font-heading font-bold text-lg text-slate-900">Baking Adjustments</h3>
+          <p class="text-sm text-slate-600 mt-1">
+            If a recipe calls for 2 1/3 cups of flour and you only have 1 3/4 cups, subtracting with unlike denominators tells you exactly how much you need to borrow!
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Key Math Vocabulary Bar -->
+      <div class="bg-amber-50 border-2 border-amber-200 rounded-2xl p-5 space-y-3">
+        <h3 class="font-heading font-bold text-xl text-amber-950 flex items-center gap-2">
+          <i class="fa-solid fa-spell-check text-amber-600"></i> Key Vocabulary Terms
+        </h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 text-sm">
+          <div class="bg-white p-3 rounded-xl border border-amber-200"><mark>simplest form</mark>: A fraction is in lowest terms when 1 is the only common factor of the numerator and denominator.</div>
+          <div class="bg-white p-3 rounded-xl border border-amber-200"><mark>common denominator</mark>: A common multiple (like the LCD) used to rename fractions so they can be added or subtracted.</div>
+          <div class="bg-white p-3 rounded-xl border border-amber-200"><mark>subtraction principle</mark>: To subtract a number, you add its opposite. Example: a - b = a + (-b).</div>
+          <div class="bg-white p-3 rounded-xl border border-amber-200"><mark>regroup</mark>: Renaming an integer or mixed number (e.g., changing 6 to 5 7/7) to allow for fraction subtraction.</div>
+          <div class="bg-white p-3 rounded-xl border border-amber-200"><mark>absolute value</mark>: A number's distance from zero. When adding unlike signs, the addend with the greater absolute value determines the sum's sign.</div>
+          <div class="bg-white p-3 rounded-xl border border-amber-200"><mark>estimate</mark>: Rounding mixed numbers to the nearest integer before solving to check if your final answer is reasonable.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: OBJECTIVE 1 DIRECT INSTRUCTION (Lesson 5-6 Add & Subtract Fractions) -->
+    <section id="sec2" class="bg-white border-2 border-sky-200 rounded-3xl p-6 md:p-8 shadow-sm space-y-6">
+      <div class="flex flex-col md:flex-row justify-between md:items-center gap-4">
+        <div class="flex items-center gap-3">
+          <div class="p-3 bg-sky-100 text-sky-800 rounded-2xl">
+            <i class="fa-solid fa-chalkboard-user text-2xl"></i>
+          </div>
+          <div>
+            <span class="text-xs font-bold text-sky-800 uppercase tracking-wide">Section 2 • 5 Minutes Direct Instruction</span>
+            <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">
+              Objective 1: Add & Subtract Positive and Negative Fractions (Lesson 5-6)
+            </h2>
+          </div>
+        </div>
+        <div class="bg-sky-50 border border-sky-200 px-4 py-2 rounded-2xl text-sky-900 font-bold text-sm">
+          Example Problem: <span class="font-mono text-lg font-extrabold text-sky-700">3/4 + (-1/6)</span>
+        </div>
+      </div>
+
+      <!-- Problem Statement Highlighted -->
+      <div class="bg-sky-50 border border-sky-300 rounded-2xl p-4 text-slate-800">
+        <span class="font-bold text-sky-900 uppercase text-xs tracking-wider block mb-1">Example Problem Statement:</span>
+        <p class="text-base font-semibold">
+          Add the fractions with unlike denominators and unlike signs: 3/4 + (-1/6). Express the sum in lowest terms.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+        
+        <!-- Step-by-Step Explanation -->
+        <div class="space-y-4">
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1">
+            <span class="font-bold text-sky-700 text-sm">Step 1: Find the LCD</span>
+            <p class="text-slate-700 text-base">
+              The denominators are 4 and 6. <br>
+              • Multiples of 4: 4, 8, <b>12</b>, 16... <br>
+              • Multiples of 6: 6, <b>12</b>, 18... <br>
+              The Least Common Denominator (LCD) is 12.
+            </p>
+          </div>
+
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1">
+            <span class="font-bold text-sky-700 text-sm">Step 2: Rename Fractions & Add</span>
+            <p class="text-slate-700 text-base">
+              Use the LCD to rename both fractions: <br>
+              • 3/4 = (3 × 3) / (4 × 3) = 9/12 <br>
+              • -1/6 = (-1 × 2) / (6 × 2) = -2/12 <br>
+              Add the numerators: 9 + (-2) = 7. <br>
+              The positive addend has the greater absolute value, so the sum is positive <b>7/12</b>.
+            </p>
+          </div>
+        </div>
+
+        <!-- VISUAL SUMMARY CARD -->
+        <div class="bg-slate-50 p-6 rounded-2xl border-2 border-sky-300 shadow-sm flex flex-col items-center">
+          <span class="text-xs font-bold text-sky-800 uppercase tracking-widest mb-4">Unlike Denominators, Unlike Signs</span>
+          
+          <div class="w-full max-w-md bg-white p-5 rounded-2xl border border-slate-300 shadow-inner space-y-4 text-center">
+            <div class="grid grid-cols-3 gap-2 font-mono text-sm items-center">
+              <div class="bg-sky-100 p-3 rounded-xl border border-sky-300">
+                <span class="block text-xs font-bold text-sky-800 uppercase">3/4</span>
+                <span class="text-base font-extrabold text-slate-800">9/12</span>
+              </div>
+              <div class="text-xl font-bold text-slate-600">+</div>
+              <div class="bg-amber-100 p-3 rounded-xl border border-amber-300">
+                <span class="block text-xs font-bold text-amber-800 uppercase">-1/6</span>
+                <span class="text-base font-extrabold text-slate-800">-2/12</span>
+              </div>
+            </div>
+
+            <div class="pt-3 border-t border-slate-200 text-center">
+              <span class="text-xs font-bold text-slate-500 uppercase block">Sum:</span>
+              <span class="text-2xl font-extrabold text-sky-700 font-mono">7/12</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Common Error Box -->
+      <div class="bg-amber-50 border-2 border-amber-300 rounded-2xl p-5 flex items-start gap-4">
+        <div class="p-3 bg-amber-200 text-amber-900 rounded-xl">
+          <i class="fa-solid fa-triangle-exclamation text-2xl"></i>
+        </div>
+        <div>
+          <h4 class="font-heading font-bold text-amber-950 text-lg">Error to Avoid: Subtracting Wrong with Negatives!</h4>
+          <p class="text-slate-700 text-base mt-1">
+            When applying the Subtraction Principle: <i>a - b = a + (-b)</i>. If you subtract a negative, it becomes adding a positive! Example: 1/5 - (-2/5) becomes 1/5 + 2/5 = 3/5.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3A: OBJECTIVE 1 GUIDED PRACTICE (5 Mins - Partner Work) -->
+    <section id="sec3a" class="space-y-6">
+      <div class="flex items-center gap-3">
+        <div class="p-3 bg-amber-500 text-white rounded-2xl shadow-sm">
+          <i class="fa-solid fa-user-group text-2xl"></i>
+        </div>
+        <div>
+          <span class="text-xs font-bold text-amber-800 uppercase tracking-wide">Section 3A • 5 Minutes Guided Practice (Partner Work)</span>
+          <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">
+            Objective 1 Partner Practice (Problems 1–2)
+          </h2>
+          <p class="text-sm text-slate-600 font-semibold">Work together with a partner to add and subtract fractions!</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <!-- Problem 1: Subtract Like Denominators, Like Signs -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-amber-300 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-heading font-bold text-amber-900 text-xl">Problem 1 (Partner Work)</span>
+              <span class="text-xs font-bold px-3 py-1 bg-amber-100 text-amber-900 rounded-full">-5/11 - (-8/11)</span>
+            </div>
+            
+            <div class="bg-amber-50 p-3 rounded-xl border border-amber-200 text-xs font-semibold text-amber-950 mb-3">
+              <b>Problem Statement:</b> Subtract the following fractions. Use the subtraction principle: -5/11 - (-8/11).
+            </div>
+
+            <p class="text-xs font-bold text-amber-800 uppercase tracking-wide mb-2"><i class="fa-solid fa-comments"></i> Partner Steps:</p>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3 text-sm">
+              <div class="flex justify-between items-center">
+                <span class="font-semibold text-slate-700">Rewrite (add opposite):</span>
+                <input type="text" id="p1-1" class="math-input w-28" placeholder="?">
+              </div>
+              <div class="border-t border-slate-300 pt-2 flex justify-between items-center">
+                <span class="font-bold text-slate-900">Final Answer:</span>
+                <input type="text" id="p1-2" class="math-input w-28 font-bold text-amber-700" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p1')" class="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-amber-600"></i> Partner Hint
+            </button>
+            <div id="hint-p1" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p>• Subtracting a negative is the same as adding a positive.</p>
+              <p>• -5/11 + 8/11.</p>
+              <p>• -5 + 8 = 3. Keep the denominator 11.</p>
+            </div>
+
+            <div id="msg-p1" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p1', [['-5/11 + 8/11', '3/11'], ['3/11']])" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Partner Answer
+            </button>
+          </div>
+        </div>
+
+        <!-- Problem 2: Add Unlike Denominators, Unlike Signs -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-amber-300 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-heading font-bold text-amber-900 text-xl">Problem 2 (Partner Work)</span>
+              <span class="text-xs font-bold px-3 py-1 bg-amber-100 text-amber-900 rounded-full">2/5 + (-3/7)</span>
+            </div>
+
+            <div class="bg-amber-50 p-3 rounded-xl border border-amber-200 text-xs font-semibold text-amber-950 mb-3">
+              <b>Problem Statement:</b> Add the fractions with unlike denominators and signs: 2/5 + (-3/7).
+            </div>
+
+            <p class="text-xs font-bold text-amber-800 uppercase tracking-wide mb-2"><i class="fa-solid fa-comments"></i> Partner Steps:</p>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3 text-sm">
+              <div class="flex justify-between items-center">
+                <span class="font-semibold text-slate-700">Find the LCD:</span>
+                <input type="text" id="p2-1" class="math-input w-28" placeholder="?">
+              </div>
+              <div class="border-t border-slate-300 pt-2 flex justify-between items-center">
+                <span class="font-bold text-slate-900">Final Answer:</span>
+                <input type="text" id="p2-2" class="math-input w-28 font-bold text-amber-700" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p2')" class="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-amber-600"></i> Partner Hint
+            </button>
+            <div id="hint-p2" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p>• The LCD of 5 and 7 is 35.</p>
+              <p>• Rename: 14/35 + (-15/35).</p>
+              <p>• The negative number has a larger absolute value, so the answer is negative.</p>
+            </div>
+
+            <div id="msg-p2" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p2', [['35'], ['-1/35']])" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Partner Answer
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 3B: OBJECTIVE 1 INDEPENDENT PRACTICE (5 Mins - Individual Work) -->
+    <section id="sec3b" class="space-y-6">
+      <div class="flex items-center gap-3">
+        <div class="p-3 bg-sky-600 text-white rounded-2xl shadow-sm">
+          <i class="fa-solid fa-user text-2xl"></i>
+        </div>
+        <div>
+          <span class="text-xs font-bold text-sky-800 uppercase tracking-wide">Section 3B • 5 Minutes Independent Practice (Individual Work)</span>
+          <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">
+            Objective 1 Independent Practice (Problems 3–5)
+          </h2>
+          <p class="text-sm text-slate-600 font-semibold">Work on your own to solve these fraction addition and subtraction problems!</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <!-- Problem 3: Add unlike denominators, like signs -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-heading font-bold text-sky-800 text-xl">Problem 3</span>
+              <span class="text-xs font-bold px-3 py-1 bg-sky-100 text-sky-900 rounded-full">-1/8 + (-7/16)</span>
+            </div>
+
+            <div class="bg-sky-50 p-2.5 rounded-xl border border-sky-200 text-xs font-semibold text-sky-950 mb-3">
+              <b>Problem Statement:</b> Add the fractions with unlike denominators and like signs: -1/8 + (-7/16).
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3 text-sm">
+              <div class="flex justify-between items-center">
+                <span class="font-semibold text-slate-700">Find the LCD:</span>
+                <input type="text" id="p3-1" class="math-input w-24" placeholder="?">
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="font-semibold text-slate-700">Rename -1/8:</span>
+                <input type="text" id="p3-2" class="math-input w-24" placeholder="?">
+              </div>
+              <div class="border-t border-slate-300 pt-2 flex justify-between items-center">
+                <span class="font-bold text-slate-900">Final Sum:</span>
+                <input type="text" id="p3-3" class="math-input w-28 font-bold text-sky-700" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p3')" class="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-amber-600"></i> Need a Hint?
+            </button>
+            <div id="hint-p3" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p>• The LCD for 8 and 16 is 16.</p>
+              <p>• -1/8 becomes -2/16.</p>
+              <p>• Both addends are negative, so the sum is negative.</p>
+            </div>
+
+            <div id="msg-p3" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p3', [['16'], ['-2/16'], ['-9/16']])" class="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+        <!-- Problem 4: Subtract unlike denominators, unlike signs -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-heading font-bold text-sky-800 text-xl">Problem 4</span>
+              <span class="text-xs font-bold px-3 py-1 bg-sky-100 text-sky-900 rounded-full">5/9 - (-1/2)</span>
+            </div>
+
+            <div class="bg-sky-50 p-2.5 rounded-xl border border-sky-200 text-xs font-semibold text-sky-950 mb-3">
+              <b>Problem Statement:</b> Subtract the fractions: 5/9 - (-1/2). Remember to apply the Subtraction Principle!
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3 text-sm">
+              <div class="flex justify-between items-center">
+                <span class="font-semibold text-slate-700">Rename 5/9:</span>
+                <input type="text" id="p4-1" class="math-input w-24" placeholder="?">
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="font-semibold text-slate-700">Rename 1/2:</span>
+                <input type="text" id="p4-2" class="math-input w-24" placeholder="?">
+              </div>
+              <div class="border-t border-slate-300 pt-2 flex justify-between items-center">
+                <span class="font-bold text-slate-900">Final Answer:</span>
+                <input type="text" id="p4-3" class="math-input w-28 font-bold text-sky-700" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p4')" class="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-amber-600"></i> Need a Hint?
+            </button>
+            <div id="hint-p4" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p>• Rewrite as addition: 5/9 + 1/2.</p>
+              <p>• The LCD for 9 and 2 is 18.</p>
+              <p>• Express the sum as an improper fraction or mixed number in simplest form.</p>
+            </div>
+
+            <div id="msg-p4" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p4', [['10/18'], ['9/18'], ['19/18', '1 1/18']])" class="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+        <!-- Problem 5: Word Problem -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-heading font-bold text-sky-800 text-xl">Problem 5 (Word Problem)</span>
+              <span class="text-xs font-bold px-3 py-1 bg-emerald-100 text-emerald-900 rounded-full"><i class="fa-solid fa-spoon"></i> Recipe</span>
+            </div>
+
+            <div class="bg-emerald-50 p-2.5 rounded-xl border border-emerald-200 text-xs font-semibold text-emerald-950 mb-3">
+              <b>Problem Statement:</b> A recipe requires 3/10 cup of sugar, but you accidentally removed 1/5 cup from the bowl. How much sugar is currently left in the bowl?
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3 text-sm">
+              <div class="flex justify-between items-center">
+                <span class="font-semibold text-slate-700">Rename 1/5 (LCD):</span>
+                <input type="text" id="p5-1" class="math-input w-24" placeholder="?">
+              </div>
+              <div class="border-t border-slate-300 pt-2 flex justify-between items-center">
+                <span class="font-bold text-slate-900">Sugar Left:</span>
+                <input type="text" id="p5-2" class="math-input w-28 font-bold text-emerald-700" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p5')" class="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-amber-600"></i> Need a Hint?
+            </button>
+            <div id="hint-p5" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p>• Subtract: 3/10 - 1/5.</p>
+              <p>• The LCD is 10. Rename 1/5 so it has a denominator of 10.</p>
+              <p>• Subtract the numerators.</p>
+            </div>
+
+            <div id="msg-p5" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p5', [['2/10'], ['1/10', '1/10 cup']])" class="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 4: OBJECTIVE 2 DIRECT INSTRUCTION (Lesson 5-7 Mixed Numbers) -->
+    <section id="sec4" class="bg-white border-2 border-purple-200 rounded-3xl p-6 md:p-8 shadow-sm space-y-6">
+      <div class="flex flex-col md:flex-row justify-between md:items-center gap-4">
+        <div class="flex items-center gap-3">
+          <div class="p-3 bg-purple-100 text-purple-900 rounded-2xl">
+            <i class="fa-solid fa-chart-line text-2xl"></i>
+          </div>
+          <div>
+            <span class="text-xs font-bold text-purple-900 uppercase tracking-wide">Section 4 • 5 Minutes Direct Instruction</span>
+            <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">
+              Objective 2: Add and Subtract Mixed Numbers (Lesson 5-7)
+            </h2>
+          </div>
+        </div>
+        <div class="bg-purple-50 border border-purple-200 px-4 py-2 rounded-2xl text-purple-900 font-bold text-sm">
+          Example Problem: <span class="font-mono text-lg font-extrabold text-purple-700">7 1/3 - 4 5/6</span>
+        </div>
+      </div>
+
+      <!-- Problem Statement Highlighted -->
+      <div class="bg-purple-50 border border-purple-300 rounded-2xl p-4 text-slate-800">
+        <span class="font-bold text-purple-900 uppercase text-xs tracking-wider block mb-1">Example Problem Statement:</span>
+        <p class="text-base font-semibold">
+          Subtract the mixed numbers and regroup to solve: 7 1/3 - 4 5/6. Express in simplest form.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+        
+        <!-- Step-by-Step Instruction -->
+        <div class="space-y-4">
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1">
+            <span class="font-bold text-purple-800 text-sm">Step 1: Estimate & Rename Fractions</span>
+            <p class="text-slate-700 text-base">
+              Estimate: 7 - 5 = 2. <br>
+              Find LCD: The LCD of 3 and 6 is 6. <br>
+              Rename: 7 1/3 = 7 2/6. <br>
+              Now set up subtraction: 7 2/6 - 4 5/6. Since 2/6 < 5/6, we must regroup!
+            </p>
+          </div>
+
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1">
+            <span class="font-bold text-purple-800 text-sm">Step 2: Regroup and Subtract</span>
+            <p class="text-slate-700 text-sm mt-1">
+              Regroup 7 2/6: <br>
+              7 2/6 = 6 + 1 + 2/6 = 6 + 6/6 + 2/6 = <b>6 8/6</b>. <br>
+              Now subtract: 6 8/6 - 4 5/6 = 2 3/6. <br>
+              Simplify the fraction part: 2 3/6 = <b>2 1/2</b>. (Close to estimate of 2!)
+            </p>
+          </div>
+        </div>
+
+        <!-- BREAK APART VISUAL CARD -->
+        <div class="bg-slate-50 p-6 rounded-2xl border-2 border-purple-300 shadow-sm flex flex-col items-center">
+          <span class="text-xs font-bold text-purple-900 uppercase tracking-widest mb-3">Regrouping Visual Summary</span>
+
+          <div class="w-full bg-white p-5 rounded-2xl border border-slate-300 space-y-4 font-mono text-center">
+            <div class="text-xl font-extrabold text-purple-900 pb-2 border-b border-slate-200">
+              7 2/6 → 6 8/6
+            </div>
+
+            <div class="space-y-2 text-sm">
+              <div class="flex justify-between items-center bg-purple-50 p-2.5 rounded-xl border border-purple-100">
+                <span class="font-bold text-purple-800">Original setup:</span>
+                <span class="text-slate-700">7 2/6 - 4 5/6</span>
+              </div>
+              <div class="flex justify-between items-center bg-purple-50 p-2.5 rounded-xl border border-purple-100">
+                <span class="font-bold text-purple-800">Regrouped:</span>
+                <span class="text-slate-700">6 8/6 - 4 5/6</span>
+              </div>
+            </div>
+
+            <div class="pt-2 border-t-2 border-purple-300 flex justify-between items-center font-extrabold text-lg text-purple-950">
+              <span>Final Difference:</span>
+              <span class="bg-purple-100 px-3 py-1 rounded-lg text-purple-900">2 3/6 = 2 1/2</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Common Error Box -->
+      <div class="bg-red-50 border-2 border-red-300 rounded-2xl p-5 flex items-start gap-4">
+        <div class="p-3 bg-red-200 text-red-900 rounded-xl">
+          <i class="fa-solid fa-triangle-exclamation text-2xl"></i>
+        </div>
+        <div>
+          <h4 class="font-heading font-bold text-red-950 text-lg">Error to Avoid: Forgetting to Regroup the Integer!</h4>
+          <p class="text-slate-700 text-base mt-1">
+            When you borrow 1 whole to add to your fraction (like 6/6), remember to subtract 1 from your integer part. Don't leave the 7 as a 7!
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5A: OBJECTIVE 2 GUIDED PRACTICE (5 Mins - Partner Work) -->
+    <section id="sec5a" class="space-y-6">
+      <div class="flex items-center gap-3">
+        <div class="p-3 bg-amber-500 text-white rounded-2xl shadow-sm">
+          <i class="fa-solid fa-user-group text-2xl"></i>
+        </div>
+        <div>
+          <span class="text-xs font-bold text-amber-800 uppercase tracking-wide">Section 5A • 5 Minutes Guided Practice (Partner Work)</span>
+          <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">
+            Objective 2 Partner Practice (Problems 6–7)
+          </h2>
+          <p class="text-sm text-slate-600 font-semibold">Work together with your partner to add and subtract mixed numbers!</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <!-- Problem 6: Mixed numbers unlike signs -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-amber-300 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-heading font-bold text-amber-900 text-xl">Problem 6 (Partner Work)</span>
+              <span class="text-xs font-bold px-3 py-1 bg-amber-100 text-amber-900 rounded-full">-4 1/5 + 2 7/10</span>
+            </div>
+
+            <div class="bg-amber-50 p-3 rounded-xl border border-amber-200 text-xs font-semibold text-amber-950 mb-3">
+              <b>Problem Statement:</b> Add the mixed numbers with unlike denominators and unlike signs: -4 1/5 + 2 7/10.
+            </div>
+
+            <p class="text-xs font-bold text-amber-800 uppercase tracking-wide mb-2"><i class="fa-solid fa-comments"></i> Partner Discussion:</p>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3 text-sm">
+              <div class="flex justify-between items-center">
+                <span class="font-semibold text-slate-700">LCD of 5 and 10:</span>
+                <input type="text" id="p6-1" class="math-input w-28" placeholder="?">
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="font-semibold text-slate-700">Rename -4 1/5:</span>
+                <input type="text" id="p6-2" class="math-input w-28" placeholder="?">
+              </div>
+              <div class="border-t border-slate-300 pt-2 flex justify-between items-center">
+                <span class="font-bold text-slate-900">Final Sum:</span>
+                <input type="text" id="p6-3" class="math-input w-28 font-bold text-amber-700" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p6')" class="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-amber-600"></i> Partner Hint
+            </button>
+            <div id="hint-p6" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p>• The negative number has a larger absolute value, so the answer is negative.</p>
+              <p>• Subtract absolute values: 4 2/10 - 2 7/10.</p>
+              <p>• Regroup 4 2/10 to 3 12/10 before subtracting.</p>
+            </div>
+
+            <div id="msg-p6" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p6', [['10'], ['-4 2/10'], ['-1 1/2', '-1 5/10']])" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Partner Answer
+            </button>
+          </div>
+        </div>
+
+        <!-- Problem 7: Integer Subtraction -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-amber-300 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-heading font-bold text-amber-900 text-xl">Problem 7 (Partner Work)</span>
+              <span class="text-xs font-bold px-3 py-1 bg-amber-100 text-amber-900 rounded-full">9 - 2 4/7</span>
+            </div>
+
+            <div class="bg-amber-50 p-3 rounded-xl border border-amber-200 text-xs font-semibold text-amber-950 mb-3">
+              <b>Problem Statement:</b> Subtract the mixed number from the integer: 9 - 2 4/7.
+            </div>
+
+            <p class="text-xs font-bold text-amber-800 uppercase tracking-wide mb-2"><i class="fa-solid fa-comments"></i> Partner Steps:</p>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3 text-sm">
+              <div class="flex justify-between items-center">
+                <span class="font-semibold text-slate-700">Rename the integer (9):</span>
+                <input type="text" id="p7-1" class="math-input w-28" placeholder="?">
+              </div>
+              <div class="border-t border-slate-300 pt-2 flex justify-between items-center">
+                <span class="font-bold text-slate-900">Final Answer:</span>
+                <input type="text" id="p7-2" class="math-input w-28 font-bold text-amber-700" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p7')" class="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-amber-600"></i> Partner Hint
+            </button>
+            <div id="hint-p7" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p>• Estimate: 9 - 3 = 6.</p>
+              <p>• Rename 9 as a mixed number: 8 + 7/7.</p>
+              <p>• Subtract 8 7/7 - 2 4/7.</p>
+            </div>
+
+            <div id="msg-p7" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p7', [['8 7/7'], ['6 3/7']])" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Partner Answer
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 5B: OBJECTIVE 2 INDEPENDENT PRACTICE (5 Mins - Individual Work) -->
+    <section id="sec5b" class="space-y-6">
+      <div class="flex items-center gap-3">
+        <div class="p-3 bg-purple-600 text-white rounded-2xl shadow-sm">
+          <i class="fa-solid fa-user text-2xl"></i>
+        </div>
+        <div>
+          <span class="text-xs font-bold text-purple-800 uppercase tracking-wide">Section 5B • 5 Minutes Independent Practice (Individual Work)</span>
+          <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">
+            Objective 2 Independent Practice (Problems 8–11)
+          </h2>
+          <p class="text-sm text-slate-600 font-semibold">Solve these mixed number problems on your own!</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+        <!-- Problem 8: Add mixed numbers -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-heading font-bold text-purple-900 text-xl">Problem 8</span>
+              <span class="text-xs font-bold px-3 py-1 bg-purple-100 text-purple-900 rounded-full">5 2/3 + 3 3/4</span>
+            </div>
+
+            <div class="bg-purple-50 p-2.5 rounded-xl border border-purple-200 text-xs font-semibold text-purple-950 mb-3">
+              <b>Problem Statement:</b> Add the mixed numbers: 5 2/3 + 3 3/4. Ensure final sum is simplest form.
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-2 text-xs">
+              <div class="flex justify-between items-center">
+                <span>Find LCD:</span>
+                <input type="text" id="p8-1" class="math-input w-20 h-8 text-sm" placeholder="?">
+              </div>
+              <div class="flex justify-between items-center">
+                <span>Initial Sum (Improper Fraction Part):</span>
+                <input type="text" id="p8-2" class="math-input w-20 h-8 text-sm" placeholder="?">
+              </div>
+              <div class="border-t border-slate-300 pt-2 flex justify-between items-center">
+                <span class="font-bold text-slate-900 text-sm">Final Sum:</span>
+                <input type="text" id="p8-3" class="math-input w-24 h-9 font-bold text-purple-800 text-sm" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p8')" class="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-amber-600"></i> Need a Hint?
+            </button>
+            <div id="hint-p8" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p>• The LCD is 12.</p>
+              <p>• 5 8/12 + 3 9/12 = 8 17/12.</p>
+              <p>• Rename 17/12 as 1 5/12 and add it to 8.</p>
+            </div>
+
+            <div id="msg-p8" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p8', [['12'], ['8 17/12'], ['9 5/12']])" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 rounded-xl transition shadow-sm text-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+        <!-- Problem 9: Subtract mixed with regrouping -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-heading font-bold text-purple-900 text-xl">Problem 9</span>
+              <span class="text-xs font-bold px-3 py-1 bg-purple-100 text-purple-900 rounded-full">6 1/4 - 1 4/5</span>
+            </div>
+
+            <div class="bg-purple-50 p-2.5 rounded-xl border border-purple-200 text-xs font-semibold text-purple-950 mb-3">
+              <b>Problem Statement:</b> Subtract the mixed numbers with regrouping: 6 1/4 - 1 4/5.
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-2 text-xs">
+              <div class="flex justify-between items-center">
+                <span>Find LCD:</span>
+                <input type="text" id="p9-1" class="math-input w-20 h-8 text-sm" placeholder="?">
+              </div>
+              <div class="flex justify-between items-center">
+                <span>Regroup 6 5/20:</span>
+                <input type="text" id="p9-2" class="math-input w-20 h-8 text-sm" placeholder="?">
+              </div>
+              <div class="border-t border-slate-300 pt-2 flex justify-between items-center">
+                <span class="font-bold text-slate-900 text-sm">Final Answer:</span>
+                <input type="text" id="p9-3" class="math-input w-24 h-9 font-bold text-purple-800 text-sm" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p9')" class="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-amber-600"></i> Need a Hint?
+            </button>
+            <div id="hint-p9" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p>• The LCD is 20.</p>
+              <p>• 6 5/20 - 1 16/20.</p>
+              <p>• Regroup 6 5/20 into 5 25/20.</p>
+            </div>
+
+            <div id="msg-p9" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p9', [['20'], ['5 25/20'], ['4 9/20']])" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 rounded-xl transition shadow-sm text-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+        <!-- Problem 10: Evaluate expression -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-heading font-bold text-purple-900 text-xl">Problem 10</span>
+              <span class="text-xs font-bold px-3 py-1 bg-purple-100 text-purple-900 rounded-full">Evaluate a - b</span>
+            </div>
+
+            <div class="bg-purple-50 p-2.5 rounded-xl border border-purple-200 text-xs font-semibold text-purple-950 mb-3">
+              <b>Problem Statement:</b> Evaluate the expression: a - b, when a = 2 1/6 and b = -1 3/8.
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-2 text-xs">
+              <div class="flex justify-between items-center">
+                <span>LCD of 6 & 8:</span>
+                <input type="text" id="p10-1" class="math-input w-20 h-8 text-sm" placeholder="?">
+              </div>
+              <div class="flex justify-between items-center">
+                <span>Rename a (LCD):</span>
+                <input type="text" id="p10-2" class="math-input w-20 h-8 text-sm" placeholder="?">
+              </div>
+              <div class="border-t border-slate-300 pt-2 flex justify-between items-center">
+                <span class="font-bold text-slate-900 text-sm">Final Answer:</span>
+                <input type="text" id="p10-3" class="math-input w-24 h-9 font-bold text-purple-800 text-sm" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p10')" class="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-amber-600"></i> Need a Hint?
+            </button>
+            <div id="hint-p10" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p>• Substitute: 2 1/6 - (-1 3/8).</p>
+              <p>• Apply Subtraction Principle: 2 1/6 + 1 3/8.</p>
+              <p>• LCD is 24.</p>
+            </div>
+
+            <div id="msg-p10" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p10', [['24'], ['2 4/24'], ['3 13/24']])" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 rounded-xl transition shadow-sm text-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+        <!-- Problem 11: Word Problem (Finance) -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-heading font-bold text-purple-900 text-xl">Problem 11 (Finance)</span>
+              <span class="text-xs font-bold px-3 py-1 bg-emerald-100 text-emerald-900 rounded-full"><i class="fa-solid fa-chart-bar"></i> Profit Loss</span>
+            </div>
+
+            <div class="bg-emerald-50 p-2.5 rounded-xl border border-emerald-200 text-xs font-semibold text-emerald-950 mb-3">
+              <b>Problem Statement:</b> A company gained $5 1/2 million year one, and lost $2 3/5 million year two. Add the profit and loss to find the net gain.
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-2 text-xs">
+              <div class="flex justify-between items-center">
+                <span>Find LCD:</span>
+                <input type="text" id="p11-1" class="math-input w-20 h-8 text-sm" placeholder="?">
+              </div>
+              <div class="flex justify-between items-center">
+                <span>Regroup 5 5/10:</span>
+                <input type="text" id="p11-2" class="math-input w-20 h-8 text-sm" placeholder="?">
+              </div>
+              <div class="border-t border-slate-300 pt-2 flex justify-between items-center">
+                <span class="font-bold text-slate-900 text-sm">Total Profit:</span>
+                <input type="text" id="p11-3" class="math-input w-24 h-9 font-bold text-emerald-700 text-sm" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p11')" class="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-amber-600"></i> Need a Hint?
+            </button>
+            <div id="hint-p11" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p>• Add: 5 1/2 + (-2 3/5).</p>
+              <p>• LCD is 10. Rename: 5 5/10 - 2 6/10.</p>
+              <p>• Since 5/10 < 6/10, regroup 5 5/10 into 4 15/10.</p>
+            </div>
+
+            <div id="msg-p11" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p11', [['10'], ['4 15/10'], ['2 9/10', '2 9/10 million', '$2 9/10 million']])" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 rounded-xl transition shadow-sm text-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 6: KEY TAKEAWAYS & EMAIL TURN-IN -->
+    <section id="sec6" class="bg-amber-50 border-2 border-amber-200 rounded-3xl p-6 md:p-8 space-y-6">
+      <div class="flex items-center gap-3">
+        <div class="p-3 bg-amber-200 text-amber-900 rounded-2xl">
+          <i class="fa-solid fa-award text-2xl"></i>
+        </div>
+        <div>
+          <span class="text-xs font-bold text-amber-800 uppercase tracking-wide">Section 6</span>
+          <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">Key Takeaways & Save / Turn In</h2>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        
+        <div class="bg-white p-5 rounded-2xl border border-amber-200 space-y-2">
+          <div class="text-amber-800 font-bold text-lg flex items-center gap-2">
+            <i class="fa-solid fa-list-ol"></i> 1. LCD First
+          </div>
+          <p class="text-sm text-slate-600">
+            Always find the Least Common Denominator (LCD) to rename fractions before trying to add or subtract.
+          </p>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-sky-200 space-y-2">
+          <div class="text-sky-800 font-bold text-lg flex items-center gap-2">
+            <i class="fa-solid fa-font-awesome"></i> 2. Subtraction Rule
+          </div>
+          <p class="text-sm text-slate-600">
+            Apply the Subtraction Principle! Remember that a - b is exactly the same as adding the opposite: a + (-b).
+          </p>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-purple-200 space-y-2">
+          <div class="text-purple-800 font-bold text-lg flex items-center gap-2">
+            <i class="fa-solid fa-scale-balanced"></i> 3. Regrouping
+          </div>
+          <p class="text-sm text-slate-600">
+            If the fraction you are subtracting is larger than your starting fraction, borrow 1 whole from the integer!
+          </p>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-emerald-200 space-y-2">
+          <div class="text-emerald-800 font-bold text-lg flex items-center gap-2">
+            <i class="fa-solid fa-bullseye"></i> 4. Simplest Form
+          </div>
+          <p class="text-sm text-slate-600">
+            Always express your final fraction in simplest form or lowest terms. Double check for common factors!
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Final Completion, Save & Email Turn In Card -->
+      <div class="bg-white p-8 rounded-3xl border-2 border-emerald-300 text-center space-y-4 shadow-md">
+        <div class="w-16 h-16 bg-emerald-100 text-emerald-700 rounded-2xl flex items-center justify-center mx-auto text-3xl">
+          <i class="fa-solid fa-envelope"></i>
+        </div>
+        <h3 class="font-heading font-bold text-2xl text-slate-900">Save Your Progress or Email Your Teacher</h3>
+        <p class="text-slate-600 text-base max-w-xl mx-auto">
+          Need more time? You can <b>Save Work</b> to finish later, or click below when you're ready to submit your full score report to <b>jvena@saintmarys.us</b>!
+        </p>
+        <div class="flex flex-wrap justify-center gap-4 pt-2">
+          <button onclick="saveProgress()" class="bg-amber-500 hover:bg-amber-600 text-white font-bold text-lg px-6 py-3.5 rounded-2xl transition shadow-md inline-flex items-center gap-2">
+            <i class="fa-solid fa-floppy-disk"></i> Save Work For Later
+          </button>
+          <button onclick="openSubmitModal()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-lg px-8 py-3.5 rounded-2xl transition shadow-lg inline-flex items-center gap-2">
+            <i class="fa-solid fa-paper-plane"></i> Email Work to jvena@saintmarys.us
+          </button>
+          <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-6 py-3.5 rounded-2xl transition border border-slate-300 inline-flex items-center gap-2">
+            <i class="fa-solid fa-arrow-up"></i> Return to Top
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- INTERACTIVE SCRATCHPAD FLOATING BUTTON -->
+  <div class="fixed bottom-6 right-6 z-50">
+    <button onclick="toggleScratchpad()" class="bg-sky-600 hover:bg-sky-700 text-white font-bold px-5 py-3 rounded-full shadow-2xl flex items-center gap-2 text-base transition transform hover:scale-105 border-2 border-white">
+      <i class="fa-solid fa-pen-line"></i> Open Scratchpad
+    </button>
+  </div>
+
+  <!-- SCRATCHPAD MODAL -->
+  <div id="scratchpad-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-3xl w-full p-6 shadow-2xl space-y-4 flex flex-col h-[85vh]">
+      <div class="flex justify-between items-center border-b border-slate-200 pb-3">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-pen-clip text-sky-600 text-xl"></i>
+          <h3 class="font-heading font-bold text-xl text-slate-900">Chromebook Scratchpad & Work Area</h3>
+        </div>
+        <button onclick="toggleScratchpad()" class="text-slate-400 hover:text-slate-700 text-2xl font-bold px-2">×</button>
+      </div>
+
+      <!-- Controls -->
+      <div class="flex flex-wrap items-center justify-between gap-3 bg-slate-100 p-3 rounded-2xl">
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-bold text-slate-600">Color:</span>
+          <button onclick="setPadColor('#0284c7')" class="w-8 h-8 rounded-full bg-sky-600 border-2 border-white shadow"></button>
+          <button onclick="setPadColor('#dc2626')" class="w-8 h-8 rounded-full bg-red-600 border-2 border-white shadow"></button>
+          <button onclick="setPadColor('#16a34a')" class="w-8 h-8 rounded-full bg-emerald-600 border-2 border-white shadow"></button>
+          <button onclick="setPadColor('#0f172a')" class="w-8 h-8 rounded-full bg-slate-900 border-2 border-white shadow"></button>
+        </div>
+        <button onclick="clearScratchpad()" class="bg-red-100 hover:bg-red-200 text-red-800 text-xs font-bold px-3 py-2 rounded-xl transition">
+          <i class="fa-solid fa-trash"></i> Clear Pad
+        </button>
+      </div>
+
+      <!-- Canvas Box -->
+      <div class="flex-1 bg-slate-50 border-2 border-slate-200 rounded-2xl overflow-hidden relative">
+        <canvas id="scratch-canvas" class="w-full h-full cursor-crosshair"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- STUDENT EMAIL SUBMIT MODAL -->
+  <div id="submit-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 md:p-8 shadow-2xl space-y-6 border-4 border-emerald-500">
+      <div class="flex justify-between items-center border-b border-slate-200 pb-3">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-paper-plane text-emerald-600 text-2xl"></i>
+          <h3 class="font-heading font-bold text-2xl text-slate-900">Email Report to Teacher</h3>
+        </div>
+        <button onclick="closeSubmitModal()" class="text-slate-400 hover:text-slate-700 text-2xl font-bold px-2">×</button>
+      </div>
+
+      <!-- Error alert banner -->
+      <div id="submit-error-banner" class="hidden bg-red-100 border border-red-300 text-red-800 p-3 rounded-xl text-xs font-bold flex items-center gap-2">
+        <i class="fa-solid fa-triangle-exclamation text-base"></i> Please enter your First and Last Name before turning in!
+      </div>
+
+      <div class="space-y-4">
+        <div>
+          <label class="block text-sm font-bold text-slate-700 mb-1">Student First & Last Name:</label>
+          <input type="text" id="studentName" class="w-full px-4 py-3 rounded-xl border-2 border-slate-300 font-bold text-slate-900 focus:border-emerald-500 focus:outline-none" placeholder="e.g. Alex Johnson">
+        </div>
+
+        <div>
+          <label class="block text-sm font-bold text-slate-700 mb-1">Grade / Class:</label>
+          <input type="text" id="classId" class="w-full px-4 py-3 rounded-xl border-2 border-slate-300 font-bold text-slate-900 focus:border-emerald-500 focus:outline-none" placeholder="e.g. 7th Grade Math">
+        </div>
+
+        <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-xl text-xs text-emerald-900">
+          <i class="fa-solid fa-circle-info"></i> Submitting will automatically open a <b>Gmail web compose window in a new tab</b> with your full score report pre-filled for <b>jvena@saintmarys.us</b>.
+        </div>
+      </div>
+
+      <div class="flex gap-3 pt-2">
+        <button onclick="processEmailSubmission()" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl transition shadow-md flex items-center justify-center gap-2">
+          <i class="fa-solid fa-envelope"></i> Open Gmail in New Tab
+        </button>
+        <button onclick="closeSubmitModal()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-5 py-3.5 rounded-xl transition">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUCCESS CONFIRMATION MODAL -->
+  <div id="success-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 text-center space-y-4 border-4 border-emerald-500 shadow-2xl">
+      <div class="w-16 h-16 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center mx-auto text-3xl">
+        <i class="fa-solid fa-check"></i>
+      </div>
+      <h3 class="font-heading font-bold text-2xl text-slate-900">Gmail Opened!</h3>
+      <p id="success-message-text" class="text-sm text-slate-600 leading-relaxed"></p>
+      <button onclick="document.getElementById('success-modal').classList.add('hidden')" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl transition">
+        Got It!
+      </button>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    const solvedProblems = new Set();
+    const totalProblems = 11;
+    const DEFAULT_TEACHER_EMAIL = "jvena@saintmarys.us";
+
+    function sanitizeInput(val) {
+      if (!val) return '';
+      return val.toString().replace(/,/g, '').trim().toLowerCase();
+    }
+
+    function toggleHint(hintId) {
+      const hintElem = document.getElementById(hintId);
+      if (hintElem) hintElem.classList.toggle('hidden');
+    }
+
+    function showToast(message, isSuccess = true) {
+      const banner = document.getElementById('toast-banner');
+      const icon = document.getElementById('toast-icon');
+      const msg = document.getElementById('toast-msg');
+
+      if (!banner || !msg || !icon) return;
+
+      msg.innerText = message;
+      if (isSuccess) {
+        icon.className = 'fa-solid fa-circle-check text-emerald-400 text-lg';
+      } else {
+        icon.className = 'fa-solid fa-circle-info text-sky-400 text-lg';
+      }
+
+      banner.classList.remove('hidden');
+      setTimeout(() => {
+        banner.classList.add('hidden');
+      }, 3500);
+    }
+
+    function checkProblem(probId, expectedAnswers) {
+      let allCorrect = true;
+
+      expectedAnswers.forEach((expectedList, idx) => {
+        const inputElem = document.getElementById(`${probId}-${idx + 1}`);
+        if (!inputElem) return;
+
+        const userVal = sanitizeInput(inputElem.value);
+        const options = Array.isArray(expectedList) ? expectedList.map(v => sanitizeInput(v)) : [sanitizeInput(expectedList)];
+
+        if (options.includes(userVal)) {
+          inputElem.classList.remove('incorrect');
+          inputElem.classList.add('correct');
+        } else {
+          inputElem.classList.remove('correct');
+          inputElem.classList.add('incorrect');
+          allCorrect = false;
+        }
+      });
+
+      const msgElem = document.getElementById(`msg-${probId}`);
+      if (msgElem) {
+        msgElem.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-800', 'bg-red-100', 'text-red-800');
+        if (allCorrect) {
+          msgElem.classList.add('bg-emerald-100', 'text-emerald-800');
+          msgElem.innerHTML = '<i class="fa-solid fa-circle-check"></i> Great job! Correct!';
+          solvedProblems.add(probId);
+        } else {
+          msgElem.classList.add('bg-red-100', 'text-red-800');
+          msgElem.innerHTML = '<i class="fa-solid fa-circle-xmark"></i> Check the red boxes and try again!';
+        }
+      }
+
+      updateProgress();
+    }
+
+    function updateProgress() {
+      const count = solvedProblems.size;
+      const percent = Math.round((count / totalProblems) * 100);
+
+      const progressText = document.getElementById('progress-text');
+      const progressBar = document.getElementById('progress-bar');
+
+      if (progressText) progressText.innerText = `${count} / ${totalProblems} Solved`;
+      if (progressBar) progressBar.style.width = `${percent}%`;
+    }
+
+    /* SAVE FOR LATER FUNCTIONALITY */
+    function saveProgress() {
+      const dataToSave = {
+        inputs: {},
+        solved: Array.from(solvedProblems),
+        savedAt: new Date().toLocaleTimeString()
+      };
+
+      const inputs = document.querySelectorAll('input.math-input, #studentName, #classId');
+      inputs.forEach(input => {
+        if (input.id) {
+          dataToSave.inputs[input.id] = input.value;
+        }
+      });
+
+      try {
+        localStorage.setItem('grade7_math_worksheet_save_5_6', JSON.stringify(dataToSave));
+        showToast('Your work has been saved to this device! You can finish later.');
+      } catch (e) {
+        showToast('Unable to save to localStorage.', false);
+      }
+    }
+
+    function loadProgress() {
+      try {
+        const savedRaw = localStorage.getItem('grade7_math_worksheet_save_5_6');
+        if (!savedRaw) {
+          showToast('No saved work found on this device.', false);
+          return;
+        }
+
+        const data = JSON.parse(savedRaw);
+        if (data.inputs) {
+          Object.keys(data.inputs).forEach(id => {
+            const elem = document.getElementById(id);
+            if (elem) elem.value = data.inputs[id];
+          });
+        }
+
+        if (data.solved) {
+          solvedProblems.clear();
+          data.solved.forEach(p => solvedProblems.add(p));
+          updateProgress();
+        }
+
+        showToast('Saved work successfully loaded!');
+      } catch (e) {
+        showToast('Error loading saved work.', false);
+      }
+    }
+
+    /* Auto-load saved work if present */
+    window.onload = function() {
+      if (localStorage.getItem('grade7_math_worksheet_save_5_6')) {
+        loadProgress();
+      }
+    };
+
+    /* Scratchpad Canvas Logic */
+    let canvas, ctx, isDrawing = false;
+    let padColor = '#0284c7';
+
+    function toggleScratchpad() {
+      const modal = document.getElementById('scratchpad-modal');
+      modal.classList.toggle('hidden');
+
+      if (!modal.classList.contains('hidden')) {
+        setTimeout(initCanvas, 100);
+      }
+    }
+
+    function initCanvas() {
+      canvas = document.getElementById('scratch-canvas');
+      if (!canvas) return;
+
+      const rect = canvas.parentElement.getBoundingClientRect();
+      canvas.width = rect.width;
+      canvas.height = rect.height;
+
+      ctx = canvas.getContext('2d');
+      ctx.lineWidth = 3;
+      ctx.lineCap = 'round';
+      ctx.strokeStyle = padColor;
+
+      canvas.onmousedown = startDrawing;
+      canvas.onmousemove = draw;
+      canvas.onmouseup = stopDrawing;
+      canvas.ontouchstart = startDrawingTouch;
+      canvas.ontouchmove = drawTouch;
+      canvas.ontouchend = stopDrawing;
+    }
+
+    function setPadColor(color) {
+      padColor = color;
+      if (ctx) ctx.strokeStyle = color;
+    }
+
+    function clearScratchpad() {
+      if (canvas && ctx) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+    }
+
+    function startDrawing(e) {
+      isDrawing = true;
+      ctx.beginPath();
+      ctx.moveTo(e.offsetX, e.offsetY);
+    }
+
+    function draw(e) {
+      if (!isDrawing) return;
+      ctx.lineTo(e.offsetX, e.offsetY);
+      ctx.stroke();
+    }
+
+    function startDrawingTouch(e) {
+      isDrawing = true;
+      const rect = canvas.getBoundingClientRect();
+      const touch = e.touches[0];
+      ctx.beginPath();
+      ctx.moveTo(touch.clientX - rect.left, touch.clientY - touch.top);
+      e.preventDefault();
+    }
+
+    function drawTouch(e) {
+      if (!isDrawing) return;
+      const rect = canvas.getBoundingClientRect();
+      const touch = e.touches[0];
+      ctx.lineTo(touch.clientX - rect.left, touch.clientY - rect.top);
+      ctx.stroke();
+      e.preventDefault();
+    }
+
+    function stopDrawing() {
+      isDrawing = false;
+    }
+
+    /* Submission Modal & Email Logic */
+    function openSubmitModal() {
+      document.getElementById('submit-modal').classList.remove('hidden');
+      document.getElementById('submit-error-banner').classList.add('hidden');
+    }
+
+    function closeSubmitModal() {
+      document.getElementById('submit-modal').classList.add('hidden');
+    }
+
+    function processEmailSubmission() {
+      const nameInput = document.getElementById('studentName');
+      const classInput = document.getElementById('classId');
+
+      if (!nameInput || !nameInput.value.trim()) {
+        document.getElementById('submit-error-banner').classList.remove('hidden');
+        return;
+      }
+
+      const studentName = nameInput.value.trim();
+      const className = classInput ? classInput.value.trim() : '7th Grade Math';
+      const scoreText = `${solvedProblems.size} of ${totalProblems} problems completed correctly`;
+
+      const subject = encodeURIComponent(`Math Worksheet Submission: ${studentName} (${className})`);
+      const bodyText = `Student Name: ${studentName}\nClass: ${className}\nWorksheet: Lesson 5-6 & 5-7 Add & Subtract Fractions & Mixed Numbers\nScore Progress: ${scoreText}\n\nSubmitted via Interactive Digital Worksheet Application.`;
+
+      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${DEFAULT_TEACHER_EMAIL}&su=${subject}&body=${encodeURIComponent(bodyText)}`;
+
+      window.open(gmailUrl, '_blank');
+
+      closeSubmitModal();
+
+      const successMsg = document.getElementById('success-message-text');
+      if (successMsg) {
+        successMsg.innerHTML = `Great work <b>${studentName}</b>! A new tab has opened with your completed score report ready to send to <b>${DEFAULT_TEACHER_EMAIL}</b>.`;
+      }
+      document.getElementById('success-modal').classList.remove('hidden');
+    }
+  </script>
+</body>
+</html>
