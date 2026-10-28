@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Homework: Dividing Fractions & Order of Operations</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Roboto+Mono:wght@500;700&display=swap">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            heading: ['Fredoka', 'sans-serif'],
+            mono: ['Roboto Mono', 'monospace']
+          },
+          colors: {
+            brandBlue: '#0284c7',
+            brandGreen: '#16a34a',
+            brandYellow: '#ca8a04',
+            brandPurple: '#9333ea',
+            brandOrange: '#ea580c'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #f8fafc;
+      color: #0f172a;
+      font-size: 18px;
+    }
+    
+    .math-input {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 18px;
+      font-weight: 700;
+      text-align: center;
+      border: 2px dashed #94a3b8;
+      border-radius: 8px;
+      background-color: #ffffff;
+      color: #0284c7;
+      transition: all 0.2s ease;
+      width: 100%;
+      height: 42px;
+    }
+
+    .math-input:focus {
+      outline: none;
+      border-color: #0284c7;
+      border-style: solid;
+      background-color: #f0f9ff;
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.2);
+    }
+
+    .math-input.correct {
+      border-color: #16a34a !important;
+      border-style: solid !important;
+      background-color: #f0fdf4 !important;
+      color: #15803d !important;
+    }
+
+    .math-input.incorrect {
+      border-color: #dc2626 !important;
+      border-style: solid !important;
+      background-color: #fef2f2 !important;
+      color: #b91c1c !important;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen pb-24">
+
+  <!-- STICKY HEADER & SECTION NAVIGATION -->
+  <header class="sticky top-0 z-40 bg-white border-b border-slate-200 shadow-md py-3 px-4 md:px-8">
+    <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-4">
+      
+      <!-- App Title -->
+      <div class="flex items-center gap-3">
+        <div class="bg-sky-600 text-white p-2.5 rounded-2xl shadow-sm">
+          <i class="fa-solid fa-calculator text-2xl"></i>
+        </div>
+        <div>
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold bg-sky-100 text-sky-800 uppercase tracking-wider">
+            Sadlier Math Grade 6 • Lessons 8-7 & 8-8
+          </span>
+          <h1 class="text-xl md:text-2xl font-heading font-bold text-slate-900">
+            Homework: Dividing Fractions & Order of Operations
+          </h1>
+        </div>
+      </div>
+
+      <!-- Live Score Counter, Save/Load Work & Turn-In Action Buttons -->
+      <div class="flex flex-wrap items-center gap-2.5">
+        <div class="bg-slate-100 px-3 py-1.5 rounded-2xl border border-slate-200 flex items-center gap-2">
+          <div class="text-right">
+            <div class="text-[10px] font-bold text-slate-500 uppercase">Score Progress</div>
+            <div id="progress-text" class="text-xs font-extrabold text-sky-700">0 / 10 Solved</div>
+          </div>
+          <div class="w-16 bg-slate-200 rounded-full h-2.5 overflow-hidden">
+            <div id="progress-bar" class="bg-gradient-to-r from-sky-500 to-emerald-500 h-2.5 rounded-full transition-all duration-500 w-0"></div>
+          </div>
+        </div>
+
+        <!-- Save & Load Buttons -->
+        <button onclick="saveWork()" class="bg-amber-600 hover:bg-amber-700 text-white font-bold px-3 py-2 rounded-xl transition flex items-center gap-1.5 text-xs shadow-sm" title="Save your work to finish later">
+          <i class="fa-solid fa-floppy-disk"></i> Save Work
+        </button>
+        <button onclick="loadWork()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-3 py-2 rounded-xl transition flex items-center gap-1.5 text-xs shadow-sm" title="Load your previously saved work">
+          <i class="fa-solid fa-folder-open"></i> Load Work
+        </button>
+
+        <button onclick="openSubmitModal()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3 py-2 rounded-xl transition flex items-center gap-1.5 text-xs shadow-sm">
+          <i class="fa-solid fa-paper-plane"></i> Email Teacher
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 mt-8 space-y-12">
+
+    <!-- SAVE NOTIFICATION BANNER -->
+    <div id="notification-banner" class="hidden max-w-7xl mx-auto p-4 rounded-2xl text-sm font-bold flex items-center justify-between shadow-sm transition-all duration-300">
+      <div class="flex items-center gap-2">
+        <i id="notification-icon" class="fa-solid fa-circle-info text-lg"></i>
+        <span id="notification-text">Your progress has been saved!</span>
+      </div>
+      <button onclick="hideNotification()" class="text-slate-500 hover:text-slate-800 text-lg font-bold px-2">&times;</button>
+    </div>
+
+    <!-- HOMEWORK SECTION -->
+    <section class="bg-white border-2 border-slate-200 rounded-3xl p-6 md:p-8 shadow-sm space-y-6">
+      <div class="flex items-center gap-3">
+        <div class="p-3 bg-sky-600 text-white rounded-2xl shadow-sm">
+          <i class="fa-solid fa-pencil text-2xl"></i>
+        </div>
+        <div>
+          <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">
+            Homework Practice
+          </h2>
+          <p class="text-sm text-slate-600 font-semibold">Complete all questions below. You can save your progress at any time.</p>
+        </div>
+      </div>
+
+      <!-- Part 1: Dividing Whole Numbers, Fractions, and Mixed Numbers (1-5) -->
+      <h3 class="font-heading font-bold text-xl text-sky-800 mt-6 border-b pb-2">Part 1: Dividing Whole Numbers, Fractions, and Mixed Numbers (Lesson 8-7)</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+        
+        <!-- Problem 1 -->
+        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 flex flex-col justify-between">
+          <div>
+            <div class="font-bold text-slate-700 mb-2">1. Find 10 ÷ 2/5</div>
+          </div>
+          <div>
+            <input type="text" id="p1" class="math-input" placeholder="Quotient">
+            <div id="msg-p1" class="text-xs font-bold hidden mt-2 p-2 rounded-xl text-center"></div>
+            <button onclick="checkProblem('p1', '25')" class="w-full mt-2 bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 rounded-xl transition shadow-sm text-sm">Check</button>
+          </div>
+        </div>
+
+        <!-- Problem 2 -->
+        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 flex flex-col justify-between">
+          <div>
+            <div class="font-bold text-slate-700 mb-2">2. Find 5 1/3 ÷ 1 1/3</div>
+          </div>
+          <div>
+            <input type="text" id="p2" class="math-input" placeholder="Quotient">
+            <div id="msg-p2" class="text-xs font-bold hidden mt-2 p-2 rounded-xl text-center"></div>
+            <button onclick="checkProblem('p2', '4')" class="w-full mt-2 bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 rounded-xl transition shadow-sm text-sm">Check</button>
+          </div>
+        </div>
+
+        <!-- Problem 3 -->
+        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 flex flex-col justify-between">
+          <div>
+            <div class="font-bold text-slate-700 mb-2">3. Find 4/5 ÷ 8</div>
+          </div>
+          <div>
+            <input type="text" id="p3" class="math-input" placeholder="Quotient">
+            <div id="msg-p3" class="text-xs font-bold hidden mt-2 p-2 rounded-xl text-center"></div>
+            <button onclick="checkProblem('p3', '1/10')" class="w-full mt-2 bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 rounded-xl transition shadow-sm text-sm">Check</button>
+          </div>
+        </div>
+
+        <!-- Problem 4 -->
+        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 flex flex-col justify-between">
+          <div>
+            <div class="font-bold text-slate-700 mb-2">4. Find 3 3/4 ÷ 1 1/4</div>
+          </div>
+          <div>
+            <input type="text" id="p4" class="math-input" placeholder="Quotient">
+            <div id="msg-p4" class="text-xs font-bold hidden mt-2 p-2 rounded-xl text-center"></div>
+            <button onclick="checkProblem('p4', '3')" class="w-full mt-2 bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 rounded-xl transition shadow-sm text-sm">Check</button>
+          </div>
+        </div>
+
+        <!-- Problem 5 (Word Problem) -->
+        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 flex flex-col justify-between">
+          <div>
+            <div class="font-bold text-slate-700 mb-2 text-sm">5. A chef has 22 1/2 cups of flour. Each loaf of bread requires 2 1/4 cups of flour. How many loaves of bread can the chef make?</div>
+          </div>
+          <div>
+            <input type="text" id="p5" class="math-input" placeholder="Loaves">
+            <div id="msg-p5" class="text-xs font-bold hidden mt-2 p-2 rounded-xl text-center"></div>
+            <button onclick="checkProblem('p5', '10')" class="w-full mt-2 bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 rounded-xl transition shadow-sm text-sm">Check</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Part 2: Order of Operations with Fractions (6-10) -->
+      <h3 class="font-heading font-bold text-xl text-purple-800 mt-8 border-b pb-2">Part 2: Order of Operations with Fractions & Evaluating Expressions (Lesson 8-8)</h3>
+      <p class="text-xs text-slate-500 font-semibold mb-2">Simplify each expression or evaluate given the variable value.</p>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+        
+        <!-- Problem 6 -->
+        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 flex flex-col justify-between">
+          <div>
+            <div class="font-bold text-slate-700 mb-2">6. Simplify (1/2)^2 + 3/4</div>
+          </div>
+          <div>
+            <input type="text" id="p6" class="math-input" placeholder="Value">
+            <div id="msg-p6" class="text-xs font-bold hidden mt-2 p-2 rounded-xl text-center"></div>
+            <button onclick="checkProblem('p6', '1')" class="w-full mt-2 bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 rounded-xl transition shadow-sm text-sm">Check</button>
+          </div>
+        </div>
+
+        <!-- Problem 7 -->
+        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 flex flex-col justify-between">
+          <div>
+            <div class="font-bold text-slate-700 mb-2">7. Simplify 12 * 1/4 ÷ (1/2)^2</div>
+          </div>
+          <div>
+            <input type="text" id="p7" class="math-input" placeholder="Value">
+            <div id="msg-p7" class="text-xs font-bold hidden mt-2 p-2 rounded-xl text-center"></div>
+            <button onclick="checkProblem('p7', '12')" class="w-full mt-2 bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 rounded-xl transition shadow-sm text-sm">Check</button>
+          </div>
+        </div>
+
+        <!-- Problem 8 -->
+        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 flex flex-col justify-between">
+          <div>
+            <div class="font-bold text-slate-700 mb-2">8. Simplify 1/3 * (12 - 3/4)</div>
+          </div>
+          <div>
+            <input type="text" id="p8" class="math-input" placeholder="Value">
+            <div id="msg-p8" class="text-xs font-bold hidden mt-2 p-2 rounded-xl text-center"></div>
+            <button onclick="checkProblem('p8', '3 3/4')" class="w-full mt-2 bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 rounded-xl transition shadow-sm text-sm">Check</button>
+          </div>
+        </div>
+
+        <!-- Problem 9 -->
+        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 flex flex-col justify-between">
+          <div>
+            <div class="font-bold text-slate-700 mb-2">9. Evaluate 2n ÷ (1/2)^2 when n = 3/4</div>
+          </div>
+          <div>
+            <input type="text" id="p9" class="math-input" placeholder="Value">
+            <div id="msg-p9" class="text-xs font-bold hidden mt-2 p-2 rounded-xl text-center"></div>
+            <button onclick="checkProblem('p9', '6')" class="w-full mt-2 bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 rounded-xl transition shadow-sm text-sm">Check</button>
+          </div>
+        </div>
+
+        <!-- Problem 10 (Word Problem) -->
+        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 flex flex-col justify-between">
+          <div>
+            <div class="font-bold text-slate-700 mb-2 text-sm">10. A recipe calls for 2/3 cup of sugar initially and 1/4 cup later. Maya makes 4 batches. Use 4 * (2/3 + 1/4) to find the total cups of sugar needed.</div>
+          </div>
+          <div>
+            <input type="text" id="p10" class="math-input" placeholder="Cups">
+            <div id="msg-p10" class="text-xs font-bold hidden mt-2 p-2 rounded-xl text-center"></div>
+            <button onclick="checkProblem('p10', '3 2/3')" class="w-full mt-2 bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 rounded-xl transition shadow-sm text-sm">Check</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Action Buttons Section -->
+      <div class="mt-12 flex flex-wrap justify-center items-center gap-4 border-t border-slate-200 pt-8">
+        <button onclick="saveWork()" class="bg-amber-600 hover:bg-amber-700 text-white font-bold text-lg px-8 py-3.5 rounded-2xl transition shadow-lg inline-flex items-center gap-2">
+          <i class="fa-solid fa-floppy-disk"></i> Save Work
+        </button>
+        <button onclick="openSubmitModal()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-lg px-8 py-3.5 rounded-2xl transition shadow-lg inline-flex items-center gap-2">
+          <i class="fa-solid fa-paper-plane"></i> Email Work to jvena@saintmarys.us
+        </button>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- INTERACTIVE SCRATCHPAD FLOATING BUTTON -->
+  <div class="fixed bottom-6 right-6 z-50">
+    <button onclick="toggleScratchpad()" class="bg-sky-600 hover:bg-sky-700 text-white font-bold px-5 py-3 rounded-full shadow-2xl flex items-center gap-2 text-base transition transform hover:scale-105 border-2 border-white">
+      <i class="fa-solid fa-pen-line"></i> Open Scratchpad
+    </button>
+  </div>
+
+  <!-- SCRATCHPAD MODAL -->
+  <div id="scratchpad-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-3xl w-full p-6 shadow-2xl space-y-4 flex flex-col h-[85vh]">
+      <div class="flex justify-between items-center border-b border-slate-200 pb-3">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-pen-clip text-sky-600 text-xl"></i>
+          <h3 class="font-heading font-bold text-xl text-slate-900">Chromebook Scratchpad & Scratch Work</h3>
+        </div>
+        <button onclick="toggleScratchpad()" class="text-slate-400 hover:text-slate-700 text-2xl font-bold px-2">&times;</button>
+      </div>
+
+      <!-- Controls -->
+      <div class="flex flex-wrap items-center justify-between gap-3 bg-slate-100 p-3 rounded-2xl">
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-bold text-slate-600">Color:</span>
+          <button onclick="setPadColor('#0284c7')" class="w-8 h-8 rounded-full bg-sky-600 border-2 border-white shadow"></button>
+          <button onclick="setPadColor('#dc2626')" class="w-8 h-8 rounded-full bg-red-600 border-2 border-white shadow"></button>
+          <button onclick="setPadColor('#16a34a')" class="w-8 h-8 rounded-full bg-emerald-600 border-2 border-white shadow"></button>
+          <button onclick="setPadColor('#0f172a')" class="w-8 h-8 rounded-full bg-slate-900 border-2 border-white shadow"></button>
+        </div>
+        <button onclick="clearScratchpad()" class="bg-red-100 hover:bg-red-200 text-red-800 text-xs font-bold px-3 py-2 rounded-xl transition">
+          <i class="fa-solid fa-trash"></i> Clear Pad
+        </button>
+      </div>
+
+      <!-- Canvas Box -->
+      <div class="flex-1 bg-slate-50 border-2 border-slate-200 rounded-2xl overflow-hidden relative">
+        <canvas id="scratch-canvas" class="w-full h-full cursor-crosshair"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- STUDENT EMAIL SUBMIT MODAL -->
+  <div id="submit-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 md:p-8 shadow-2xl space-y-6 border-4 border-emerald-500">
+      <div class="flex justify-between items-center border-b border-slate-200 pb-3">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-paper-plane text-emerald-600 text-2xl"></i>
+          <h3 class="font-heading font-bold text-2xl text-slate-900">Email Report to Teacher</h3>
+        </div>
+        <button onclick="closeSubmitModal()" class="text-slate-400 hover:text-slate-700 text-2xl font-bold px-2">&times;</button>
+      </div>
+
+      <!-- Error alert banner (no browser alert used) -->
+      <div id="submit-error-banner" class="hidden bg-red-100 border border-red-300 text-red-800 p-3 rounded-xl text-xs font-bold flex items-center gap-2">
+        <i class="fa-solid fa-triangle-exclamation text-base"></i> Please enter your First and Last Name before turning in!
+      </div>
+
+      <div class="space-y-4">
+        <div>
+          <label class="block text-sm font-bold text-slate-700 mb-1">Student First & Last Name:</label>
+          <input type="text" id="studentName" class="w-full px-4 py-3 rounded-xl border-2 border-slate-300 font-bold text-slate-900 focus:border-emerald-500 focus:outline-none" placeholder="e.g. Alex Johnson">
+        </div>
+
+        <div>
+          <label class="block text-sm font-bold text-slate-700 mb-1">Grade / Class:</label>
+          <input type="text" id="classId" class="w-full px-4 py-3 rounded-xl border-2 border-slate-300 font-bold text-slate-900 focus:border-emerald-500 focus:outline-none" placeholder="e.g. 6th Grade">
+        </div>
+
+        <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-xl text-xs text-emerald-900">
+          <i class="fa-solid fa-circle-info"></i> Submitting will automatically open a <b>Gmail web compose window in a new tab</b> with your full score report pre-filled for <b>jvena@saintmarys.us</b>.
+        </div>
+      </div>
+
+      <div class="flex gap-3 pt-2">
+        <button onclick="processEmailSubmission()" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl transition shadow-md flex items-center justify-center gap-2">
+          <i class="fa-solid fa-envelope"></i> Open Gmail in New Tab
+        </button>
+        <button onclick="closeSubmitModal()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-5 py-3.5 rounded-xl transition">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUCCESS CONFIRMATION MODAL -->
+  <div id="success-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 text-center space-y-4 border-4 border-emerald-500 shadow-2xl">
+      <div class="w-16 h-16 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center mx-auto text-3xl">
+        <i class="fa-solid fa-check"></i>
+      </div>
+      <h3 class="font-heading font-bold text-2xl text-slate-900">Gmail Opened!</h3>
+      <p id="success-message-text" class="text-sm text-slate-600 leading-relaxed"></p>
+      <button onclick="document.getElementById('success-modal').classList.add('hidden')" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl transition">
+        Got It!
+      </button>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    const solvedProblems = new Set();
+    const totalProblems = 10;
+    const DEFAULT_TEACHER_EMAIL = "jvena@saintmarys.us";
+    const SAVE_KEY = "sadlier_math_g6_worksheet_8_7_8_8";
+
+    const expectedAnswers = {
+      p1: ['25'],
+      p2: ['4'],
+      p3: ['1/10'],
+      p4: ['3'],
+      p5: ['10'],
+      p6: ['1'],
+      p7: ['12'],
+      p8: ['3 3/4', '15/4'],
+      p9: ['6'],
+      p10: ['3 2/3', '11/3']
+    };
+
+    function sanitizeInput(val) {
+      return val.toString().toLowerCase().replace(/\s+/g, ' ').replace(/,/g, '').trim();
+    }
+
+    function checkProblem(probId, target) {
+      const inputElem = document.getElementById(probId);
+      if (!inputElem) return;
+
+      const userVal = sanitizeInput(inputElem.value);
+      const allowedAnswers = expectedAnswers[probId].map(a => sanitizeInput(a));
+      const msgElem = document.getElementById(`msg-${probId}`);
+
+      if (userVal !== '' && allowedAnswers.includes(userVal)) {
+        inputElem.classList.remove('incorrect');
+        inputElem.classList.add('correct');
+        solvedProblems.add(probId);
+        if (msgElem) {
+          msgElem.classList.remove('hidden', 'bg-red-100', 'text-red-800');
+          msgElem.classList.add('bg-emerald-100', 'text-emerald-800');
+          msgElem.innerHTML = '<i class="fa-solid fa-circle-check"></i> Correct!';
+        }
+      } else {
+        inputElem.classList.remove('correct');
+        inputElem.classList.add('incorrect');
+        solvedProblems.delete(probId);
+        if (msgElem) {
+          msgElem.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-800');
+          msgElem.classList.add('bg-red-100', 'text-red-800');
+          msgElem.innerHTML = '<i class="fa-solid fa-circle-xmark"></i> Try again!';
+        }
+      }
+
+      updateProgress();
+    }
+
+    function updateProgress() {
+      const count = solvedProblems.size;
+      const percent = Math.round((count / totalProblems) * 100);
+
+      const progressText = document.getElementById('progress-text');
+      const progressBar = document.getElementById('progress-bar');
+
+      if (progressText) progressText.innerText = `${count} / ${totalProblems} Solved`;
+      if (progressBar) progressBar.style.width = `${percent}%`;
+    }
+
+    /* Save Work Logic */
+    function saveWork() {
+      const saveData = {
+        answers: {},
+        studentName: document.getElementById('studentName') ? document.getElementById('studentName').value : '',
+        classId: document.getElementById('classId') ? document.getElementById('classId').value : '',
+        timestamp: new Date().toLocaleString()
+      };
+
+      for (let i = 1; i <= totalProblems; i++) {
+        const probId = `p${i}`;
+        const elem = document.getElementById(probId);
+        if (elem) {
+          saveData.answers[probId] = elem.value;
+        }
+      }
+
+      try {
+        localStorage.setItem(SAVE_KEY, JSON.stringify(saveData));
+        showNotification('success', `Work saved successfully at ${saveData.timestamp}!`);
+      } catch (e) {
+        showNotification('error', 'Could not save work to browser storage.');
+      }
+    }
+
+    /* Load Work Logic */
+    function loadWork() {
+      try {
+        const savedString = localStorage.getItem(SAVE_KEY);
+        if (!savedString) {
+          showNotification('error', 'No saved work found on this device.');
+          return;
+        }
+
+        const saveData = JSON.parse(savedString);
+
+        if (saveData.studentName && document.getElementById('studentName')) {
+          document.getElementById('studentName').value = saveData.studentName;
+        }
+        if (saveData.classId && document.getElementById('classId')) {
+          document.getElementById('classId').value = saveData.classId;
+        }
+
+        let restoredCount = 0;
+        for (let i = 1; i <= totalProblems; i++) {
+          const probId = `p${i}`;
+          const elem = document.getElementById(probId);
+          if (elem && saveData.answers && saveData.answers[probId] !== undefined) {
+            elem.value = saveData.answers[probId];
+            if (elem.value.trim() !== '') {
+              checkProblem(probId, expectedAnswers[probId][0]);
+              restoredCount++;
+            }
+          }
+        }
+
+        showNotification('success', `Loaded saved work (${restoredCount} answers restored).`);
+      } catch (e) {
+        showNotification('error', 'Failed to load saved work.');
+      }
+    }
+
+    function showNotification(type, message) {
+      const banner = document.getElementById('notification-banner');
+      const icon = document.getElementById('notification-icon');
+      const text = document.getElementById('notification-text');
+
+      if (!banner || !icon || !text) return;
+
+      text.innerText = message;
+      banner.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-800', 'bg-red-100', 'text-red-800', 'border-emerald-300', 'border-red-300');
+
+      if (type === 'success') {
+        banner.classList.add('bg-emerald-100', 'text-emerald-800', 'border', 'border-emerald-300');
+        icon.className = 'fa-solid fa-circle-check text-lg';
+      } else {
+        banner.classList.add('bg-red-100', 'text-red-800', 'border', 'border-red-300');
+        icon.className = 'fa-solid fa-triangle-exclamation text-lg';
+      }
+
+      banner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function hideNotification() {
+      const banner = document.getElementById('notification-banner');
+      if (banner) banner.classList.add('hidden');
+    }
+
+    /* Scratchpad Canvas Logic */
+    let canvas, ctx, isDrawing = false;
+    let padColor = '#0284c7';
+
+    function toggleScratchpad() {
+      const modal = document.getElementById('scratchpad-modal');
+      modal.classList.toggle('hidden');
+
+      if (!modal.classList.contains('hidden')) {
+        setTimeout(initCanvas, 100);
+      }
+    }
+
+    function initCanvas() {
+      canvas = document.getElementById('scratch-canvas');
+      if (!canvas) return;
+
+      const rect = canvas.parentElement.getBoundingClientRect();
+      canvas.width = rect.width;
+      canvas.height = rect.height;
+
+      ctx = canvas.getContext('2d');
+      ctx.lineWidth = 3;
+      ctx.lineCap = 'round';
+      ctx.strokeStyle = padColor;
+
+      canvas.removeEventListener('mousedown', startDraw);
+      canvas.removeEventListener('mousemove', draw);
+      canvas.removeEventListener('mouseup', stopDraw);
+
+      canvas.addEventListener('mousedown', startDraw);
+      canvas.addEventListener('mousemove', draw);
+      canvas.addEventListener('mouseup', stopDraw);
+
+      canvas.addEventListener('touchstart', (e) => { startDraw(e.touches[0]); e.preventDefault(); }, { passive: false });
+      canvas.addEventListener('touchmove', (e) => { draw(e.touches[0]); e.preventDefault(); }, { passive: false });
+      canvas.addEventListener('touchend', stopDraw);
+    }
+
+    function startDraw(e) {
+      isDrawing = true;
+      const rect = canvas.getBoundingClientRect();
+      ctx.beginPath();
+      ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
+    }
+
+    function draw(e) {
+      if (!isDrawing) return;
+      const rect = canvas.getBoundingClientRect();
+      ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
+      ctx.stroke();
+    }
+
+    function stopDraw() {
+      isDrawing = false;
+    }
+
+    function setPadColor(color) {
+      padColor = color;
+      if (ctx) ctx.strokeStyle = padColor;
+    }
+
+    function clearScratchpad() {
+      if (ctx && canvas) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+    }
+
+    /* Email Submission Functions */
+    function openSubmitModal() {
+      document.getElementById('submit-error-banner').classList.add('hidden');
+      document.getElementById('submit-modal').classList.remove('hidden');
+    }
+
+    function closeSubmitModal() {
+      document.getElementById('submit-modal').classList.add('hidden');
+    }
+
+    function processEmailSubmission() {
+      const name = document.getElementById('studentName').value.trim();
+      const classId = document.getElementById('classId').value.trim();
+
+      if (!name) {
+        document.getElementById('submit-error-banner').classList.remove('hidden');
+        return;
+      }
+
+      const timestamp = new Date().toLocaleString();
+      const scoreProgress = `${solvedProblems.size} / ${totalProblems} Solved`;
+      const targetEmail = DEFAULT_TEACHER_EMAIL;
+
+      let reportBody = `6th Grade Math Score Report - Sadlier Math Lessons 8-7 & 8-8 Homework\n`;
+      reportBody += `----------------------------------------------------\n`;
+      reportBody += `Student Name: ${name}\n`;
+      reportBody += `Grade: ${classId || '6th Grade'}\n`;
+      reportBody += `Score Progress: ${scoreProgress}\n`;
+      reportBody += `Date & Time: ${timestamp}\n\n`;
+      reportBody += `--- DETAILED STUDENT ANSWERS ---\n`;
+
+      const problemTitles = [
+        "Problem 1 (10 ÷ 2/5)",
+        "Problem 2 (5 1/3 ÷ 1 1/3)",
+        "Problem 3 (4/5 ÷ 8)",
+        "Problem 4 (3 3/4 ÷ 1 1/4)",
+        "Problem 5 (Word Problem: Flour & Loaves)",
+        "Problem 6 ((1/2)^2 + 3/4)",
+        "Problem 7 (12 * 1/4 ÷ (1/2)^2)",
+        "Problem 8 (1/3 * (12 - 3/4))",
+        "Problem 9 (Evaluate 2n ÷ (1/2)^2 when n = 3/4)",
+        "Problem 10 (Word Problem: Sugar & Batches)"
+      ];
+
+      for (let i = 1; i <= 10; i++) {
+        const val = document.getElementById(`p${i}`) ? document.getElementById(`p${i}`).value : '';
+        reportBody += `${problemTitles[i - 1]}: Answer Submitted = [${val}]\n`;
+      }
+
+      const subject = encodeURIComponent(`Math Score Report: ${name} (${classId || '6th Grade'}) - ${scoreProgress}`);
+      const body = encodeURIComponent(reportBody);
+
+      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(targetEmail)}&su=${subject}&body=${body}`;
+
+      window.open(gmailUrl, '_blank');
+
+      closeSubmitModal();
+
+      document.getElementById('success-message-text').innerText = `Great job, ${name}! A new Gmail tab has opened with your score report pre-filled for ${targetEmail}. Click "Send" in Gmail to complete your turn-in.`;
+      document.getElementById('success-modal').classList.remove('hidden');
+    }
+  </script>
+</body>
+</html>
