@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson: Subtracting Decimals (Hundredths & Thousandths)</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Roboto+Mono:wght@500;700&display=swap">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            heading: ['Fredoka', 'sans-serif'],
+            mono: ['Roboto Mono', 'monospace']
+          },
+          colors: {
+            brandBlue: '#0284c7',
+            brandGreen: '#16a34a',
+            brandYellow: '#ca8a04',
+            brandPurple: '#9333ea',
+            brandOrange: '#ea580c'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #f8fafc;
+      color: #0f172a;
+      font-size: 18px;
+    }
+    
+    .math-input {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 18px;
+      font-weight: 700;
+      text-align: center;
+      border: 2px dashed #94a3b8;
+      border-radius: 8px;
+      background-color: #ffffff;
+      color: #0284c7;
+      transition: all 0.2s ease;
+      width: 100%;
+      height: 42px;
+    }
+
+    .math-input:focus {
+      outline: none;
+      border-color: #0284c7;
+      border-style: solid;
+      background-color: #f0f9ff;
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.2);
+    }
+
+    .math-input.correct {
+      border-color: #16a34a !important;
+      border-style: solid !important;
+      background-color: #f0fdf4 !important;
+      color: #15803d !important;
+    }
+
+    .math-input.incorrect {
+      border-color: #dc2626 !important;
+      border-style: solid !important;
+      background-color: #fef2f2 !important;
+      color: #b91c1c !important;
+    }
+
+    mark {
+      background-color: #fef08a;
+      color: #854d0e;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-weight: 700;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Base 10 Block Styles for Manipulatives */
+    .base-block {
+      width: 100%;
+      padding-top: 100%;
+      background-color: #fde68a;
+      border: 1px solid #d97706;
+      cursor: pointer;
+      position: relative;
+      transition: background-color 0.2s ease;
+    }
+    .base-block:hover {
+      background-color: #fcd34d;
+    }
+    .base-block.crossed-out {
+      background-color: #f87171;
+      border-color: #b91c1c;
+    }
+    .base-block.crossed-out::after {
+      content: '\d7';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #7f1d1d;
+      font-size: 24px;
+      font-weight: bold;
+      line-height: 1;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen pb-24">
+
+  <!-- STICKY HEADER & SECTION NAVIGATION -->
+  <header class="sticky top-0 z-40 bg-white border-b border-slate-200 shadow-md py-3 px-4 md:px-8">
+    <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-4">
+      
+      <!-- App Title -->
+      <div class="flex items-center gap-3">
+        <div class="bg-sky-600 text-white p-2.5 rounded-2xl shadow-sm">
+          <i class="fa-solid fa-calculator text-2xl"></i>
+        </div>
+        <div>
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold bg-sky-100 text-sky-800 uppercase tracking-wider">
+            Sadlier Math Grade 5 • Lessons 11-3 & 11-4
+          </span>
+          <h1 class="text-xl md:text-2xl font-heading font-bold text-slate-900">
+            Lesson: Subtracting Decimals
+          </h1>
+        </div>
+      </div>
+
+      <!-- Quick Jump Navigation Tabs -->
+      <nav class="flex flex-wrap items-center justify-center gap-1.5 text-xs font-bold">
+        <a href="#sec1" class="px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-sky-100 text-slate-700 hover:text-sky-800 transition">1. Intro & Vocab</a>
+        <a href="#sec2" class="px-2.5 py-1.5 rounded-xl bg-sky-100 hover:bg-sky-200 text-sky-900 transition">2. Obj 1 Teach</a>
+        <a href="#sec3a" class="px-2.5 py-1.5 rounded-xl bg-amber-100 hover:bg-amber-200 text-amber-900 transition">3. Obj 1 Partner</a>
+        <a href="#sec3b" class="px-2.5 py-1.5 rounded-xl bg-sky-600 hover:bg-sky-700 text-white transition">4. Obj 1 Ind.</a>
+        <a href="#sec4" class="px-2.5 py-1.5 rounded-xl bg-purple-100 hover:bg-purple-200 text-purple-900 transition">5. Obj 2 Teach</a>
+        <a href="#sec5a" class="px-2.5 py-1.5 rounded-xl bg-amber-100 hover:bg-amber-200 text-amber-900 transition">6. Obj 2 Partner</a>
+        <a href="#sec5b" class="px-2.5 py-1.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white transition">7. Obj 2 Ind.</a>
+        <a href="#sec6" class="px-2.5 py-1.5 rounded-xl bg-emerald-100 hover:bg-emerald-200 text-emerald-900 transition">8. Summary</a>
+      </nav>
+
+      <!-- Live Score Counter, Save Work & Turn-In Action Buttons -->
+      <div class="flex items-center gap-2">
+        <div class="bg-slate-100 px-3 py-1.5 rounded-2xl border border-slate-200 flex items-center gap-2">
+          <div class="text-right">
+            <div class="text-[10px] font-bold text-slate-500 uppercase">Score Progress</div>
+            <div id="progress-text" class="text-xs font-extrabold text-sky-700">0 / 11 Solved</div>
+          </div>
+          <div class="w-16 bg-slate-200 rounded-full h-2.5 overflow-hidden">
+            <div id="progress-bar" class="bg-gradient-to-r from-sky-500 to-emerald-500 h-2.5 rounded-full transition-all duration-500 w-0"></div>
+          </div>
+        </div>
+
+        <button onclick="saveProgress()" class="bg-amber-500 hover:bg-amber-600 text-white font-bold px-3 py-2 rounded-xl transition flex items-center gap-1.5 text-xs shadow-sm" title="Save your current answers to finish later">
+          <i class="fa-solid fa-floppy-disk"></i> Save Work
+        </button>
+
+        <button onclick="loadProgress()" class="bg-slate-700 hover:bg-slate-800 text-white font-bold px-3 py-2 rounded-xl transition flex items-center gap-1.5 text-xs shadow-sm" title="Load previously saved answers">
+          <i class="fa-solid fa-folder-open"></i> Load Work
+        </button>
+
+        <button onclick="openSubmitModal()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3 py-2 rounded-xl transition flex items-center gap-1.5 text-xs shadow-sm">
+          <i class="fa-solid fa-paper-plane"></i> Email Teacher
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Toast Notification for Save/Load -->
+  <div id="toast-banner" class="fixed top-20 right-6 z-50 hidden bg-slate-900 text-white px-4 py-3 rounded-2xl shadow-xl flex items-center gap-3 text-sm border border-slate-700">
+    <i id="toast-icon" class="fa-solid fa-circle-check text-emerald-400 text-lg"></i>
+    <span id="toast-msg">Progress saved successfully!</span>
+  </div>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 mt-8 space-y-12">
+
+    <!-- SECTION 1: WHY WE NEED THIS MATH & KEY VOCABULARY -->
+    <section id="sec1" class="bg-white border-2 border-slate-200 rounded-3xl p-6 md:p-8 shadow-sm space-y-6">
+      <div class="flex items-center gap-3">
+        <div class="p-3 bg-emerald-100 text-emerald-800 rounded-2xl">
+          <i class="fa-solid fa-earth-americas text-2xl"></i>
+        </div>
+        <div>
+          <span class="text-xs font-bold text-emerald-800 uppercase tracking-wide">Section 1</span>
+          <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">Why We Need This Math & Key Vocabulary</h2>
+        </div>
+      </div>
+
+      <!-- Real World Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        
+        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 flex flex-col items-center text-center">
+          <div class="w-14 h-14 mb-2 flex items-center justify-center text-sky-600 text-3xl">
+            <i class="fa-solid fa-flask"></i>
+          </div>
+          <h3 class="font-heading font-bold text-lg text-slate-900">Chemistry & Medicine</h3>
+          <p class="text-sm text-slate-600 mt-1">
+            A blood test measures a pH level of 7.416. Later it drops to 7.358. We use decimal subtraction to find it decreased by exactly 0.058!
+          </p>
+        </div>
+
+        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 flex flex-col items-center text-center">
+          <div class="w-14 h-14 mb-2 flex items-center justify-center text-emerald-600 text-3xl">
+            <i class="fa-solid fa-mug-hot"></i>
+          </div>
+          <h3 class="font-heading font-bold text-lg text-slate-900">Cooking & Boiling</h3>
+          <p class="text-sm text-slate-600 mt-1">
+            A chef boils 0.94 liters of water. After boiling, 0.36 liters evaporate. Subtracting decimals helps her find that 0.58 liters remain.
+          </p>
+        </div>
+
+        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 flex flex-col items-center text-center">
+          <div class="w-14 h-14 mb-2 flex items-center justify-center text-purple-600 text-3xl">
+            <i class="fa-solid fa-stopwatch"></i>
+          </div>
+          <h3 class="font-heading font-bold text-lg text-slate-900">Sports & Racing</h3>
+          <p class="text-sm text-slate-600 mt-1">
+            A runner finishes a drill in 12.435 seconds. Her teammate finishes in 12.512 seconds. Subtracting thousandths reveals the exact split-second difference.
+          </p>
+        </div>
+
+        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 flex flex-col items-center text-center">
+          <div class="w-14 h-14 mb-2 flex items-center justify-center text-amber-600 text-3xl">
+            <i class="fa-solid fa-cloud-rain"></i>
+          </div>
+          <h3 class="font-heading font-bold text-lg text-slate-900">Weather & Climate</h3>
+          <p class="text-sm text-slate-600 mt-1">
+            A city receives 5.42 inches of rain in April, and 2.18 inches in May. Finding the difference tells us the precise change in rainfall.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Key Math Vocabulary Bar -->
+      <div class="bg-amber-50 border-2 border-amber-200 rounded-2xl p-5 space-y-3">
+        <h3 class="font-heading font-bold text-xl text-amber-950 flex items-center gap-2">
+          <i class="fa-solid fa-spell-check text-amber-600"></i> Key Vocabulary Terms
+        </h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 text-sm">
+          <div class="bg-white p-3 rounded-xl border border-amber-200"><mark>minuend</mark>: The first number in a subtraction problem; the total amount you start with.</div>
+          <div class="bg-white p-3 rounded-xl border border-amber-200"><mark>subtrahend</mark>: The number being subtracted from the minuend.</div>
+          <div class="bg-white p-3 rounded-xl border border-amber-200"><mark>difference</mark>: The final result or answer when you subtract one number from another.</div>
+          <div class="bg-white p-3 rounded-xl border border-amber-200"><mark>regroup</mark>: To rearrange groups in place value to carry out an operation (e.g., regrouping 1 tenth as 10 hundredths).</div>
+          <div class="bg-white p-3 rounded-xl border border-amber-200"><mark>hundredth</mark>: One of one hundred equal parts of a whole (two decimal places).</div>
+          <div class="bg-white p-3 rounded-xl border border-amber-200"><mark>thousandth</mark>: One of one thousand equal parts of a whole (three decimal places).</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: OBJECTIVE 1 DIRECT INSTRUCTION (Lesson 11-3 Hundredths) -->
+    <section id="sec2" class="bg-white border-2 border-sky-200 rounded-3xl p-6 md:p-8 shadow-sm space-y-6">
+      <div class="flex flex-col md:flex-row justify-between md:items-center gap-4">
+        <div class="flex items-center gap-3">
+          <div class="p-3 bg-sky-100 text-sky-800 rounded-2xl">
+            <i class="fa-solid fa-chalkboard-user text-2xl"></i>
+          </div>
+          <div>
+            <span class="text-xs font-bold text-sky-800 uppercase tracking-wide">Section 2 • 5 Minutes Direct Instruction</span>
+            <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">
+              Objective 1: Subtract Decimals (Hundredths)
+            </h2>
+          </div>
+        </div>
+        <div class="bg-sky-50 border border-sky-200 px-4 py-2 rounded-2xl text-sky-900 font-bold text-sm">
+          Example Problem: <span class="font-mono text-lg font-extrabold text-sky-700">0.94 - 0.36</span>
+        </div>
+      </div>
+
+      <!-- Problem Statement Highlighted -->
+      <div class="bg-sky-50 border border-sky-300 rounded-2xl p-4 text-slate-800">
+        <span class="font-bold text-sky-900 uppercase text-xs tracking-wider block mb-1">Example Problem Statement:</span>
+        <p class="text-base font-semibold">
+          A chef boils 0.94 liters of water. After boiling, 0.36 liters evaporate. Subtracting decimals helps her find the amount that remains.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+        
+        <!-- Step-by-Step Explanation -->
+        <div class="space-y-4">
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1">
+            <span class="font-bold text-sky-700 text-sm">Step 1: Set Up and Regroup</span>
+            <p class="text-slate-700 text-base">
+              <b>Problem:</b> Find 0.94 - 0.36.<br><br>
+              First, line up the decimal points. Since you cannot subtract 6 hundredths from 4 hundredths, you must regroup!<br>
+              Regroup 9 tenths and 4 hundredths as <b>8 tenths and 14 hundredths</b>.
+            </p>
+          </div>
+
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1">
+            <span class="font-bold text-sky-700 text-sm">Step 2: Subtract by Place Value</span>
+            <p class="text-slate-700 text-base">
+              • Subtract the hundredths: 14 - 6 = 8.<br>
+              • Subtract the tenths: 8 - 3 = 5.<br>
+              • Bring straight down the decimal point.<br>
+              The difference is <b>0.58</b>.
+            </p>
+          </div>
+        </div>
+
+        <!-- VISUAL SUMMARY CARD -->
+        <div class="bg-slate-50 p-6 rounded-2xl border-2 border-sky-300 shadow-sm flex flex-col items-center">
+          <span class="text-xs font-bold text-sky-800 uppercase tracking-widest mb-4">Subtracting with Place Value</span>
+          
+          <div class="w-full max-w-md bg-white p-5 rounded-2xl border border-slate-300 shadow-inner space-y-4 text-center font-mono">
+            <div class="text-right max-w-[120px] mx-auto text-xl leading-relaxed">
+                <span class="text-red-600 text-sm align-top">8</span><span class="text-red-600 text-sm align-top ml-3">14</span><br>
+                0.<s>9</s><s>4</s><br>
+              -0.36<br>
+              <hr class="border-slate-800 border-2 my-1">
+                0.58
+            </div>
+            
+            <div class="pt-3 border-t border-slate-200 text-center">
+              <span class="text-xs font-bold text-slate-500 uppercase block">Calculation:</span>
+              <span class="text-2xl font-extrabold text-sky-700 font-mono">0.94 - 0.36 = 0.58</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Common Error Box -->
+      <div class="bg-amber-50 border-2 border-amber-300 rounded-2xl p-5 flex items-start gap-4">
+        <div class="p-3 bg-amber-200 text-amber-900 rounded-xl">
+          <i class="fa-solid fa-triangle-exclamation text-2xl"></i>
+        </div>
+        <div>
+          <h4 class="font-heading font-bold text-amber-950 text-lg">Error to Avoid: Forgetting to Line Up the Decimals!</h4>
+          <p class="text-slate-700 text-base mt-1">
+            Always make sure the decimal points are stacked exactly on top of each other before you begin subtracting.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3A: OBJECTIVE 1 GUIDED PRACTICE (5 Mins - Partner Work) -->
+    <section id="sec3a" class="space-y-6">
+      <div class="flex items-center gap-3">
+        <div class="p-3 bg-amber-500 text-white rounded-2xl shadow-sm">
+          <i class="fa-solid fa-user-group text-2xl"></i>
+        </div>
+        <div>
+          <span class="text-xs font-bold text-amber-800 uppercase tracking-wide">Section 3A • 5 Minutes Guided Practice (Partner Work)</span>
+          <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">
+            Objective 1 Partner Practice (Problems 1–2)
+          </h2>
+          <p class="text-sm text-slate-600 font-semibold">Work together with a partner to regroup and subtract hundredths!</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <!-- Problem 1 -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-amber-300 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-heading font-bold text-amber-900 text-xl">Problem 1 (Partner Work)</span>
+              <span class="text-xs font-bold px-3 py-1 bg-amber-100 text-amber-900 rounded-full">5.42 - 2.18</span>
+            </div>
+            
+            <div class="bg-amber-50 p-3 rounded-xl border border-amber-200 text-xs font-semibold text-amber-950 mb-3">
+              <b>Problem Statement:</b> Find the difference for 5.42 - 2.18.
+            </div>
+
+            <p class="text-xs font-bold text-amber-800 uppercase tracking-wide mb-2"><i class="fa-solid fa-comments"></i> Partner Steps:</p>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3 text-sm">
+              <div class="flex justify-between items-center">
+                <span class="font-semibold text-slate-700">Regroup 4 tenths 2 hundredths as 3 tenths and <u>  ?  </u> hundredths:</span>
+                <input type="text" id="p1-1" class="math-input w-24" placeholder="?">
+              </div>
+              <div class="border-t border-slate-300 pt-2 flex justify-between items-center">
+                <span class="font-bold text-slate-900">Difference:</span>
+                <input type="text" id="p1-2" class="math-input w-28 font-bold text-amber-700" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p1')" class="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-amber-600"></i> Partner Hint
+            </button>
+            <div id="hint-p1" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p>• Since you can't subtract 8 from 2, borrow from the 4 tenths.</p>
+              <p>• The 2 hundredths become 12 hundredths.</p>
+            </div>
+
+            <div id="msg-p1" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p1', [['12'], ['3.24']])" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Partner Answer
+            </button>
+          </div>
+        </div>
+
+        <!-- Problem 2 -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-amber-300 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-heading font-bold text-amber-900 text-xl">Problem 2 (Partner Work)</span>
+              <span class="text-xs font-bold px-3 py-1 bg-amber-100 text-amber-900 rounded-full">8.70 - 3.45</span>
+            </div>
+
+            <div class="bg-amber-50 p-3 rounded-xl border border-amber-200 text-xs font-semibold text-amber-950 mb-3">
+              <b>Problem Statement:</b> Find the difference for 8.70 - 3.45.
+            </div>
+
+            <p class="text-xs font-bold text-amber-800 uppercase tracking-wide mb-2"><i class="fa-solid fa-comments"></i> Partner Steps:</p>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3 text-sm">
+              <div class="flex justify-between items-center">
+                <span class="font-semibold text-slate-700">Regroup 7 tenths 0 hundredths as 6 tenths and <u>  ?  </u> hundredths:</span>
+                <input type="text" id="p2-1" class="math-input w-24" placeholder="?">
+              </div>
+              <div class="border-t border-slate-300 pt-2 flex justify-between items-center">
+                <span class="font-bold text-slate-900">Difference:</span>
+                <input type="text" id="p2-2" class="math-input w-28 font-bold text-amber-700" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p2')" class="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-amber-600"></i> Partner Hint
+            </button>
+            <div id="hint-p2" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p>• You cannot subtract 5 from 0.</p>
+              <p>• Borrow from the 7 tenths to make it 10 hundredths.</p>
+            </div>
+
+            <div id="msg-p2" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p2', [['10'], ['5.25']])" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Partner Answer
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 3B: OBJECTIVE 1 INDEPENDENT PRACTICE (5 Mins - Individual Work) -->
+    <section id="sec3b" class="space-y-6">
+      <div class="flex items-center gap-3">
+        <div class="p-3 bg-sky-600 text-white rounded-2xl shadow-sm">
+          <i class="fa-solid fa-user text-2xl"></i>
+        </div>
+        <div>
+          <span class="text-xs font-bold text-sky-800 uppercase tracking-wide">Section 3B • 5 Minutes Independent Practice (Individual Work)</span>
+          <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">
+            Objective 1 Independent Practice (Problems 3–5)
+          </h2>
+          <p class="text-sm text-slate-600 font-semibold">Work on your own to solve these hundredths subtraction problems!</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <!-- Problem 3 -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-heading font-bold text-sky-800 text-xl">Problem 3</span>
+              <span class="text-xs font-bold px-3 py-1 bg-sky-100 text-sky-900 rounded-full">9.61 - 4.28</span>
+            </div>
+
+            <div class="bg-sky-50 p-2.5 rounded-xl border border-sky-200 text-xs font-semibold text-sky-950 mb-3">
+              <b>Problem Statement:</b> Find the difference for 9.61 - 4.28.
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3 text-sm">
+              <div class="flex justify-between items-center">
+                <span class="font-semibold text-slate-700">Difference:</span>
+                <input type="text" id="p3-1" class="math-input w-28 font-bold text-sky-700" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <div id="msg-p3" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p3', [['5.33']])" class="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+        <!-- Problem 4 -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-heading font-bold text-sky-800 text-xl">Problem 4</span>
+              <span class="text-xs font-bold px-3 py-1 bg-sky-100 text-sky-900 rounded-full">14.30 - 8.16</span>
+            </div>
+
+            <div class="bg-sky-50 p-2.5 rounded-xl border border-sky-200 text-xs font-semibold text-sky-950 mb-3">
+              <b>Problem Statement:</b> Find the difference for 14.30 - 8.16.
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3 text-sm">
+              <div class="flex justify-between items-center">
+                <span class="font-semibold text-slate-700">Difference:</span>
+                <input type="text" id="p4-1" class="math-input w-28 font-bold text-sky-700" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <div id="msg-p4" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p4', [['6.14']])" class="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+        <!-- Problem 5: Word Problem -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-heading font-bold text-sky-800 text-xl">Problem 5 (Word)</span>
+              <span class="text-xs font-bold px-3 py-1 bg-emerald-100 text-emerald-900 rounded-full"><i class="fa-solid fa-bucket"></i> Water</span>
+            </div>
+
+            <div class="bg-emerald-50 p-2.5 rounded-xl border border-emerald-200 text-xs font-semibold text-emerald-950 mb-3">
+              <b>Problem Statement:</b> A bucket contains 4.25 liters of water. A dog drinks 1.17 liters from the bucket. How much water is left?
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3 text-sm">
+              <div class="flex justify-between items-center">
+                <span class="font-semibold text-slate-700">Remaining Liters:</span>
+                <input type="text" id="p5-1" class="math-input w-28 font-bold text-emerald-700" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <div id="msg-p5" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p5', [['3.08']])" class="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 4: OBJECTIVE 2 DIRECT INSTRUCTION (Lesson 11-4 Thousandths) -->
+    <section id="sec4" class="bg-white border-2 border-purple-200 rounded-3xl p-6 md:p-8 shadow-sm space-y-6">
+      <div class="flex flex-col md:flex-row justify-between md:items-center gap-4">
+        <div class="flex items-center gap-3">
+          <div class="p-3 bg-purple-100 text-purple-900 rounded-2xl">
+            <i class="fa-solid fa-chart-line text-2xl"></i>
+          </div>
+          <div>
+            <span class="text-xs font-bold text-purple-900 uppercase tracking-wide">Section 4 • 5 Minutes Direct Instruction</span>
+            <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">
+              Objective 2: Subtract Decimals (Thousandths)
+            </h2>
+          </div>
+        </div>
+        <div class="bg-purple-50 border border-purple-200 px-4 py-2 rounded-2xl text-purple-900 font-bold text-sm">
+          Example Problem: <span class="font-mono text-lg font-extrabold text-purple-700">6.315 - 2.184</span>
+        </div>
+      </div>
+
+      <!-- Problem Statement Highlighted -->
+      <div class="bg-purple-50 border border-purple-300 rounded-2xl p-4 text-slate-800">
+        <span class="font-bold text-purple-900 uppercase text-xs tracking-wider block mb-1">Example Problem Statement:</span>
+        <p class="text-base font-semibold">
+          A scientist weighs a mineral sample at 6.315 grams. Another sample weighs 2.184 grams. What is the difference in their weights?
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+        
+        <!-- Step-by-Step Instruction -->
+        <div class="space-y-4">
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1">
+            <span class="font-bold text-purple-800 text-sm">Step 1: Set Up & Check Places</span>
+            <p class="text-slate-700 text-base">
+              <b>Problem:</b> Find 6.315 - 2.184.<br><br>
+              Make sure to line up the decimals precisely. Here, we need to subtract in the thousandths, hundredths, tenths, and ones places!
+            </p>
+          </div>
+
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1">
+            <span class="font-bold text-purple-800 text-sm">Step 2: Regrouping Across Places</span>
+            <p class="text-slate-700 text-sm mt-1">
+              • Thousandths: 5 - 4 = 1.<br>
+              • Hundredths: You can't subtract 8 from 1. Regroup the 3 tenths as 2 tenths and 11 hundredths.<br>
+              • 11 - 8 = 3 hundredths.<br>
+              • Tenths: 2 - 1 = 1.<br>
+              • Ones: 6 - 2 = 4.<br>
+              The difference is <b>4.131</b>.
+            </p>
+          </div>
+        </div>
+
+        <!-- BREAK APART VISUAL CARD -->
+        <div class="bg-slate-50 p-6 rounded-2xl border-2 border-purple-300 shadow-sm flex flex-col items-center">
+          <span class="text-xs font-bold text-purple-900 uppercase tracking-widest mb-3">Place Value Alignment</span>
+
+          <div class="w-full bg-white p-5 rounded-2xl border border-slate-300 space-y-4 font-mono text-center">
+            
+            <div class="text-right max-w-[150px] mx-auto text-xl leading-relaxed">
+                 <span class="text-red-600 text-sm align-top ml-2">2</span><span class="text-red-600 text-sm align-top ml-2">11</span><br>
+                6.<s>3</s><s>1</s>5<br>
+              -2.184<br>
+              <hr class="border-slate-800 border-2 my-1">
+                4.131
+            </div>
+
+            <div class="pt-2 border-t-2 border-purple-300 flex justify-between items-center font-extrabold text-lg text-purple-950">
+              <span>Final Difference:</span>
+              <span class="bg-purple-100 px-3 py-1 rounded-lg text-purple-900">4.131</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- SECTION 5A: OBJECTIVE 2 GUIDED PRACTICE (5 Mins - Partner Work) -->
+    <section id="sec5a" class="space-y-6">
+      <div class="flex items-center gap-3">
+        <div class="p-3 bg-amber-500 text-white rounded-2xl shadow-sm">
+          <i class="fa-solid fa-user-group text-2xl"></i>
+        </div>
+        <div>
+          <span class="text-xs font-bold text-amber-800 uppercase tracking-wide">Section 5A • 5 Minutes Guided Practice (Partner Work)</span>
+          <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">
+            Objective 2 Partner Practice (Problems 6–7)
+          </h2>
+          <p class="text-sm text-slate-600 font-semibold">Work together with your partner to subtract thousandths!</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <!-- Problem 6 -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-amber-300 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-heading font-bold text-amber-900 text-xl">Problem 6 (Partner Work)</span>
+              <span class="text-xs font-bold px-3 py-1 bg-amber-100 text-amber-900 rounded-full">7.542 - 3.261</span>
+            </div>
+
+            <div class="bg-amber-50 p-3 rounded-xl border border-amber-200 text-xs font-semibold text-amber-950 mb-3">
+              <b>Problem Statement:</b> Find the difference for 7.542 - 3.261.
+            </div>
+
+            <p class="text-xs font-bold text-amber-800 uppercase tracking-wide mb-2"><i class="fa-solid fa-comments"></i> Partner Discussion:</p>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3 text-sm">
+              <div class="flex justify-between items-center">
+                <span class="font-semibold text-slate-700">Thousandths Column (2 - 1):</span>
+                <input type="text" id="p6-1" class="math-input w-28" placeholder="?">
+              </div>
+              <div class="border-t border-slate-300 pt-2 flex justify-between items-center">
+                <span class="font-bold text-slate-900">Final Difference:</span>
+                <input type="text" id="p6-2" class="math-input w-28 font-bold text-amber-700" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p6')" class="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-amber-600"></i> Partner Hint
+            </button>
+            <div id="hint-p6" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p>• Regrouping will be needed in the hundredths place!</p>
+              <p>• Borrow from the 5 tenths to make 14 hundredths.</p>
+            </div>
+
+            <div id="msg-p6" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p6', [['1'], ['4.281']])" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Partner Answer
+            </button>
+          </div>
+        </div>
+
+        <!-- Problem 7 -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-amber-300 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-heading font-bold text-amber-900 text-xl">Problem 7 (Partner Work)</span>
+              <span class="text-xs font-bold px-3 py-1 bg-amber-100 text-amber-900 rounded-full">9.108 - 4.053</span>
+            </div>
+
+            <div class="bg-amber-50 p-3 rounded-xl border border-amber-200 text-xs font-semibold text-amber-950 mb-3">
+              <b>Problem Statement:</b> Find the difference for 9.108 - 4.053.
+            </div>
+
+            <p class="text-xs font-bold text-amber-800 uppercase tracking-wide mb-2"><i class="fa-solid fa-comments"></i> Partner Steps:</p>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3 text-sm">
+              <div class="flex justify-between items-center">
+                <span class="font-semibold text-slate-700">Final Difference:</span>
+                <input type="text" id="p7-1" class="math-input w-28 font-bold text-amber-700" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p7')" class="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-amber-600"></i> Partner Hint
+            </button>
+            <div id="hint-p7" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p>• You cannot subtract 5 from 0 in the hundredths place.</p>
+              <p>• Borrow from the 1 tenth to make it 10 hundredths.</p>
+            </div>
+
+            <div id="msg-p7" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p7', [['5.055']])" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Partner Answer
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 5B: OBJECTIVE 2 INDEPENDENT PRACTICE (5 Mins - Individual Work) -->
+    <section id="sec5b" class="space-y-6">
+      <div class="flex items-center gap-3">
+        <div class="p-3 bg-purple-600 text-white rounded-2xl shadow-sm">
+          <i class="fa-solid fa-user text-2xl"></i>
+        </div>
+        <div>
+          <span class="text-xs font-bold text-purple-800 uppercase tracking-wide">Section 5B • 5 Minutes Independent Practice (Individual Work)</span>
+          <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">
+            Objective 2 Independent Practice (Problems 8–11)
+          </h2>
+          <p class="text-sm text-slate-600 font-semibold">Subtract thousandths independently to reveal the final differences!</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+        <!-- Problem 8 -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-heading font-bold text-purple-900 text-xl">Problem 8</span>
+              <span class="text-xs font-bold px-3 py-1 bg-purple-100 text-purple-900 rounded-full">12.435 - 5.172</span>
+            </div>
+
+            <div class="bg-purple-50 p-2.5 rounded-xl border border-purple-200 text-xs font-semibold text-purple-950 mb-3">
+              <b>Problem Statement:</b> Find the difference for 12.435 - 5.172.
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-2 text-xs">
+              <div class="border-t border-slate-300 pt-2 flex justify-between items-center">
+                <span class="font-bold text-slate-900 text-sm">Difference:</span>
+                <input type="text" id="p8-1" class="math-input w-24 h-9 font-bold text-purple-800 text-sm" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <div id="msg-p8" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p8', [['7.263']])" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 rounded-xl transition shadow-sm text-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+        <!-- Problem 9 -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-heading font-bold text-purple-900 text-xl">Problem 9</span>
+              <span class="text-xs font-bold px-3 py-1 bg-purple-100 text-purple-900 rounded-full">8.050 - 2.914</span>
+            </div>
+
+            <div class="bg-purple-50 p-2.5 rounded-xl border border-purple-200 text-xs font-semibold text-purple-950 mb-3">
+              <b>Problem Statement:</b> Find the difference for 8.050 - 2.914.
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-2 text-xs">
+              <div class="border-t border-slate-300 pt-2 flex justify-between items-center">
+                <span class="font-bold text-slate-900 text-sm">Difference:</span>
+                <input type="text" id="p9-1" class="math-input w-24 h-9 font-bold text-purple-800 text-sm" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <div id="msg-p9" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p9', [['5.136']])" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 rounded-xl transition shadow-sm text-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+        <!-- Problem 10 -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-heading font-bold text-purple-900 text-xl">Problem 10</span>
+              <span class="text-xs font-bold px-3 py-1 bg-purple-100 text-purple-900 rounded-full">15.702 - 9.348</span>
+            </div>
+
+            <div class="bg-purple-50 p-2.5 rounded-xl border border-purple-200 text-xs font-semibold text-purple-950 mb-3">
+              <b>Problem Statement:</b> Find the difference for 15.702 - 9.348.
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-2 text-xs">
+              <div class="border-t border-slate-300 pt-2 flex justify-between items-center">
+                <span class="font-bold text-slate-900 text-sm">Difference:</span>
+                <input type="text" id="p10-1" class="math-input w-24 h-9 font-bold text-purple-800 text-sm" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <div id="msg-p10" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p10', [['6.354']])" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 rounded-xl transition shadow-sm text-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+        <!-- Problem 11: Word Problem -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-heading font-bold text-purple-900 text-xl">Problem 11 (Word)</span>
+              <span class="text-xs font-bold px-3 py-1 bg-emerald-100 text-emerald-900 rounded-full"><i class="fa-solid fa-weight-hanging"></i> Gold</span>
+            </div>
+
+            <div class="bg-emerald-50 p-2.5 rounded-xl border border-emerald-200 text-xs font-semibold text-emerald-950 mb-3">
+              <b>Problem Statement:</b> A gold chain weighs 24.156 grams. A smaller chain weighs 12.089 grams. How much heavier is the first chain?
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-2 text-xs">
+              <div class="border-t border-slate-300 pt-2 flex justify-between items-center">
+                <span class="font-bold text-slate-900 text-sm">Difference in Weight:</span>
+                <input type="text" id="p11-1" class="math-input w-24 h-9 font-bold text-emerald-700 text-sm" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <div id="msg-p11" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p11', [['12.067']])" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 rounded-xl transition shadow-sm text-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 6: KEY TAKEAWAYS & EMAIL TURN-IN -->
+    <section id="sec6" class="bg-amber-50 border-2 border-amber-200 rounded-3xl p-6 md:p-8 space-y-6">
+      <div class="flex items-center gap-3">
+        <div class="p-3 bg-amber-200 text-amber-900 rounded-2xl">
+          <i class="fa-solid fa-award text-2xl"></i>
+        </div>
+        <div>
+          <span class="text-xs font-bold text-amber-800 uppercase tracking-wide">Section 6</span>
+          <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">Key Takeaways & Save / Turn In</h2>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        
+        <div class="bg-white p-5 rounded-2xl border border-amber-200 space-y-2">
+          <div class="text-amber-800 font-bold text-lg flex items-center gap-2">
+            <i class="fa-solid fa-align-center"></i> 1. Line 'Em Up
+          </div>
+          <p class="text-sm text-slate-600">
+            Always line up the decimal points first so that ones match with ones, tenths with tenths, etc.
+          </p>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-sky-200 space-y-2">
+          <div class="text-sky-800 font-bold text-lg flex items-center gap-2">
+            <i class="fa-solid fa-0"></i> 2. Placeholders
+          </div>
+          <p class="text-sm text-slate-600">
+            You can write a zero (0) in empty decimal places to make subtracting easier!
+          </p>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-purple-200 space-y-2">
+          <div class="text-purple-800 font-bold text-lg flex items-center gap-2">
+            <i class="fa-solid fa-arrow-right-arrow-left"></i> 3. Regrouping
+          </div>
+          <p class="text-sm text-slate-600">
+            If a digit in the minuend is smaller than the subtrahend, borrow from the next place value to the left.
+          </p>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-emerald-200 space-y-2">
+          <div class="text-emerald-800 font-bold text-lg flex items-center gap-2">
+            <i class="fa-solid fa-bullseye"></i> 4. Check Work
+          </div>
+          <p class="text-sm text-slate-600">
+            Add your final difference back to the subtrahend (bottom number) to see if you get the top number!
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Final Completion, Save & Email Turn In Card -->
+      <div class="bg-white p-8 rounded-3xl border-2 border-emerald-300 text-center space-y-4 shadow-md">
+        <div class="w-16 h-16 bg-emerald-100 text-emerald-700 rounded-2xl flex items-center justify-center mx-auto text-3xl">
+          <i class="fa-solid fa-envelope"></i>
+        </div>
+        <h3 class="font-heading font-bold text-2xl text-slate-900">Save Your Progress or Email Your Teacher</h3>
+        <p class="text-slate-600 text-base max-w-xl mx-auto">
+          Need more time? You can <b>Save Work</b> to finish later, or click below when you're ready to submit your full score report to <b>jvena@saintmarys.us</b>!
+        </p>
+        <div class="flex flex-wrap justify-center gap-4 pt-2">
+          <button onclick="saveProgress()" class="bg-amber-500 hover:bg-amber-600 text-white font-bold text-lg px-6 py-3.5 rounded-2xl transition shadow-md inline-flex items-center gap-2">
+            <i class="fa-solid fa-floppy-disk"></i> Save Work For Later
+          </button>
+          <button onclick="openSubmitModal()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-lg px-8 py-3.5 rounded-2xl transition shadow-lg inline-flex items-center gap-2">
+            <i class="fa-solid fa-paper-plane"></i> Email Work to jvena@saintmarys.us
+          </button>
+          <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-6 py-3.5 rounded-2xl transition border border-slate-300 inline-flex items-center gap-2">
+            <i class="fa-solid fa-arrow-up"></i> Return to Top
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- INTERACTIVE MANIPULATIVES FLOATING BUTTON -->
+  <div class="fixed bottom-24 right-6 z-50">
+    <button onclick="toggleManipulatives()" class="bg-amber-600 hover:bg-amber-700 text-white font-bold px-5 py-3 rounded-full shadow-2xl flex items-center gap-2 text-base transition transform hover:scale-105 border-2 border-white">
+      <i class="fa-solid fa-shapes"></i> Base-10 Blocks
+    </button>
+  </div>
+
+  <!-- INTERACTIVE SCRATCHPAD FLOATING BUTTON -->
+  <div class="fixed bottom-6 right-6 z-50">
+    <button onclick="toggleScratchpad()" class="bg-sky-600 hover:bg-sky-700 text-white font-bold px-5 py-3 rounded-full shadow-2xl flex items-center gap-2 text-base transition transform hover:scale-105 border-2 border-white">
+      <i class="fa-solid fa-pen-line"></i> Open Scratchpad
+    </button>
+  </div>
+
+  <!-- MANIPULATIVES MODAL (Base 10 Blocks) -->
+  <div id="manipulatives-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl space-y-4 flex flex-col">
+      <div class="flex justify-between items-center border-b border-slate-200 pb-3">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-shapes text-amber-600 text-xl"></i>
+          <h3 class="font-heading font-bold text-xl text-slate-900">Digital Math Manipulatives</h3>
+        </div>
+        <button onclick="toggleManipulatives()" class="text-slate-400 hover:text-slate-700 text-2xl font-bold px-2">×</button>
+      </div>
+
+      <div class="bg-amber-50 p-3 rounded-xl border border-amber-200 text-xs font-semibold text-amber-950">
+        <b>Instructions:</b> This grid represents one whole (divided into 100 hundredths). Click the blocks to "cross them out" and visually model decimal subtraction!
+      </div>
+      
+      <div class="flex justify-between items-center bg-slate-100 p-2 rounded-xl">
+        <span class="text-sm font-bold text-slate-700 pl-2">Crossed out: <span id="crossed-count" class="text-red-600">0</span> hundredths</span>
+        <button onclick="resetManipulatives()" class="bg-slate-300 hover:bg-slate-400 text-slate-800 text-xs font-bold px-3 py-1.5 rounded-lg transition">
+          Reset Blocks
+        </button>
+      </div>
+
+      <!-- Base 10 Grid -->
+      <div id="base-ten-grid" class="grid grid-cols-10 gap-1 bg-slate-200 p-2 rounded-xl border-2 border-slate-300 mx-auto w-full max-w-[320px]">
+        <!-- JS will populate 100 blocks here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRATCHPAD MODAL -->
+  <div id="scratchpad-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-3xl w-full p-6 shadow-2xl space-y-4 flex flex-col h-[85vh]">
+      <div class="flex justify-between items-center border-b border-slate-200 pb-3">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-pen-clip text-sky-600 text-xl"></i>
+          <h3 class="font-heading font-bold text-xl text-slate-900">Chromebook Scratchpad & Work Area</h3>
+        </div>
+        <button onclick="toggleScratchpad()" class="text-slate-400 hover:text-slate-700 text-2xl font-bold px-2">×</button>
+      </div>
+
+      <!-- Controls -->
+      <div class="flex flex-wrap items-center justify-between gap-3 bg-slate-100 p-3 rounded-2xl">
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-bold text-slate-600">Color:</span>
+          <button onclick="setPadColor('#0284c7')" class="w-8 h-8 rounded-full bg-sky-600 border-2 border-white shadow"></button>
+          <button onclick="setPadColor('#dc2626')" class="w-8 h-8 rounded-full bg-red-600 border-2 border-white shadow"></button>
+          <button onclick="setPadColor('#16a34a')" class="w-8 h-8 rounded-full bg-emerald-600 border-2 border-white shadow"></button>
+          <button onclick="setPadColor('#0f172a')" class="w-8 h-8 rounded-full bg-slate-900 border-2 border-white shadow"></button>
+        </div>
+        <button onclick="clearScratchpad()" class="bg-red-100 hover:bg-red-200 text-red-800 text-xs font-bold px-3 py-2 rounded-xl transition">
+          <i class="fa-solid fa-trash"></i> Clear Pad
+        </button>
+      </div>
+
+      <!-- Canvas Box -->
+      <div class="flex-1 bg-slate-50 border-2 border-slate-200 rounded-2xl overflow-hidden relative">
+        <canvas id="scratch-canvas" class="w-full h-full cursor-crosshair"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- STUDENT EMAIL SUBMIT MODAL -->
+  <div id="submit-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 md:p-8 shadow-2xl space-y-6 border-4 border-emerald-500">
+      <div class="flex justify-between items-center border-b border-slate-200 pb-3">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-paper-plane text-emerald-600 text-2xl"></i>
+          <h3 class="font-heading font-bold text-2xl text-slate-900">Email Report to Teacher</h3>
+        </div>
+        <button onclick="closeSubmitModal()" class="text-slate-400 hover:text-slate-700 text-2xl font-bold px-2">×</button>
+      </div>
+
+      <!-- Error alert banner -->
+      <div id="submit-error-banner" class="hidden bg-red-100 border border-red-300 text-red-800 p-3 rounded-xl text-xs font-bold flex items-center gap-2">
+        <i class="fa-solid fa-triangle-exclamation text-base"></i> Please enter your First and Last Name before turning in!
+      </div>
+
+      <div class="space-y-4">
+        <div>
+          <label class="block text-sm font-bold text-slate-700 mb-1">Student First & Last Name:</label>
+          <input type="text" id="studentName" class="w-full px-4 py-3 rounded-xl border-2 border-slate-300 font-bold text-slate-900 focus:border-emerald-500 focus:outline-none" placeholder="e.g. Alex Johnson">
+        </div>
+
+        <div>
+          <label class="block text-sm font-bold text-slate-700 mb-1">Grade / Class:</label>
+          <input type="text" id="classId" class="w-full px-4 py-3 rounded-xl border-2 border-slate-300 font-bold text-slate-900 focus:border-emerald-500 focus:outline-none" placeholder="e.g. 5th Grade Math">
+        </div>
+
+        <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-xl text-xs text-emerald-900">
+          <i class="fa-solid fa-circle-info"></i> Submitting will automatically open a <b>Gmail web compose window in a new tab</b> with your full score report pre-filled for <b>jvena@saintmarys.us</b>.
+        </div>
+      </div>
+
+      <div class="flex gap-3 pt-2">
+        <button onclick="processEmailSubmission()" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl transition shadow-md flex items-center justify-center gap-2">
+          <i class="fa-solid fa-envelope"></i> Open Gmail in New Tab
+        </button>
+        <button onclick="closeSubmitModal()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-5 py-3.5 rounded-xl transition">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUCCESS CONFIRMATION MODAL -->
+  <div id="success-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 text-center space-y-4 border-4 border-emerald-500 shadow-2xl">
+      <div class="w-16 h-16 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center mx-auto text-3xl">
+        <i class="fa-solid fa-check"></i>
+      </div>
+      <h3 class="font-heading font-bold text-2xl text-slate-900">Gmail Opened!</h3>
+      <p id="success-message-text" class="text-sm text-slate-600 leading-relaxed"></p>
+      <button onclick="document.getElementById('success-modal').classList.add('hidden')" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl transition">
+        Got It!
+      </button>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    const solvedProblems = new Set();
+    const totalProblems = 11;
+    const DEFAULT_TEACHER_EMAIL = "jvena@saintmarys.us";
+
+    function sanitizeInput(val) {
+      if (!val) return '';
+      return val.toString().replace(/,/g, '').trim().toLowerCase();
+    }
+
+    function toggleHint(hintId) {
+      const hintElem = document.getElementById(hintId);
+      if (hintElem) hintElem.classList.toggle('hidden');
+    }
+
+    function showToast(message, isSuccess = true) {
+      const banner = document.getElementById('toast-banner');
+      const icon = document.getElementById('toast-icon');
+      const msg = document.getElementById('toast-msg');
+
+      if (!banner || !msg || !icon) return;
+
+      msg.innerText = message;
+      if (isSuccess) {
+        icon.className = 'fa-solid fa-circle-check text-emerald-400 text-lg';
+      } else {
+        icon.className = 'fa-solid fa-circle-info text-sky-400 text-lg';
+      }
+
+      banner.classList.remove('hidden');
+      setTimeout(() => {
+        banner.classList.add('hidden');
+      }, 3500);
+    }
+
+    function checkProblem(probId, expectedAnswers) {
+      let allCorrect = true;
+
+      expectedAnswers.forEach((expectedList, idx) => {
+        const inputElem = document.getElementById(`${probId}-${idx + 1}`);
+        if (!inputElem) return;
+
+        const userVal = sanitizeInput(inputElem.value);
+        const options = Array.isArray(expectedList) ? expectedList.map(v => sanitizeInput(v)) : [sanitizeInput(expectedList)];
+
+        if (options.includes(userVal)) {
+          inputElem.classList.remove('incorrect');
+          inputElem.classList.add('correct');
+        } else {
+          inputElem.classList.remove('correct');
+          inputElem.classList.add('incorrect');
+          allCorrect = false;
+        }
+      });
+
+      const msgElem = document.getElementById(`msg-${probId}`);
+      if (msgElem) {
+        msgElem.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-800', 'bg-red-100', 'text-red-800');
+        if (allCorrect) {
+          msgElem.classList.add('bg-emerald-100', 'text-emerald-800');
+          msgElem.innerHTML = '<i class="fa-solid fa-circle-check"></i> Great job! Correct!';
+          solvedProblems.add(probId);
+        } else {
+          msgElem.classList.add('bg-red-100', 'text-red-800');
+          msgElem.innerHTML = '<i class="fa-solid fa-circle-xmark"></i> Check the red boxes and try again!';
+        }
+      }
+
+      updateProgress();
+    }
+
+    function updateProgress() {
+      const count = solvedProblems.size;
+      const percent = Math.round((count / totalProblems) * 100);
+
+      const progressText = document.getElementById('progress-text');
+      const progressBar = document.getElementById('progress-bar');
+
+      if (progressText) progressText.innerText = `${count} / ${totalProblems} Solved`;
+      if (progressBar) progressBar.style.width = `${percent}%`;
+    }
+
+    /* SAVE FOR LATER FUNCTIONALITY */
+    function saveProgress() {
+      const dataToSave = {
+        inputs: {},
+        solved: Array.from(solvedProblems),
+        savedAt: new Date().toLocaleTimeString()
+      };
+
+      const inputs = document.querySelectorAll('input.math-input, #studentName, #classId');
+      inputs.forEach(input => {
+        if (input.id) {
+          dataToSave.inputs[input.id] = input.value;
+        }
+      });
+
+      try {
+        localStorage.setItem('grade5_math_worksheet_dec_sub', JSON.stringify(dataToSave));
+        showToast('Your work has been saved to this device! You can finish later.');
+      } catch (e) {
+        showToast('Unable to save to localStorage.', false);
+      }
+    }
+
+    function loadProgress() {
+      try {
+        const savedRaw = localStorage.getItem('grade5_math_worksheet_dec_sub');
+        if (!savedRaw) {
+          showToast('No saved work found on this device.', false);
+          return;
+        }
+
+        const data = JSON.parse(savedRaw);
+        if (data.inputs) {
+          Object.keys(data.inputs).forEach(id => {
+            const elem = document.getElementById(id);
+            if (elem) elem.value = data.inputs[id];
+          });
+        }
+
+        if (data.solved) {
+          solvedProblems.clear();
+          data.solved.forEach(p => solvedProblems.add(p));
+          updateProgress();
+        }
+
+        showToast('Saved work successfully loaded!');
+      } catch (e) {
+        showToast('Error loading saved work.', false);
+      }
+    }
+
+    /* Base-10 Blocks Logic */
+    function initManipulatives() {
+      const grid = document.getElementById('base-ten-grid');
+      if (!grid || grid.children.length > 0) return; // already initialized
+
+      for(let i=0; i<100; i++) {
+        const block = document.createElement('div');
+        block.className = 'base-block rounded-sm';
+        block.onclick = function() {
+          this.classList.toggle('crossed-out');
+          updateManipulativesCount();
+        };
+        grid.appendChild(block);
+      }
+    }
+
+    function updateManipulativesCount() {
+      const crossed = document.querySelectorAll('.base-block.crossed-out').length;
+      document.getElementById('crossed-count').innerText = crossed;
+    }
+
+    function resetManipulatives() {
+      const blocks = document.querySelectorAll('.base-block');
+      blocks.forEach(b => b.classList.remove('crossed-out'));
+      updateManipulativesCount();
+    }
+
+    function toggleManipulatives() {
+      const modal = document.getElementById('manipulatives-modal');
+      modal.classList.toggle('hidden');
+      if(!modal.classList.contains('hidden')) {
+        initManipulatives();
+      }
+    }
+
+    /* Auto-load saved work if present */
+    window.onload = function() {
+      if (localStorage.getItem('grade5_math_worksheet_dec_sub')) {
+        loadProgress();
+      }
+    };
+
+    /* Scratchpad Canvas Logic */
+    let canvas, ctx, isDrawing = false;
+    let padColor = '#0284c7';
+
+    function toggleScratchpad() {
+      const modal = document.getElementById('scratchpad-modal');
+      modal.classList.toggle('hidden');
+
+      if (!modal.classList.contains('hidden')) {
+        setTimeout(initCanvas, 100);
+      }
+    }
+
+    function initCanvas() {
+      canvas = document.getElementById('scratch-canvas');
+      if (!canvas) return;
+
+      const rect = canvas.parentElement.getBoundingClientRect();
+      canvas.width = rect.width;
+      canvas.height = rect.height;
+
+      ctx = canvas.getContext('2d');
+      ctx.lineWidth = 3;
+      ctx.lineCap = 'round';
+      ctx.strokeStyle = padColor;
+
+      canvas.onmousedown = startDrawing;
+      canvas.onmousemove = draw;
+      canvas.onmouseup = stopDrawing;
+      canvas.ontouchstart = startDrawingTouch;
+      canvas.ontouchmove = drawTouch;
+      canvas.ontouchend = stopDrawing;
+    }
+
+    function setPadColor(color) {
+      padColor = color;
+      if (ctx) ctx.strokeStyle = color;
+    }
+
+    function clearScratchpad() {
+      if (canvas && ctx) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+    }
+
+    function startDrawing(e) {
+      isDrawing = true;
+      ctx.beginPath();
+      ctx.moveTo(e.offsetX, e.offsetY);
+    }
+
+    function draw(e) {
+      if (!isDrawing) return;
+      ctx.lineTo(e.offsetX, e.offsetY);
+      ctx.stroke();
+    }
+
+    function startDrawingTouch(e) {
+      isDrawing = true;
+      const rect = canvas.getBoundingClientRect();
+      const touch = e.touches[0];
+      ctx.beginPath();
+      ctx.moveTo(touch.clientX - rect.left, touch.clientY - touch.top);
+      e.preventDefault();
+    }
+
+    function drawTouch(e) {
+      if (!isDrawing) return;
+      const rect = canvas.getBoundingClientRect();
+      const touch = e.touches[0];
+      ctx.lineTo(touch.clientX - rect.left, touch.clientY - rect.top);
+      ctx.stroke();
+      e.preventDefault();
+    }
+
+    function stopDrawing() {
+      isDrawing = false;
+    }
+
+    /* Submission Modal & Email Logic */
+    function openSubmitModal() {
+      document.getElementById('submit-modal').classList.remove('hidden');
+      document.getElementById('submit-error-banner').classList.add('hidden');
+    }
+
+    function closeSubmitModal() {
+      document.getElementById('submit-modal').classList.add('hidden');
+    }
+
+    function processEmailSubmission() {
+      const nameInput = document.getElementById('studentName');
+      const classInput = document.getElementById('classId');
+
+      if (!nameInput || !nameInput.value.trim()) {
+        document.getElementById('submit-error-banner').classList.remove('hidden');
+        return;
+      }
+
+      const studentName = nameInput.value.trim();
+      const className = classInput ? classInput.value.trim() : '5th Grade Math';
+      const scoreText = `${solvedProblems.size} of ${totalProblems} problems completed correctly`;
+
+      const subject = encodeURIComponent(`Math Worksheet Submission: ${studentName} (${className})`);
+      const bodyText = `Student Name: ${studentName}\nClass: ${className}\nWorksheet: Lesson 11-3 & 11-4 Subtracting Decimals (Hundredths & Thousandths)\nScore Progress: ${scoreText}\n\nSubmitted via Interactive Digital Worksheet Application.`;
+
+      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${DEFAULT_TEACHER_EMAIL}&su=${subject}&body=${encodeURIComponent(bodyText)}`;
+
+      window.open(gmailUrl, '_blank');
+
+      closeSubmitModal();
+
+      const successMsg = document.getElementById('success-message-text');
+      if (successMsg) {
+        successMsg.innerHTML = `Great work <b>${studentName}</b>! A new tab has opened with your completed score report ready to send to <b>${DEFAULT_TEACHER_EMAIL}</b>.`;
+      }
+      document.getElementById('success-modal').classList.remove('hidden');
+    }
+  </script>
+</body>
+</html>
