@@ -1,0 +1,1398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson: Multiplying Decimals by Powers of 10 and Whole Numbers</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Roboto+Mono:wght@500;700&display=swap">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            heading: ['Fredoka', 'sans-serif'],
+            mono: ['Roboto Mono', 'monospace']
+          },
+          colors: {
+            brandBlue: '#0284c7',
+            brandGreen: '#16a34a',
+            brandYellow: '#ca8a04',
+            brandPurple: '#9333ea',
+            brandOrange: '#ea580c'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #f8fafc;
+      color: #0f172a;
+      font-size: 18px;
+    }
+    
+    .math-input {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 18px;
+      font-weight: 700;
+      text-align: center;
+      border: 2px dashed #94a3b8;
+      border-radius: 8px;
+      background-color: #ffffff;
+      color: #0284c7;
+      transition: all 0.2s ease;
+      width: 100%;
+      height: 42px;
+    }
+
+    .math-input:focus {
+      outline: none;
+      border-color: #0284c7;
+      border-style: solid;
+      background-color: #f0f9ff;
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.2);
+    }
+
+    .math-input.correct {
+      border-color: #16a34a !important;
+      border-style: solid !important;
+      background-color: #f0fdf4 !important;
+      color: #15803d !important;
+    }
+
+    .math-input.incorrect {
+      border-color: #dc2626 !important;
+      border-style: solid !important;
+      background-color: #fef2f2 !important;
+      color: #b91c1c !important;
+    }
+
+    mark {
+      background-color: #fef08a;
+      color: #854d0e;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-weight: 700;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Base Grid Styles for Manipulatives */
+    .base-block {
+      width: 100%;
+      padding-top: 100%;
+      border: 1px solid #94a3b8;
+      position: relative;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen pb-24">
+
+  <!-- STICKY HEADER & SECTION NAVIGATION -->
+  <header class="sticky top-0 z-40 bg-white border-b border-slate-200 shadow-md py-3 px-4 md:px-8">
+    <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-4">
+      
+      <!-- App Title -->
+      <div class="flex items-center gap-3">
+        <div class="bg-sky-600 text-white p-2.5 rounded-2xl shadow-sm">
+          <i class="fa-solid fa-calculator text-2xl"></i>
+        </div>
+        <div>
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold bg-sky-100 text-sky-800 uppercase tracking-wider">
+            5th Grade Math • Chapters 12-1 & 12-2
+          </span>
+          <h1 class="text-xl md:text-2xl font-heading font-bold text-slate-900">
+            Lesson: Multiplying Decimals
+          </h1>
+        </div>
+      </div>
+
+      <!-- Quick Jump Navigation Tabs -->
+      <nav class="flex flex-wrap items-center justify-center gap-1.5 text-xs font-bold">
+        <a href="#sec1" class="px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-sky-100 text-slate-700 hover:text-sky-800 transition">1. Intro & Vocab</a>
+        <a href="#sec2" class="px-2.5 py-1.5 rounded-xl bg-sky-100 hover:bg-sky-200 text-sky-900 transition">2. Obj 1 Teach</a>
+        <a href="#sec3a" class="px-2.5 py-1.5 rounded-xl bg-amber-100 hover:bg-amber-200 text-amber-900 transition">3. Obj 1 Partner</a>
+        <a href="#sec3b" class="px-2.5 py-1.5 rounded-xl bg-sky-600 hover:bg-sky-700 text-white transition">4. Obj 1 Ind.</a>
+        <a href="#sec4" class="px-2.5 py-1.5 rounded-xl bg-purple-100 hover:bg-purple-200 text-purple-900 transition">5. Obj 2 Teach</a>
+        <a href="#sec5a" class="px-2.5 py-1.5 rounded-xl bg-amber-100 hover:bg-amber-200 text-amber-900 transition">6. Obj 2 Partner</a>
+        <a href="#sec5b" class="px-2.5 py-1.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white transition">7. Obj 2 Ind.</a>
+        <a href="#sec6" class="px-2.5 py-1.5 rounded-xl bg-emerald-100 hover:bg-emerald-200 text-emerald-900 transition">8. Summary</a>
+      </nav>
+
+      <!-- Live Score Counter, Save Work & Turn-In Action Buttons -->
+      <div class="flex items-center gap-2">
+        <div class="bg-slate-100 px-3 py-1.5 rounded-2xl border border-slate-200 flex items-center gap-2">
+          <div class="text-right">
+            <div class="text-[10px] font-bold text-slate-500 uppercase">Score Progress</div>
+            <div id="progress-text" class="text-xs font-extrabold text-sky-700">0 / 11 Solved</div>
+          </div>
+          <div class="w-16 bg-slate-200 rounded-full h-2.5 overflow-hidden">
+            <div id="progress-bar" class="bg-gradient-to-r from-sky-500 to-emerald-500 h-2.5 rounded-full transition-all duration-500 w-0"></div>
+          </div>
+        </div>
+
+        <button onclick="saveProgress()" class="bg-amber-500 hover:bg-amber-600 text-white font-bold px-3 py-2 rounded-xl transition flex items-center gap-1.5 text-xs shadow-sm" title="Save your current answers to finish later">
+          <i class="fa-solid fa-floppy-disk"></i> Save Work
+        </button>
+
+        <button onclick="loadProgress()" class="bg-slate-700 hover:bg-slate-800 text-white font-bold px-3 py-2 rounded-xl transition flex items-center gap-1.5 text-xs shadow-sm" title="Load previously saved answers">
+          <i class="fa-solid fa-folder-open"></i> Load Work
+        </button>
+
+        <button onclick="openSubmitModal()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3 py-2 rounded-xl transition flex items-center gap-1.5 text-xs shadow-sm">
+          <i class="fa-solid fa-paper-plane"></i> Email Teacher
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Toast Notification for Save/Load -->
+  <div id="toast-banner" class="fixed top-20 right-6 z-50 hidden bg-slate-900 text-white px-4 py-3 rounded-2xl shadow-xl flex items-center gap-3 text-sm border border-slate-700">
+    <i id="toast-icon" class="fa-solid fa-circle-check text-emerald-400 text-lg"></i>
+    <span id="toast-msg">Progress saved successfully!</span>
+  </div>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 mt-8 space-y-12">
+
+    <!-- LEARNING OBJECTIVE BOX -->
+    <div class="bg-sky-600 text-white p-6 md:p-8 rounded-3xl shadow-lg border-4 border-sky-300 text-center">
+      <h2 class="text-xl md:text-2xl font-heading font-bold mb-2 tracking-wide uppercase text-sky-100">Today's Learning Objective</h2>
+      <p class="text-lg md:text-xl font-bold">
+        I can multiply decimals by powers of 10 by moving the decimal point, and I can multiply decimals by whole numbers using repeated addition or the distributive property.
+      </p>
+    </div>
+
+    <!-- SECTION 1: WHY WE NEED THIS MATH & KEY VOCABULARY -->
+    <section id="sec1" class="bg-white border-2 border-slate-200 rounded-3xl p-6 md:p-8 shadow-sm space-y-6">
+      <div class="flex items-center gap-3">
+        <div class="p-3 bg-emerald-100 text-emerald-800 rounded-2xl">
+          <i class="fa-solid fa-earth-americas text-2xl"></i>
+        </div>
+        <div>
+          <span class="text-xs font-bold text-emerald-800 uppercase tracking-wide">Section 1</span>
+          <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">Why We Need This Math & Key Vocabulary</h2>
+        </div>
+      </div>
+
+      <!-- Real World Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        
+        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 flex flex-col items-center text-center">
+          <div class="w-14 h-14 mb-2 flex items-center justify-center text-sky-600 text-3xl">
+            <i class="fa-solid fa-microscope"></i>
+          </div>
+          <h3 class="font-heading font-bold text-lg text-slate-900">Science & Magnification</h3>
+          <p class="text-sm text-slate-600 mt-1">
+            Example Problem: A plant cell is 0.025 mm wide. A microscope magnifies it 1000 times. How wide does it appear?
+          </p>
+        </div>
+
+        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 flex flex-col items-center text-center">
+          <div class="w-14 h-14 mb-2 flex items-center justify-center text-emerald-600 text-3xl">
+            <i class="fa-solid fa-cart-shopping"></i>
+          </div>
+          <h3 class="font-heading font-bold text-lg text-slate-900">Shopping & Money</h3>
+          <p class="text-sm text-slate-600 mt-1">
+            Example Problem: You buy 4 packs of trading cards that cost $1.25 each. How much do you spend in total?
+          </p>
+        </div>
+
+        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 flex flex-col items-center text-center">
+          <div class="w-14 h-14 mb-2 flex items-center justify-center text-purple-600 text-3xl">
+            <i class="fa-solid fa-hammer"></i>
+          </div>
+          <h3 class="font-heading font-bold text-lg text-slate-900">Building & Materials</h3>
+          <p class="text-sm text-slate-600 mt-1">
+            Example Problem: A builder uses 100 pieces of wood that are each 0.45 meters long. What is the total length?
+          </p>
+        </div>
+
+        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 flex flex-col items-center text-center">
+          <div class="w-14 h-14 mb-2 flex items-center justify-center text-amber-600 text-3xl">
+            <i class="fa-solid fa-weight-hanging"></i>
+          </div>
+          <h3 class="font-heading font-bold text-lg text-slate-900">Weight & Packaging</h3>
+          <p class="text-sm text-slate-600 mt-1">
+            Example Problem: A single metal bolt weighs 0.12 pounds. What is the weight of 10^3 bolts?
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Key Math Vocabulary Bar -->
+      <div class="bg-amber-50 border-2 border-amber-200 rounded-2xl p-5 space-y-3">
+        <h3 class="font-heading font-bold text-xl text-amber-950 flex items-center gap-2">
+          <i class="fa-solid fa-spell-check text-amber-600"></i> Key Vocabulary Terms
+        </h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+          <div class="bg-white p-3 rounded-xl border border-amber-200"><mark>power of 10</mark>: Numbers like 10, 100, and 1000 that can be formed by multiplying 10 by itself.</div>
+          <div class="bg-white p-3 rounded-xl border border-amber-200"><mark>exponent</mark>: A number that tells how many times the base (like 10) is used as a factor.</div>
+          <div class="bg-white p-3 rounded-xl border border-amber-200"><mark>repeated addition</mark>: Adding the exact same number multiple times, which is the same as multiplying.</div>
+          <div class="bg-white p-3 rounded-xl border border-amber-200"><mark>Distributive Property</mark>: Breaking apart a number to multiply its parts separately, then adding the products together.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: OBJECTIVE 1 DIRECT INSTRUCTION -->
+    <section id="sec2" class="bg-white border-2 border-sky-200 rounded-3xl p-6 md:p-8 shadow-sm space-y-6">
+      <div class="flex flex-col md:flex-row justify-between md:items-center gap-4">
+        <div class="flex items-center gap-3">
+          <div class="p-3 bg-sky-100 text-sky-800 rounded-2xl">
+            <i class="fa-solid fa-chalkboard-user text-2xl"></i>
+          </div>
+          <div>
+            <span class="text-xs font-bold text-sky-800 uppercase tracking-wide">Section 2 • 5 Minutes Direct Instruction</span>
+            <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">
+              Objective 1: Multiply by Powers of 10
+            </h2>
+          </div>
+        </div>
+        <div class="bg-sky-50 border border-sky-200 px-4 py-2 rounded-2xl text-sky-900 font-bold text-sm">
+          Example Problem: <span class="font-mono text-lg font-extrabold text-sky-700">0.814 x 100</span>
+        </div>
+      </div>
+
+      <!-- Problem Statement Highlighted -->
+      <div class="bg-sky-50 border border-sky-300 rounded-2xl p-4 text-slate-800">
+        <span class="font-bold text-sky-900 uppercase text-xs tracking-wider block mb-1">Example Problem Statement:</span>
+        <p class="text-base font-semibold">
+          Problem: Multiply 0.814 by 100.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+        
+        <!-- Step-by-Step Explanation -->
+        <div class="space-y-4">
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1">
+            <span class="font-bold text-sky-700 text-sm">Step 1: Count the Zeros or Look at the Exponent</span>
+            <p class="text-slate-700 text-base">
+              <b>Problem:</b> Multiply 0.814 by 100.<br><br>
+              Look at the power of 10. The number 100 has <b>2 zeros</b>. If the problem used an exponent like 10^2, the exponent would also be 2.
+            </p>
+          </div>
+
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1">
+            <span class="font-bold text-sky-700 text-sm">Step 2: Move the Decimal Point</span>
+            <p class="text-slate-700 text-base">
+              <b>Problem:</b> Multiply 0.814 by 100.<br><br>
+              To multiply by a power of 10, move the decimal point to the right as many places as there are zeros.<br>
+              Move the decimal in 0.814 to the right <b>2 places</b>.
+            </p>
+          </div>
+        </div>
+
+        <!-- VISUAL SUMMARY CARD -->
+        <div class="bg-slate-50 p-6 rounded-2xl border-2 border-sky-300 shadow-sm flex flex-col items-center">
+          <span class="text-xs font-bold text-sky-800 uppercase tracking-widest mb-4">Decimal Shift Mapping</span>
+          
+          <div class="w-full max-w-md bg-white p-5 rounded-2xl border border-slate-300 shadow-inner space-y-4 text-center font-mono">
+            <div class="text-center mx-auto text-xl leading-relaxed flex flex-col justify-center">
+               <div class="text-slate-500 mb-2">0.814 x 100 = ?</div>
+               <div class="text-sky-700 font-bold text-3xl flex items-center justify-center gap-2">
+                 <span>0</span>
+                 <span class="text-red-500 font-bold -mt-4">.</span>
+                 <span>8</span>
+                 <i class="fa-solid fa-arrow-right text-sm text-slate-400"></i>
+                 <span>1</span>
+                 <i class="fa-solid fa-arrow-right text-sm text-slate-400"></i>
+                 <span class="text-emerald-600 font-bold -mt-4">.</span>
+                 <span>4</span>
+               </div>
+               <div class="mt-4 border-t-2 border-slate-200 pt-2 text-emerald-700 font-extrabold text-2xl">
+                 81.4
+               </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Common Error Box -->
+      <div class="bg-amber-50 border-2 border-amber-300 rounded-2xl p-5 flex items-start gap-4">
+        <div class="p-3 bg-amber-200 text-amber-900 rounded-xl">
+          <i class="fa-solid fa-triangle-exclamation text-2xl"></i>
+        </div>
+        <div>
+          <h4 class="font-heading font-bold text-amber-950 text-lg">Error to Avoid: Not Adding Zeros!</h4>
+          <p class="text-slate-700 text-base mt-1">
+            If there are not enough places in the number when you are moving the decimal to the right, you must write one or more zeros to the right of the last digit. Example: 3.5 x 100 = 350.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3A: OBJECTIVE 1 GUIDED PRACTICE (5 Mins - Partner Work) -->
+    <section id="sec3a" class="space-y-6">
+      <div class="flex items-center gap-3">
+        <div class="p-3 bg-amber-500 text-white rounded-2xl shadow-sm">
+          <i class="fa-solid fa-user-group text-2xl"></i>
+        </div>
+        <div>
+          <span class="text-xs font-bold text-amber-800 uppercase tracking-wide">Section 3A • 5 Minutes Guided Practice (Partner Work)</span>
+          <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">
+            Objective 1 Partner Practice (Problems 1–2)
+          </h2>
+          <p class="text-sm text-slate-600 font-semibold">Work together with a partner to multiply decimals by powers of 10!</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <!-- Problem 1 -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-amber-300 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-heading font-bold text-amber-900 text-xl">Problem 1 (Partner Work)</span>
+              <span class="text-xs font-bold px-3 py-1 bg-amber-100 text-amber-900 rounded-full">Powers of 10</span>
+            </div>
+            
+            <div class="bg-amber-50 p-3 rounded-xl border border-amber-200 text-xs font-semibold text-amber-950 mb-3">
+              <b>Problem Statement:</b> Multiply 0.452 by 10^3.
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3 text-sm">
+              <div class="flex flex-col gap-2">
+                <span class="font-bold text-slate-900">The product of 0.452 and 10^3:</span>
+                <input type="text" id="p1-1" class="math-input h-9 font-bold text-amber-700" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p1')" class="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-xl flex items-center gap-1 w-full justify-center">
+              <i class="fa-solid fa-lightbulb text-amber-600"></i> Partner Hint
+            </button>
+            <div id="hint-p1" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p>• The exponent tells you exactly how many places to move the decimal to the right.</p>
+            </div>
+
+            <div id="msg-p1" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p1', [['452', '452.0']])" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Partner Answer
+            </button>
+          </div>
+        </div>
+
+        <!-- Problem 2 -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-amber-300 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-heading font-bold text-amber-900 text-xl">Problem 2 (Partner Work)</span>
+              <span class="text-xs font-bold px-3 py-1 bg-amber-100 text-amber-900 rounded-full">Powers of 10</span>
+            </div>
+
+            <div class="bg-amber-50 p-3 rounded-xl border border-amber-200 text-xs font-semibold text-amber-950 mb-3">
+              <b>Problem Statement:</b> Multiply 7.19 by 100.
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3 text-sm">
+              <div class="flex flex-col gap-2">
+                <span class="font-bold text-slate-900">The product of 7.19 and 100:</span>
+                <input type="text" id="p2-1" class="math-input h-9 font-bold text-amber-700" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p2')" class="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-xl flex items-center gap-1 w-full justify-center">
+              <i class="fa-solid fa-lightbulb text-amber-600"></i> Partner Hint
+            </button>
+            <div id="hint-p2" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p>• Count the number of zeros in 100 to know how far to move the decimal point.</p>
+            </div>
+
+            <div id="msg-p2" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p2', [['719', '719.0']])" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Partner Answer
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 3B: OBJECTIVE 1 INDEPENDENT PRACTICE (5 Mins - Individual Work) -->
+    <section id="sec3b" class="space-y-6">
+      <div class="flex items-center gap-3">
+        <div class="p-3 bg-sky-600 text-white rounded-2xl shadow-sm">
+          <i class="fa-solid fa-user text-2xl"></i>
+        </div>
+        <div>
+          <span class="text-xs font-bold text-sky-800 uppercase tracking-wide">Section 3B • 5 Minutes Independent Practice (Individual Work)</span>
+          <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">
+            Objective 1 Independent Practice (Problems 3–5)
+          </h2>
+          <p class="text-sm text-slate-600 font-semibold">Work on your own to solve these powers of 10 problems!</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <!-- Problem 3 -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-heading font-bold text-sky-800 text-xl">Problem 3</span>
+              <span class="text-xs font-bold px-3 py-1 bg-sky-100 text-sky-900 rounded-full">Powers of 10</span>
+            </div>
+
+            <div class="bg-sky-50 p-2.5 rounded-xl border border-sky-200 text-xs font-semibold text-sky-950 mb-3">
+              <b>Problem Statement:</b> Multiply 0.063 by 10^2.
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3 text-sm">
+              <div class="flex flex-col gap-2">
+                <span class="font-bold text-slate-700 text-xs">The product of 0.063 and 10^2:</span>
+                <input type="text" id="p3-1" class="math-input h-9 font-bold text-sky-700" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p3')" class="text-xs font-bold text-sky-800 bg-sky-50 hover:bg-sky-100 border border-sky-200 px-3 py-1.5 rounded-xl flex items-center gap-1 w-full justify-center">
+              <i class="fa-solid fa-lightbulb text-sky-600"></i> Hint
+            </button>
+            <div id="hint-p3" class="hidden text-xs bg-sky-50 p-3 rounded-xl border border-sky-200 text-sky-900 space-y-1">
+              <p>• Move the decimal 2 places to the right.</p>
+            </div>
+            <div id="msg-p3" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p3', [['6.3', '6.30']])" class="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+        <!-- Problem 4 -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-heading font-bold text-sky-800 text-xl">Problem 4</span>
+              <span class="text-xs font-bold px-3 py-1 bg-sky-100 text-sky-900 rounded-full">Powers of 10</span>
+            </div>
+
+            <div class="bg-sky-50 p-2.5 rounded-xl border border-sky-200 text-xs font-semibold text-sky-950 mb-3">
+              <b>Problem Statement:</b> Multiply 9.8 by 1000.
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3 text-sm">
+              <div class="flex flex-col gap-2">
+                <span class="font-bold text-slate-700 text-xs">The product of 9.8 and 1000:</span>
+                <input type="text" id="p4-1" class="math-input h-9 font-bold text-sky-700" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p4')" class="text-xs font-bold text-sky-800 bg-sky-50 hover:bg-sky-100 border border-sky-200 px-3 py-1.5 rounded-xl flex items-center gap-1 w-full justify-center">
+              <i class="fa-solid fa-lightbulb text-sky-600"></i> Hint
+            </button>
+            <div id="hint-p4" class="hidden text-xs bg-sky-50 p-3 rounded-xl border border-sky-200 text-sky-900 space-y-1">
+              <p>• You might need to add placeholder zeros to the end of the number when moving the decimal.</p>
+            </div>
+            <div id="msg-p4" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p4', [['9800', '9800.0']])" class="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+        <!-- Problem 5: Word Problem -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-heading font-bold text-sky-800 text-xl">Problem 5 (Word)</span>
+              <span class="text-xs font-bold px-3 py-1 bg-emerald-100 text-emerald-900 rounded-full"><i class="fa-solid fa-paperclip"></i> Weight</span>
+            </div>
+
+            <div class="bg-emerald-50 p-2.5 rounded-xl border border-emerald-200 text-xs font-semibold text-emerald-950 mb-3">
+              <b>Problem Statement:</b> A single paperclip weighs 0.35 grams. What is the total weight of 10^2 paperclips?
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3 text-sm">
+              <div class="flex flex-col gap-2">
+                <span class="font-bold text-slate-700 text-xs">Total weight of the paperclips in grams:</span>
+                <input type="text" id="p5-1" class="math-input h-9 font-bold text-emerald-700" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p5')" class="text-xs font-bold text-sky-800 bg-sky-50 hover:bg-sky-100 border border-sky-200 px-3 py-1.5 rounded-xl flex items-center gap-1 w-full justify-center">
+              <i class="fa-solid fa-lightbulb text-sky-600"></i> Hint
+            </button>
+            <div id="hint-p5" class="hidden text-xs bg-sky-50 p-3 rounded-xl border border-sky-200 text-sky-900 space-y-1">
+              <p>• Multiply the single weight by the power of 10.</p>
+            </div>
+            <div id="msg-p5" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p5', [['35', '35.0', '35.00']])" class="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 4: OBJECTIVE 2 DIRECT INSTRUCTION -->
+    <section id="sec4" class="bg-white border-2 border-purple-200 rounded-3xl p-6 md:p-8 shadow-sm space-y-6">
+      <div class="flex flex-col md:flex-row justify-between md:items-center gap-4">
+        <div class="flex items-center gap-3">
+          <div class="p-3 bg-purple-100 text-purple-900 rounded-2xl">
+            <i class="fa-solid fa-chart-line text-2xl"></i>
+          </div>
+          <div>
+            <span class="text-xs font-bold text-purple-900 uppercase tracking-wide">Section 4 • 5 Minutes Direct Instruction</span>
+            <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">
+              Objective 2: Multiply a Decimal by a Whole Number
+            </h2>
+          </div>
+        </div>
+        <div class="bg-purple-50 border border-purple-200 px-4 py-2 rounded-2xl text-purple-900 font-bold text-sm">
+          Example Problem: <span class="font-mono text-lg font-extrabold text-purple-700">3 x 0.24</span>
+        </div>
+      </div>
+
+      <!-- Problem Statement Highlighted -->
+      <div class="bg-purple-50 border border-purple-300 rounded-2xl p-4 text-slate-800">
+        <span class="font-bold text-purple-900 uppercase text-xs tracking-wider block mb-1">Example Problem Statement:</span>
+        <p class="text-base font-semibold">
+          Problem: Find the product of 3 and 0.24 using properties of multiplication.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+        
+        <!-- Step-by-Step Instruction -->
+        <div class="space-y-4">
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1">
+            <span class="font-bold text-purple-800 text-sm">Step 1: Break apart the decimal</span>
+            <p class="text-slate-700 text-base">
+              <b>Problem:</b> Find 3 x 0.24.<br><br>
+              Break apart 0.24 into tenths and hundredths. That gives us <b>0.20 + 0.04</b>.
+            </p>
+          </div>
+
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1">
+            <span class="font-bold text-purple-800 text-sm">Step 2: Use the Distributive Property</span>
+            <p class="text-slate-700 text-sm mt-1">
+              • Multiply the whole number by each part separately.<br>
+              • Find how many tenths: 3 x 0.20 = 0.60<br>
+              • Find how many hundredths: 3 x 0.04 = 0.12<br>
+              • Add the sums: 0.60 + 0.12 = <b>0.72</b><br>
+              The final product is 0.72.
+            </p>
+          </div>
+        </div>
+
+        <!-- BREAK APART VISUAL CARD -->
+        <div class="bg-slate-50 p-6 rounded-2xl border-2 border-purple-300 shadow-sm flex flex-col items-center">
+          <span class="text-xs font-bold text-purple-900 uppercase tracking-widest mb-3">Distributive Property Machine</span>
+
+          <div class="w-full bg-white p-5 rounded-2xl border border-slate-300 space-y-4 font-mono text-center">
+            
+            <div class="text-center mx-auto text-xl leading-relaxed">
+               <span class="text-purple-700 font-bold">3 x 0.24</span><br>
+               <i class="fa-solid fa-arrow-down my-2 text-slate-400"></i><br>
+               (3 x <span class="text-sky-600 font-bold">0.20</span>) + (3 x <span class="text-emerald-600 font-bold">0.04</span>)<br>
+               <i class="fa-solid fa-arrow-down my-2 text-slate-400"></i><br>
+               <span class="text-sky-600 font-bold">0.60</span> + <span class="text-emerald-600 font-bold">0.12</span>
+            </div>
+
+            <div class="pt-2 border-t-2 border-purple-300 flex justify-between items-center font-extrabold text-lg text-purple-950">
+              <span>Final Product:</span>
+              <span class="bg-purple-100 px-3 py-1 rounded-lg text-purple-900">0.72</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- SECTION 5A: OBJECTIVE 2 GUIDED PRACTICE (5 Mins - Partner Work) -->
+    <section id="sec5a" class="space-y-6">
+      <div class="flex items-center gap-3">
+        <div class="p-3 bg-amber-500 text-white rounded-2xl shadow-sm">
+          <i class="fa-solid fa-user-group text-2xl"></i>
+        </div>
+        <div>
+          <span class="text-xs font-bold text-amber-800 uppercase tracking-wide">Section 5A • 5 Minutes Guided Practice (Partner Work)</span>
+          <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">
+            Objective 2 Partner Practice (Problems 6–7)
+          </h2>
+          <p class="text-sm text-slate-600 font-semibold">Work together with your partner to multiply decimals by whole numbers!</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <!-- Problem 6 -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-amber-300 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-heading font-bold text-amber-900 text-xl">Problem 6 (Partner Work)</span>
+              <span class="text-xs font-bold px-3 py-1 bg-amber-100 text-amber-900 rounded-full">Whole x Decimal</span>
+            </div>
+
+            <div class="bg-amber-50 p-3 rounded-xl border border-amber-200 text-xs font-semibold text-amber-950 mb-3">
+              <b>Problem Statement:</b> Find the product of 4 and 0.42.
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3 text-sm">
+              <div class="flex flex-col gap-2">
+                <span class="font-bold text-slate-900 text-xs">The product of 4 and 0.42:</span>
+                <input type="text" id="p6-1" class="math-input h-9 font-bold text-amber-700" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p6')" class="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-xl flex items-center gap-1 w-full justify-center">
+              <i class="fa-solid fa-lightbulb text-amber-600"></i> Partner Hint
+            </button>
+            <div id="hint-p6" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p>• Try multiplying 4 by 0.40 first, then 4 by 0.02. Add the results!</p>
+            </div>
+
+            <div id="msg-p6" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p6', [['1.68']])" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Partner Answer
+            </button>
+          </div>
+        </div>
+
+        <!-- Problem 7 -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-amber-300 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-heading font-bold text-amber-900 text-xl">Problem 7 (Partner Work)</span>
+              <span class="text-xs font-bold px-3 py-1 bg-amber-100 text-amber-900 rounded-full">Whole x Decimal</span>
+            </div>
+
+            <div class="bg-amber-50 p-3 rounded-xl border border-amber-200 text-xs font-semibold text-amber-950 mb-3">
+              <b>Problem Statement:</b> Find the product of 5 and 0.16.
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3 text-sm">
+              <div class="flex flex-col gap-2">
+                <span class="font-bold text-slate-900 text-xs">The product of 5 and 0.16:</span>
+                <input type="text" id="p7-1" class="math-input h-9 font-bold text-amber-700" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p7')" class="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-xl flex items-center gap-1 w-full justify-center">
+              <i class="fa-solid fa-lightbulb text-amber-600"></i> Partner Hint
+            </button>
+            <div id="hint-p7" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p>• You can also use repeated addition: 0.16 + 0.16 + 0.16 + 0.16 + 0.16.</p>
+            </div>
+
+            <div id="msg-p7" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p7', [['0.8', '0.80', '.8', '.80']])" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Partner Answer
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 5B: OBJECTIVE 2 INDEPENDENT PRACTICE (5 Mins - Individual Work) -->
+    <section id="sec5b" class="space-y-6">
+      <div class="flex items-center gap-3">
+        <div class="p-3 bg-purple-600 text-white rounded-2xl shadow-sm">
+          <i class="fa-solid fa-user text-2xl"></i>
+        </div>
+        <div>
+          <span class="text-xs font-bold text-purple-800 uppercase tracking-wide">Section 5B • 5 Minutes Independent Practice (Individual Work)</span>
+          <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">
+            Objective 2 Independent Practice (Problems 8–11)
+          </h2>
+          <p class="text-sm text-slate-600 font-semibold">Multiply decimals by whole numbers independently to find the exact outputs!</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+        <!-- Problem 8 -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-heading font-bold text-purple-900 text-xl">Problem 8</span>
+              <span class="text-xs font-bold px-3 py-1 bg-purple-100 text-purple-900 rounded-full">Properties</span>
+            </div>
+
+            <div class="bg-purple-50 p-2.5 rounded-xl border border-purple-200 text-xs font-semibold text-purple-950 mb-3">
+              <b>Problem Statement:</b> Find the product of 2 and 0.73.
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-2 text-xs">
+              <div class="flex flex-col gap-2">
+                <span class="font-bold text-slate-900 text-xs">The product of 2 and 0.73:</span>
+                <input type="text" id="p8-1" class="math-input h-9 font-bold text-purple-800 text-sm" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p8')" class="w-full text-xs font-bold text-purple-800 bg-purple-50 hover:bg-purple-100 border border-purple-200 px-3 py-1.5 rounded-xl flex items-center justify-center gap-1">
+              <i class="fa-solid fa-lightbulb text-purple-600"></i> Hint
+            </button>
+            <div id="hint-p8" class="hidden text-xs bg-purple-50 p-3 rounded-xl border border-purple-200 text-purple-900 space-y-1">
+              <p>Double 0.70, then double 0.03.</p>
+            </div>
+            <div id="msg-p8" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p8', [['1.46']])" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 rounded-xl transition shadow-sm text-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+        <!-- Problem 9 -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-heading font-bold text-purple-900 text-xl">Problem 9</span>
+              <span class="text-xs font-bold px-3 py-1 bg-purple-100 text-purple-900 rounded-full">Properties</span>
+            </div>
+
+            <div class="bg-purple-50 p-2.5 rounded-xl border border-purple-200 text-xs font-semibold text-purple-950 mb-3">
+              <b>Problem Statement:</b> Find the product of 6 and 0.12.
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-2 text-xs">
+              <div class="flex flex-col gap-2">
+                <span class="font-bold text-slate-900 text-xs">The product of 6 and 0.12:</span>
+                <input type="text" id="p9-1" class="math-input h-9 font-bold text-purple-800 text-sm" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p9')" class="w-full text-xs font-bold text-purple-800 bg-purple-50 hover:bg-purple-100 border border-purple-200 px-3 py-1.5 rounded-xl flex items-center justify-center gap-1">
+              <i class="fa-solid fa-lightbulb text-purple-600"></i> Hint
+            </button>
+            <div id="hint-p9" class="hidden text-xs bg-purple-50 p-3 rounded-xl border border-purple-200 text-purple-900 space-y-1">
+              <p>Think about 6 times 12, then place the decimal correctly!</p>
+            </div>
+            <div id="msg-p9" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p9', [['0.72', '.72']])" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 rounded-xl transition shadow-sm text-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+        <!-- Problem 10 -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-heading font-bold text-purple-900 text-xl">Problem 10</span>
+              <span class="text-xs font-bold px-3 py-1 bg-purple-100 text-purple-900 rounded-full">Properties</span>
+            </div>
+
+            <div class="bg-purple-50 p-2.5 rounded-xl border border-purple-200 text-xs font-semibold text-purple-950 mb-3">
+              <b>Problem Statement:</b> Find the product of 3 and 0.55.
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-2 text-xs">
+              <div class="flex flex-col gap-2">
+                <span class="font-bold text-slate-900 text-xs">The product of 3 and 0.55:</span>
+                <input type="text" id="p10-1" class="math-input h-9 font-bold text-purple-800 text-sm" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p10')" class="w-full text-xs font-bold text-purple-800 bg-purple-50 hover:bg-purple-100 border border-purple-200 px-3 py-1.5 rounded-xl flex items-center justify-center gap-1">
+              <i class="fa-solid fa-lightbulb text-purple-600"></i> Hint
+            </button>
+            <div id="hint-p10" class="hidden text-xs bg-purple-50 p-3 rounded-xl border border-purple-200 text-purple-900 space-y-1">
+              <p>Break it apart: (3 x 0.50) + (3 x 0.05).</p>
+            </div>
+            <div id="msg-p10" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p10', [['1.65']])" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 rounded-xl transition shadow-sm text-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+        <!-- Problem 11: Word Problem -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-heading font-bold text-purple-900 text-xl">Problem 11 (Word)</span>
+              <span class="text-xs font-bold px-3 py-1 bg-emerald-100 text-emerald-900 rounded-full"><i class="fa-solid fa-bowl-rice"></i> Food</span>
+            </div>
+
+            <div class="bg-emerald-50 p-2.5 rounded-xl border border-emerald-200 text-xs font-semibold text-emerald-950 mb-3">
+              <b>Problem Statement:</b> You buy 4 boxes of rice. Each box contains 0.65 kilograms of rice. How many kilograms of rice do you have in all?
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-2 text-xs">
+              <div class="flex flex-col gap-2">
+                <span class="font-bold text-slate-900 text-xs">Total kilograms of rice:</span>
+                <input type="text" id="p11-1" class="math-input h-9 font-bold text-emerald-700 text-sm" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p11')" class="w-full text-xs font-bold text-purple-800 bg-purple-50 hover:bg-purple-100 border border-purple-200 px-3 py-1.5 rounded-xl flex items-center justify-center gap-1">
+              <i class="fa-solid fa-lightbulb text-purple-600"></i> Hint
+            </button>
+            <div id="hint-p11" class="hidden text-xs bg-purple-50 p-3 rounded-xl border border-purple-200 text-purple-900 space-y-1">
+              <p>Multiply 4 by 0.65.</p>
+            </div>
+            <div id="msg-p11" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p11', [['2.6', '2.60']])" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 rounded-xl transition shadow-sm text-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 6: KEY TAKEAWAYS & EMAIL TURN-IN -->
+    <section id="sec6" class="bg-amber-50 border-2 border-amber-200 rounded-3xl p-6 md:p-8 space-y-6">
+      <div class="flex items-center gap-3">
+        <div class="p-3 bg-amber-200 text-amber-900 rounded-2xl">
+          <i class="fa-solid fa-award text-2xl"></i>
+        </div>
+        <div>
+          <span class="text-xs font-bold text-amber-800 uppercase tracking-wide">Section 6</span>
+          <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">Key Takeaways & Save / Turn In</h2>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        
+        <div class="bg-white p-5 rounded-2xl border border-amber-200 space-y-2">
+          <div class="text-amber-800 font-bold text-lg flex items-center gap-2">
+            <i class="fa-solid fa-arrow-right"></i> 1. Shifting Right
+          </div>
+          <p class="text-sm text-slate-600">
+            When you multiply by a power of 10, the decimal point always moves to the right. The number gets bigger!
+          </p>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-sky-200 space-y-2">
+          <div class="text-sky-800 font-bold text-lg flex items-center gap-2">
+            <i class="fa-solid fa-0"></i> 2. Counting Zeros
+          </div>
+          <p class="text-sm text-slate-600">
+            The exponent or the number of zeros tells you exactly how many places to move the decimal point. Add zeros to the end if you need more spaces!
+          </p>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-purple-200 space-y-2">
+          <div class="text-purple-800 font-bold text-lg flex items-center gap-2">
+            <i class="fa-solid fa-plus"></i> 3. Repeated Addition
+          </div>
+          <p class="text-sm text-slate-600">
+            Multiplying a decimal by a whole number can be modeled by adding the decimal to itself that many times.
+          </p>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-emerald-200 space-y-2">
+          <div class="text-emerald-800 font-bold text-lg flex items-center gap-2">
+            <i class="fa-solid fa-code-branch"></i> 4. Distributive Property
+          </div>
+          <p class="text-sm text-slate-600">
+            You can break a decimal apart into tenths and hundredths, multiply each part separately, and add them back together.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Final Completion, Save & Email Turn In Card -->
+      <div class="bg-white p-8 rounded-3xl border-2 border-emerald-300 text-center space-y-4 shadow-md">
+        <div class="w-16 h-16 bg-emerald-100 text-emerald-700 rounded-2xl flex items-center justify-center mx-auto text-3xl">
+          <i class="fa-solid fa-envelope"></i>
+        </div>
+        <h3 class="font-heading font-bold text-2xl text-slate-900">Save Your Progress or Email Your Teacher</h3>
+        <p class="text-slate-600 text-base max-w-xl mx-auto">
+          Need more time? You can <b>Save Work</b> to finish later, or click below when you're ready to submit your full score report to <b>jvena@saintmarys.us</b>!
+        </p>
+        <div class="flex flex-wrap justify-center gap-4 pt-2">
+          <button onclick="saveProgress()" class="bg-amber-500 hover:bg-amber-600 text-white font-bold text-lg px-6 py-3.5 rounded-2xl transition shadow-md inline-flex items-center gap-2">
+            <i class="fa-solid fa-floppy-disk"></i> Save Work For Later
+          </button>
+          <button onclick="openSubmitModal()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-lg px-8 py-3.5 rounded-2xl transition shadow-lg inline-flex items-center gap-2">
+            <i class="fa-solid fa-paper-plane"></i> Email Work to jvena@saintmarys.us
+          </button>
+          <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-6 py-3.5 rounded-2xl transition border border-slate-300 inline-flex items-center gap-2">
+            <i class="fa-solid fa-arrow-up"></i> Return to Top
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- INTERACTIVE MANIPULATIVES FLOATING BUTTON -->
+  <div class="fixed bottom-24 right-6 z-50">
+    <button onclick="toggleManipulatives()" class="bg-amber-600 hover:bg-amber-700 text-white font-bold px-5 py-3 rounded-full shadow-2xl flex items-center gap-2 text-base transition transform hover:scale-105 border-2 border-white">
+      <i class="fa-solid fa-shapes"></i> Decimal Grid Modeler
+    </button>
+  </div>
+
+  <!-- INTERACTIVE SCRATCHPAD FLOATING BUTTON -->
+  <div class="fixed bottom-6 right-6 z-50">
+    <button onclick="toggleScratchpad()" class="bg-sky-600 hover:bg-sky-700 text-white font-bold px-5 py-3 rounded-full shadow-2xl flex items-center gap-2 text-base transition transform hover:scale-105 border-2 border-white">
+      <i class="fa-solid fa-pen-line"></i> Open Scratchpad
+    </button>
+  </div>
+
+  <!-- MANIPULATIVES MODAL (Grid Counters) -->
+  <div id="manipulatives-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl space-y-4 flex flex-col">
+      <div class="flex justify-between items-center border-b border-slate-200 pb-3">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-border-all text-amber-600 text-xl"></i>
+          <h3 class="font-heading font-bold text-xl text-slate-900">Decimal Grid Modeler</h3>
+        </div>
+        <button onclick="toggleManipulatives()" class="text-slate-400 hover:text-slate-700 text-2xl font-bold px-2">×</button>
+      </div>
+
+      <div class="bg-amber-50 p-3 rounded-xl border border-amber-200 text-xs font-semibold text-amber-950">
+        <b>Instructions:</b> Each large square represents 1 Whole, broken into 100 hundredths. Click to shade the blocks to model multiplying a decimal by a whole number!
+      </div>
+      
+      <div class="flex justify-between items-center bg-slate-100 p-2 rounded-xl">
+        <span class="text-sm font-bold text-slate-700 pl-2">Hundredths shaded: <span id="crossed-count" class="text-emerald-700">0 (Decimal: 0.00)</span></span>
+        <button onclick="resetManipulatives()" class="bg-slate-300 hover:bg-slate-400 text-slate-800 text-xs font-bold px-3 py-1.5 rounded-lg transition">
+          Clear Grids
+        </button>
+      </div>
+
+      <!-- Decimal Grids Container -->
+      <div id="decimal-grids-container" class="flex flex-row justify-center gap-4 py-2">
+        <!-- JS will populate two 10x10 grids here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRATCHPAD MODAL -->
+  <div id="scratchpad-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-3xl w-full p-6 shadow-2xl space-y-4 flex flex-col h-[85vh]">
+      <div class="flex justify-between items-center border-b border-slate-200 pb-3">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-pen-clip text-sky-600 text-xl"></i>
+          <h3 class="font-heading font-bold text-xl text-slate-900">Chromebook Scratchpad & Work Area</h3>
+        </div>
+        <button onclick="toggleScratchpad()" class="text-slate-400 hover:text-slate-700 text-2xl font-bold px-2">×</button>
+      </div>
+
+      <!-- Controls -->
+      <div class="flex flex-wrap items-center justify-between gap-3 bg-slate-100 p-3 rounded-2xl">
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-bold text-slate-600">Color:</span>
+          <button onclick="setPadColor('#0284c7')" class="w-8 h-8 rounded-full bg-sky-600 border-2 border-white shadow"></button>
+          <button onclick="setPadColor('#dc2626')" class="w-8 h-8 rounded-full bg-red-600 border-2 border-white shadow"></button>
+          <button onclick="setPadColor('#16a34a')" class="w-8 h-8 rounded-full bg-emerald-600 border-2 border-white shadow"></button>
+          <button onclick="setPadColor('#0f172a')" class="w-8 h-8 rounded-full bg-slate-900 border-2 border-white shadow"></button>
+        </div>
+        <button onclick="clearScratchpad()" class="bg-red-100 hover:bg-red-200 text-red-800 text-xs font-bold px-3 py-2 rounded-xl transition">
+          <i class="fa-solid fa-trash"></i> Clear Pad
+        </button>
+      </div>
+
+      <!-- Canvas Box -->
+      <div class="flex-1 bg-slate-50 border-2 border-slate-200 rounded-2xl overflow-hidden relative">
+        <canvas id="scratch-canvas" class="w-full h-full cursor-crosshair"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- STUDENT EMAIL SUBMIT MODAL -->
+  <div id="submit-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 md:p-8 shadow-2xl space-y-6 border-4 border-emerald-500">
+      <div class="flex justify-between items-center border-b border-slate-200 pb-3">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-paper-plane text-emerald-600 text-2xl"></i>
+          <h3 class="font-heading font-bold text-2xl text-slate-900">Email Report to Teacher</h3>
+        </div>
+        <button onclick="closeSubmitModal()" class="text-slate-400 hover:text-slate-700 text-2xl font-bold px-2">×</button>
+      </div>
+
+      <!-- Error alert banner -->
+      <div id="submit-error-banner" class="hidden bg-red-100 border border-red-300 text-red-800 p-3 rounded-xl text-xs font-bold flex items-center gap-2">
+        <i class="fa-solid fa-triangle-exclamation text-base"></i> Please enter your First and Last Name before turning in!
+      </div>
+
+      <div class="space-y-4">
+        <div>
+          <label class="block text-sm font-bold text-slate-700 mb-1">Student First & Last Name:</label>
+          <input type="text" id="studentName" class="w-full px-4 py-3 rounded-xl border-2 border-slate-300 font-bold text-slate-900 focus:border-emerald-500 focus:outline-none" placeholder="e.g. Alex Johnson">
+        </div>
+
+        <div>
+          <label class="block text-sm font-bold text-slate-700 mb-1">Grade / Class:</label>
+          <input type="text" id="classId" class="w-full px-4 py-3 rounded-xl border-2 border-slate-300 font-bold text-slate-900 focus:border-emerald-500 focus:outline-none" placeholder="e.g. 5th Grade Math">
+        </div>
+
+        <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-xl text-xs text-emerald-900">
+          <i class="fa-solid fa-circle-info"></i> Submitting will automatically open a <b>Gmail web compose window in a new tab</b> with your full score report pre-filled for <b>jvena@saintmarys.us</b>.
+        </div>
+      </div>
+
+      <div class="flex gap-3 pt-2">
+        <button onclick="processEmailSubmission()" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl transition shadow-md flex items-center justify-center gap-2">
+          <i class="fa-solid fa-envelope"></i> Open Gmail in New Tab
+        </button>
+        <button onclick="closeSubmitModal()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-5 py-3.5 rounded-xl transition">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUCCESS CONFIRMATION MODAL -->
+  <div id="success-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 text-center space-y-4 border-4 border-emerald-500 shadow-2xl">
+      <div class="w-16 h-16 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center mx-auto text-3xl">
+        <i class="fa-solid fa-check"></i>
+      </div>
+      <h3 class="font-heading font-bold text-2xl text-slate-900">Gmail Opened!</h3>
+      <p id="success-message-text" class="text-sm text-slate-600 leading-relaxed"></p>
+      <button onclick="document.getElementById('success-modal').classList.add('hidden')" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl transition">
+        Got It!
+      </button>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    const solvedProblems = new Set();
+    const totalProblems = 11;
+    const DEFAULT_TEACHER_EMAIL = "jvena@saintmarys.us";
+
+    function sanitizeInput(val) {
+      if (!val) return '';
+      return val.toString().replace(/,/g, '').trim().toLowerCase();
+    }
+
+    function toggleHint(hintId) {
+      const hintElem = document.getElementById(hintId);
+      if (hintElem) hintElem.classList.toggle('hidden');
+    }
+
+    function showToast(message, isSuccess = true) {
+      const banner = document.getElementById('toast-banner');
+      const icon = document.getElementById('toast-icon');
+      const msg = document.getElementById('toast-msg');
+
+      if (!banner || !msg || !icon) return;
+
+      msg.innerText = message;
+      if (isSuccess) {
+        icon.className = 'fa-solid fa-circle-check text-emerald-400 text-lg';
+      } else {
+        icon.className = 'fa-solid fa-circle-info text-sky-400 text-lg';
+      }
+
+      banner.classList.remove('hidden');
+      setTimeout(() => {
+        banner.classList.add('hidden');
+      }, 3500);
+    }
+
+    function checkProblem(probId, expectedAnswers) {
+      let allCorrect = true;
+
+      expectedAnswers.forEach((expectedList, idx) => {
+        const inputElem = document.getElementById(`${probId}-${idx + 1}`);
+        if (!inputElem) return;
+
+        const userVal = sanitizeInput(inputElem.value);
+        const options = Array.isArray(expectedList) ? expectedList.map(v => sanitizeInput(v)) : [sanitizeInput(expectedList)];
+
+        if (options.includes(userVal)) {
+          inputElem.classList.remove('incorrect');
+          inputElem.classList.add('correct');
+        } else {
+          inputElem.classList.remove('correct');
+          inputElem.classList.add('incorrect');
+          allCorrect = false;
+        }
+      });
+
+      const msgElem = document.getElementById(`msg-${probId}`);
+      if (msgElem) {
+        msgElem.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-800', 'bg-red-100', 'text-red-800');
+        if (allCorrect) {
+          msgElem.classList.add('bg-emerald-100', 'text-emerald-800');
+          msgElem.innerHTML = '<i class="fa-solid fa-circle-check"></i> Great job! Correct!';
+          solvedProblems.add(probId);
+        } else {
+          msgElem.classList.add('bg-red-100', 'text-red-800');
+          msgElem.innerHTML = '<i class="fa-solid fa-circle-xmark"></i> Check the red boxes and try again!';
+        }
+      }
+
+      updateProgress();
+    }
+
+    function updateProgress() {
+      const count = solvedProblems.size;
+      const percent = Math.round((count / totalProblems) * 100);
+
+      const progressText = document.getElementById('progress-text');
+      const progressBar = document.getElementById('progress-bar');
+
+      if (progressText) progressText.innerText = `${count} / ${totalProblems} Solved`;
+      if (progressBar) progressBar.style.width = `${percent}%`;
+    }
+
+    /* SAVE FOR LATER FUNCTIONALITY */
+    function saveProgress() {
+      const dataToSave = {
+        inputs: {},
+        solved: Array.from(solvedProblems),
+        savedAt: new Date().toLocaleTimeString()
+      };
+
+      const inputs = document.querySelectorAll('input.math-input, #studentName, #classId');
+      inputs.forEach(input => {
+        if (input.id) {
+          dataToSave.inputs[input.id] = input.value;
+        }
+      });
+
+      try {
+        localStorage.setItem('5th_math_worksheet_decimals', JSON.stringify(dataToSave));
+        showToast('Your work has been saved to this device! You can finish later.');
+      } catch (e) {
+        showToast('Unable to save to localStorage.', false);
+      }
+    }
+
+    function loadProgress() {
+      try {
+        const savedRaw = localStorage.getItem('5th_math_worksheet_decimals');
+        if (!savedRaw) {
+          showToast('No saved work found on this device.', false);
+          return;
+        }
+
+        const data = JSON.parse(savedRaw);
+        if (data.inputs) {
+          Object.keys(data.inputs).forEach(id => {
+            const elem = document.getElementById(id);
+            if (elem) elem.value = data.inputs[id];
+          });
+        }
+
+        if (data.solved) {
+          solvedProblems.clear();
+          data.solved.forEach(p => solvedProblems.add(p));
+          updateProgress();
+        }
+
+        showToast('Saved work successfully loaded!');
+      } catch (e) {
+        showToast('Error loading saved work.', false);
+      }
+    }
+
+    /* Manipulatives Logic */
+    function initManipulatives() {
+      const container = document.getElementById('decimal-grids-container');
+      if (!container || container.children.length > 0) return; // already initialized
+
+      // Create two 10x10 decimal grids
+      for (let g = 0; g < 2; g++) {
+        const grid = document.createElement('div');
+        grid.className = 'grid grid-cols-10 gap-px bg-slate-300 p-1 rounded-sm border-2 border-slate-400 w-full max-w-[150px] mx-auto';
+        
+        for (let i = 0; i < 100; i++) {
+          const block = document.createElement('div');
+          block.className = 'base-block bg-white cursor-pointer transition-colors duration-200';
+          block.onclick = function() {
+            this.classList.toggle('bg-emerald-400');
+            this.classList.toggle('bg-white');
+            this.classList.toggle('shaded-block');
+            updateManipulativesCount();
+          };
+          grid.appendChild(block);
+        }
+        container.appendChild(grid);
+      }
+    }
+
+    function updateManipulativesCount() {
+      const shaded = document.querySelectorAll('.shaded-block').length;
+      const decimalVal = (shaded / 100).toFixed(2);
+      document.getElementById('crossed-count').innerText = `${shaded} (Decimal: ${decimalVal})`;
+    }
+
+    function resetManipulatives() {
+      const blocks = document.querySelectorAll('.base-block');
+      blocks.forEach(b => {
+        b.classList.remove('bg-emerald-400', 'shaded-block');
+        b.classList.add('bg-white');
+      });
+      updateManipulativesCount();
+    }
+
+    function toggleManipulatives() {
+      const modal = document.getElementById('manipulatives-modal');
+      modal.classList.toggle('hidden');
+      if(!modal.classList.contains('hidden')) {
+        initManipulatives();
+      }
+    }
+
+    /* Auto-load saved work if present */
+    window.onload = function() {
+      if (localStorage.getItem('5th_math_worksheet_decimals')) {
+        loadProgress();
+      }
+    };
+
+    /* Scratchpad Canvas Logic */
+    let canvas, ctx, isDrawing = false;
+    let padColor = '#0284c7';
+
+    function toggleScratchpad() {
+      const modal = document.getElementById('scratchpad-modal');
+      modal.classList.toggle('hidden');
+
+      if (!modal.classList.contains('hidden')) {
+        setTimeout(initCanvas, 100);
+      }
+    }
+
+    function initCanvas() {
+      canvas = document.getElementById('scratch-canvas');
+      if (!canvas) return;
+
+      const rect = canvas.parentElement.getBoundingClientRect();
+      canvas.width = rect.width;
+      canvas.height = rect.height;
+
+      ctx = canvas.getContext('2d');
+      ctx.lineWidth = 3;
+      ctx.lineCap = 'round';
+      ctx.strokeStyle = padColor;
+
+      canvas.onmousedown = startDrawing;
+      canvas.onmousemove = draw;
+      canvas.onmouseup = stopDrawing;
+      canvas.ontouchstart = startDrawingTouch;
+      canvas.ontouchmove = drawTouch;
+      canvas.ontouchend = stopDrawing;
+    }
+
+    function setPadColor(color) {
+      padColor = color;
+      if (ctx) ctx.strokeStyle = color;
+    }
+
+    function clearScratchpad() {
+      if (canvas && ctx) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+    }
+
+    function startDrawing(e) {
+      isDrawing = true;
+      ctx.beginPath();
+      ctx.moveTo(e.offsetX, e.offsetY);
+    }
+
+    function draw(e) {
+      if (!isDrawing) return;
+      ctx.lineTo(e.offsetX, e.offsetY);
+      ctx.stroke();
+    }
+
+    function startDrawingTouch(e) {
+      isDrawing = true;
+      const rect = canvas.getBoundingClientRect();
+      const touch = e.touches[0];
+      ctx.beginPath();
+      ctx.moveTo(touch.clientX - rect.left, touch.clientY - touch.top);
+      e.preventDefault();
+    }
+
+    function drawTouch(e) {
+      if (!isDrawing) return;
+      const rect = canvas.getBoundingClientRect();
+      const touch = e.touches[0];
+      ctx.lineTo(touch.clientX - rect.left, touch.clientY - rect.top);
+      ctx.stroke();
+      e.preventDefault();
+    }
+
+    function stopDrawing() {
+      isDrawing = false;
+    }
+
+    /* Submission Modal & Email Logic */
+    function openSubmitModal() {
+      document.getElementById('submit-modal').classList.remove('hidden');
+      document.getElementById('submit-error-banner').classList.add('hidden');
+    }
+
+    function closeSubmitModal() {
+      document.getElementById('submit-modal').classList.add('hidden');
+    }
+
+    function processEmailSubmission() {
+      const nameInput = document.getElementById('studentName');
+      const classInput = document.getElementById('classId');
+
+      if (!nameInput || !nameInput.value.trim()) {
+        document.getElementById('submit-error-banner').classList.remove('hidden');
+        return;
+      }
+
+      const studentName = nameInput.value.trim();
+      const className = classInput ? classInput.value.trim() : '5th Grade Math';
+      const scoreText = `${solvedProblems.size} of ${totalProblems} problems completed correctly`;
+
+      const subject = encodeURIComponent(`Math Worksheet Submission: ${studentName} (${className})`);
+      const bodyText = `Student Name: ${studentName}\nClass: ${className}\nWorksheet: Lesson 12-1 & 12-2 Multiplying Decimals\nScore Progress: ${scoreText}\n\nSubmitted via Interactive Digital Worksheet Application.`;
+
+      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${DEFAULT_TEACHER_EMAIL}&su=${subject}&body=${encodeURIComponent(bodyText)}`;
+
+      window.open(gmailUrl, '_blank');
+
+      closeSubmitModal();
+
+      const successMsg = document.getElementById('success-message-text');
+      if (successMsg) {
+        successMsg.innerHTML = `Great work <b>${studentName}</b>! A new tab has opened with your completed score report ready to send to <b>${DEFAULT_TEACHER_EMAIL}</b>.`;
+      }
+      document.getElementById('success-modal').classList.remove('hidden');
+    }
+  </script>
+</body>
+</html>
