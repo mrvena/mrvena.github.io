@@ -1,0 +1,1463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson: Integers on the Number Line & Real World</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Roboto+Mono:wght@500;700&display=swap">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            heading: ['Fredoka', 'sans-serif'],
+            mono: ['Roboto Mono', 'monospace']
+          },
+          colors: {
+            brandBlue: '#0284c7',
+            brandGreen: '#16a34a',
+            brandYellow: '#ca8a04',
+            brandPurple: '#9333ea',
+            brandOrange: '#ea580c'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #f8fafc;
+      color: #0f172a;
+      font-size: 18px;
+    }
+    
+    .math-input {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 18px;
+      font-weight: 700;
+      text-align: center;
+      border: 2px dashed #94a3b8;
+      border-radius: 8px;
+      background-color: #ffffff;
+      color: #0284c7;
+      transition: all 0.2s ease;
+      width: 100%;
+      height: 42px;
+    }
+
+    .math-input:focus {
+      outline: none;
+      border-color: #0284c7;
+      border-style: solid;
+      background-color: #f0f9ff;
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.2);
+    }
+
+    .math-input.correct {
+      border-color: #16a34a !important;
+      border-style: solid !important;
+      background-color: #f0fdf4 !important;
+      color: #15803d !important;
+    }
+
+    .math-input.incorrect {
+      border-color: #dc2626 !important;
+      border-style: solid !important;
+      background-color: #fef2f2 !important;
+      color: #b91c1c !important;
+    }
+
+    mark {
+      background-color: #fef08a;
+      color: #854d0e;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-weight: 700;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Number Line Manipulative Styles */
+    .nl-point {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background-color: #e2e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 12px;
+      cursor: pointer;
+      position: relative;
+      z-index: 10;
+      border: 2px solid #94a3b8;
+      transition: all 0.2s;
+    }
+    .nl-point:hover {
+      background-color: #cbd5e1;
+    }
+    .nl-point.selected {
+      background-color: #0284c7;
+      color: white;
+      border-color: #0369a1;
+      transform: scale(1.2);
+    }
+    .nl-point.opposite {
+      background-color: #dc2626;
+      color: white;
+      border-color: #991b1b;
+      transform: scale(1.2);
+    }
+    .nl-point.zero {
+      background-color: #16a34a;
+      color: white;
+      border-color: #14532d;
+    }
+    .nl-line {
+      position: absolute;
+      top: 15px;
+      left: 16px;
+      right: 16px;
+      height: 4px;
+      background-color: #94a3b8;
+      z-index: 5;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen pb-24">
+
+  <!-- STICKY HEADER & SECTION NAVIGATION -->
+  <header class="sticky top-0 z-40 bg-white border-b border-slate-200 shadow-md py-3 px-4 md:px-8">
+    <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-4">
+      
+      <!-- App Title -->
+      <div class="flex items-center gap-3">
+        <div class="bg-sky-600 text-white p-2.5 rounded-2xl shadow-sm">
+          <i class="fa-solid fa-arrows-left-right-to-line text-2xl"></i>
+        </div>
+        <div>
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold bg-sky-100 text-sky-800 uppercase tracking-wider">
+            6th Grade Math • Lessons 9-1 & 9-2
+          </span>
+          <h1 class="text-xl md:text-2xl font-heading font-bold text-slate-900">
+            Lesson: Integers on the Number Line & Real World
+          </h1>
+        </div>
+      </div>
+
+      <!-- Quick Jump Navigation Tabs -->
+      <nav class="flex flex-wrap items-center justify-center gap-1.5 text-xs font-bold">
+        <a href="#sec1" class="px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-sky-100 text-slate-700 hover:text-sky-800 transition">1. Intro & Vocab</a>
+        <a href="#sec2" class="px-2.5 py-1.5 rounded-xl bg-sky-100 hover:bg-sky-200 text-sky-900 transition">2. Obj 1 Teach</a>
+        <a href="#sec3a" class="px-2.5 py-1.5 rounded-xl bg-amber-100 hover:bg-amber-200 text-amber-900 transition">3. Obj 1 Partner</a>
+        <a href="#sec3b" class="px-2.5 py-1.5 rounded-xl bg-sky-600 hover:bg-sky-700 text-white transition">4. Obj 1 Ind.</a>
+        <a href="#sec4" class="px-2.5 py-1.5 rounded-xl bg-purple-100 hover:bg-purple-200 text-purple-900 transition">5. Obj 2 Teach</a>
+        <a href="#sec5a" class="px-2.5 py-1.5 rounded-xl bg-amber-100 hover:bg-amber-200 text-amber-900 transition">6. Obj 2 Partner</a>
+        <a href="#sec5b" class="px-2.5 py-1.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white transition">7. Obj 2 Ind.</a>
+        <a href="#sec6" class="px-2.5 py-1.5 rounded-xl bg-emerald-100 hover:bg-emerald-200 text-emerald-900 transition">8. Summary</a>
+      </nav>
+
+      <!-- Live Score Counter, Save Work & Turn-In Action Buttons -->
+      <div class="flex items-center gap-2">
+        <div class="bg-slate-100 px-3 py-1.5 rounded-2xl border border-slate-200 flex items-center gap-2">
+          <div class="text-right">
+            <div class="text-[10px] font-bold text-slate-500 uppercase">Score Progress</div>
+            <div id="progress-text" class="text-xs font-extrabold text-sky-700">0 / 11 Solved</div>
+          </div>
+          <div class="w-16 bg-slate-200 rounded-full h-2.5 overflow-hidden">
+            <div id="progress-bar" class="bg-gradient-to-r from-sky-500 to-emerald-500 h-2.5 rounded-full transition-all duration-500 w-0"></div>
+          </div>
+        </div>
+
+        <button onclick="saveProgress()" class="bg-amber-500 hover:bg-amber-600 text-white font-bold px-3 py-2 rounded-xl transition flex items-center gap-1.5 text-xs shadow-sm" title="Save your current answers to finish later">
+          <i class="fa-solid fa-floppy-disk"></i> Save Work
+        </button>
+
+        <button onclick="loadProgress()" class="bg-slate-700 hover:bg-slate-800 text-white font-bold px-3 py-2 rounded-xl transition flex items-center gap-1.5 text-xs shadow-sm" title="Load previously saved answers">
+          <i class="fa-solid fa-folder-open"></i> Load Work
+        </button>
+
+        <button onclick="openSubmitModal()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3 py-2 rounded-xl transition flex items-center gap-1.5 text-xs shadow-sm">
+          <i class="fa-solid fa-paper-plane"></i> Email Teacher
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Toast Notification for Save/Load -->
+  <div id="toast-banner" class="fixed top-20 right-6 z-50 hidden bg-slate-900 text-white px-4 py-3 rounded-2xl shadow-xl flex items-center gap-3 text-sm border border-slate-700">
+    <i id="toast-icon" class="fa-solid fa-circle-check text-emerald-400 text-lg"></i>
+    <span id="toast-msg">Progress saved successfully!</span>
+  </div>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 mt-8 space-y-12">
+
+    <!-- LEARNING OBJECTIVE BOX -->
+    <div class="bg-sky-600 text-white p-6 md:p-8 rounded-3xl shadow-lg border-4 border-sky-300 text-center">
+      <h2 class="text-xl md:text-2xl font-heading font-bold mb-2 tracking-wide uppercase text-sky-100">Today's Learning Objective</h2>
+      <p class="text-lg md:text-xl font-bold">
+        I can use number lines to understand positive and negative integers, find their opposites, and use them to represent real-world situations like temperature, money, and elevation.
+      </p>
+    </div>
+
+    <!-- SECTION 1: WHY WE NEED THIS MATH & KEY VOCABULARY -->
+    <section id="sec1" class="bg-white border-2 border-slate-200 rounded-3xl p-6 md:p-8 shadow-sm space-y-6">
+      <div class="flex items-center gap-3">
+        <div class="p-3 bg-emerald-100 text-emerald-800 rounded-2xl">
+          <i class="fa-solid fa-earth-americas text-2xl"></i>
+        </div>
+        <div>
+          <span class="text-xs font-bold text-emerald-800 uppercase tracking-wide">Section 1</span>
+          <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">Why We Need This Math & Key Vocabulary</h2>
+        </div>
+      </div>
+
+      <!-- Real World Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        
+        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 flex flex-col items-center text-center">
+          <div class="w-14 h-14 mb-2 flex items-center justify-center text-sky-600 text-3xl">
+            <i class="fa-solid fa-temperature-half"></i>
+          </div>
+          <h3 class="font-heading font-bold text-lg text-slate-900">Weather & Temperature</h3>
+          <p class="text-sm text-slate-600 mt-1">
+            Example: A severe freeze drops the temperature to 4 degrees below zero. We use negative integers like -4 to measure how cold it gets!
+          </p>
+        </div>
+
+        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 flex flex-col items-center text-center">
+          <div class="w-14 h-14 mb-2 flex items-center justify-center text-emerald-600 text-3xl">
+            <i class="fa-solid fa-money-bill-transfer"></i>
+          </div>
+          <h3 class="font-heading font-bold text-lg text-slate-900">Banking & Money</h3>
+          <p class="text-sm text-slate-600 mt-1">
+            Example: If you deposit money, your balance goes up (positive). If you write a check or owe someone, your balance goes down (negative).
+          </p>
+        </div>
+
+        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 flex flex-col items-center text-center">
+          <div class="w-14 h-14 mb-2 flex items-center justify-center text-purple-600 text-3xl">
+            <i class="fa-solid fa-water"></i>
+          </div>
+          <h3 class="font-heading font-bold text-lg text-slate-900">Elevation & Depth</h3>
+          <p class="text-sm text-slate-600 mt-1">
+            Example: A mountain peak is high above sea level (positive). A diver swimming below the surface is represented by a negative depth.
+          </p>
+        </div>
+
+        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 flex flex-col items-center text-center">
+          <div class="w-14 h-14 mb-2 flex items-center justify-center text-amber-600 text-3xl">
+            <i class="fa-solid fa-football"></i>
+          </div>
+          <h3 class="font-heading font-bold text-lg text-slate-900">Sports & Games</h3>
+          <p class="text-sm text-slate-600 mt-1">
+            Example: In football, gaining yards moves you forward (+), but getting tackled behind the line of scrimmage results in losing yards (-).
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Key Math Vocabulary Bar -->
+      <div class="bg-amber-50 border-2 border-amber-200 rounded-2xl p-5 space-y-3">
+        <h3 class="font-heading font-bold text-xl text-amber-950 flex items-center gap-2">
+          <i class="fa-solid fa-spell-check text-amber-600"></i> Key Vocabulary Terms
+        </h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 text-sm">
+          <div class="bg-white p-3 rounded-xl border border-amber-200"><mark>integers</mark>: The set of whole numbers and their opposites. They can be positive, negative, or zero.</div>
+          <div class="bg-white p-3 rounded-xl border border-amber-200"><mark>positive integers</mark>: Integers that are greater than zero. They appear to the right of zero on a horizontal number line.</div>
+          <div class="bg-white p-3 rounded-xl border border-amber-200"><mark>negative integers</mark>: Integers that are less than zero. They appear to the left of zero on a horizontal number line.</div>
+          <div class="bg-white p-3 rounded-xl border border-amber-200"><mark>zero</mark>: The number zero is right in the middle of the number line. It is neither positive nor negative.</div>
+          <div class="bg-white p-3 rounded-xl border border-amber-200"><mark>opposites</mark>: Two integers that are the exact same distance from zero, but on opposite sides of the number line.</div>
+          <div class="bg-white p-3 rounded-xl border border-amber-200"><mark>vertical number line</mark>: A number line drawn up and down, often used for temperature (thermometer) or elevation (above/below sea level).</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: OBJECTIVE 1 DIRECT INSTRUCTION -->
+    <section id="sec2" class="bg-white border-2 border-sky-200 rounded-3xl p-6 md:p-8 shadow-sm space-y-6">
+      <div class="flex flex-col md:flex-row justify-between md:items-center gap-4">
+        <div class="flex items-center gap-3">
+          <div class="p-3 bg-sky-100 text-sky-800 rounded-2xl">
+            <i class="fa-solid fa-chalkboard-user text-2xl"></i>
+          </div>
+          <div>
+            <span class="text-xs font-bold text-sky-800 uppercase tracking-wide">Section 2 • 5 Minutes Direct Instruction</span>
+            <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">
+              Objective 1: Integers and Opposites
+            </h2>
+          </div>
+        </div>
+      </div>
+
+      <!-- Problem Statement Highlighted -->
+      <div class="bg-sky-50 border border-sky-300 rounded-2xl p-4 text-slate-800">
+        <span class="font-bold text-sky-900 uppercase text-xs tracking-wider block mb-1">Example Problem Statement:</span>
+        <p class="text-base font-semibold">
+          Find the opposite of the integer -8.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+        
+        <!-- Step-by-Step Explanation -->
+        <div class="space-y-4">
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1">
+            <span class="font-bold text-sky-700 text-sm">Step 1: Locate the Number on the Number Line</span>
+            <p class="text-slate-700 text-base">
+              <b>Problem:</b> Find the opposite of -8.<br><br>
+              First, find where -8 lives on the number line. Since it is a negative number, it is located exactly 8 spaces to the left of zero.
+            </p>
+          </div>
+
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1">
+            <span class="font-bold text-sky-700 text-sm">Step 2: Find the Opposite Distance</span>
+            <p class="text-slate-700 text-base">
+              <b>Problem:</b> Find the opposite of -8.<br><br>
+              Opposites are the same distance from zero, just on the other side. Since -8 is 8 spaces to the left, its opposite must be 8 spaces to the right of zero.<br>
+              The number 8 spaces to the right of zero is positive 8.
+            </p>
+          </div>
+        </div>
+
+        <!-- VISUAL SUMMARY CARD -->
+        <div class="bg-slate-50 p-6 rounded-2xl border-2 border-sky-300 shadow-sm flex flex-col items-center">
+          <span class="text-xs font-bold text-sky-800 uppercase tracking-widest mb-4">Finding Opposites</span>
+          
+          <div class="w-full max-w-md bg-white p-5 rounded-2xl border border-slate-300 shadow-inner space-y-4 text-center font-mono">
+            <div class="flex justify-between items-center text-sm font-bold text-slate-400 mb-2 px-2">
+              <span>-8</span>
+              <span>0</span>
+              <span>8</span>
+            </div>
+            <!-- Simple custom horizontal line for visual -->
+            <div class="relative w-full h-2 bg-slate-300 rounded-full mb-8">
+              <div class="absolute w-4 h-4 bg-sky-600 rounded-full -top-1 left-0 shadow-md"></div>
+              <div class="absolute w-4 h-4 bg-slate-800 rounded-full -top-1 left-1/2 -ml-2 shadow-md"></div>
+              <div class="absolute w-4 h-4 bg-red-600 rounded-full -top-1 right-0 shadow-md"></div>
+              
+              <!-- Arcs to show distance -->
+              <svg class="absolute top-4 left-0 w-[50%] h-8" preserveAspectRatio="none">
+                <path d="M 8 0 Q 50% 30 100% 0" fill="transparent" stroke="#0284c7" stroke-width="2" stroke-dasharray="4"/>
+              </svg>
+              <svg class="absolute top-4 left-[50%] w-[50%] h-8" preserveAspectRatio="none">
+                <path d="M 0 0 Q 50% 30 100% 0" fill="transparent" stroke="#dc2626" stroke-width="2" stroke-dasharray="4"/>
+              </svg>
+            </div>
+            
+            <div class="text-center mx-auto text-xl leading-relaxed flex flex-col justify-center">
+               <div class="font-sans font-bold text-slate-700">The opposite of -8 is <span class="text-red-600 text-2xl">8</span></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Common Error Box -->
+      <div class="bg-amber-50 border-2 border-amber-300 rounded-2xl p-5 flex items-start gap-4">
+        <div class="p-3 bg-amber-200 text-amber-900 rounded-xl">
+          <i class="fa-solid fa-triangle-exclamation text-2xl"></i>
+        </div>
+        <div>
+          <h4 class="font-heading font-bold text-amber-950 text-lg">Rule to Remember: The Opposite of an Opposite!</h4>
+          <p class="text-slate-700 text-base mt-1">
+            Every integer has an opposite. The opposite of the opposite of a number is the original number! For example, the opposite of the opposite of 3 is just 3.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3A: OBJECTIVE 1 GUIDED PRACTICE (5 Mins - Partner Work) -->
+    <section id="sec3a" class="space-y-6">
+      <div class="flex items-center gap-3">
+        <div class="p-3 bg-amber-500 text-white rounded-2xl shadow-sm">
+          <i class="fa-solid fa-user-group text-2xl"></i>
+        </div>
+        <div>
+          <span class="text-xs font-bold text-amber-800 uppercase tracking-wide">Section 3A • 5 Minutes Guided Practice (Partner Work)</span>
+          <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">
+            Objective 1 Partner Practice (Problems 1–2)
+          </h2>
+          <p class="text-sm text-slate-600 font-semibold">Work together with a partner to find these integer opposites!</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <!-- Problem 1 -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-amber-300 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-heading font-bold text-amber-900 text-xl">Problem 1 (Partner Work)</span>
+            </div>
+            
+            <div class="bg-amber-50 p-3 rounded-xl border border-amber-200 text-xs font-semibold text-amber-950 mb-3">
+              <b>Problem Statement:</b> Find the opposite of the integer 14.
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3 text-sm">
+              <div class="flex justify-between items-center">
+                <span class="font-bold text-slate-900">The opposite integer:</span>
+                <input type="text" id="p1-1" class="math-input w-28 font-bold text-amber-700" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p1')" class="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-amber-600"></i> Partner Hint
+            </button>
+            <div id="hint-p1" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p>• Think about which direction from zero the number 14 is, and go the exact same distance in the other direction.</p>
+            </div>
+
+            <div id="msg-p1" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p1', [['-14']])" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Partner Answer
+            </button>
+          </div>
+        </div>
+
+        <!-- Problem 2 -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-amber-300 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-heading font-bold text-amber-900 text-xl">Problem 2 (Partner Work)</span>
+            </div>
+
+            <div class="bg-amber-50 p-3 rounded-xl border border-amber-200 text-xs font-semibold text-amber-950 mb-3">
+              <b>Problem Statement:</b> Find the opposite of the opposite of 22.
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3 text-sm">
+              <div class="flex justify-between items-center">
+                <span class="font-bold text-slate-900">The opposite of the opposite integer:</span>
+                <input type="text" id="p2-1" class="math-input w-28 font-bold text-amber-700" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p2')" class="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-amber-600"></i> Partner Hint
+            </button>
+            <div id="hint-p2" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p>• The opposite of an opposite brings you back to where you started.</p>
+            </div>
+
+            <div id="msg-p2" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p2', [['22']])" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Partner Answer
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 3B: OBJECTIVE 1 INDEPENDENT PRACTICE (5 Mins - Individual Work) -->
+    <section id="sec3b" class="space-y-6">
+      <div class="flex items-center gap-3">
+        <div class="p-3 bg-sky-600 text-white rounded-2xl shadow-sm">
+          <i class="fa-solid fa-user text-2xl"></i>
+        </div>
+        <div>
+          <span class="text-xs font-bold text-sky-800 uppercase tracking-wide">Section 3B • 5 Minutes Independent Practice (Individual Work)</span>
+          <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">
+            Objective 1 Independent Practice (Problems 3–5)
+          </h2>
+          <p class="text-sm text-slate-600 font-semibold">Work on your own to solve these number line problems!</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <!-- Problem 3 -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-heading font-bold text-sky-800 text-xl">Problem 3</span>
+            </div>
+
+            <div class="bg-sky-50 p-2.5 rounded-xl border border-sky-200 text-xs font-semibold text-sky-950 mb-3">
+              <b>Problem Statement:</b> Find the opposite of the integer -35.
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3 text-sm">
+              <div class="flex justify-between items-center">
+                <span class="font-bold text-slate-700">The opposite integer:</span>
+                <input type="text" id="p3-1" class="math-input w-28 font-bold text-sky-700" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p3')" class="text-xs font-bold text-sky-800 bg-sky-50 hover:bg-sky-100 border border-sky-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-sky-600"></i> Hint
+            </button>
+            <div id="hint-p3" class="hidden text-xs bg-sky-50 p-3 rounded-xl border border-sky-200 text-sky-900 space-y-1">
+              <p>• If the number is negative, its opposite is on the positive side of zero.</p>
+            </div>
+            <div id="msg-p3" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p3', [['35']])" class="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+        <!-- Problem 4 -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-heading font-bold text-sky-800 text-xl">Problem 4</span>
+            </div>
+
+            <div class="bg-sky-50 p-2.5 rounded-xl border border-sky-200 text-xs font-semibold text-sky-950 mb-3">
+              <b>Problem Statement:</b> Write the integer that is exactly 9 spaces to the left of 0 on the number line.
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3 text-sm">
+              <div class="flex justify-between items-center">
+                <span class="font-bold text-slate-700">The integer that represents this location:</span>
+                <input type="text" id="p4-1" class="math-input w-28 font-bold text-sky-700" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p4')" class="text-xs font-bold text-sky-800 bg-sky-50 hover:bg-sky-100 border border-sky-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-sky-600"></i> Hint
+            </button>
+            <div id="hint-p4" class="hidden text-xs bg-sky-50 p-3 rounded-xl border border-sky-200 text-sky-900 space-y-1">
+              <p>• Remember that numbers to the left of zero on the number line are negative.</p>
+            </div>
+            <div id="msg-p4" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p4', [['-9']])" class="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+        <!-- Problem 5: Word Problem -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-heading font-bold text-sky-800 text-xl">Problem 5 (Word)</span>
+              <span class="text-xs font-bold px-3 py-1 bg-emerald-100 text-emerald-900 rounded-full"><i class="fa-solid fa-football"></i> Sports</span>
+            </div>
+
+            <div class="bg-emerald-50 p-2.5 rounded-xl border border-emerald-200 text-xs font-semibold text-emerald-950 mb-3">
+              <b>Problem Statement:</b> A football player is tackled behind the line of scrimmage and loses 6 yards on a play. Write the integer that represents this situation.
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3 text-sm">
+              <div class="flex justify-between items-center">
+                <span class="font-bold text-slate-700">The integer that represents the yards lost:</span>
+                <input type="text" id="p5-1" class="math-input w-28 font-bold text-emerald-700" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p5')" class="text-xs font-bold text-sky-800 bg-sky-50 hover:bg-sky-100 border border-sky-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-sky-600"></i> Hint
+            </button>
+            <div id="hint-p5" class="hidden text-xs bg-sky-50 p-3 rounded-xl border border-sky-200 text-sky-900 space-y-1">
+              <p>• In football, a loss means moving backward. What kind of integer represents a loss?</p>
+            </div>
+            <div id="msg-p5" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p5', [['-6']])" class="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 4: OBJECTIVE 2 DIRECT INSTRUCTION -->
+    <section id="sec4" class="bg-white border-2 border-purple-200 rounded-3xl p-6 md:p-8 shadow-sm space-y-6">
+      <div class="flex flex-col md:flex-row justify-between md:items-center gap-4">
+        <div class="flex items-center gap-3">
+          <div class="p-3 bg-purple-100 text-purple-900 rounded-2xl">
+            <i class="fa-solid fa-earth-americas text-2xl"></i>
+          </div>
+          <div>
+            <span class="text-xs font-bold text-purple-900 uppercase tracking-wide">Section 4 • 5 Minutes Direct Instruction</span>
+            <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">
+              Objective 2: Real-World Integers & Vertical Lines
+            </h2>
+          </div>
+        </div>
+      </div>
+
+      <!-- Problem Statement Highlighted -->
+      <div class="bg-purple-50 border border-purple-300 rounded-2xl p-4 text-slate-800">
+        <span class="font-bold text-purple-900 uppercase text-xs tracking-wider block mb-1">Example Problem Statement:</span>
+        <p class="text-base font-semibold">
+          A scuba diver is exploring a reef 25 feet below sea level. Write the integer that represents this situation.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+        
+        <!-- Step-by-Step Instruction -->
+        <div class="space-y-4">
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1">
+            <span class="font-bold text-purple-800 text-sm">Step 1: Identify Zero in the Real World Context</span>
+            <p class="text-slate-700 text-base">
+              <b>Problem:</b> A diver is 25 feet below sea level.<br><br>
+              In this situation, "sea level" acts as zero on a vertical number line. Anything above the water is positive, and anything below the water is negative.
+            </p>
+          </div>
+
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1">
+            <span class="font-bold text-purple-800 text-sm">Step 2: Assign Positive or Negative</span>
+            <p class="text-slate-700 text-sm mt-1">
+              • Because the diver is <b>below</b> sea level, we use a negative integer.<br>
+              • We take the number 25 and make it negative: -25.<br>
+              The final integer representing the diver's depth is <b>-25</b>.
+            </p>
+          </div>
+        </div>
+
+        <!-- BREAK APART VISUAL CARD -->
+        <div class="bg-slate-50 p-6 rounded-2xl border-2 border-purple-300 shadow-sm flex flex-col items-center">
+          <span class="text-xs font-bold text-purple-900 uppercase tracking-widest mb-3">Vertical Number Line</span>
+
+          <div class="w-full bg-white p-5 rounded-2xl border border-slate-300 space-y-4 font-mono text-center flex flex-row items-center justify-center gap-6">
+            
+            <!-- Vertical Number Line -->
+            <div class="flex flex-col items-center relative py-2">
+              <div class="w-1 h-32 bg-slate-300 rounded-full relative">
+                <!-- Zero point -->
+                <div class="absolute w-4 h-1 bg-slate-800 top-1/2 -left-1.5 rounded-full"></div>
+                <div class="absolute right-4 top-1/2 -mt-2 text-xs font-bold text-slate-500">0 (Sea Level)</div>
+                <!-- -25 point -->
+                <div class="absolute w-4 h-4 bg-purple-600 top-[85%] -left-1.5 rounded-full shadow-md"></div>
+              </div>
+            </div>
+
+            <div class="text-left mx-auto text-base leading-relaxed">
+               <span class="text-slate-500 font-sans">Location:</span><br>
+               <span class="text-purple-700 font-bold text-xl">25 ft Below Zero</span><br><br>
+               <span class="text-slate-500 font-sans">Integer:</span><br>
+               <span class="bg-purple-100 px-3 py-1 rounded-lg text-purple-900 font-extrabold text-2xl">-25</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Common Error Box -->
+      <div class="bg-amber-50 border-2 border-amber-300 rounded-2xl p-5 flex items-start gap-4">
+        <div class="p-3 bg-amber-200 text-amber-900 rounded-xl">
+          <i class="fa-solid fa-triangle-exclamation text-2xl"></i>
+        </div>
+        <div>
+          <h4 class="font-heading font-bold text-amber-950 text-lg">Error to Avoid: Forgetting the Meaning of Zero!</h4>
+          <p class="text-slate-700 text-base mt-1">
+            Always figure out what zero means in your story. Zero could mean sea level, ground level, freezing point of water, or having an empty bank account!
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5A: OBJECTIVE 2 GUIDED PRACTICE (5 Mins - Partner Work) -->
+    <section id="sec5a" class="space-y-6">
+      <div class="flex items-center gap-3">
+        <div class="p-3 bg-amber-500 text-white rounded-2xl shadow-sm">
+          <i class="fa-solid fa-user-group text-2xl"></i>
+        </div>
+        <div>
+          <span class="text-xs font-bold text-amber-800 uppercase tracking-wide">Section 5A • 5 Minutes Guided Practice (Partner Work)</span>
+          <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">
+            Objective 2 Partner Practice (Problems 6–7)
+          </h2>
+          <p class="text-sm text-slate-600 font-semibold">Work together with your partner to identify integers in the real world!</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <!-- Problem 6 -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-amber-300 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-heading font-bold text-amber-900 text-xl">Problem 6 (Partner Work)</span>
+            </div>
+
+            <div class="bg-amber-50 p-3 rounded-xl border border-amber-200 text-xs font-semibold text-amber-950 mb-3">
+              <b>Problem Statement:</b> Write the integer to represent a deposit of $40 into a bank account.
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3 text-sm">
+              <div class="flex justify-between items-center">
+                <span class="font-bold text-slate-900">The integer that represents this situation:</span>
+                <input type="text" id="p6-1" class="math-input w-28 font-bold text-amber-700" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p6')" class="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-amber-600"></i> Partner Hint
+            </button>
+            <div id="hint-p6" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p>• A deposit adds money to your account, increasing your balance above zero.</p>
+            </div>
+
+            <div id="msg-p6" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p6', [['40']])" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Partner Answer
+            </button>
+          </div>
+        </div>
+
+        <!-- Problem 7 -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-amber-300 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-heading font-bold text-amber-900 text-xl">Problem 7 (Partner Work)</span>
+            </div>
+
+            <div class="bg-amber-50 p-3 rounded-xl border border-amber-200 text-xs font-semibold text-amber-950 mb-3">
+              <b>Problem Statement:</b> Write the integer to represent 12 degrees below zero.
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3 text-sm">
+              <div class="flex justify-between items-center">
+                <span class="font-bold text-slate-900">The integer that represents this situation:</span>
+                <input type="text" id="p7-1" class="math-input w-28 font-bold text-amber-700" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p7')" class="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-amber-600"></i> Partner Hint
+            </button>
+            <div id="hint-p7" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p>• "Below zero" means the temperature is colder than zero.</p>
+            </div>
+
+            <div id="msg-p7" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p7', [['-12']])" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Partner Answer
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 5B: OBJECTIVE 2 INDEPENDENT PRACTICE (5 Mins - Individual Work) -->
+    <section id="sec5b" class="space-y-6">
+      <div class="flex items-center gap-3">
+        <div class="p-3 bg-purple-600 text-white rounded-2xl shadow-sm">
+          <i class="fa-solid fa-user text-2xl"></i>
+        </div>
+        <div>
+          <span class="text-xs font-bold text-purple-800 uppercase tracking-wide">Section 5B • 5 Minutes Independent Practice (Individual Work)</span>
+          <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">
+            Objective 2 Independent Practice (Problems 8–11)
+          </h2>
+          <p class="text-sm text-slate-600 font-semibold">Identify integers in these real-world scenarios on your own!</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+        <!-- Problem 8 -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-heading font-bold text-purple-900 text-xl">Problem 8</span>
+            </div>
+
+            <div class="bg-purple-50 p-2.5 rounded-xl border border-purple-200 text-xs font-semibold text-purple-950 mb-3">
+              <b>Problem Statement:</b> Write the integer to represent a bird flying 45 feet above the ground.
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-2 text-xs">
+              <div class="flex flex-col gap-2">
+                <span class="font-bold text-slate-900 text-sm">The integer that represents this situation:</span>
+                <input type="text" id="p8-1" class="math-input h-9 font-bold text-purple-800 text-sm" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p8')" class="w-full text-xs font-bold text-purple-800 bg-purple-50 hover:bg-purple-100 border border-purple-200 px-3 py-1.5 rounded-xl flex items-center justify-center gap-1">
+              <i class="fa-solid fa-lightbulb text-purple-600"></i> Hint
+            </button>
+            <div id="hint-p8" class="hidden text-xs bg-purple-50 p-3 rounded-xl border border-purple-200 text-purple-900 space-y-1">
+              <p>• "Above" signifies a positive direction from the ground level of zero.</p>
+            </div>
+            <div id="msg-p8" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p8', [['45']])" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 rounded-xl transition shadow-sm text-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+        <!-- Problem 9 -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-heading font-bold text-purple-900 text-xl">Problem 9</span>
+            </div>
+
+            <div class="bg-purple-50 p-2.5 rounded-xl border border-purple-200 text-xs font-semibold text-purple-950 mb-3">
+              <b>Problem Statement:</b> Write the integer to represent an elevator going down 7 floors.
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-2 text-xs">
+              <div class="flex flex-col gap-2">
+                <span class="font-bold text-slate-900 text-sm">The integer that represents this situation:</span>
+                <input type="text" id="p9-1" class="math-input h-9 font-bold text-purple-800 text-sm" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p9')" class="w-full text-xs font-bold text-purple-800 bg-purple-50 hover:bg-purple-100 border border-purple-200 px-3 py-1.5 rounded-xl flex items-center justify-center gap-1">
+              <i class="fa-solid fa-lightbulb text-purple-600"></i> Hint
+            </button>
+            <div id="hint-p9" class="hidden text-xs bg-purple-50 p-3 rounded-xl border border-purple-200 text-purple-900 space-y-1">
+              <p>• Going down floors in a building is like going below zero on a vertical number line.</p>
+            </div>
+            <div id="msg-p9" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p9', [['-7']])" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 rounded-xl transition shadow-sm text-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+        <!-- Problem 10 -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-heading font-bold text-purple-900 text-xl">Problem 10</span>
+            </div>
+
+            <div class="bg-purple-50 p-2.5 rounded-xl border border-purple-200 text-xs font-semibold text-purple-950 mb-3">
+              <b>Problem Statement:</b> Write the integer to represent owing a friend 15 dollars.
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-2 text-xs">
+              <div class="flex flex-col gap-2">
+                <span class="font-bold text-slate-900 text-sm">The integer that represents this situation:</span>
+                <input type="text" id="p10-1" class="math-input h-9 font-bold text-purple-800 text-sm" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p10')" class="w-full text-xs font-bold text-purple-800 bg-purple-50 hover:bg-purple-100 border border-purple-200 px-3 py-1.5 rounded-xl flex items-center justify-center gap-1">
+              <i class="fa-solid fa-lightbulb text-purple-600"></i> Hint
+            </button>
+            <div id="hint-p10" class="hidden text-xs bg-purple-50 p-3 rounded-xl border border-purple-200 text-purple-900 space-y-1">
+              <p>• If you owe someone money, that is a debt or a negative balance.</p>
+            </div>
+            <div id="msg-p10" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p10', [['-15']])" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 rounded-xl transition shadow-sm text-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+        <!-- Problem 11: Word Problem -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-heading font-bold text-purple-900 text-xl">Problem 11 (Word)</span>
+              <span class="text-xs font-bold px-3 py-1 bg-emerald-100 text-emerald-900 rounded-full"><i class="fa-solid fa-water"></i> Ocean</span>
+            </div>
+
+            <div class="bg-emerald-50 p-2.5 rounded-xl border border-emerald-200 text-xs font-semibold text-emerald-950 mb-3">
+              <b>Problem Statement:</b> A submarine is swimming at a depth of 120 feet below sea level. Write the integer that represents its location.
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-2 text-xs">
+              <div class="flex flex-col gap-2">
+                <span class="font-bold text-slate-900 text-sm">The integer that represents the submarine's depth:</span>
+                <input type="text" id="p11-1" class="math-input h-9 font-bold text-emerald-700 text-sm" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p11')" class="w-full text-xs font-bold text-purple-800 bg-purple-50 hover:bg-purple-100 border border-purple-200 px-3 py-1.5 rounded-xl flex items-center justify-center gap-1">
+              <i class="fa-solid fa-lightbulb text-purple-600"></i> Hint
+            </button>
+            <div id="hint-p11" class="hidden text-xs bg-purple-50 p-3 rounded-xl border border-purple-200 text-purple-900 space-y-1">
+              <p>• "Below sea level" represents a depth lower than zero.</p>
+            </div>
+            <div id="msg-p11" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p11', [['-120']])" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 rounded-xl transition shadow-sm text-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 6: KEY TAKEAWAYS & EMAIL TURN-IN -->
+    <section id="sec6" class="bg-amber-50 border-2 border-amber-200 rounded-3xl p-6 md:p-8 space-y-6">
+      <div class="flex items-center gap-3">
+        <div class="p-3 bg-amber-200 text-amber-900 rounded-2xl">
+          <i class="fa-solid fa-award text-2xl"></i>
+        </div>
+        <div>
+          <span class="text-xs font-bold text-amber-800 uppercase tracking-wide">Section 6</span>
+          <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">Key Takeaways & Save / Turn In</h2>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        
+        <div class="bg-white p-5 rounded-2xl border border-amber-200 space-y-2">
+          <div class="text-amber-800 font-bold text-lg flex items-center gap-2">
+            <i class="fa-solid fa-align-center"></i> 1. The Integer Family
+          </div>
+          <p class="text-sm text-slate-600">
+            Integers are all the whole numbers and their opposites. They include positive numbers, negative numbers, and zero.
+          </p>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-sky-200 space-y-2">
+          <div class="text-sky-800 font-bold text-lg flex items-center gap-2">
+            <i class="fa-solid fa-0"></i> 2. The Middle Ground
+          </div>
+          <p class="text-sm text-slate-600">
+            Zero is right in the middle of the number line. It is perfectly neutral—neither positive nor negative!
+          </p>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-purple-200 space-y-2">
+          <div class="text-purple-800 font-bold text-lg flex items-center gap-2">
+            <i class="fa-solid fa-arrows-left-right-to-line"></i> 3. Opposites
+          </div>
+          <p class="text-sm text-slate-600">
+            Two numbers that are the same exact distance from zero are called opposites. (Example: 4 and -4). The opposite of an opposite is the original number!
+          </p>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-emerald-200 space-y-2">
+          <div class="text-emerald-800 font-bold text-lg flex items-center gap-2">
+            <i class="fa-solid fa-earth-americas"></i> 4. Real World Clues
+          </div>
+          <p class="text-sm text-slate-600">
+            Words like "deposit", "above", and "gain" usually mean positive integers. Words like "withdrawal", "below", and "loss" mean negative integers.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Final Completion, Save & Email Turn In Card -->
+      <div class="bg-white p-8 rounded-3xl border-2 border-emerald-300 text-center space-y-4 shadow-md">
+        <div class="w-16 h-16 bg-emerald-100 text-emerald-700 rounded-2xl flex items-center justify-center mx-auto text-3xl">
+          <i class="fa-solid fa-envelope"></i>
+        </div>
+        <h3 class="font-heading font-bold text-2xl text-slate-900">Save Your Progress or Email Your Teacher</h3>
+        <p class="text-slate-600 text-base max-w-xl mx-auto">
+          Need more time? You can <b>Save Work</b> to finish later, or click below when you're ready to submit your full score report to <b>jvena@saintmarys.us</b>!
+        </p>
+        <div class="flex flex-wrap justify-center gap-4 pt-2">
+          <button onclick="saveProgress()" class="bg-amber-500 hover:bg-amber-600 text-white font-bold text-lg px-6 py-3.5 rounded-2xl transition shadow-md inline-flex items-center gap-2">
+            <i class="fa-solid fa-floppy-disk"></i> Save Work For Later
+          </button>
+          <button onclick="openSubmitModal()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-lg px-8 py-3.5 rounded-2xl transition shadow-lg inline-flex items-center gap-2">
+            <i class="fa-solid fa-paper-plane"></i> Email Work to jvena@saintmarys.us
+          </button>
+          <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-6 py-3.5 rounded-2xl transition border border-slate-300 inline-flex items-center gap-2">
+            <i class="fa-solid fa-arrow-up"></i> Return to Top
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- INTERACTIVE MANIPULATIVES FLOATING BUTTON -->
+  <div class="fixed bottom-24 right-6 z-50">
+    <button onclick="toggleManipulatives()" class="bg-amber-600 hover:bg-amber-700 text-white font-bold px-5 py-3 rounded-full shadow-2xl flex items-center gap-2 text-base transition transform hover:scale-105 border-2 border-white">
+      <i class="fa-solid fa-arrows-left-right"></i> Interactive Number Line
+    </button>
+  </div>
+
+  <!-- INTERACTIVE SCRATCHPAD FLOATING BUTTON -->
+  <div class="fixed bottom-6 right-6 z-50">
+    <button onclick="toggleScratchpad()" class="bg-sky-600 hover:bg-sky-700 text-white font-bold px-5 py-3 rounded-full shadow-2xl flex items-center gap-2 text-base transition transform hover:scale-105 border-2 border-white">
+      <i class="fa-solid fa-pen-line"></i> Open Scratchpad
+    </button>
+  </div>
+
+  <!-- MANIPULATIVES MODAL (Interactive Number Line) -->
+  <div id="manipulatives-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-3xl w-full p-6 shadow-2xl space-y-4 flex flex-col">
+      <div class="flex justify-between items-center border-b border-slate-200 pb-3">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-arrows-left-right text-amber-600 text-xl"></i>
+          <h3 class="font-heading font-bold text-xl text-slate-900">Interactive Digital Number Line</h3>
+        </div>
+        <button onclick="toggleManipulatives()" class="text-slate-400 hover:text-slate-700 text-2xl font-bold px-2">×</button>
+      </div>
+
+      <div class="bg-amber-50 p-3 rounded-xl border border-amber-200 text-xs font-semibold text-amber-950">
+        <b>Instructions:</b> Click on any integer on the number line between -10 and 10 to instantly see it highlight blue, and its opposite highlight red! You can use this to visually map out distances from zero.
+      </div>
+      
+      <div class="flex justify-between items-center bg-slate-100 p-3 rounded-xl">
+        <span class="text-sm font-bold text-slate-700 pl-2" id="nl-status">Select a number on the line.</span>
+        <button onclick="resetManipulatives()" class="bg-slate-300 hover:bg-slate-400 text-slate-800 text-xs font-bold px-3 py-1.5 rounded-lg transition">
+          Reset Line
+        </button>
+      </div>
+
+      <!-- Interactive Number Line Container -->
+      <div class="bg-white p-6 rounded-xl border-2 border-slate-300 mx-auto w-full relative mt-4 mb-4 overflow-x-auto">
+        <div class="min-w-[700px] flex justify-between items-center relative py-4" id="number-line-container">
+          <div class="nl-line"></div>
+          <!-- JS will populate dots here -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRATCHPAD MODAL -->
+  <div id="scratchpad-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-3xl w-full p-6 shadow-2xl space-y-4 flex flex-col h-[85vh]">
+      <div class="flex justify-between items-center border-b border-slate-200 pb-3">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-pen-clip text-sky-600 text-xl"></i>
+          <h3 class="font-heading font-bold text-xl text-slate-900">Chromebook Scratchpad & Work Area</h3>
+        </div>
+        <button onclick="toggleScratchpad()" class="text-slate-400 hover:text-slate-700 text-2xl font-bold px-2">×</button>
+      </div>
+
+      <!-- Controls -->
+      <div class="flex flex-wrap items-center justify-between gap-3 bg-slate-100 p-3 rounded-2xl">
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-bold text-slate-600">Color:</span>
+          <button onclick="setPadColor('#0284c7')" class="w-8 h-8 rounded-full bg-sky-600 border-2 border-white shadow"></button>
+          <button onclick="setPadColor('#dc2626')" class="w-8 h-8 rounded-full bg-red-600 border-2 border-white shadow"></button>
+          <button onclick="setPadColor('#16a34a')" class="w-8 h-8 rounded-full bg-emerald-600 border-2 border-white shadow"></button>
+          <button onclick="setPadColor('#0f172a')" class="w-8 h-8 rounded-full bg-slate-900 border-2 border-white shadow"></button>
+        </div>
+        <button onclick="clearScratchpad()" class="bg-red-100 hover:bg-red-200 text-red-800 text-xs font-bold px-3 py-2 rounded-xl transition">
+          <i class="fa-solid fa-trash"></i> Clear Pad
+        </button>
+      </div>
+
+      <!-- Canvas Box -->
+      <div class="flex-1 bg-slate-50 border-2 border-slate-200 rounded-2xl overflow-hidden relative">
+        <canvas id="scratch-canvas" class="w-full h-full cursor-crosshair"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- STUDENT EMAIL SUBMIT MODAL -->
+  <div id="submit-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 md:p-8 shadow-2xl space-y-6 border-4 border-emerald-500">
+      <div class="flex justify-between items-center border-b border-slate-200 pb-3">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-paper-plane text-emerald-600 text-2xl"></i>
+          <h3 class="font-heading font-bold text-2xl text-slate-900">Email Report to Teacher</h3>
+        </div>
+        <button onclick="closeSubmitModal()" class="text-slate-400 hover:text-slate-700 text-2xl font-bold px-2">×</button>
+      </div>
+
+      <!-- Error alert banner -->
+      <div id="submit-error-banner" class="hidden bg-red-100 border border-red-300 text-red-800 p-3 rounded-xl text-xs font-bold flex items-center gap-2">
+        <i class="fa-solid fa-triangle-exclamation text-base"></i> Please enter your First and Last Name before turning in!
+      </div>
+
+      <div class="space-y-4">
+        <div>
+          <label class="block text-sm font-bold text-slate-700 mb-1">Student First & Last Name:</label>
+          <input type="text" id="studentName" class="w-full px-4 py-3 rounded-xl border-2 border-slate-300 font-bold text-slate-900 focus:border-emerald-500 focus:outline-none" placeholder="e.g. Alex Johnson">
+        </div>
+
+        <div>
+          <label class="block text-sm font-bold text-slate-700 mb-1">Grade / Class:</label>
+          <input type="text" id="classId" class="w-full px-4 py-3 rounded-xl border-2 border-slate-300 font-bold text-slate-900 focus:border-emerald-500 focus:outline-none" placeholder="e.g. 6th Grade Math">
+        </div>
+
+        <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-xl text-xs text-emerald-900">
+          <i class="fa-solid fa-circle-info"></i> Submitting will automatically open a <b>Gmail web compose window in a new tab</b> with your full score report pre-filled for <b>jvena@saintmarys.us</b>.
+        </div>
+      </div>
+
+      <div class="flex gap-3 pt-2">
+        <button onclick="processEmailSubmission()" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl transition shadow-md flex items-center justify-center gap-2">
+          <i class="fa-solid fa-envelope"></i> Open Gmail in New Tab
+        </button>
+        <button onclick="closeSubmitModal()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-5 py-3.5 rounded-xl transition">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUCCESS CONFIRMATION MODAL -->
+  <div id="success-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 text-center space-y-4 border-4 border-emerald-500 shadow-2xl">
+      <div class="w-16 h-16 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center mx-auto text-3xl">
+        <i class="fa-solid fa-check"></i>
+      </div>
+      <h3 class="font-heading font-bold text-2xl text-slate-900">Gmail Opened!</h3>
+      <p id="success-message-text" class="text-sm text-slate-600 leading-relaxed"></p>
+      <button onclick="document.getElementById('success-modal').classList.add('hidden')" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl transition">
+        Got It!
+      </button>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    const solvedProblems = new Set();
+    const totalProblems = 11;
+    const DEFAULT_TEACHER_EMAIL = "jvena@saintmarys.us";
+
+    function sanitizeInput(val) {
+      if (!val) return '';
+      return val.toString().replace(/,/g, '').trim().toLowerCase();
+    }
+
+    function toggleHint(hintId) {
+      const hintElem = document.getElementById(hintId);
+      if (hintElem) hintElem.classList.toggle('hidden');
+    }
+
+    function showToast(message, isSuccess = true) {
+      const banner = document.getElementById('toast-banner');
+      const icon = document.getElementById('toast-icon');
+      const msg = document.getElementById('toast-msg');
+
+      if (!banner || !msg || !icon) return;
+
+      msg.innerText = message;
+      if (isSuccess) {
+        icon.className = 'fa-solid fa-circle-check text-emerald-400 text-lg';
+      } else {
+        icon.className = 'fa-solid fa-circle-info text-sky-400 text-lg';
+      }
+
+      banner.classList.remove('hidden');
+      setTimeout(() => {
+        banner.classList.add('hidden');
+      }, 3500);
+    }
+
+    function checkProblem(probId, expectedAnswers) {
+      let allCorrect = true;
+
+      expectedAnswers.forEach((expectedList, idx) => {
+        const inputElem = document.getElementById(`${probId}-${idx + 1}`);
+        if (!inputElem) return;
+
+        const userVal = sanitizeInput(inputElem.value);
+        const options = Array.isArray(expectedList) ? expectedList.map(v => sanitizeInput(v)) : [sanitizeInput(expectedList)];
+
+        if (options.includes(userVal)) {
+          inputElem.classList.remove('incorrect');
+          inputElem.classList.add('correct');
+        } else {
+          inputElem.classList.remove('correct');
+          inputElem.classList.add('incorrect');
+          allCorrect = false;
+        }
+      });
+
+      const msgElem = document.getElementById(`msg-${probId}`);
+      if (msgElem) {
+        msgElem.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-800', 'bg-red-100', 'text-red-800');
+        if (allCorrect) {
+          msgElem.classList.add('bg-emerald-100', 'text-emerald-800');
+          msgElem.innerHTML = '<i class="fa-solid fa-circle-check"></i> Great job! Correct!';
+          solvedProblems.add(probId);
+        } else {
+          msgElem.classList.add('bg-red-100', 'text-red-800');
+          msgElem.innerHTML = '<i class="fa-solid fa-circle-xmark"></i> Check the red boxes and try again!';
+        }
+      }
+
+      updateProgress();
+    }
+
+    function updateProgress() {
+      const count = solvedProblems.size;
+      const percent = Math.round((count / totalProblems) * 100);
+
+      const progressText = document.getElementById('progress-text');
+      const progressBar = document.getElementById('progress-bar');
+
+      if (progressText) progressText.innerText = `${count} / ${totalProblems} Solved`;
+      if (progressBar) progressBar.style.width = `${percent}%`;
+    }
+
+    /* SAVE FOR LATER FUNCTIONALITY */
+    function saveProgress() {
+      const dataToSave = {
+        inputs: {},
+        solved: Array.from(solvedProblems),
+        savedAt: new Date().toLocaleTimeString()
+      };
+
+      const inputs = document.querySelectorAll('input.math-input, #studentName, #classId');
+      inputs.forEach(input => {
+        if (input.id) {
+          dataToSave.inputs[input.id] = input.value;
+        }
+      });
+
+      try {
+        localStorage.setItem('grade6_math_worksheet_integers', JSON.stringify(dataToSave));
+        showToast('Your work has been saved to this device! You can finish later.');
+      } catch (e) {
+        showToast('Unable to save to localStorage.', false);
+      }
+    }
+
+    function loadProgress() {
+      try {
+        const savedRaw = localStorage.getItem('grade6_math_worksheet_integers');
+        if (!savedRaw) {
+          showToast('No saved work found on this device.', false);
+          return;
+        }
+
+        const data = JSON.parse(savedRaw);
+        if (data.inputs) {
+          Object.keys(data.inputs).forEach(id => {
+            const elem = document.getElementById(id);
+            if (elem) elem.value = data.inputs[id];
+          });
+        }
+
+        if (data.solved) {
+          solvedProblems.clear();
+          data.solved.forEach(p => solvedProblems.add(p));
+          updateProgress();
+        }
+
+        showToast('Saved work successfully loaded!');
+      } catch (e) {
+        showToast('Error loading saved work.', false);
+      }
+    }
+
+    /* Interactive Number Line Logic */
+    function initManipulatives() {
+      const container = document.getElementById('number-line-container');
+      if (!container || container.querySelectorAll('.nl-point').length > 0) return; // already initialized
+
+      // We want to loop from -10 to 10
+      for (let i = -10; i <= 10; i++) {
+        const point = document.createElement('div');
+        point.className = 'nl-point';
+        point.innerText = i;
+        point.dataset.val = i;
+        if (i === 0) {
+          point.classList.add('zero');
+        }
+
+        point.onclick = function() {
+          selectNumberLinePoint(i);
+        };
+        
+        container.appendChild(point);
+      }
+    }
+
+    function selectNumberLinePoint(val) {
+      const points = document.querySelectorAll('.nl-point');
+      points.forEach(p => {
+        p.classList.remove('selected', 'opposite');
+      });
+
+      const oppVal = -val;
+      
+      points.forEach(p => {
+        const pVal = parseInt(p.dataset.val);
+        if (pVal === val) {
+          p.classList.add('selected');
+        } else if (pVal === oppVal && val !== 0) {
+          p.classList.add('opposite');
+        }
+      });
+
+      const status = document.getElementById('nl-status');
+      if (val === 0) {
+        status.innerHTML = `Selected: <b>0</b> | Zero is its own opposite!`;
+      } else {
+        status.innerHTML = `Selected: <span class="text-sky-700"><b>${val}</b></span> | Opposite: <span class="text-red-700"><b>${oppVal}</b></span>`;
+      }
+    }
+
+    function resetManipulatives() {
+      const points = document.querySelectorAll('.nl-point');
+      points.forEach(p => p.classList.remove('selected', 'opposite'));
+      document.getElementById('nl-status').innerHTML = 'Select a number on the line.';
+    }
+
+    function toggleManipulatives() {
+      const modal = document.getElementById('manipulatives-modal');
+      modal.classList.toggle('hidden');
+      if(!modal.classList.contains('hidden')) {
+        initManipulatives();
+      }
+    }
+
+    /* Auto-load saved work if present */
+    window.onload = function() {
+      if (localStorage.getItem('grade6_math_worksheet_integers')) {
+        loadProgress();
+      }
+    };
+
+    /* Scratchpad Canvas Logic */
+    let canvas, ctx, isDrawing = false;
+    let padColor = '#0284c7';
+
+    function toggleScratchpad() {
+      const modal = document.getElementById('scratchpad-modal');
+      modal.classList.toggle('hidden');
+
+      if (!modal.classList.contains('hidden')) {
+        setTimeout(initCanvas, 100);
+      }
+    }
+
+    function initCanvas() {
+      canvas = document.getElementById('scratch-canvas');
+      if (!canvas) return;
+
+      const rect = canvas.parentElement.getBoundingClientRect();
+      canvas.width = rect.width;
+      canvas.height = rect.height;
+
+      ctx = canvas.getContext('2d');
+      ctx.lineWidth = 3;
+      ctx.lineCap = 'round';
+      ctx.strokeStyle = padColor;
+
+      canvas.onmousedown = startDrawing;
+      canvas.onmousemove = draw;
+      canvas.onmouseup = stopDrawing;
+      canvas.ontouchstart = startDrawingTouch;
+      canvas.ontouchmove = drawTouch;
+      canvas.ontouchend = stopDrawing;
+    }
+
+    function setPadColor(color) {
+      padColor = color;
+      if (ctx) ctx.strokeStyle = color;
+    }
+
+    function clearScratchpad() {
+      if (canvas && ctx) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+    }
+
+    function startDrawing(e) {
+      isDrawing = true;
+      ctx.beginPath();
+      ctx.moveTo(e.offsetX, e.offsetY);
+    }
+
+    function draw(e) {
+      if (!isDrawing) return;
+      ctx.lineTo(e.offsetX, e.offsetY);
+      ctx.stroke();
+    }
+
+    function startDrawingTouch(e) {
+      isDrawing = true;
+      const rect = canvas.getBoundingClientRect();
+      const touch = e.touches[0];
+      ctx.beginPath();
+      ctx.moveTo(touch.clientX - rect.left, touch.clientY - touch.top);
+      e.preventDefault();
+    }
+
+    function drawTouch(e) {
+      if (!isDrawing) return;
+      const rect = canvas.getBoundingClientRect();
+      const touch = e.touches[0];
+      ctx.lineTo(touch.clientX - rect.left, touch.clientY - rect.top);
+      ctx.stroke();
+      e.preventDefault();
+    }
+
+    function stopDrawing() {
+      isDrawing = false;
+    }
+
+    /* Submission Modal & Email Logic */
+    function openSubmitModal() {
+      document.getElementById('submit-modal').classList.remove('hidden');
+      document.getElementById('submit-error-banner').classList.add('hidden');
+    }
+
+    function closeSubmitModal() {
+      document.getElementById('submit-modal').classList.add('hidden');
+    }
+
+    function processEmailSubmission() {
+      const nameInput = document.getElementById('studentName');
+      const classInput = document.getElementById('classId');
+
+      if (!nameInput || !nameInput.value.trim()) {
+        document.getElementById('submit-error-banner').classList.remove('hidden');
+        return;
+      }
+
+      const studentName = nameInput.value.trim();
+      const className = classInput ? classInput.value.trim() : '6th Grade Math';
+      const scoreText = `${solvedProblems.size} of ${totalProblems} problems completed correctly`;
+
+      const subject = encodeURIComponent(`Math Worksheet Submission: ${studentName} (${className})`);
+      const bodyText = `Student Name: ${studentName}\nClass: ${className}\nWorksheet: Lesson 9-1 & 9-2 Integers on the Number Line\nScore Progress: ${scoreText}\n\nSubmitted via Interactive Digital Worksheet Application.`;
+
+      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${DEFAULT_TEACHER_EMAIL}&su=${subject}&body=${encodeURIComponent(bodyText)}`;
+
+      window.open(gmailUrl, '_blank');
+
+      closeSubmitModal();
+
+      const successMsg = document.getElementById('success-message-text');
+      if (successMsg) {
+        successMsg.innerHTML = `Great work <b>${studentName}</b>! A new tab has opened with your completed score report ready to send to <b>${DEFAULT_TEACHER_EMAIL}</b>.`;
+      }
+      document.getElementById('success-modal').classList.remove('hidden');
+    }
+  </script>
+</body>
+</html>
