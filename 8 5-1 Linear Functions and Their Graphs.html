@@ -1,0 +1,1507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson: Linear Functions and Their Graphs</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Roboto+Mono:wght@500;700&display=swap">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            heading: ['Fredoka', 'sans-serif'],
+            mono: ['Roboto Mono', 'monospace']
+          },
+          colors: {
+            brandBlue: '#0284c7',
+            brandGreen: '#16a34a',
+            brandYellow: '#ca8a04',
+            brandPurple: '#9333ea',
+            brandOrange: '#ea580c'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #f8fafc;
+      color: #0f172a;
+      font-size: 18px;
+    }
+    
+    .math-input {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 18px;
+      font-weight: 700;
+      text-align: center;
+      border: 2px dashed #94a3b8;
+      border-radius: 8px;
+      background-color: #ffffff;
+      color: #0284c7;
+      transition: all 0.2s ease;
+      width: 100%;
+      height: 42px;
+    }
+
+    .math-input:focus {
+      outline: none;
+      border-color: #0284c7;
+      border-style: solid;
+      background-color: #f0f9ff;
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.2);
+    }
+
+    .math-input.correct {
+      border-color: #16a34a !important;
+      border-style: solid !important;
+      background-color: #f0fdf4 !important;
+      color: #15803d !important;
+    }
+
+    .math-input.incorrect {
+      border-color: #dc2626 !important;
+      border-style: solid !important;
+      background-color: #fef2f2 !important;
+      color: #b91c1c !important;
+    }
+
+    mark {
+      background-color: #fef08a;
+      color: #854d0e;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-weight: 700;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen pb-24">
+
+  <!-- STICKY HEADER & SECTION NAVIGATION -->
+  <header class="sticky top-0 z-40 bg-white border-b border-slate-200 shadow-md py-3 px-4 md:px-8">
+    <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-4">
+      
+      <!-- App Title -->
+      <div class="flex items-center gap-3">
+        <div class="bg-sky-600 text-white p-2.5 rounded-2xl shadow-sm">
+          <i class="fa-solid fa-chart-line text-2xl"></i>
+        </div>
+        <div>
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold bg-sky-100 text-sky-800 uppercase tracking-wider">
+            Algebra 1 • Lesson 5-1
+          </span>
+          <h1 class="text-xl md:text-2xl font-heading font-bold text-slate-900">
+            Lesson: Linear Functions and Their Graphs
+          </h1>
+        </div>
+      </div>
+
+      <!-- Quick Jump Navigation Tabs -->
+      <nav class="flex flex-wrap items-center justify-center gap-1.5 text-xs font-bold">
+        <a href="#sec1" class="px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-sky-100 text-slate-700 hover:text-sky-800 transition">1. Intro & Vocab</a>
+        <a href="#sec2" class="px-2.5 py-1.5 rounded-xl bg-sky-100 hover:bg-sky-200 text-sky-900 transition">2. Obj 1 Teach</a>
+        <a href="#sec3a" class="px-2.5 py-1.5 rounded-xl bg-amber-100 hover:bg-amber-200 text-amber-900 transition">3. Obj 1 Partner</a>
+        <a href="#sec3b" class="px-2.5 py-1.5 rounded-xl bg-sky-600 hover:bg-sky-700 text-white transition">4. Obj 1 Ind.</a>
+        <a href="#sec4" class="px-2.5 py-1.5 rounded-xl bg-purple-100 hover:bg-purple-200 text-purple-900 transition">5. Obj 2 Teach</a>
+        <a href="#sec5a" class="px-2.5 py-1.5 rounded-xl bg-amber-100 hover:bg-amber-200 text-amber-900 transition">6. Obj 2 Partner</a>
+        <a href="#sec5b" class="px-2.5 py-1.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white transition">7. Obj 2 Ind.</a>
+        <a href="#sec6" class="px-2.5 py-1.5 rounded-xl bg-emerald-100 hover:bg-emerald-200 text-emerald-900 transition">8. Summary</a>
+      </nav>
+
+      <!-- Live Score Counter, Save Work & Turn-In Action Buttons -->
+      <div class="flex items-center gap-2">
+        <div class="bg-slate-100 px-3 py-1.5 rounded-2xl border border-slate-200 flex items-center gap-2">
+          <div class="text-right">
+            <div class="text-[10px] font-bold text-slate-500 uppercase">Score Progress</div>
+            <div id="progress-text" class="text-xs font-extrabold text-sky-700">0 / 11 Solved</div>
+          </div>
+          <div class="w-16 bg-slate-200 rounded-full h-2.5 overflow-hidden">
+            <div id="progress-bar" class="bg-gradient-to-r from-sky-500 to-emerald-500 h-2.5 rounded-full transition-all duration-500 w-0"></div>
+          </div>
+        </div>
+
+        <button onclick="saveProgress()" class="bg-amber-500 hover:bg-amber-600 text-white font-bold px-3 py-2 rounded-xl transition flex items-center gap-1.5 text-xs shadow-sm" title="Save your current answers to finish later">
+          <i class="fa-solid fa-floppy-disk"></i> Save Work
+        </button>
+
+        <button onclick="loadProgress()" class="bg-slate-700 hover:bg-slate-800 text-white font-bold px-3 py-2 rounded-xl transition flex items-center gap-1.5 text-xs shadow-sm" title="Load previously saved answers">
+          <i class="fa-solid fa-folder-open"></i> Load Work
+        </button>
+
+        <button onclick="openSubmitModal()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3 py-2 rounded-xl transition flex items-center gap-1.5 text-xs shadow-sm">
+          <i class="fa-solid fa-paper-plane"></i> Email Teacher
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Toast Notification for Save/Load -->
+  <div id="toast-banner" class="fixed top-20 right-6 z-50 hidden bg-slate-900 text-white px-4 py-3 rounded-2xl shadow-xl flex items-center gap-3 text-sm border border-slate-700">
+    <i id="toast-icon" class="fa-solid fa-circle-check text-emerald-400 text-lg"></i>
+    <span id="toast-msg">Progress saved successfully!</span>
+  </div>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 mt-8 space-y-12">
+
+    <!-- LEARNING OBJECTIVE BOX -->
+    <div class="bg-sky-600 text-white p-6 md:p-8 rounded-3xl shadow-lg border-4 border-sky-300 text-center">
+      <h2 class="text-xl md:text-2xl font-heading font-bold mb-2 tracking-wide uppercase text-sky-100">Today's Learning Objective</h2>
+      <p class="text-lg md:text-xl font-bold">
+        I can identify a linear function by checking for a constant rate of change, and I can calculate the slope of any line from two points using the rise over run formula.
+      </p>
+    </div>
+
+    <!-- SECTION 1: WHY WE NEED THIS MATH & KEY VOCABULARY -->
+    <section id="sec1" class="bg-white border-2 border-slate-200 rounded-3xl p-6 md:p-8 shadow-sm space-y-6">
+      <div class="flex items-center gap-3">
+        <div class="p-3 bg-emerald-100 text-emerald-800 rounded-2xl">
+          <i class="fa-solid fa-earth-americas text-2xl"></i>
+        </div>
+        <div>
+          <span class="text-xs font-bold text-emerald-800 uppercase tracking-wide">Section 1</span>
+          <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">Why We Need This Math & Key Vocabulary</h2>
+        </div>
+      </div>
+
+      <!-- Real World Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        
+        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 flex flex-col items-center text-center">
+          <div class="w-14 h-14 mb-2 flex items-center justify-center text-sky-600 text-3xl">
+            <i class="fa-solid fa-mountain"></i>
+          </div>
+          <h3 class="font-heading font-bold text-lg text-slate-900">Mountain Hiking</h3>
+          <p class="text-sm text-slate-600 mt-1">
+            When climbing a mountain at a steady pace, your elevation gain per hour represents a constant rate of change (a linear function).
+          </p>
+        </div>
+
+        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 flex flex-col items-center text-center">
+          <div class="w-14 h-14 mb-2 flex items-center justify-center text-emerald-600 text-3xl">
+            <i class="fa-solid fa-piggy-bank"></i>
+          </div>
+          <h3 class="font-heading font-bold text-lg text-slate-900">Saving Money</h3>
+          <p class="text-sm text-slate-600 mt-1">
+            If you deposit the exact same amount of money into a savings account every week, the total balance grows along a straight line with a constant slope.
+          </p>
+        </div>
+
+        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 flex flex-col items-center text-center">
+          <div class="w-14 h-14 mb-2 flex items-center justify-center text-purple-600 text-3xl">
+            <i class="fa-solid fa-house-chimney"></i>
+          </div>
+          <h3 class="font-heading font-bold text-lg text-slate-900">Roofing & Ramps</h3>
+          <p class="text-sm text-slate-600 mt-1">
+            Builders use slope (rise over run) to calculate the steepness of a house roof or to make sure a wheelchair ramp is safe and accessible.
+          </p>
+        </div>
+
+        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 flex flex-col items-center text-center">
+          <div class="w-14 h-14 mb-2 flex items-center justify-center text-amber-600 text-3xl">
+            <i class="fa-solid fa-download"></i>
+          </div>
+          <h3 class="font-heading font-bold text-lg text-slate-900">Downloading Files</h3>
+          <p class="text-sm text-slate-600 mt-1">
+            If a video game downloads at 50 megabytes per second, the download speed is the constant slope of the data transfer.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Key Math Vocabulary Bar -->
+      <div class="bg-amber-50 border-2 border-amber-200 rounded-2xl p-5 space-y-3">
+        <h3 class="font-heading font-bold text-xl text-amber-950 flex items-center gap-2">
+          <i class="fa-solid fa-spell-check text-amber-600"></i> Key Vocabulary Terms
+        </h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 text-sm">
+          <div class="bg-white p-3 rounded-xl border border-amber-200"><mark>linear function</mark>: A function whose graph creates a straight, non-vertical line.</div>
+          <div class="bg-white p-3 rounded-xl border border-amber-200"><mark>rate of change</mark>: A ratio comparing how much one quantity changes relative to another.</div>
+          <div class="bg-white p-3 rounded-xl border border-amber-200"><mark>slope (m)</mark>: The constant ratio of the vertical change to the horizontal change between any two points on a line.</div>
+          <div class="bg-white p-3 rounded-xl border border-amber-200"><mark>rise</mark>: The vertical change (the change in the y-values) on a graph.</div>
+          <div class="bg-white p-3 rounded-xl border border-amber-200"><mark>run</mark>: The horizontal change (the change in the x-values) on a graph.</div>
+          <div class="bg-white p-3 rounded-xl border border-amber-200"><mark>undefined slope</mark>: A vertical line has an undefined slope because the run (change in x) is zero.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: OBJECTIVE 1 DIRECT INSTRUCTION -->
+    <section id="sec2" class="bg-white border-2 border-sky-200 rounded-3xl p-6 md:p-8 shadow-sm space-y-6">
+      <div class="flex flex-col md:flex-row justify-between md:items-center gap-4">
+        <div class="flex items-center gap-3">
+          <div class="p-3 bg-sky-100 text-sky-800 rounded-2xl">
+            <i class="fa-solid fa-chalkboard-user text-2xl"></i>
+          </div>
+          <div>
+            <span class="text-xs font-bold text-sky-800 uppercase tracking-wide">Section 2 • 5 Minutes Direct Instruction</span>
+            <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">
+              Objective 1: Identifying Linear Functions
+            </h2>
+          </div>
+        </div>
+        <div class="bg-sky-50 border border-sky-200 px-4 py-2 rounded-2xl text-sky-900 font-bold text-sm">
+          Core Concept: <span class="font-mono text-lg font-extrabold text-sky-700">Constant Rate of Change</span>
+        </div>
+      </div>
+
+      <!-- Problem Statement Highlighted -->
+      <div class="bg-sky-50 border border-sky-300 rounded-2xl p-4 text-slate-800">
+        <span class="font-bold text-sky-900 uppercase text-xs tracking-wider block mb-1">Example Problem Statement:</span>
+        <p class="text-base font-semibold">
+          Does the following table represent a linear function? If so, what is the constant rate of change?<br>
+          Ordered Pairs (x, y): (0, 10), (3, 25), (6, 40), and (9, 55).
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+        
+        <!-- Step-by-Step Explanation -->
+        <div class="space-y-4">
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1">
+            <span class="font-bold text-sky-700 text-sm">Step 1: Find the change in the y-values (Rise)</span>
+            <p class="text-slate-700 text-base">
+              Look at how the outputs (y-values) change from one row to the next: 10 to 25, 25 to 40, and 40 to 55.<br>
+              The change in y is a constant <b>+15</b>.
+            </p>
+          </div>
+
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1">
+            <span class="font-bold text-sky-700 text-sm">Step 2: Find the change in the x-values (Run)</span>
+            <p class="text-slate-700 text-base">
+              Look at how the inputs (x-values) change from one row to the next: 0 to 3, 3 to 6, and 6 to 9.<br>
+              The change in x is a constant <b>+3</b>.
+            </p>
+          </div>
+
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1">
+            <span class="font-bold text-sky-700 text-sm">Step 3: Calculate the Rate of Change</span>
+            <p class="text-slate-700 text-base">
+              Ratio = (Change in y) / (Change in x).<br>
+              15 / 3 = <b>5</b>. Since this ratio is constant everywhere, the relation is a linear function with a slope of 5.
+            </p>
+          </div>
+        </div>
+
+        <!-- VISUAL SUMMARY CARD -->
+        <div class="bg-slate-50 p-6 rounded-2xl border-2 border-sky-300 shadow-sm flex flex-col items-center">
+          <span class="text-xs font-bold text-sky-800 uppercase tracking-widest mb-4">Rate of Change Mapping</span>
+          
+          <div class="w-full max-w-md bg-white p-5 rounded-2xl border border-slate-300 shadow-inner space-y-4 text-center font-mono">
+            <div class="flex justify-around items-center text-lg">
+               <div class="text-center text-slate-500">
+                  <span class="text-xs font-sans font-bold uppercase block mb-2">Change in x</span>
+                  <div class="text-sky-700 font-bold">+3</div>
+                  <div class="text-sky-700 font-bold mt-3">+3</div>
+                  <div class="text-sky-700 font-bold mt-3">+3</div>
+               </div>
+               <div class="text-center mx-4">
+                  <span class="text-xs font-sans font-bold uppercase block mb-2">x</span>
+                  <div>0</div>
+                  <div class="mt-3">3</div>
+                  <div class="mt-3">6</div>
+                  <div class="mt-3">9</div>
+               </div>
+               <div class="text-center mx-4">
+                  <span class="text-xs font-sans font-bold uppercase block mb-2">y</span>
+                  <div>10</div>
+                  <div class="mt-3">25</div>
+                  <div class="mt-3">40</div>
+                  <div class="mt-3">55</div>
+               </div>
+               <div class="text-center text-slate-500">
+                  <span class="text-xs font-sans font-bold uppercase block mb-2">Change in y</span>
+                  <div class="text-emerald-700 font-bold">+15</div>
+                  <div class="text-emerald-700 font-bold mt-3">+15</div>
+                  <div class="text-emerald-700 font-bold mt-3">+15</div>
+               </div>
+            </div>
+            <div class="pt-4 border-t-2 border-slate-200 font-bold text-sky-900 text-lg">
+              Slope = 15 / 3 = 5
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Common Error Box -->
+      <div class="bg-amber-50 border-2 border-amber-300 rounded-2xl p-5 flex items-start gap-4">
+        <div class="p-3 bg-amber-200 text-amber-900 rounded-xl">
+          <i class="fa-solid fa-triangle-exclamation text-2xl"></i>
+        </div>
+        <div>
+          <h4 class="font-heading font-bold text-amber-950 text-lg">Error to Avoid: Only Checking the First Pair!</h4>
+          <p class="text-slate-700 text-base mt-1">
+            Do not just check the rate of change for the very first pair of coordinates. You must check every pair in the table to make sure the rate stays constant the entire way down!
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3A: OBJECTIVE 1 GUIDED PRACTICE (5 Mins - Partner Work) -->
+    <section id="sec3a" class="space-y-6">
+      <div class="flex items-center gap-3">
+        <div class="p-3 bg-amber-500 text-white rounded-2xl shadow-sm">
+          <i class="fa-solid fa-user-group text-2xl"></i>
+        </div>
+        <div>
+          <span class="text-xs font-bold text-amber-800 uppercase tracking-wide">Section 3A • 5 Minutes Guided Practice (Partner Work)</span>
+          <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">
+            Objective 1 Partner Practice (Problems 1–2)
+          </h2>
+          <p class="text-sm text-slate-600 font-semibold">Work together with a partner to find the constant rate of change for these tables!</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <!-- Problem 1 -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-amber-300 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-heading font-bold text-amber-900 text-xl">Problem 1 (Partner Work)</span>
+              <span class="text-xs font-bold px-3 py-1 bg-amber-100 text-amber-900 rounded-full">Rate of Change</span>
+            </div>
+            
+            <div class="bg-amber-50 p-3 rounded-xl border border-amber-200 text-xs font-semibold text-amber-950 mb-3">
+              <b>Problem Statement:</b> Identify the constant rate of change (slope) for a linear function passing through the ordered pairs (2, 14), (4, 22), and (6, 30).
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3 text-sm">
+              <div class="flex justify-between items-center">
+                <span class="font-bold text-slate-900">The exact constant rate of change (slope) is:</span>
+                <input type="text" id="p1-1" class="math-input w-28 font-bold text-amber-700" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p1')" class="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-amber-600"></i> Partner Hint
+            </button>
+            <div id="hint-p1" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p>• Consider the ratio of the vertical change to the horizontal change.</p>
+            </div>
+
+            <div id="msg-p1" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p1', [['4']])" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Partner Answer
+            </button>
+          </div>
+        </div>
+
+        <!-- Problem 2 -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-amber-300 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-heading font-bold text-amber-900 text-xl">Problem 2 (Partner Work)</span>
+              <span class="text-xs font-bold px-3 py-1 bg-amber-100 text-amber-900 rounded-full">Rate of Change</span>
+            </div>
+
+            <div class="bg-amber-50 p-3 rounded-xl border border-amber-200 text-xs font-semibold text-amber-950 mb-3">
+              <b>Problem Statement:</b> Identify the constant rate of change (slope) for a linear function passing through the ordered pairs (1, 50), (6, 35), and (11, 20).
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3 text-sm">
+              <div class="flex justify-between items-center">
+                <span class="font-bold text-slate-900">The exact constant rate of change (slope) is:</span>
+                <input type="text" id="p2-1" class="math-input w-28 font-bold text-amber-700" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p2')" class="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-amber-600"></i> Partner Hint
+            </button>
+            <div id="hint-p2" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p>• Pay attention to the sign of the change in the y-values.</p>
+            </div>
+
+            <div id="msg-p2" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p2', [['-3']])" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Partner Answer
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 3B: OBJECTIVE 1 INDEPENDENT PRACTICE (5 Mins - Individual Work) -->
+    <section id="sec3b" class="space-y-6">
+      <div class="flex items-center gap-3">
+        <div class="p-3 bg-sky-600 text-white rounded-2xl shadow-sm">
+          <i class="fa-solid fa-user text-2xl"></i>
+        </div>
+        <div>
+          <span class="text-xs font-bold text-sky-800 uppercase tracking-wide">Section 3B • 5 Minutes Independent Practice (Individual Work)</span>
+          <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">
+            Objective 1 Independent Practice (Problems 3–5)
+          </h2>
+          <p class="text-sm text-slate-600 font-semibold">Work on your own to solve for the constant rate of change in these linear functions!</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <!-- Problem 3 -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-heading font-bold text-sky-800 text-xl">Problem 3</span>
+              <span class="text-xs font-bold px-3 py-1 bg-sky-100 text-sky-900 rounded-full">Rate of Change</span>
+            </div>
+
+            <div class="bg-sky-50 p-2.5 rounded-xl border border-sky-200 text-xs font-semibold text-sky-950 mb-3">
+              <b>Problem Statement:</b> What is the constant rate of change for a function containing the points (10, -5), (12, 1), and (14, 7)?
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3 text-sm">
+              <div class="flex justify-between items-center">
+                <span class="font-bold text-slate-700">The constant rate of change (slope) is:</span>
+                <input type="text" id="p3-1" class="math-input w-28 font-bold text-sky-700" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p3')" class="text-xs font-bold text-sky-800 bg-sky-50 hover:bg-sky-100 border border-sky-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-sky-600"></i> Hint
+            </button>
+            <div id="hint-p3" class="hidden text-xs bg-sky-50 p-3 rounded-xl border border-sky-200 text-sky-900 space-y-1">
+              <p>• Remember which variable represents the vertical change on top.</p>
+            </div>
+            <div id="msg-p3" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p3', [['3']])" class="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+        <!-- Problem 4 -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-heading font-bold text-sky-800 text-xl">Problem 4</span>
+              <span class="text-xs font-bold px-3 py-1 bg-sky-100 text-sky-900 rounded-full">Rate of Change</span>
+            </div>
+
+            <div class="bg-sky-50 p-2.5 rounded-xl border border-sky-200 text-xs font-semibold text-sky-950 mb-3">
+              <b>Problem Statement:</b> What is the constant rate of change for a function containing the points (-4, 12), (-1, 10), and (2, 8)?
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3 text-sm">
+              <div class="flex justify-between items-center">
+                <span class="font-bold text-slate-700">The constant rate of change (slope) is:</span>
+                <input type="text" id="p4-1" class="math-input w-28 font-bold text-sky-700" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p4')" class="text-xs font-bold text-sky-800 bg-sky-50 hover:bg-sky-100 border border-sky-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-sky-600"></i> Hint
+            </button>
+            <div id="hint-p4" class="hidden text-xs bg-sky-50 p-3 rounded-xl border border-sky-200 text-sky-900 space-y-1">
+              <p>• Your final answer might not be a whole number.</p>
+            </div>
+            <div id="msg-p4" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p4', [['-2/3', '- 2/3']])" class="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+        <!-- Problem 5: Word Problem -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-heading font-bold text-sky-800 text-xl">Problem 5 (Word)</span>
+              <span class="text-xs font-bold px-3 py-1 bg-emerald-100 text-emerald-900 rounded-full"><i class="fa-solid fa-water"></i> Draining Pool</span>
+            </div>
+
+            <div class="bg-emerald-50 p-2.5 rounded-xl border border-emerald-200 text-xs font-semibold text-emerald-950 mb-3">
+              <b>Problem Statement:</b> A pool is draining at a constant rate. At 20 minutes, there are 400 gallons. At 40 minutes, there are 300 gallons. At 60 minutes, there are 200 gallons. What is the constant rate of change in gallons per minute?
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3 text-sm">
+              <div class="flex justify-between items-center">
+                <span class="font-bold text-slate-700">Rate of change in gallons per minute:</span>
+                <input type="text" id="p5-1" class="math-input w-28 font-bold text-emerald-700" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p5')" class="text-xs font-bold text-sky-800 bg-sky-50 hover:bg-sky-100 border border-sky-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-sky-600"></i> Hint
+            </button>
+            <div id="hint-p5" class="hidden text-xs bg-sky-50 p-3 rounded-xl border border-sky-200 text-sky-900 space-y-1">
+              <p>• Think about whether the pool volume is increasing or decreasing to determine the sign.</p>
+            </div>
+            <div id="msg-p5" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p5', [['-5']])" class="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 4: OBJECTIVE 2 DIRECT INSTRUCTION -->
+    <section id="sec4" class="bg-white border-2 border-purple-200 rounded-3xl p-6 md:p-8 shadow-sm space-y-6">
+      <div class="flex flex-col md:flex-row justify-between md:items-center gap-4">
+        <div class="flex items-center gap-3">
+          <div class="p-3 bg-purple-100 text-purple-900 rounded-2xl">
+            <i class="fa-solid fa-calculator text-2xl"></i>
+          </div>
+          <div>
+            <span class="text-xs font-bold text-purple-900 uppercase tracking-wide">Section 4 • 5 Minutes Direct Instruction</span>
+            <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">
+              Objective 2: Calculating Slope From Two Points
+            </h2>
+          </div>
+        </div>
+        <div class="bg-purple-50 border border-purple-200 px-4 py-2 rounded-2xl text-purple-900 font-bold text-sm">
+          Slope Formula: <span class="font-mono text-lg font-extrabold text-purple-700">m = (y₂ - y₁) / (x₂ - x₁)</span>
+        </div>
+      </div>
+
+      <!-- Problem Statement Highlighted -->
+      <div class="bg-purple-50 border border-purple-300 rounded-2xl p-4 text-slate-800">
+        <span class="font-bold text-purple-900 uppercase text-xs tracking-wider block mb-1">Example Problem Statement:</span>
+        <p class="text-base font-semibold">
+          Find the exact slope of the line that contains the points (2, 6) and (6, 34).
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+        
+        <!-- Step-by-Step Instruction -->
+        <div class="space-y-4">
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1">
+            <span class="font-bold text-purple-800 text-sm">Step 1: Identify your coordinate values</span>
+            <p class="text-slate-700 text-base">
+              Label your first point as (x₁, y₁) and your second point as (x₂, y₂).<br><br>
+              For (2, 6), x₁ = 2 and y₁ = 6.<br>
+              For (6, 34), x₂ = 6 and y₂ = 34.
+            </p>
+          </div>
+
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1">
+            <span class="font-bold text-purple-800 text-sm">Step 2: Substitute into the Slope Formula</span>
+            <p class="text-slate-700 text-sm mt-1">
+              • Set up the fraction: (y₂ - y₁) over (x₂ - x₁)<br>
+              • Substitute the numbers: (34 - 6) over (6 - 2)<br>
+              • Subtract the numerator: 34 - 6 = 28<br>
+              • Subtract the denominator: 6 - 2 = 4<br>
+              • Divide to simplify: 28 / 4 = <b>7</b>. The slope is 7!
+            </p>
+          </div>
+        </div>
+
+        <!-- BREAK APART VISUAL CARD -->
+        <div class="bg-slate-50 p-6 rounded-2xl border-2 border-purple-300 shadow-sm flex flex-col items-center">
+          <span class="text-xs font-bold text-purple-900 uppercase tracking-widest mb-3">Slope Formula Machine</span>
+
+          <div class="w-full bg-white p-5 rounded-2xl border border-slate-300 space-y-4 font-mono text-center">
+            
+            <div class="text-center mx-auto text-xl leading-relaxed">
+               <span class="text-purple-700 font-bold">m = (34 - 6) / (6 - 2)</span><br>
+               <i class="fa-solid fa-arrow-down my-2 text-slate-400"></i><br>
+               m = <span class="text-purple-700 font-bold">28</span> / <span class="text-purple-700 font-bold">4</span><br>
+               <i class="fa-solid fa-arrow-down my-2 text-slate-400"></i><br>
+            </div>
+
+            <div class="pt-2 border-t-2 border-purple-300 flex justify-between items-center font-extrabold text-lg text-purple-950">
+              <span>Final Slope (m):</span>
+              <span class="bg-purple-100 px-3 py-1 rounded-lg text-purple-900">7</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Common Error Box -->
+      <div class="bg-amber-50 border-2 border-amber-300 rounded-2xl p-5 flex items-start gap-4">
+        <div class="p-3 bg-amber-200 text-amber-900 rounded-xl">
+          <i class="fa-solid fa-triangle-exclamation text-2xl"></i>
+        </div>
+        <div>
+          <h4 class="font-heading font-bold text-amber-950 text-lg">Error to Avoid: Putting the X's on Top!</h4>
+          <p class="text-slate-700 text-base mt-1">
+            Always remember that slope is <b>Rise over Run</b>. The vertical change (y-values) must be calculated on the top of the fraction, and the horizontal change (x-values) goes on the bottom.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5A: OBJECTIVE 2 GUIDED PRACTICE (5 Mins - Partner Work) -->
+    <section id="sec5a" class="space-y-6">
+      <div class="flex items-center gap-3">
+        <div class="p-3 bg-amber-500 text-white rounded-2xl shadow-sm">
+          <i class="fa-solid fa-user-group text-2xl"></i>
+        </div>
+        <div>
+          <span class="text-xs font-bold text-amber-800 uppercase tracking-wide">Section 5A • 5 Minutes Guided Practice (Partner Work)</span>
+          <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">
+            Objective 2 Partner Practice (Problems 6–7)
+          </h2>
+          <p class="text-sm text-slate-600 font-semibold">Work together with your partner to calculate the slope using the formula!</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <!-- Problem 6 -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-amber-300 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-heading font-bold text-amber-900 text-xl">Problem 6 (Partner Work)</span>
+              <span class="text-xs font-bold px-3 py-1 bg-amber-100 text-amber-900 rounded-full">Slope Formula</span>
+            </div>
+
+            <div class="bg-amber-50 p-3 rounded-xl border border-amber-200 text-xs font-semibold text-amber-950 mb-3">
+              <b>Problem Statement:</b> Find the exact slope of the line passing through the points (1, 9) and (5, 33).
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3 text-sm">
+              <div class="flex justify-between items-center">
+                <span class="font-bold text-slate-900">The exact slope (m) of the line is:</span>
+                <input type="text" id="p6-1" class="math-input w-28 font-bold text-amber-700" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p6')" class="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-amber-600"></i> Partner Hint
+            </button>
+            <div id="hint-p6" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p>• Recall the ratio that relates the vertical change to the horizontal change between two points.</p>
+            </div>
+
+            <div id="msg-p6" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p6', [['6']])" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Partner Answer
+            </button>
+          </div>
+        </div>
+
+        <!-- Problem 7 -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-amber-300 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-heading font-bold text-amber-900 text-xl">Problem 7 (Partner Work)</span>
+              <span class="text-xs font-bold px-3 py-1 bg-amber-100 text-amber-900 rounded-full">Slope Formula</span>
+            </div>
+
+            <div class="bg-amber-50 p-3 rounded-xl border border-amber-200 text-xs font-semibold text-amber-950 mb-3">
+              <b>Problem Statement:</b> Find the exact slope of the line passing through the points (-2, 10) and (3, 0).
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3 text-sm">
+              <div class="flex justify-between items-center">
+                <span class="font-bold text-slate-900">The exact slope (m) of the line is:</span>
+                <input type="text" id="p7-1" class="math-input w-28 font-bold text-amber-700" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p7')" class="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-amber-600"></i> Partner Hint
+            </button>
+            <div id="hint-p7" class="hidden text-xs bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p>• Pay close attention to the signs of your coordinates when subtracting.</p>
+            </div>
+
+            <div id="msg-p7" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p7', [['-2']])" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-2.5 rounded-xl transition shadow-sm">
+              Check Partner Answer
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 5B: OBJECTIVE 2 INDEPENDENT PRACTICE (5 Mins - Individual Work) -->
+    <section id="sec5b" class="space-y-6">
+      <div class="flex items-center gap-3">
+        <div class="p-3 bg-purple-600 text-white rounded-2xl shadow-sm">
+          <i class="fa-solid fa-user text-2xl"></i>
+        </div>
+        <div>
+          <span class="text-xs font-bold text-purple-800 uppercase tracking-wide">Section 5B • 5 Minutes Independent Practice (Individual Work)</span>
+          <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">
+            Objective 2 Independent Practice (Problems 8–11)
+          </h2>
+          <p class="text-sm text-slate-600 font-semibold">Calculate the slope for these pairs of points independently!</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+        <!-- Problem 8 -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-heading font-bold text-purple-900 text-xl">Problem 8</span>
+              <span class="text-xs font-bold px-3 py-1 bg-purple-100 text-purple-900 rounded-full">Slope</span>
+            </div>
+
+            <div class="bg-purple-50 p-2.5 rounded-xl border border-purple-200 text-xs font-semibold text-purple-950 mb-3">
+              <b>Problem Statement:</b> Find the exact slope of the line passing through (5, -4) and (8, 20).
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-2 text-xs">
+              <div class="flex flex-col gap-2">
+                <span class="font-bold text-slate-900 text-sm">The exact slope of the line is:</span>
+                <input type="text" id="p8-1" class="math-input h-9 font-bold text-purple-800 text-sm" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p8')" class="w-full text-xs font-bold text-purple-800 bg-purple-50 hover:bg-purple-100 border border-purple-200 px-3 py-1.5 rounded-xl flex items-center justify-center gap-1">
+              <i class="fa-solid fa-lightbulb text-purple-600"></i> Hint
+            </button>
+            <div id="hint-p8" class="hidden text-xs bg-purple-50 p-3 rounded-xl border border-purple-200 text-purple-900 space-y-1">
+              <p>Remember which coordinates belong on the top of the ratio.</p>
+            </div>
+            <div id="msg-p8" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p8', [['8']])" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 rounded-xl transition shadow-sm text-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+        <!-- Problem 9 -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-heading font-bold text-purple-900 text-xl">Problem 9</span>
+              <span class="text-xs font-bold px-3 py-1 bg-purple-100 text-purple-900 rounded-full">Slope</span>
+            </div>
+
+            <div class="bg-purple-50 p-2.5 rounded-xl border border-purple-200 text-xs font-semibold text-purple-950 mb-3">
+              <b>Problem Statement:</b> Find the exact slope of the line passing through (7, 15) and (7, -9).
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-2 text-xs">
+              <div class="flex flex-col gap-2">
+                <span class="font-bold text-slate-900 text-sm">The exact slope of the line is:</span>
+                <input type="text" id="p9-1" class="math-input h-9 font-bold text-purple-800 text-sm" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p9')" class="w-full text-xs font-bold text-purple-800 bg-purple-50 hover:bg-purple-100 border border-purple-200 px-3 py-1.5 rounded-xl flex items-center justify-center gap-1">
+              <i class="fa-solid fa-lightbulb text-purple-600"></i> Hint
+            </button>
+            <div id="hint-p9" class="hidden text-xs bg-purple-50 p-3 rounded-xl border border-purple-200 text-purple-900 space-y-1">
+              <p>Think about the special rule for horizontal and vertical lines.</p>
+            </div>
+            <div id="msg-p9" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p9', [['undefined']])" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 rounded-xl transition shadow-sm text-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+        <!-- Problem 10 -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-heading font-bold text-purple-900 text-xl">Problem 10</span>
+              <span class="text-xs font-bold px-3 py-1 bg-purple-100 text-purple-900 rounded-full">Slope</span>
+            </div>
+
+            <div class="bg-purple-50 p-2.5 rounded-xl border border-purple-200 text-xs font-semibold text-purple-950 mb-3">
+              <b>Problem Statement:</b> Find the exact slope of the line passing through (-6, 14) and (9, 14).
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-2 text-xs">
+              <div class="flex flex-col gap-2">
+                <span class="font-bold text-slate-900 text-sm">The exact slope of the line is:</span>
+                <input type="text" id="p10-1" class="math-input h-9 font-bold text-purple-800 text-sm" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p10')" class="w-full text-xs font-bold text-purple-800 bg-purple-50 hover:bg-purple-100 border border-purple-200 px-3 py-1.5 rounded-xl flex items-center justify-center gap-1">
+              <i class="fa-solid fa-lightbulb text-purple-600"></i> Hint
+            </button>
+            <div id="hint-p10" class="hidden text-xs bg-purple-50 p-3 rounded-xl border border-purple-200 text-purple-900 space-y-1">
+              <p>Examine what happens to the vertical change in this specific case.</p>
+            </div>
+            <div id="msg-p10" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p10', [['0']])" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 rounded-xl transition shadow-sm text-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+        <!-- Problem 11: Word Problem -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-heading font-bold text-purple-900 text-xl">Problem 11 (Word)</span>
+              <span class="text-xs font-bold px-3 py-1 bg-emerald-100 text-emerald-900 rounded-full"><i class="fa-solid fa-plane-departure"></i> Flight</span>
+            </div>
+
+            <div class="bg-emerald-50 p-2.5 rounded-xl border border-emerald-200 text-xs font-semibold text-emerald-950 mb-3">
+              <b>Problem Statement:</b> An airplane's climb can be modeled by a linear function. At 3 minutes, its elevation is 1,000 feet. At 7 minutes, its elevation is 1,400 feet. What is its rate of change (slope) in feet per minute?
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-2 text-xs">
+              <div class="flex flex-col gap-2">
+                <span class="font-bold text-slate-900 text-sm">Rate of change in feet per minute:</span>
+                <input type="text" id="p11-1" class="math-input h-9 font-bold text-emerald-700 text-sm" placeholder="?">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="toggleHint('hint-p11')" class="w-full text-xs font-bold text-purple-800 bg-purple-50 hover:bg-purple-100 border border-purple-200 px-3 py-1.5 rounded-xl flex items-center justify-center gap-1">
+              <i class="fa-solid fa-lightbulb text-purple-600"></i> Hint
+            </button>
+            <div id="hint-p11" class="hidden text-xs bg-purple-50 p-3 rounded-xl border border-purple-200 text-purple-900 space-y-1">
+              <p>Think about the relationship between the time passing and the altitude climbing.</p>
+            </div>
+            <div id="msg-p11" class="text-xs font-bold hidden p-2 rounded-xl text-center"></div>
+
+            <button onclick="checkProblem('p11', [['100']])" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 rounded-xl transition shadow-sm text-sm">
+              Check Answer
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 6: KEY TAKEAWAYS & EMAIL TURN-IN -->
+    <section id="sec6" class="bg-amber-50 border-2 border-amber-200 rounded-3xl p-6 md:p-8 space-y-6">
+      <div class="flex items-center gap-3">
+        <div class="p-3 bg-amber-200 text-amber-900 rounded-2xl">
+          <i class="fa-solid fa-award text-2xl"></i>
+        </div>
+        <div>
+          <span class="text-xs font-bold text-amber-800 uppercase tracking-wide">Section 6</span>
+          <h2 class="text-2xl md:text-3xl font-heading font-bold text-slate-900">Key Takeaways & Save / Turn In</h2>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        
+        <div class="bg-white p-5 rounded-2xl border border-amber-200 space-y-2">
+          <div class="text-amber-800 font-bold text-lg flex items-center gap-2">
+            <i class="fa-solid fa-align-center"></i> 1. Linear Functions
+          </div>
+          <p class="text-sm text-slate-600">
+            A function is only linear if it has a constant rate of change between every single point on its line.
+          </p>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-sky-200 space-y-2">
+          <div class="text-sky-800 font-bold text-lg flex items-center gap-2">
+            <i class="fa-solid fa-arrows-up-down"></i> 2. Rise over Run
+          </div>
+          <p class="text-sm text-slate-600">
+            Slope is calculated as the vertical change (the Rise or change in y) over the horizontal change (the Run or change in x).
+          </p>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-purple-200 space-y-2">
+          <div class="text-purple-800 font-bold text-lg flex items-center gap-2">
+            <i class="fa-solid fa-calculator"></i> 3. The Formula
+          </div>
+          <p class="text-sm text-slate-600">
+            Always make sure to keep the order of your coordinates consistent when using the formula m = (y₂ - y₁) / (x₂ - x₁).
+          </p>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-emerald-200 space-y-2">
+          <div class="text-emerald-800 font-bold text-lg flex items-center gap-2">
+            <i class="fa-solid fa-minus"></i> 4. Zero vs Undefined
+          </div>
+          <p class="text-sm text-slate-600">
+            A horizontal line has a slope of 0. A vertical line has an undefined slope because you cannot divide by zero!
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Final Completion, Save & Email Turn In Card -->
+      <div class="bg-white p-8 rounded-3xl border-2 border-emerald-300 text-center space-y-4 shadow-md">
+        <div class="w-16 h-16 bg-emerald-100 text-emerald-700 rounded-2xl flex items-center justify-center mx-auto text-3xl">
+          <i class="fa-solid fa-envelope"></i>
+        </div>
+        <h3 class="font-heading font-bold text-2xl text-slate-900">Save Your Progress or Email Your Teacher</h3>
+        <p class="text-slate-600 text-base max-w-xl mx-auto">
+          Need more time? You can <b>Save Work</b> to finish later, or click below when you're ready to submit your full score report to <b>jvena@saintmarys.us</b>!
+        </p>
+        <div class="flex flex-wrap justify-center gap-4 pt-2">
+          <button onclick="saveProgress()" class="bg-amber-500 hover:bg-amber-600 text-white font-bold text-lg px-6 py-3.5 rounded-2xl transition shadow-md inline-flex items-center gap-2">
+            <i class="fa-solid fa-floppy-disk"></i> Save Work For Later
+          </button>
+          <button onclick="openSubmitModal()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-lg px-8 py-3.5 rounded-2xl transition shadow-lg inline-flex items-center gap-2">
+            <i class="fa-solid fa-paper-plane"></i> Email Work to jvena@saintmarys.us
+          </button>
+          <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-6 py-3.5 rounded-2xl transition border border-slate-300 inline-flex items-center gap-2">
+            <i class="fa-solid fa-arrow-up"></i> Return to Top
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- INTERACTIVE MANIPULATIVES FLOATING BUTTON -->
+  <div class="fixed bottom-24 right-6 z-50">
+    <button onclick="toggleManipulatives()" class="bg-amber-600 hover:bg-amber-700 text-white font-bold px-5 py-3 rounded-full shadow-2xl flex items-center gap-2 text-base transition transform hover:scale-105 border-2 border-white">
+      <i class="fa-solid fa-chart-area"></i> Slope Grapher
+    </button>
+  </div>
+
+  <!-- INTERACTIVE SCRATCHPAD FLOATING BUTTON -->
+  <div class="fixed bottom-6 right-6 z-50">
+    <button onclick="toggleScratchpad()" class="bg-sky-600 hover:bg-sky-700 text-white font-bold px-5 py-3 rounded-full shadow-2xl flex items-center gap-2 text-base transition transform hover:scale-105 border-2 border-white">
+      <i class="fa-solid fa-pen-line"></i> Open Scratchpad
+    </button>
+  </div>
+
+  <!-- MANIPULATIVES MODAL (Interactive Slope Grapher) -->
+  <div id="manipulatives-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl space-y-4 flex flex-col">
+      <div class="flex justify-between items-center border-b border-slate-200 pb-3">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-chart-area text-amber-600 text-xl"></i>
+          <h3 class="font-heading font-bold text-xl text-slate-900">Interactive Slope Grapher</h3>
+        </div>
+        <button onclick="toggleManipulatives()" class="text-slate-400 hover:text-slate-700 text-2xl font-bold px-2">×</button>
+      </div>
+
+      <div class="bg-amber-50 p-3 rounded-xl border border-amber-200 text-xs font-semibold text-amber-950">
+        <b>Instructions:</b> Click twice on the coordinate grid below to plot two points. The grapher will automatically draw the line, trace the right triangle, and calculate the Rise over Run for you!
+      </div>
+      
+      <div class="flex justify-between items-center bg-slate-100 p-2 rounded-xl">
+        <span class="text-sm font-bold text-slate-700 pl-2">Points: <span id="slope-points-text" class="text-sky-700">0</span></span>
+        <button onclick="resetSlopeGrapher()" class="bg-slate-300 hover:bg-slate-400 text-slate-800 text-xs font-bold px-3 py-1.5 rounded-lg transition">
+          Reset Grid
+        </button>
+      </div>
+
+      <!-- Canvas for Slope Grapher -->
+      <canvas id="slope-canvas" width="320" height="320" class="bg-white border-2 border-slate-300 rounded-xl mx-auto cursor-crosshair shadow-sm"></canvas>
+      <div id="slope-result" class="text-center font-bold text-lg text-slate-800 h-8 mt-2">Slope: ?</div>
+    </div>
+  </div>
+
+  <!-- SCRATCHPAD MODAL -->
+  <div id="scratchpad-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-3xl w-full p-6 shadow-2xl space-y-4 flex flex-col h-[85vh]">
+      <div class="flex justify-between items-center border-b border-slate-200 pb-3">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-pen-clip text-sky-600 text-xl"></i>
+          <h3 class="font-heading font-bold text-xl text-slate-900">Chromebook Scratchpad & Work Area</h3>
+        </div>
+        <button onclick="toggleScratchpad()" class="text-slate-400 hover:text-slate-700 text-2xl font-bold px-2">×</button>
+      </div>
+
+      <!-- Controls -->
+      <div class="flex flex-wrap items-center justify-between gap-3 bg-slate-100 p-3 rounded-2xl">
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-bold text-slate-600">Color:</span>
+          <button onclick="setPadColor('#0284c7')" class="w-8 h-8 rounded-full bg-sky-600 border-2 border-white shadow"></button>
+          <button onclick="setPadColor('#dc2626')" class="w-8 h-8 rounded-full bg-red-600 border-2 border-white shadow"></button>
+          <button onclick="setPadColor('#16a34a')" class="w-8 h-8 rounded-full bg-emerald-600 border-2 border-white shadow"></button>
+          <button onclick="setPadColor('#0f172a')" class="w-8 h-8 rounded-full bg-slate-900 border-2 border-white shadow"></button>
+        </div>
+        <button onclick="clearScratchpad()" class="bg-red-100 hover:bg-red-200 text-red-800 text-xs font-bold px-3 py-2 rounded-xl transition">
+          <i class="fa-solid fa-trash"></i> Clear Pad
+        </button>
+      </div>
+
+      <!-- Canvas Box -->
+      <div class="flex-1 bg-slate-50 border-2 border-slate-200 rounded-2xl overflow-hidden relative">
+        <canvas id="scratch-canvas" class="w-full h-full cursor-crosshair"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- STUDENT EMAIL SUBMIT MODAL -->
+  <div id="submit-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 md:p-8 shadow-2xl space-y-6 border-4 border-emerald-500">
+      <div class="flex justify-between items-center border-b border-slate-200 pb-3">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-paper-plane text-emerald-600 text-2xl"></i>
+          <h3 class="font-heading font-bold text-2xl text-slate-900">Email Report to Teacher</h3>
+        </div>
+        <button onclick="closeSubmitModal()" class="text-slate-400 hover:text-slate-700 text-2xl font-bold px-2">×</button>
+      </div>
+
+      <!-- Error alert banner -->
+      <div id="submit-error-banner" class="hidden bg-red-100 border border-red-300 text-red-800 p-3 rounded-xl text-xs font-bold flex items-center gap-2">
+        <i class="fa-solid fa-triangle-exclamation text-base"></i> Please enter your First and Last Name before turning in!
+      </div>
+
+      <div class="space-y-4">
+        <div>
+          <label class="block text-sm font-bold text-slate-700 mb-1">Student First & Last Name:</label>
+          <input type="text" id="studentName" class="w-full px-4 py-3 rounded-xl border-2 border-slate-300 font-bold text-slate-900 focus:border-emerald-500 focus:outline-none" placeholder="e.g. Alex Johnson">
+        </div>
+
+        <div>
+          <label class="block text-sm font-bold text-slate-700 mb-1">Grade / Class:</label>
+          <input type="text" id="classId" class="w-full px-4 py-3 rounded-xl border-2 border-slate-300 font-bold text-slate-900 focus:border-emerald-500 focus:outline-none" placeholder="e.g. 8th Grade Math">
+        </div>
+
+        <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-xl text-xs text-emerald-900">
+          <i class="fa-solid fa-circle-info"></i> Submitting will automatically open a <b>Gmail web compose window in a new tab</b> with your full score report pre-filled for <b>jvena@saintmarys.us</b>.
+        </div>
+      </div>
+
+      <div class="flex gap-3 pt-2">
+        <button onclick="processEmailSubmission()" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl transition shadow-md flex items-center justify-center gap-2">
+          <i class="fa-solid fa-envelope"></i> Open Gmail in New Tab
+        </button>
+        <button onclick="closeSubmitModal()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-5 py-3.5 rounded-xl transition">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUCCESS CONFIRMATION MODAL -->
+  <div id="success-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 text-center space-y-4 border-4 border-emerald-500 shadow-2xl">
+      <div class="w-16 h-16 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center mx-auto text-3xl">
+        <i class="fa-solid fa-check"></i>
+      </div>
+      <h3 class="font-heading font-bold text-2xl text-slate-900">Gmail Opened!</h3>
+      <p id="success-message-text" class="text-sm text-slate-600 leading-relaxed"></p>
+      <button onclick="document.getElementById('success-modal').classList.add('hidden')" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl transition">
+        Got It!
+      </button>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    const solvedProblems = new Set();
+    const totalProblems = 11;
+    const DEFAULT_TEACHER_EMAIL = "jvena@saintmarys.us";
+
+    function sanitizeInput(val) {
+      if (!val) return '';
+      return val.toString().replace(/,/g, '').trim().toLowerCase();
+    }
+
+    function toggleHint(hintId) {
+      const hintElem = document.getElementById(hintId);
+      if (hintElem) hintElem.classList.toggle('hidden');
+    }
+
+    function showToast(message, isSuccess = true) {
+      const banner = document.getElementById('toast-banner');
+      const icon = document.getElementById('toast-icon');
+      const msg = document.getElementById('toast-msg');
+
+      if (!banner || !msg || !icon) return;
+
+      msg.innerText = message;
+      if (isSuccess) {
+        icon.className = 'fa-solid fa-circle-check text-emerald-400 text-lg';
+      } else {
+        icon.className = 'fa-solid fa-circle-info text-sky-400 text-lg';
+      }
+
+      banner.classList.remove('hidden');
+      setTimeout(() => {
+        banner.classList.add('hidden');
+      }, 3500);
+    }
+
+    function checkProblem(probId, expectedAnswers) {
+      let allCorrect = true;
+
+      expectedAnswers.forEach((expectedList, idx) => {
+        const inputElem = document.getElementById(`${probId}-${idx + 1}`);
+        if (!inputElem) return;
+
+        const userVal = sanitizeInput(inputElem.value);
+        const options = Array.isArray(expectedList) ? expectedList.map(v => sanitizeInput(v)) : [sanitizeInput(expectedList)];
+
+        if (options.includes(userVal)) {
+          inputElem.classList.remove('incorrect');
+          inputElem.classList.add('correct');
+        } else {
+          inputElem.classList.remove('correct');
+          inputElem.classList.add('incorrect');
+          allCorrect = false;
+        }
+      });
+
+      const msgElem = document.getElementById(`msg-${probId}`);
+      if (msgElem) {
+        msgElem.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-800', 'bg-red-100', 'text-red-800');
+        if (allCorrect) {
+          msgElem.classList.add('bg-emerald-100', 'text-emerald-800');
+          msgElem.innerHTML = '<i class="fa-solid fa-circle-check"></i> Great job! Correct!';
+          solvedProblems.add(probId);
+        } else {
+          msgElem.classList.add('bg-red-100', 'text-red-800');
+          msgElem.innerHTML = '<i class="fa-solid fa-circle-xmark"></i> Check the red boxes and try again!';
+        }
+      }
+
+      updateProgress();
+    }
+
+    function updateProgress() {
+      const count = solvedProblems.size;
+      const percent = Math.round((count / totalProblems) * 100);
+
+      const progressText = document.getElementById('progress-text');
+      const progressBar = document.getElementById('progress-bar');
+
+      if (progressText) progressText.innerText = `${count} / ${totalProblems} Solved`;
+      if (progressBar) progressBar.style.width = `${percent}%`;
+    }
+
+    /* SAVE FOR LATER FUNCTIONALITY */
+    function saveProgress() {
+      const dataToSave = {
+        inputs: {},
+        solved: Array.from(solvedProblems),
+        savedAt: new Date().toLocaleTimeString()
+      };
+
+      const inputs = document.querySelectorAll('input.math-input, #studentName, #classId');
+      inputs.forEach(input => {
+        if (input.id) {
+          dataToSave.inputs[input.id] = input.value;
+        }
+      });
+
+      try {
+        localStorage.setItem('algebra1_math_worksheet_linear_functions', JSON.stringify(dataToSave));
+        showToast('Your work has been saved to this device! You can finish later.');
+      } catch (e) {
+        showToast('Unable to save to localStorage.', false);
+      }
+    }
+
+    function loadProgress() {
+      try {
+        const savedRaw = localStorage.getItem('algebra1_math_worksheet_linear_functions');
+        if (!savedRaw) {
+          showToast('No saved work found on this device.', false);
+          return;
+        }
+
+        const data = JSON.parse(savedRaw);
+        if (data.inputs) {
+          Object.keys(data.inputs).forEach(id => {
+            const elem = document.getElementById(id);
+            if (elem) elem.value = data.inputs[id];
+          });
+        }
+
+        if (data.solved) {
+          solvedProblems.clear();
+          data.solved.forEach(p => solvedProblems.add(p));
+          updateProgress();
+        }
+
+        showToast('Saved work successfully loaded!');
+      } catch (e) {
+        showToast('Error loading saved work.', false);
+      }
+    }
+
+    /* Interactive Slope Grapher Logic */
+    let slopeCanvas, sCtx;
+    let clickedPoints = [];
+    
+    function initSlopeGrapher() {
+      slopeCanvas = document.getElementById('slope-canvas');
+      if(!slopeCanvas) return;
+      sCtx = slopeCanvas.getContext('2d');
+      drawGrid();
+      
+      slopeCanvas.onmousedown = function(e) {
+        if(clickedPoints.length >= 2) return;
+        
+        const rect = slopeCanvas.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        // Snap to nearest grid intersection (32px per unit)
+        const snapX = Math.round(x / 32) * 32;
+        const snapY = Math.round(y / 32) * 32;
+        
+        clickedPoints.push({x: snapX, y: snapY});
+        document.getElementById('slope-points-text').innerText = clickedPoints.length;
+        
+        redrawSlopeGrapher();
+      };
+    }
+
+    function drawGrid() {
+      if(!sCtx) return;
+      sCtx.clearRect(0, 0, slopeCanvas.width, slopeCanvas.height);
+      sCtx.strokeStyle = '#e2e8f0'; // light slate
+      sCtx.lineWidth = 1;
+      
+      for(let i = 0; i <= 320; i += 32) {
+        sCtx.beginPath();
+        sCtx.moveTo(i, 0); sCtx.lineTo(i, 320);
+        sCtx.stroke();
+        sCtx.beginPath();
+        sCtx.moveTo(0, i); sCtx.lineTo(320, i);
+        sCtx.stroke();
+      }
+      
+      // Draw axes
+      sCtx.strokeStyle = '#94a3b8';
+      sCtx.lineWidth = 2;
+      sCtx.beginPath(); sCtx.moveTo(160, 0); sCtx.lineTo(160, 320); sCtx.stroke();
+      sCtx.beginPath(); sCtx.moveTo(0, 160); sCtx.lineTo(320, 160); sCtx.stroke();
+    }
+
+    function redrawSlopeGrapher() {
+      drawGrid();
+      
+      // Draw points
+      sCtx.fillStyle = '#0284c7';
+      clickedPoints.forEach(p => {
+        sCtx.beginPath();
+        sCtx.arc(p.x, p.y, 5, 0, Math.PI * 2);
+        sCtx.fill();
+      });
+      
+      if(clickedPoints.length === 2) {
+        const p1 = clickedPoints[0];
+        const p2 = clickedPoints[1];
+        
+        // Draw Line connecting them
+        sCtx.strokeStyle = '#0284c7';
+        sCtx.lineWidth = 3;
+        sCtx.beginPath();
+        
+        // Extend line slightly for visual effect
+        let dx = p2.x - p1.x;
+        let dy = p2.y - p1.y;
+        sCtx.moveTo(p1.x - dx*10, p1.y - dy*10);
+        sCtx.lineTo(p2.x + dx*10, p2.y + dy*10);
+        sCtx.stroke();
+        
+        // Draw right triangle (Rise & Run)
+        sCtx.strokeStyle = '#ea580c';
+        sCtx.lineWidth = 2;
+        sCtx.setLineDash([5, 5]);
+        sCtx.beginPath();
+        sCtx.moveTo(p1.x, p1.y);
+        sCtx.lineTo(p2.x, p1.y); // run
+        sCtx.lineTo(p2.x, p2.y); // rise
+        sCtx.stroke();
+        sCtx.setLineDash([]);
+        
+        // Calculate math values (Coordinate grid is inverted for Y in Canvas)
+        let graphX1 = (p1.x - 160) / 32;
+        let graphY1 = (160 - p1.y) / 32;
+        let graphX2 = (p2.x - 160) / 32;
+        let graphY2 = (160 - p2.y) / 32;
+        
+        let run = graphX2 - graphX1;
+        let rise = graphY2 - graphY1;
+        
+        let slopeText = "";
+        if(run === 0) {
+            slopeText = "Undefined (Vertical Line)";
+        } else if(rise === 0) {
+            slopeText = "0 (Horizontal Line)";
+        } else {
+            // Simplify fraction if possible, else leave as ratio
+            slopeText = `${rise} / ${run}`;
+            if(rise % run === 0) {
+                slopeText += ` = ${rise / run}`;
+            }
+        }
+        
+        document.getElementById('slope-result').innerText = `Slope: ${slopeText}`;
+      }
+    }
+
+    function resetSlopeGrapher() {
+      clickedPoints = [];
+      document.getElementById('slope-points-text').innerText = '0';
+      document.getElementById('slope-result').innerText = 'Slope: ?';
+      drawGrid();
+    }
+
+    function toggleManipulatives() {
+      const modal = document.getElementById('manipulatives-modal');
+      modal.classList.toggle('hidden');
+      if(!modal.classList.contains('hidden')) {
+        setTimeout(initSlopeGrapher, 50);
+      }
+    }
+
+    /* Auto-load saved work if present */
+    window.onload = function() {
+      if (localStorage.getItem('algebra1_math_worksheet_linear_functions')) {
+        loadProgress();
+      }
+    };
+
+    /* Scratchpad Canvas Logic */
+    let canvas, ctx, isDrawing = false;
+    let padColor = '#0284c7';
+
+    function toggleScratchpad() {
+      const modal = document.getElementById('scratchpad-modal');
+      modal.classList.toggle('hidden');
+
+      if (!modal.classList.contains('hidden')) {
+        setTimeout(initCanvas, 100);
+      }
+    }
+
+    function initCanvas() {
+      canvas = document.getElementById('scratch-canvas');
+      if (!canvas) return;
+
+      const rect = canvas.parentElement.getBoundingClientRect();
+      canvas.width = rect.width;
+      canvas.height = rect.height;
+
+      ctx = canvas.getContext('2d');
+      ctx.lineWidth = 3;
+      ctx.lineCap = 'round';
+      ctx.strokeStyle = padColor;
+
+      canvas.onmousedown = startDrawing;
+      canvas.onmousemove = draw;
+      canvas.onmouseup = stopDrawing;
+      canvas.ontouchstart = startDrawingTouch;
+      canvas.ontouchmove = drawTouch;
+      canvas.ontouchend = stopDrawing;
+    }
+
+    function setPadColor(color) {
+      padColor = color;
+      if (ctx) ctx.strokeStyle = color;
+    }
+
+    function clearScratchpad() {
+      if (canvas && ctx) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+    }
+
+    function startDrawing(e) {
+      isDrawing = true;
+      ctx.beginPath();
+      ctx.moveTo(e.offsetX, e.offsetY);
+    }
+
+    function draw(e) {
+      if (!isDrawing) return;
+      ctx.lineTo(e.offsetX, e.offsetY);
+      ctx.stroke();
+    }
+
+    function startDrawingTouch(e) {
+      isDrawing = true;
+      const rect = canvas.getBoundingClientRect();
+      const touch = e.touches[0];
+      ctx.beginPath();
+      ctx.moveTo(touch.clientX - rect.left, touch.clientY - touch.top);
+      e.preventDefault();
+    }
+
+    function drawTouch(e) {
+      if (!isDrawing) return;
+      const rect = canvas.getBoundingClientRect();
+      const touch = e.touches[0];
+      ctx.lineTo(touch.clientX - rect.left, touch.clientY - rect.top);
+      ctx.stroke();
+      e.preventDefault();
+    }
+
+    function stopDrawing() {
+      isDrawing = false;
+    }
+
+    /* Submission Modal & Email Logic */
+    function openSubmitModal() {
+      document.getElementById('submit-modal').classList.remove('hidden');
+      document.getElementById('submit-error-banner').classList.add('hidden');
+    }
+
+    function closeSubmitModal() {
+      document.getElementById('submit-modal').classList.add('hidden');
+    }
+
+    function processEmailSubmission() {
+      const nameInput = document.getElementById('studentName');
+      const classInput = document.getElementById('classId');
+
+      if (!nameInput || !nameInput.value.trim()) {
+        document.getElementById('submit-error-banner').classList.remove('hidden');
+        return;
+      }
+
+      const studentName = nameInput.value.trim();
+      const className = classInput ? classInput.value.trim() : '8th Grade Math';
+      const scoreText = `${solvedProblems.size} of ${totalProblems} problems completed correctly`;
+
+      const subject = encodeURIComponent(`Math Worksheet Submission: ${studentName} (${className})`);
+      const bodyText = `Student Name: ${studentName}\nClass: ${className}\nWorksheet: Lesson 5-1 Linear Functions and Their Graphs\nScore Progress: ${scoreText}\n\nSubmitted via Interactive Digital Worksheet Application.`;
+
+      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${DEFAULT_TEACHER_EMAIL}&su=${subject}&body=${encodeURIComponent(bodyText)}`;
+
+      window.open(gmailUrl, '_blank');
+
+      closeSubmitModal();
+
+      const successMsg = document.getElementById('success-message-text');
+      if (successMsg) {
+        successMsg.innerHTML = `Great work <b>${studentName}</b>! A new tab has opened with your completed score report ready to send to <b>${DEFAULT_TEACHER_EMAIL}</b>.`;
+      }
+      document.getElementById('success-modal').classList.remove('hidden');
+    }
+  </script>
+</body>
+</html>
